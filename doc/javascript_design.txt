@@ -1,0 +1,12 @@
+JAVASCRIPT DESIGN
+=================
+
+JQuery
+------
+Bird-a will use JQuery and JQuery UI as standard javascript libraries. These libraries will be
+included by bird-a in the final generated html.
+
+All JQuery plugins should be added to the "vendor/jquery" folder. Every other library should be
+added to "vendor" directory. It is important to use, wherever possibile, the library version
+in the file or folder filename and create a symbolic link to that with the name without the
+version number.

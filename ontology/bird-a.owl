@@ -1,0 +1,573 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/ontologies/bird-a-ontology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/ontologies/bird-a-ontology">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology
+
+Ontology for defining web interfaces for author and display RDF Data.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">BIRD-A Ontology</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#ActionWidget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CheckboxInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DateInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DiscardButton"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FieldSet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Form"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HierarchicalWidget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InputWidget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LeafWidget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NextFieldSet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NumberInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RadioInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SelectInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#StaticText"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#StaticWidget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SubForm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SubmitButton"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TabbedFieldSet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TextAreaInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TextInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Widget"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasNextWidget"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasPart"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isPartOf"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDefaultValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLabel"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaximum"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMinimum"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasOptions"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="rdf:HTML"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#ActionWidget"/>
+        <Class IRI="#Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CheckboxInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CheckboxInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DateInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DateInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DiscardButton"/>
+        <Class IRI="#ActionWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DiscardButton"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FieldSet"/>
+        <Class IRI="#HierarchicalWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Form"/>
+        <Class IRI="#HierarchicalWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HierarchicalWidget"/>
+        <Class IRI="#Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InputWidget"/>
+        <Class IRI="#Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LeafWidget"/>
+        <Class IRI="#Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NextFieldSet"/>
+        <Class IRI="#FieldSet"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NumberInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NumberInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RadioInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RadioInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SelectInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SelectInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StaticText"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StaticText"/>
+        <Class IRI="#StaticWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StaticWidget"/>
+        <Class IRI="#Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SubForm"/>
+        <Class IRI="#HierarchicalWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SubmitButton"/>
+        <Class IRI="#ActionWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SubmitButton"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TabbedFieldSet"/>
+        <Class IRI="#FieldSet"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TextAreaInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TextAreaInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TextInput"/>
+        <Class IRI="#InputWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TextInput"/>
+        <Class IRI="#LeafWidget"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#HierarchicalWidget"/>
+        <Class IRI="#LeafWidget"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#InputWidget"/>
+        <Class IRI="#StaticWidget"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#NextFieldSet"/>
+        <Class IRI="#TabbedFieldSet"/>
+    </DisjointClasses>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#hasPart"/>
+        <ObjectProperty IRI="#isPartOf"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasNextWidget"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasPart"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#isPartOf"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#hasNextWidget"/>
+    </InverseFunctionalObjectProperty>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+    </AsymmetricObjectProperty>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="#hasNextWidget"/>
+    </AsymmetricObjectProperty>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="#hasPart"/>
+    </AsymmetricObjectProperty>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="#isPartOf"/>
+    </AsymmetricObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#hasNextWidget"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#hasPart"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#isPartOf"/>
+    </IrreflexiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+        <Class IRI="#HierarchicalWidget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasNextWidget"/>
+        <Class IRI="#Widget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasPart"/>
+        <Class IRI="#HierarchicalWidget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isPartOf"/>
+        <Class IRI="#Widget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasFirstWidget"/>
+        <Class IRI="#Widget"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasNextWidget"/>
+        <Class IRI="#Widget"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasPart"/>
+        <Class IRI="#Widget"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isPartOf"/>
+        <Class IRI="#HierarchicalWidget"/>
+    </ObjectPropertyRange>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasDefaultValue"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasDescription"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasLabel"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasMaximum"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasMinimum"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasOptions"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDefaultValue"/>
+        <Class IRI="#InputWidget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDescription"/>
+        <Class IRI="#Widget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLabel"/>
+        <Class IRI="#Widget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaximum"/>
+        <Class IRI="#DateInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaximum"/>
+        <Class IRI="#NumberInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMinimum"/>
+        <Class IRI="#DateInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMinimum"/>
+        <Class IRI="#NumberInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasOptions"/>
+        <Class IRI="#CheckboxInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasOptions"/>
+        <Class IRI="#RadioInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasOptions"/>
+        <Class IRI="#SelectInput"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDefaultValue"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDescription"/>
+        <Datatype abbreviatedIRI="rdf:HTML"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLabel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMaximum"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMinimum"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasOptions"/>
+        <DatatypeRestriction>
+            <Datatype abbreviatedIRI="xsd:string"/>
+            <FacetRestriction facet="&xsd;pattern">
+                <Literal datatypeIRI="&rdf;PlainLiteral">(?:^|,)(?=[^&quot;]|(&quot;)?)&quot;?((?(1)[^&quot;]*|[^,&quot;]*))&quot;?(?=,|$)</Literal>
+            </FacetRestriction>
+        </DatatypeRestriction>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#FieldSet</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A FieldSet is a set of Widget correlated to each other that have to be presented together.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Form</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A Form represents a set of ActionableWidget which have to be sent simultaneusly towards the application. Every ActionableWidget should be contained in a Form.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#HierarchicalWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Widget which can contain other Widgets</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#HierarchicalWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Hierarchical Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#InputWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Widget the user can interact with. It can be a text input, a submit action, etc.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#InputWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Actionable Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#LeafWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Final Widget which represents the basic objects of the Form</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#LeafWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Leaf Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#StaticText</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Static Text</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#StaticWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Widget the user can&apos;t interact with</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#StaticWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Static Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Widget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Top Class of BIRD-A Ontology. Everything is a Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Widget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasDefaultValue</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Value wherewith the input field is precompiled at insertion time (ignored at edit time)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasDefaultValue</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Default Value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasDescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">More complete descripiton of the field meaning and possibile online help for the user. Intended to be shown like a tooltip.
+
+The content could be any valid html.
+hasDesctipiton is translatable and must have the language tag</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasDescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Description</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasFirstWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">For a HierarchicalWidget, indicates which is the first Widget among the contained Widgets</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasFirstWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">First Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasLabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Short and explicative description of the Widget. It will be visible aside the input.
+
+The content could be any valid html.
+hasDesctipiton is translatable and must have the language tag</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasLabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Label</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasNextWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">For a Widget contained in a HierarchicalWidget, specifies the next sibling Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasNextWidget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Next Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasPart</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Has Part</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasPart</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Property which connects a HierarchicalWidget to its contained WIdgets</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#isPartOf</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Property which connects a Widget to the Widget which contains it (if any)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#isPartOf</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Is Part Of</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

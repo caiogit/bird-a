@@ -1,0 +1,26 @@
+DIRECTORY STRUCTURE
+===================
+
+bird-a
+	+ bin: Contains python modules used by bird-a webserver
+		+ core: Contains core modues used by bird-a
+		+ formatter: Contains modules used to build widgets html
+		+ storage: Contains modules used by the storage
+		+ utils: Contains collections of utilities used project wide
+		+ templates (?): Contains the HTML+Jinja Templates used by
+		+ validator: Contains all modules related to 
+		
+	+ catalog: Contains the instances of bird-a ontology served by bird-a
+	
+	+ config: Contains all the config files needed by bird-a
+	
+	+ doc: Contains the main doc of bird-a and bird-a ontology
+	
+	+ log: Used for webserver and bird-a logs
+	
+	+ ontology: Contains bird-a ontology definition
+	
+	+ static: Contains static files used by bird-a webserver
+	
+	+ storage: Contains stored RDF files
+		+ ...: Every served ontology has his own directory

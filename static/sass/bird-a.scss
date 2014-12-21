@@ -1,0 +1,9 @@
+// customize bootstrap variables here:
+//@import "variables";
+@import "bootstrap";
+@import "bootstrap-theme";
+
+#test-div-1 {
+	@extend .alert;
+	@extend .alert-warning;
+}

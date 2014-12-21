@@ -1,0 +1,13 @@
+Python Templating
+-----------------
+
+At the time this choice was made (17/11/2014), there are a lot of competing python templating libraries.
+
+The chosen one is Jinja (http://jinja.pocoo.org/). It presents:
+- Good popularity: is the most frequently suggested library at the time in forums and communities
+- Active development
+- Good features set
+- Linear syntax
+- Honest performance
+
+(Sources: https://wiki.python.org/moin/Templating, http://www.simple-is-better.org/template/, forums...)

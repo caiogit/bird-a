@@ -1,0 +1,36 @@
+CSS Design
+==========
+
+CSS Precompiler
+---------------
+CSS developing is tedious and repetitive task. In these late years two major css precompilers emerged: Sass and Less.
+At the time this document is written, they have nearly the same popularity, but Sass results to be the most expressive
+among the two, primarly for two reasons: it has the ability to import others sass scripts (that will be combined in
+the same output css) and it has a compiler, compass, with interesting and unique features (for example the sprites generator).
+
+CSS Framework
+-------------
+Cross browser and mobile CSS is, same as the above, a tedious task. Moreover, every new project requires some starting, repetitive
+css code just for make the page esthetically pleasant.
+At the time this document is being written, two major framework are competing: Bootstrap and Foundation.
+Bootstrap has been choosen for the wide popularity and the standard look and feel (the most common one on Internet, currently).
+
+It has as well another interesting feature: it has released both for Less than Sass. While this make easy to modify the 
+look and feel, visual originality is not the purpose of the project, so bootstrap is imported in his simple compiled css format.
+
+CSS Structure
+-------------
+CSS should be coded in sass format, in "sass" directory. There is no need to have multiple css file, so always edit "bird-a.scss".
+This file imports all bootstrap, so it will be easy to implement a bird-a css rule by extending one ore more bootstrap classes.
+
+The modularity is encouraged, so it is preferable to add css code to existing sass modules (starting with an underscore) or to create
+a new one. "bird-a.scss" should be used only to import modules.
+
+Sass Developing
+---------------
+To develop CSS with Sass, Compass is needed. The main directory for CSS devoloping is "static", where the compass project file is located.
+To compile the project, simply type while in "static" folder:
+	compass compile
+
+This will create "stylesheets/bird-a.css" that will be autmatically imported by bird-a in the generated html. Bird-a will also
+import the necessary javascript libraries needed by bootstrap.
