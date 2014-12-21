@@ -8,3 +8,5 @@ bak/
 # Ignore sass cache
 .sass-cache/
 
+# Editor config files
+.idea/
