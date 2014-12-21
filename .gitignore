@@ -1,8 +1,10 @@
 # Ignore .pyc files
-*.pyc
+*.py[cod]
 
-# Ignore backup file/directories
+# Ignore bak directories and log files
 bak/
-
-# Ignore log files
 *.log
+
+# Ignore sass cache
+.sass-cache/
+
