@@ -2,4 +2,7 @@
 *.pyc
 
 # Ignore backup file/directories
-bak
+bak/
+
+# Ignore log files
+*.log
