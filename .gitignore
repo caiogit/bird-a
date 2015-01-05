@@ -1,4 +1,4 @@
-# Ignore .pyc files
+# Ignore python bytecode files
 *.py[cod]
 
 # Ignore bak directories and log files
@@ -10,3 +10,11 @@ bak/
 
 # Editor config files
 .idea/
+.project
+.pydevproject
+
+# Other Ignores
+*.egg
+*.egg-info
+*.sqlite
+*.db
