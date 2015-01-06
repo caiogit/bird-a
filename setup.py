@@ -13,6 +13,7 @@ requires = [
     'SQLAlchemy',
     'transaction',
 #    'pyramid_chameleon',
+	'pyramid_jinja2',
     'pyramid_tm',
     'pyramid_debugtoolbar',
     'pyramid_exclog',
