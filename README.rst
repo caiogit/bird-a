@@ -32,13 +32,13 @@ Python 2.6 or 2.7 is required.
 
 - . bin/activate
 
-- git clone git@github.com:Pylons/shootout.git
+- git clone git@github.com:caiogit/bird-a
 
-- cd shootout
+- cd bird-a
 
 - python setup.py develop
 
-- initialize_shootout_db development.ini
+- initialize_birda_db development.ini
 
 - pserve development.ini
 

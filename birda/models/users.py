@@ -18,7 +18,7 @@ import base
 
 # ==================================================================================================================== #
 
-class User(Base):
+class User(base.Base):
 	"""
 	Application's user model.
 	"""
@@ -66,4 +66,4 @@ class User(Base):
 		user = cls.get_by_username(username)
 		if not user:
 			return False
-		return crypt.check(user.password, password)
+		return base.crypt.check(user.password, password)

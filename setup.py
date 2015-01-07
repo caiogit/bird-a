@@ -49,12 +49,12 @@ setup(name='shootout',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      test_suite='bin.tests',
+      test_suite='birda.tests',
       install_requires=requires,
       entry_points="""\
       [paste.app_factory]
-      main = bin:main
+      main = birda:main
       [console_scripts]
-      initialize_shootout_db = shootout.scripts.initializedb:main
+      initialize_birda_db = birda.scripts.initializedb:main
       """,
       )
