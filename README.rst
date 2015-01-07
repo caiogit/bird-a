@@ -42,3 +42,15 @@ Python 2.6 or 2.7 is required.
 
 - pserve development.ini
 
+Troubleshooting
+---------------
+
+If setup.py terminates with this error::
+
+	cryptacular/bcrypt/_bcrypt.c:26:20: fatal error: Python.h: No such file or directory
+
+then try (source https://github.com/eventray/horus/issues/38) ::
+
+	sudo apt-get install python-dev python3-dev
+	easy_install -UZ cryptacular
+

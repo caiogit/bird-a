@@ -28,7 +28,7 @@ requires = [
 if sys.version_info[:3] < (2,5,0):
     raise RuntimeError('This application requires Python 2.6+')
 
-setup(name='shootout',
+setup(name='bird-a',
       version='0.0.1',
       description='Builder of Interfaces for RDF Data Authoring (BIRD-A)',
       long_description=README + '\n\n' + CHANGES,
