@@ -2,6 +2,7 @@ import os
 import sys
 
 import sqlalchemy
+import transaction
 import pyramid.paster
 import birda
 from birda.models import *
@@ -20,6 +21,13 @@ def main(argv=sys.argv):
 	settings = pyramid.paster.get_appsettings(config_uri)
 	engine = sqlalchemy.engine_from_config(settings, 'sqlalchemy.')
 	birda.models.base.DBSession.configure(bind=engine)
-	birda.models.base.Base.metadata.create_all(engine)
+
+	# Create tables
+	birda.models.base.Base.metadata.create_all(engine, checkfirst=True)
+
+	# Add initial (dummy) data to tables
+	with transaction.manager:
+		editor = birda.models.users.User('editor','editor', 'Editor', 'dummy@mail.com')
+		birda.models.base.DBSession.add(editor)
 
 
