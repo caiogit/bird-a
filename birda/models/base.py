@@ -3,7 +3,7 @@
 import sqlalchemy.ext.declarative
 import sqlalchemy.orm
 import zope.sqlalchemy
-import cryptacular
+import cryptacular.bcrypt
 
 DBSession = sqlalchemy.orm.scoped_session(sqlalchemy.orm.sessionmaker(extension=zope.sqlalchemy.ZopeTransactionExtension()))
 

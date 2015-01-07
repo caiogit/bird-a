@@ -3,7 +3,8 @@ import sys
 
 import sqlalchemy
 import pyramid.paster
-import birda.models.base
+import birda
+from birda.models import *
 
 def usage(argv):
 	cmd = os.path.basename(argv[0])
