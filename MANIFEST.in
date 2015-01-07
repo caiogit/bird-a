@@ -1,2 +1,10 @@
 include *.txt *.ini *.cfg *.rst
-recursive-include shootout *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml
+
+#recursive-include yourapp *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.jinja2 *.js *.html *.xml
+recursive-include bin *.txt *.mak *.mako *.xml *.jinja2
+recursive-include catalog *.txt *.xml *.rdf *.owl
+recursive-include ontology *.txt *.xml *.rdf *.owl
+recursive-include doc *.txt *.rst
+recursive-include locale *.pot *.po *.mo
+recursive-include log
+recursive-include static *
