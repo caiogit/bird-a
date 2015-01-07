@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 
@@ -20,14 +22,15 @@ def main(argv=sys.argv):
 	pyramid.paster.setup_logging(config_uri)
 	settings = pyramid.paster.get_appsettings(config_uri)
 	engine = sqlalchemy.engine_from_config(settings, 'sqlalchemy.')
-	birda.models.base.DBSession.configure(bind=engine)
+	birda.models.DBSession.configure(bind=engine)
 
 	# Create tables
-	birda.models.base.Base.metadata.create_all(engine, checkfirst=True)
+	birda.models.Base.metadata.create_all(engine, checkfirst=True)
 
 	# Add initial (dummy) data to tables
 	with transaction.manager:
-		editor = birda.models.users.User('editor','editor', 'Editor', 'dummy@mail.com')
-		birda.models.base.DBSession.add(editor)
+		if not birda.models.users.User.get_by_username(u'editor'):
+			editor = birda.models.users.User(u'editor', u'editor', u'Editor', u'dummy@mail.com')
+			birda.models.DBSession.add(editor)
 
 

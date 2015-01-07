@@ -11,7 +11,7 @@ def main(global_config, **settings):  # pragma: no cover
 	""" This function returns a Pyramid WSGI application.
 	"""
 	engine = sqlalchemy.engine_from_config(settings, 'sqlalchemy.')
-	birda.models.base.DBSession.configure(bind=engine)
+	birda.models.DBSession.configure(bind=engine)
 
 	session_factory = pyramid.session.UnencryptedCookieSessionFactoryConfig(
 		settings['session.secret']
@@ -22,7 +22,7 @@ def main(global_config, **settings):  # pragma: no cover
 
 	config = pyramid.config.Configurator(
 		settings=settings,
-		root_factory=birda.models.base.RootFactory,
+		root_factory=birda.models.RootFactory,
 		authentication_policy=authn_policy,
 		authorization_policy=authz_policy,
 		session_factory=session_factory
@@ -32,6 +32,9 @@ def main(global_config, **settings):  # pragma: no cover
 	config.add_static_view('static', 'shootout:static')
 	config.include(addroutes)
 	config.scan()
+
+	# Import all birda.models modules (necessary?)
+	config.scan('birda.models')
 
 	return config.make_wsgi_app()
 

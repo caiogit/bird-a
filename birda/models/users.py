@@ -14,11 +14,11 @@ from sqlalchemy.types import (
 
 import sqlalchemy.orm
 
-import base
+import birda.models
 
 # ==================================================================================================================== #
 
-class User(base.Base):
+class User(birda.models.Base):
 	"""
 	Application's user model.
 	"""
@@ -38,7 +38,7 @@ class User(base.Base):
 		return self._password
 
 	def _set_password(self, password):
-		self._password = base.hash_password(password)
+		self._password = birda.models.hash_password(password)
 
 	password = property(_get_password, _set_password)
 	password = sqlalchemy.orm.synonym('_password', descriptor=password)
@@ -56,7 +56,7 @@ class User(base.Base):
 
 	@classmethod
 	def get_by_username(cls, username):
-		return base.DBSession.query(cls).filter(cls.username == username).first()
+		return birda.models.DBSession.query(cls).filter(cls.username == username).first()
 
 
 	# ----------------------------------------------------------------------- #
@@ -66,4 +66,4 @@ class User(base.Base):
 		user = cls.get_by_username(username)
 		if not user:
 			return False
-		return base.crypt.check(user.password, password)
+		return birda.models.crypt.check(user.password, password)
