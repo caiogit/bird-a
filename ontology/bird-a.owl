@@ -32,9 +32,6 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
         <Literal datatypeIRI="&rdf;PlainLiteral">BIRD-A Ontology</Literal>
     </Annotation>
     <Declaration>
-        <Class IRI="#ActionWidget"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#CheckboxInput"/>
     </Declaration>
     <Declaration>
@@ -57,6 +54,9 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     </Declaration>
     <Declaration>
         <Class IRI="#LeafWidget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#List"/>
     </Declaration>
     <Declaration>
         <Class IRI="#NextFieldSet"/>
@@ -128,10 +128,6 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
         <Datatype abbreviatedIRI="rdf:HTML"/>
     </Declaration>
     <SubClassOf>
-        <Class IRI="#ActionWidget"/>
-        <Class IRI="#Widget"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#CheckboxInput"/>
         <Class IRI="#InputWidget"/>
     </SubClassOf>
@@ -149,7 +145,7 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#DiscardButton"/>
-        <Class IRI="#ActionWidget"/>
+        <Class IRI="#InputWidget"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#DiscardButton"/>
@@ -174,6 +170,10 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     <SubClassOf>
         <Class IRI="#LeafWidget"/>
         <Class IRI="#Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#List"/>
+        <Class IRI="#HierarchicalWidget"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#NextFieldSet"/>
@@ -221,7 +221,7 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#SubmitButton"/>
-        <Class IRI="#ActionWidget"/>
+        <Class IRI="#InputWidget"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#SubmitButton"/>
@@ -426,13 +426,23 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     </DataPropertyRange>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DiscardButton</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Permits user to specify the DiscardButton properties (like label, colour, etc). If this Widget is not present, Bird-a will take care to add a default one.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#FieldSet</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">A FieldSet is a set of Widget correlated to each other that have to be presented together.</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A FieldSet is a set of correlated Widgets that have to be presented together.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#FieldSet</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Field Set</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#Form</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">A Form represents a set of ActionableWidget which have to be sent simultaneusly towards the application. Every ActionableWidget should be contained in a Form.</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A Form represents a set of ActionableWidgets which have to be sent simultaneusly towards the application. Every ActionableWidget should be contained in a Form.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -465,6 +475,16 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
         <Literal datatypeIRI="&rdf;PlainLiteral">Leaf Widget</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#List</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A set of Widget that can be repeated several times (e.g. first and family names of friends)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#List</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">List</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>#StaticText</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Static Text</Literal>
@@ -478,6 +498,21 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>#StaticWidget</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Static Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SubForm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">A SubForm maps an external instance of whatever ontology</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#SubForm</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Sub Form</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SubmitButton</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Permits user to specify the SubmitButton properties (like label, colour, etc). If this Widget is not present, Bird-a will take care to add a default one.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
