@@ -1,23 +1,12 @@
-shootout
-========
+Bird-A
+======
 
-Shootout is a demo app for the Pyramid web framework.  The concepts
-demonstrated in the code include:
-
-- Url dispatch mechanism.
-
-- Built-in authentication and authorization mechanism.
-
-- Usage of built-in sessioning machinery.
-
-- Integration with pyramid_simpleform for form handling.
-
-- SQLAlchemy based models and transaction management via pyramid_tm.
+Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 
 Library Requirements
 --------------------
 
-shootout requires a SQLite3 bindings.
+Bird-A requires a SQLite3 bindings.
 
 On a Debian system, these imply: build-essentials, libsqlite3-dev.
 
@@ -38,9 +27,9 @@ Python 2.6 or 2.7 is required.
 
 - python setup.py develop
 
-- initialize_birda_db development.ini
+- initialize_birda_db config/development.ini
 
-- pserve development.ini
+- pserve config/development.ini
 
 Troubleshooting
 ---------------
