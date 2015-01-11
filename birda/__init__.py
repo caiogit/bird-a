@@ -6,9 +6,12 @@ import pyramid.session
 import sqlalchemy
 
 import birda.models
+import birda.models.acl
+import birda.routes
 
-def main(global_config, **settings):  # pragma: no cover
-	""" This function returns a Pyramid WSGI application.
+def main(global_config, **settings):
+	"""
+	This function returns a Pyramid WSGI application.
 	"""
 	engine = sqlalchemy.engine_from_config(settings, 'sqlalchemy.')
 	birda.models.DBSession.configure(bind=engine)
@@ -22,15 +25,19 @@ def main(global_config, **settings):  # pragma: no cover
 
 	config = pyramid.config.Configurator(
 		settings=settings,
-		root_factory=birda.models.RootFactory,
+		root_factory=birda.models.acl.RootFactory,
 		authentication_policy=authn_policy,
 		authorization_policy=authz_policy,
 		session_factory=session_factory
 	)
 
-	config.include('pyramid_chameleon')
-	config.add_static_view('static', 'shootout:static')
-	config.include(addroutes)
+	# Add a static view routed on "/static" for the directory "bird-a/static"
+	config.add_static_view('static', 'static')
+
+	# Add all the routes of birda
+	config.include(birda.routes.addroutes)
+
+	# Scan modules for views (i.e. @view_config decorators)
 	config.scan()
 
 	# Import all birda.models modules (necessary?)
@@ -38,16 +45,4 @@ def main(global_config, **settings):  # pragma: no cover
 
 	return config.make_wsgi_app()
 
-def addroutes(config):
-	# broken out of main() so it can be used by unit tests
-	config.add_route('idea', '/ideas/{idea_id}')
-	config.add_route('user', '/users/{username}')
-	config.add_route('tag', '/tags/{tag_name}')
-	config.add_route('idea_add', '/idea_add')
-	config.add_route('idea_vote', '/idea_vote')
-	config.add_route('register', '/register')
-	config.add_route('login', '/login')
-	config.add_route('logout', '/logout')
-	config.add_route('about', '/about')
-	config.add_route('main', '/')
 
