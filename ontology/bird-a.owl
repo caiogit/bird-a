@@ -373,11 +373,19 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasMaximum"/>
+        <Class IRI="#List"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMaximum"/>
         <Class IRI="#NumberInput"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasMinimum"/>
         <Class IRI="#DateInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMinimum"/>
+        <Class IRI="#List"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasMinimum"/>
@@ -394,6 +402,10 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     <DataPropertyDomain>
         <DataProperty IRI="#hasOptions"/>
         <Class IRI="#SelectInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasOptions"/>
+        <Class IRI="#TextInput"/>
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#hasDefaultValue"/>
@@ -568,7 +580,17 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>#hasLabel</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Label</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has Label</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasMaximum</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Set the maximum value for the specified input. For Lists indicates the maximum number of items in the list</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasMinimum</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Set the minimum value for the specified input. For Lists indicates the minimum number of items in the list</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -579,6 +601,11 @@ hasDesctipiton is translatable and must have the language tag</Literal>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>#hasNextWidget</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Next Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#hasOptions</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies the options showed by selection widgets (like RadioInput) or restrict the range of a TextInput. The format is the common csv format (e.g: item1, &quot;Item 2&quot;,item3)</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
