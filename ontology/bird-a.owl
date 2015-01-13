@@ -21,15 +21,26 @@
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://purl.org/spar/doco</Import>
     <Annotation>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology
-
-Ontology for defining web interfaces for author and display RDF Data.</Literal>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/title"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/creator"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Silvio Peroni</Literal>
     </Annotation>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <Literal datatypeIRI="&rdf;PlainLiteral">BIRD-A Ontology</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Ontology for defining web interfaces for author and display RDF Data.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/creator"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Francesco Caliumi</Literal>
     </Annotation>
     <Declaration>
         <Class IRI="#CheckboxInput"/>
@@ -210,6 +221,10 @@ Ontology for defining web interfaces for author and display RDF Data.</Literal>
     <SubClassOf>
         <Class IRI="#StaticText"/>
         <Class IRI="#StaticWidget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StaticWidget"/>
+        <Class IRI="http://purl.org/spar/deo/DiscourseElement"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#StaticWidget"/>
