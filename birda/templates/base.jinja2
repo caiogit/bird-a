@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		{% block head %}
+			<title>{% block title %}{% endblock %} - Bird-A</title>
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+			<meta name="keywords" content="python web application" />
+			<meta name="description" content="pyramid web application" />
+			<link rel="shortcut icon" href="{{request.application_url}}/static/favicon.ico" />
+			<link rel="stylesheet" href="{{request.application_url}}/static/stylesheets/bird-a.css" type="text/css" media="screen" charset="utf-8" />
+			<!--[if !IE 7]>
+			<style type="text/css">
+				#wrap {display:table;height:100%}
+			</style>
+			<![endif]-->
+		{% endblock %}
+	</head>
+	<body>
+		<div id="wrap">
+			<header>
+				{% block header %}
+        			<h1 id="header">Bird-A</h1>
+					<p id="description">Builder of Interfaces for RDF Data Authoring</p>
+				{% endblock %}
+			</header>
+
+			<nav>
+				{% block nav %}
+
+				{% endblock %}
+			</nav>
+
+			<div class="site-inner">
+				<main>
+					{% block content %}
+
+					{% endblock %}
+				</main>
+			</div>
+
+			<footer>
+				{% block footer %}
+        			&copy; Copyright Bird-A by ...
+				{% endblock %}
+			</footer>
+		</div>
+	</body>
+</html>

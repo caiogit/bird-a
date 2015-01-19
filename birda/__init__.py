@@ -30,9 +30,11 @@ def main(global_config, **settings):
 		authorization_policy=authz_policy,
 		session_factory=session_factory
 	)
+	# config = pyramid.config.Configurator(settings=settings)
 
-	# Add a static view routed on "/static" for the directory "bird-a/static"
-	config.add_static_view('static', 'static')
+	# Add a static view routed on "/static" for the directory "bird-a/static" (relative to
+	# dir "bird-a/config"
+	config.add_static_view(name='static', path='../static')
 
 	# Add all the routes of birda
 	config.include(birda.routes.addroutes)
