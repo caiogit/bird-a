@@ -19,18 +19,43 @@
 		<div id="wrap">
 			<header>
 				{% block header %}
-        			<h1 id="header">Bird-A</h1>
-					<p id="description">Builder of Interfaces for RDF Data Authoring</p>
+        			<nav class="navbar" role="navigation">
+						{% block navbar %}
+						<div class="container">
+							<div class="row">
+								<div class="navbar-header">
+									<a class="navbar-brand" href="{{request.application_url}}">
+										<div class="logo-image"></div>
+										<div class="sitename">Bird-A</div>
+									</a>
+								</div>
+
+								<div class="collapse navbar-collapse">
+									<ul class="nav navbar-nav">
+										{% block navbar_main %}
+											<li>
+												<a href="{{request.application_url}}/list">Ontologies</a>
+											</li>
+										{% endblock %}
+									</ul>
+
+									<ul class="nav navbar-nav navbar-right">
+										{% block navbar_right %}
+											<li>
+												<a href="{{request.application_url}}/login">Login</a>
+											</li>
+										{% endblock %}
+									</ul>
+								</div>
+
+							</div>
+						</div>
+						{% endblock %}
+					</nav>
 				{% endblock %}
 			</header>
 
-			<nav>
-				{% block nav %}
-
-				{% endblock %}
-			</nav>
-
-			<div class="site-inner">
+			<div class="main-container container">
 				<main>
 					{% block content %}
 
@@ -38,9 +63,15 @@
 				</main>
 			</div>
 
-			<footer>
+			<footer class="footer">
 				{% block footer %}
-        			&copy; Copyright Bird-A by ...
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<p class="copyright">&copy; Copyright Bird-A by ...</p>
+							</div>
+						</div>
+					</div>
 				{% endblock %}
 			</footer>
 		</div>

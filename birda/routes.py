@@ -19,6 +19,8 @@ def addroutes(config):
 	# Let the user log out
 	#config.add_route('logout', '/logout')
 
+	# List all available ontologies
+	#config.add_route('show_instances', '/list')
 	# Show all the instances of an ontology
 	#config.add_route('show_instances', '/{onto_id}/')
 	# Add an instance to an ontology
