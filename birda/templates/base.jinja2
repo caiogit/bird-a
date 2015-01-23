@@ -25,7 +25,9 @@
 							<div class="row">
 								<div class="navbar-header">
 									<a class="navbar-brand" href="{{request.application_url}}">
-										<div class="logo-image"></div>
+										<div class="logo-image">
+											<img class="logo-image" src="{{request.application_url}}/static/favicon.ico" />
+										</div>
 										<div class="sitename">Bird-A</div>
 									</a>
 								</div>
@@ -41,8 +43,12 @@
 
 									<ul class="nav navbar-nav navbar-right">
 										{% block navbar_right %}
-											<li>
-												<a href="{{request.application_url}}/login">Login</a>
+											<li class="loginout">
+													{% if view.logged_in is not none %}
+														<a href="{{ request.application_url }}/logout">Logout</a>
+													{% else  %}
+														<a href="{{ request.application_url }}/login">Log In</a>
+													{% endif %}
 											</li>
 										{% endblock %}
 									</ul>
