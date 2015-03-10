@@ -4,6 +4,7 @@ import pyramid.view
 import pyramid.security
 import pyramid.httpexceptions
 import birda.models.users
+import birda.storage.storage
 
 #_ = TranslationStringFactory('bird-a')
 
@@ -43,6 +44,7 @@ class WikiViews(object):
 		#renderer = get_renderer("templates/layout.pt")
 		#self.layout = renderer.implementation().macros['layout']
 		self.logged_in = pyramid.security.authenticated_userid(request)
+		self.storage = birda.storage.storage.Storage()
 
 	# ----------------------------------------------------------------------------- #
 
