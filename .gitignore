@@ -18,3 +18,10 @@ bak/
 *.egg-info
 *.sqlite
 *.db
+.DS_Store
+
+# Ignore test ontologies, instances, etc.
+test*.rdf
+test*.n3
+test*.turtle
+test*.processed
