@@ -55,6 +55,6 @@ setup(name='bird-a',
       [paste.app_factory]
       main = birda:main
       [console_scripts]
-      initialize_birda_db = birda.scripts.initializedb:main
+      initialize_birda_db = birda.scripts.initialize_db:main
       """,
       )

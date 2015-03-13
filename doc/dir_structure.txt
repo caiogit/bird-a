@@ -10,7 +10,9 @@ bird-a
 		+ templates (?): Contains the HTML+Jinja Templates used by
 		+ validator: Contains all modules related to 
 		
-	+ catalog: Contains the instances of bird-a ontology served by bird-a
+	+ catalog:
+		+ birda: Contains instances of bird-a ontology served by bird-a
+		+ ontologies: Contains instances of the target ontologies served by bird-a
 	
 	+ config: Contains all the config files needed by bird-a
 	
