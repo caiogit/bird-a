@@ -3,13 +3,18 @@ DIRECTORY STRUCTURE
 
 bird-a
 	+ bin: Contains python modules used by bird-a webserver
-		+ core: Contains core modues used by bird-a
-		+ formatter: Contains modules used to build widgets html
-		+ storage: Contains modules used by the storage
+		+ formatter (?): Contains modules used to build widgets html
+		+ models: Contains all models mapping db objects
+		+ scripts: Contains init or test scripts
+		+ storage: Contains modules related to the storage
+		+ templates: Contains the HTML+Jinja Templates used by birda
+		+ unittest: Contains unittest modules
 		+ utils: Contains collections of utilities used project wide
-		+ templates (?): Contains the HTML+Jinja Templates used by
-		+ validator: Contains all modules related to 
-		
+		+ validator: Contains all modules related to the validator
+		+ w_model: Contains the Widget Models designed to represent a birda instance
+		+ w_view: Contains the Widget Views designed to generate a html representation
+		 		  of a birda instance
+
 	+ catalog:
 		+ birda: Contains instances of bird-a ontology served by bird-a
 		+ ontologies: Contains instances of the target ontologies served by bird-a

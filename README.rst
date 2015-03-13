@@ -43,3 +43,14 @@ then try (source https://github.com/eventray/horus/issues/38) ::
 	sudo apt-get install python-dev python3-dev
 	easy_install -UZ cryptacular
 
+
+If some scripts raise this error:
+
+	Traceback (most recent call last):
+	  File "...", line XXX, in <...>
+		from rdflib.namespace import RDF
+	ImportError: No module named namespace
+
+then try:
+
+	sudo pip install --upgrade rdflib
