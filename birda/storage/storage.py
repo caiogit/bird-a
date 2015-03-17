@@ -1,6 +1,11 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 class Storage(object):
+	"""
+	Storage abstract class
+
+	"""
 
 	def __init__(self):
 		pass
@@ -11,7 +16,8 @@ class Storage(object):
 
 		:return: List of dictionaries in the form {'id':'...', 'title':'...', 'description':'...'}
 		"""
-		pass
+
+		raise NotImplementedError("This method should be overrided by subclass")
 
 	def get_instances(self, onto_id):
 		"""
@@ -20,7 +26,8 @@ class Storage(object):
 		:param onto_id: Ontology ID
 		:return: List of dictionaries (keys: 'id', 'title')
 		"""
-		pass
+
+		raise NotImplementedError("This method should be overrided by subclass")
 
 	def get_ontology_iri(self, onto_id):
 		"""
@@ -29,4 +36,10 @@ class Storage(object):
 		:param onto_id: (string) Ontology ID
 		:return: (string) IRI of the ontology
 		"""
-		pass
+
+		raise NotImplementedError("This method should be overrided by subclass")
+
+
+if __name__ == '__main__':
+	storage = Storage()
+	storage.get_ontologies()
