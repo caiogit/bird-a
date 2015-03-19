@@ -21,7 +21,7 @@ bak/
 .DS_Store
 
 # Ignore test ontologies, instances, etc.
-test*.rdf
-test*.n3
-test*.turtle
-test*.processed
+*.rdf
+*.n3
+*.turtle
+*.processed

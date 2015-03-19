@@ -8,9 +8,13 @@ class BirdaInstance(object):
 	
 	# List of w_model.Widget not descending from any other widget (root widgets)
 	widgets = []
+
+	# ----------------------------------------------------------------------- #
 	
 	def __init__(self):
 		pass
+
+	# ----------------------------------------------------------------------- #
 
 	def parse(self,rdf):
 		"""
@@ -21,6 +25,33 @@ class BirdaInstance(object):
 		"""
 		pass
 
+# ================================================================================================ #
+
+class BirdaInstances(object):
+	"""
+	Container for processed Birda instances
+	"""
+
+	# Dictionary: "ontology_id" -> birda_instance
+	birda_instances = {}
+
+	# ----------------------------------------------------------------------- #
+
+	def __init__(self):
+		pass
+
+	# ----------------------------------------------------------------------- #
+
+	def load_instances(self, rdf_dict):
+		"""
+		Load birda instances from a dictionary containing birda instances in rdf format
+
+		:param rdf_dict: Dictionary "ontology_id" -> rdflib.Graph
+		:return: None
+		"""
+		raise NotImplementedError()
+
+# ================================================================================================ #
 
 if __name__ == '__main__':
 	pass

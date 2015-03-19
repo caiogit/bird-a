@@ -7,8 +7,23 @@ class Storage(object):
 
 	"""
 
+	# ----------------------------------------------------------------------- #
+
 	def __init__(self):
 		pass
+
+	# ----------------------------------------------------------------------- #
+
+	def load_available_ontologies_catalog(self):
+		"""
+		Load the internal ontologies catalog
+
+		:return: None
+		"""
+
+		raise NotImplementedError("This method should be implemented by subclasses")
+
+	# ----------------------------------------------------------------------- #
 
 	def get_ontologies(self):
 		"""
@@ -17,7 +32,9 @@ class Storage(object):
 		:return: List of dictionaries in the form {'id':'...', 'title':'...', 'description':'...'}
 		"""
 
-		raise NotImplementedError("This method should be overrided by subclass")
+		raise NotImplementedError("This method should be implemented by subclasses")
+
+	# ----------------------------------------------------------------------- #
 
 	def get_instances(self, onto_id):
 		"""
@@ -27,7 +44,9 @@ class Storage(object):
 		:return: List of dictionaries (keys: 'id', 'title')
 		"""
 
-		raise NotImplementedError("This method should be overrided by subclass")
+		raise NotImplementedError("This method should be implemented by subclasses")
+
+	# ----------------------------------------------------------------------- #
 
 	def get_ontology_iri(self, onto_id):
 		"""
@@ -37,8 +56,19 @@ class Storage(object):
 		:return: (string) IRI of the ontology
 		"""
 
-		raise NotImplementedError("This method should be overrided by subclass")
+		raise NotImplementedError("This method should be implemented by subclasses")
 
+	# ----------------------------------------------------------------------- #
+
+	def get_birda_instances(self):
+		"""
+		Return all birda instances in rdf format
+
+		:return: Dictionary "ontology_id" -> rdflib.Graph
+		"""
+		raise NotImplementedError("This method should be implemented by subclasses")
+
+# ================================================================================================ #
 
 if __name__ == '__main__':
 	storage = Storage()
