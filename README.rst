@@ -6,7 +6,7 @@ Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 Library Requirements
 --------------------
 
-Bird-A requires a SQLite3 bindings.
+Bird-A requires SQLite3 bindings.
 
 On a Debian system, these imply: build-essentials, libsqlite3-dev.
 
@@ -41,7 +41,7 @@ If setup.py terminates with this error::
 then try (source https://github.com/eventray/horus/issues/38) ::
 
 	sudo apt-get install python-dev python3-dev
-	easy_install -UZ cryptacular
+	sudo easy_install -UZ cryptacular
 
 
 If some scripts raise this error:
