@@ -1,6 +1,6 @@
 import widget
 
-class ActionableWidget(Widget):
+class ActionableWidget(widget.Widget):
 	
 	def __init__(self):
 		pass
