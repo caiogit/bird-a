@@ -25,3 +25,6 @@ bak/
 *.n3
 *.turtle
 *.processed
+
+# Others
+doc/MockUp.pdf
