@@ -8,15 +8,6 @@ from rdflib import Namespace, Literal, URIRef
 
 DIR_PATH = os.path.dirname( os.path.realpath(__file__) )
 
-def convert_ontology():
-	rdf = rdflib.Graph()
-
-	rdf.load("test_foaf_instance.rdf")
-	rdf.serialize("test_foaf_instance_2.n3",format="n3")
-
-	for s,p,o in rdf:
-		print "%(s)r,\n%(p)r,\n%(o)r\n" % vars()
-
 def create_simple_birda_instance():
 
 	# hasFirstWidget
