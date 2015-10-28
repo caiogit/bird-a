@@ -14,22 +14,11 @@ class Storage(object):
 
 	# ----------------------------------------------------------------------- #
 
-	def load_available_ontologies_catalog(self):
+	def reload_available_ontologies_catalog(self):
 		"""
-		Load the internal ontologies catalog
+		Reload the internal ontologies catalog
 
 		:return: None
-		"""
-
-		raise NotImplementedError("This method should be implemented by subclasses")
-
-	# ----------------------------------------------------------------------- #
-
-	def get_ontologies(self):
-		"""
-		Get a list all all available ontologies
-
-		:return: List of dictionaries in the form {'id':'...', 'title':'...', 'description':'...'}
 		"""
 
 		raise NotImplementedError("This method should be implemented by subclasses")
