@@ -109,6 +109,9 @@
         <ObjectProperty IRI="#hasFirstWidget"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#hasNextLocalNameCompoent"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#hasNextWidget"/>
     </Declaration>
     <Declaration>
@@ -134,6 +137,21 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasOptions"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isLocalNameComponent"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#BirdALabel"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#birdADescription"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#localNameMembersSeparator"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#localNameSeparator"/>
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="rdf:HTML"/>
@@ -325,6 +343,14 @@
         <Class IRI="#HierarchicalWidget"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasNextLocalNameCompoent"/>
+        <Class IRI="#InputWidget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasNextLocalNameCompoent"/>
+        <Class IRI="#LeafWidget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasNextWidget"/>
         <Class IRI="#Widget"/>
     </ObjectPropertyDomain>
@@ -339,6 +365,14 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasFirstWidget"/>
         <Class IRI="#Widget"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasNextLocalNameCompoent"/>
+        <Class IRI="#InputWidget"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasNextLocalNameCompoent"/>
+        <Class IRI="#LeafWidget"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasNextWidget"/>
@@ -422,6 +456,14 @@
         <DataProperty IRI="#hasOptions"/>
         <Class IRI="#TextInput"/>
     </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isLocalNameComponent"/>
+        <Class IRI="#InputWidget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isLocalNameComponent"/>
+        <Class IRI="#LeafWidget"/>
+    </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#hasDefaultValue"/>
         <Datatype abbreviatedIRI="rdfs:Literal"/>
@@ -451,6 +493,20 @@
             </FacetRestriction>
         </DatatypeRestriction>
     </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isLocalNameComponent"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#BirdALabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">States what property should be used like description for a BirdA instance and the referenced object instances</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#BirdALabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">BirdA Label</Literal>
+    </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#DiscardButton</IRI>
@@ -552,6 +608,16 @@
         <Literal datatypeIRI="&rdf;PlainLiteral">Widget</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#birdADescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">States what property should be used for labeling a BirdA instance and the referenced object instances</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#birdADescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">BirdA Description</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#hasDefaultValue</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Value wherewith the input field is precompiled at insertion time (ignored at edit time)</Literal>
@@ -608,6 +674,16 @@ hasDesctipiton is translatable and must have the language tag</Literal>
         <Literal datatypeIRI="&rdf;PlainLiteral">Set the minimum value for the specified input. For Lists indicates the minimum number of items in the list</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#hasNextLocalNameCompoent</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">States the next widget that will compose the instance local name, if any</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasNextLocalNameCompoent</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Has Next Local Name Component</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#hasNextWidget</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">For a Widget contained in a HierarchicalWidget, specifies the next sibling Widget</Literal>
@@ -634,6 +710,16 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#isLocalNameComponent</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">States that this widget value should be used to generate instance local name</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#isLocalNameComponent</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Is Local Name Component</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#isPartOf</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Property which connects a Widget to the Widget which contains it (if any)</Literal>
     </AnnotationAssertion>
@@ -642,6 +728,38 @@ hasDesctipiton is translatable and must have the language tag</Literal>
         <IRI>#isPartOf</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Is Part Of</Literal>
     </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#localNameMembersSeparator</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Separator bewteen local name members, if any (ad es http://example.com/ontology#john-smith-jr). Could be only &quot;_&quot; or &quot;-&quot;.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#localNameMembersSeparator</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Local Name Members Separator</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#localNameSeparator</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Character that divides URI from Local Name. Should be one char and between &quot;/&quot; and &quot;#&quot;</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#localNameSeparator</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Local Name Separator</Literal>
+    </AnnotationAssertion>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="#BirdALabel"/>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+    </SubAnnotationPropertyOf>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="#birdADescription"/>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+    </SubAnnotationPropertyOf>
+    <AnnotationPropertyRange>
+        <AnnotationProperty IRI="#localNameSeparator"/>
+        <AbbreviatedIRI>xsd:string</AbbreviatedIRI>
+    </AnnotationPropertyRange>
 </Ontology>
 
 
