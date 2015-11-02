@@ -7,11 +7,26 @@ import rdflib
 import argparse
 import tempfile
 
-SUPPORTED_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
+SUPPORTED_INPUT_TYPES = ['xml', 'pretty-xml', 'nt', 'n3', 'turtle']
+SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
-def print_ontology(format, input_file):
-	rdf = rdflib.Graph()
-	rdf.load(input_file)
+def load_ontology(input_file):
+
+	for type in SUPPORTED_INPUT_TYPES:
+		try:
+			print "Trying %(type)s: " % vars(),
+			rdf = rdflib.Graph()
+			rdf.load(input_file, format=type)
+			print\
+				"Ok"
+			print
+			return rdf
+		except Exception, e:
+			print "Fail"
+			pass
+
+
+def print_ontology(format, rdf):
 
 	if format == 'triples':
 		for s,p,o in rdf:
@@ -42,8 +57,8 @@ def arg_parse():
 	parser.add_argument(
 		dest='format',
 		type=str,
-		choices=SUPPORTED_TYPES,
-		help="Display format (%s)" % ', '.join(SUPPORTED_TYPES))
+		choices=SUPPORTED_OUTPUT_TYPES,
+		help="Display format (%s)" % ', '.join(SUPPORTED_OUTPUT_TYPES))
 
 	parser.add_argument(
 		dest='input_file',
@@ -63,4 +78,5 @@ def arg_parse():
 
 if __name__ == '__main__':
 	args = arg_parse()
-	print_ontology(args.format, args.input_file)
+	rdf = load_ontology(args.input_file)
+	print_ontology(args.format, rdf)

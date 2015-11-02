@@ -3,7 +3,7 @@
 
 import os
 import rdflib
-from rdflib.namespace import RDF
+from rdflib.namespace import RDF, RDFS
 from rdflib import Namespace, Literal, URIRef
 
 DIR_PATH = os.path.dirname( os.path.realpath(__file__) )
@@ -26,22 +26,27 @@ def create_simple_birda_instance():
 	BIRDA = Namespace("http://www.semanticweb.org/ontologies/bird-a-ontology/")
 	FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
-	B_DATA = Namespace("http://www.francescocaliumi.it/bird-a/test/data/")
 
-	formPerson = B_DATA.Form
+	B_DATA = Namespace("http://www.francescocaliumi.it/bird-a/person")
+	B_DATAs = Namespace(B_DATA + '/')
+
+	b_data = URIRef(B_DATA)
+	rdf.add((b_data, RDFS.comment, Literal("Persone")))
+
+	formPerson = B_DATAs.Form
 	rdf.add((formPerson, RDF.type, BIRDA.Form))
-	rdf.add((formPerson, BIRDA.hasLabel, Literal("Persona")))
-	rdf.add((formPerson, BIRDA.mapsResource, URIRef(B_DATA)))
+	rdf.add((formPerson, BIRDA.hasLabel, Literal("Persona: inserimento dati")))
+	rdf.add((formPerson, BIRDA.mapsResource, URIRef(B_DATAs)))
 	rdf.add((formPerson, BIRDA.mapsType, FOAF.Person))
 
-	inputGivenName = B_DATA.GivenName
+	inputGivenName = B_DATAs.GivenName
 	rdf.add((inputGivenName, RDF.type, BIRDA.TextInput))
 	rdf.add((formPerson, BIRDA.hasFirstWidget, inputGivenName))
 	rdf.add((inputGivenName, BIRDA.ifPartOf, formPerson))
 	rdf.add((inputGivenName, BIRDA.hasLabel, Literal("Name")))
 	rdf.add((inputGivenName, BIRDA.mapsType, FOAF.givenName))
 
-	inputFamilyName = B_DATA.FamilyName
+	inputFamilyName = B_DATAs.FamilyName
 	rdf.add((inputFamilyName, RDF.type, BIRDA.TextInput))
 	rdf.add((inputGivenName, BIRDA.hasNextWidget, inputFamilyName))
 	rdf.add((inputFamilyName, BIRDA.ifPartOf, formPerson))
@@ -54,6 +59,7 @@ def create_simple_birda_instance():
 	  print "%(s)r,\n%(p)r,\n%(o)r\n" % vars()
 
 	rdf.serialize("%s/test_birda_simple.turtle" % DIR_PATH,format="turtle")
+	rdf.serialize("%s/test_birda_simple.rdf" % DIR_PATH,format="xml")
 
 if __name__ == '__main__':
 	create_simple_birda_instance()
