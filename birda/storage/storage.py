@@ -14,9 +14,9 @@ class Storage(object):
 
 	# ----------------------------------------------------------------------- #
 
-	def reload_available_ontologies_catalog(self):
+	def reload_available_binst_catalog(self):
 		"""
-		Reload the internal ontologies catalog
+		Reload the internal bird-a instances catalog
 
 		:return: None
 		"""
@@ -25,11 +25,11 @@ class Storage(object):
 
 	# ----------------------------------------------------------------------- #
 
-	def get_instances(self, onto_id):
+	def get_binst_instances(self, binst_id):
 		"""
-		Get a list of all instances of a given ontology
+		Get a list of all instances of a given bird-a instance
 
-		:param onto_id: Ontology ID
+		:param binst_id: bird-a instance id
 		:return: List of dictionaries (keys: 'id', 'title')
 		"""
 
@@ -37,11 +37,11 @@ class Storage(object):
 
 	# ----------------------------------------------------------------------- #
 
-	def get_ontology_iri(self, onto_id):
+	def get_binst_iri(self, binst_id):
 		"""
-		Get the ontology IRI
+		Get the bird-a instance IRI
 
-		:param onto_id: (string) Ontology ID
+		:param binst_id: (string) bird-a instance id
 		:return: (string) IRI of the ontology
 		"""
 
@@ -49,11 +49,11 @@ class Storage(object):
 
 	# ----------------------------------------------------------------------- #
 
-	def get_birda_instances(self):
+	def get_all_binst(self):
 		"""
-		Return all birda instances in rdf format
+		Return all bird-a instances in rdf format
 
-		:return: Dictionary "ontology_id" -> rdflib.Graph
+		:return: Dictionary {"<binst_id>" -> rdflib.Graph}
 		"""
 		raise NotImplementedError("This method should be implemented by subclasses")
 
