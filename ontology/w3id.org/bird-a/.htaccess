@@ -12,6 +12,9 @@ RewriteEngine on
 Header set Access-Control-Allow-Origin *
 Options +FollowSymLinks
 
+# Rewrite rule to serve bird-a ontology directly
+RewriteRule ^bird-a.owl$ http://rawgit.com/caiogit/bird-a/master/ontology/bird-a.owl [R=303,L]
+
 # Rewrite rule to serve HTML content
 RewriteCond %{HTTP_ACCEPT} !application/rdf\+xml.*(text/html|application/xhtml\+xml)
 RewriteCond %{HTTP_ACCEPT} text/html [OR]
@@ -21,7 +24,7 @@ RewriteRule ^.*$ http://www.essepuntato.it/lode/owlapi/http://rawgit.com/caiogit
 
 # Rewrite rule to serve RDF/XML content if requested
 RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
-RewriteRule ^.*$ http://rawgit.com/caiogit/bird-a/master/ontology/bird-a.owl [R=303]
+RewriteRule ^.*$ http://rawgit.com/caiogit/bird-a/master/ontology/bird-a.owl [R=303,L]
 
 # Choose the default response
 RewriteRule ^.*$ http://rawgit.com/caiogit/bird-a/master/ontology/bird-a.owl [R=303]
