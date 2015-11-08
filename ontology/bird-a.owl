@@ -489,7 +489,7 @@
         <DatatypeRestriction>
             <Datatype abbreviatedIRI="xsd:string"/>
             <FacetRestriction facet="&xsd;pattern">
-                <Literal datatypeIRI="&rdf;PlainLiteral">(?:^|,)(?=[^&quot;]|(&quot;)?)&quot;?((?(1)[^&quot;]*|[^,&quot;]*))&quot;?(?=,|$)</Literal>
+                <Literal datatypeIRI="&rdf;PlainLiteral">^\s*(?:&apos;[^&apos;\]*(?:\[\S\s][^&apos;\]*)*&apos;|&quot;[^&quot;\]*(?:\[\S\s][^&quot;\]*)*&quot;|[^,&apos;&quot;\s\]*(?:\s+[^,&apos;&quot;\s\]+)*)\s*(?:,\s*(?:&apos;[^&apos;\]*(?:\[\S\s][^&apos;\]*)*&apos;|&quot;[^&quot;\]*(?:\[\S\s][^&quot;\]*)*&quot;|[^,&apos;&quot;\s\]*(?:\s+[^,&apos;&quot;\s\]+)*)\s*)*$</Literal>
             </FacetRestriction>
         </DatatypeRestriction>
     </DataPropertyRange>
@@ -696,7 +696,33 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasOptions</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies the options showed by selection widgets (like RadioInput) or restrict the range of a TextInput. The format is the common csv format (e.g: item1, &quot;Item 2&quot;,item3)</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies the options showed by selection widgets (like RadioInput) or restrict the range of a TextInput. The format is the common csv format (e.g: item1, &quot;Item 2&quot;,item3)
+
+Here there is the verbose regex expression (as copied from http://programmers.stackexchange.com/questions/166454/can-the-csv-format-be-defined-by-a-regex ):
+
+re_valid = r&quot;&quot;&quot;
+# Validate a CSV string having single, double or un-quoted values.
+^                                   # Anchor to start of string.
+\s*                                 # Allow whitespace before value.
+(?:                                 # Group for value alternatives.
+  &apos;[^&apos;\\]*(?:\\[\S\s][^&apos;\\]*)*&apos;     # Either Single quoted string,
+| &quot;[^&quot;\\]*(?:\\[\S\s][^&quot;\\]*)*&quot;     # or Double quoted string,
+| [^,&apos;&quot;\s\\]*(?:\s+[^,&apos;&quot;\s\\]+)*    # or Non-comma, non-quote stuff.
+)                                   # End group of value alternatives.
+\s*                                 # Allow whitespace after value.
+(?:                                 # Zero or more additional values
+  ,                                 # Values separated by a comma.
+  \s*                               # Allow whitespace before value.
+  (?:                               # Group for value alternatives.
+    &apos;[^&apos;\\]*(?:\\[\S\s][^&apos;\\]*)*&apos;   # Either Single quoted string,
+  | &quot;[^&quot;\\]*(?:\\[\S\s][^&quot;\\]*)*&quot;   # or Double quoted string,
+  | [^,&apos;&quot;\s\\]*(?:\s+[^,&apos;&quot;\s\\]+)*  # or Non-comma, non-quote stuff.
+  )                                 # End group of value alternatives.
+  \s*                               # Allow whitespace after value.
+)*                                  # Zero or more additional values
+$                                   # Anchor to end of string.
+&quot;&quot;&quot;
+re.match(re_valid, &apos;[...]&apos;, re.VERBOSE)</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
