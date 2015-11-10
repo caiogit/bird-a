@@ -22,6 +22,7 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Import>http://purl.org/spar/doco</Import>
+    <Import>http://purl.org/co</Import>
     <Annotation>
         <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/title"/>
         <Literal datatypeIRI="&rdf;PlainLiteral">Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology</Literal>
@@ -121,6 +122,9 @@
         <ObjectProperty IRI="/isPartOf"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="/hasBaseIRI"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="/hasDefaultValue"/>
     </Declaration>
     <Declaration>
@@ -139,19 +143,22 @@
         <DataProperty IRI="/hasOptions"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="/hasTokenSeparator"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="/isLocalNameComponent"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="/BirdALabel"/>
+        <DataProperty IRI="/mapsResource"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="/birdADescription"/>
+        <DataProperty IRI="/mapsType"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="/localNameMembersSeparator"/>
+        <DataProperty IRI="/usesPropertyForDescription"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="/localNameSeparator"/>
+        <DataProperty IRI="/usesPropertyForLabel"/>
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="rdf:HTML"/>
@@ -405,6 +412,10 @@
         <DataProperty IRI="/hasOptions"/>
     </FunctionalDataProperty>
     <DataPropertyDomain>
+        <DataProperty IRI="/hasBaseIRI"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="/hasDefaultValue"/>
         <Class IRI="/InputWidget"/>
     </DataPropertyDomain>
@@ -457,6 +468,10 @@
         <Class IRI="/TextInput"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="/hasTokenSeparator"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="/isLocalNameComponent"/>
         <Class IRI="/InputWidget"/>
     </DataPropertyDomain>
@@ -464,6 +479,26 @@
         <DataProperty IRI="/isLocalNameComponent"/>
         <Class IRI="/LeafWidget"/>
     </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/mapsResource"/>
+        <Class IRI="/InputWidget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/mapsType"/>
+        <Class IRI="/InputWidget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/usesPropertyForDescription"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/usesPropertyForLabel"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasBaseIRI"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="/hasDefaultValue"/>
         <Datatype abbreviatedIRI="rdfs:Literal"/>
@@ -494,19 +529,34 @@
         </DatatypeRestriction>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="/hasTokenSeparator"/>
+        <DatatypeRestriction>
+            <Datatype abbreviatedIRI="xsd:string"/>
+            <FacetRestriction facet="&xsd;pattern">
+                <Literal datatypeIRI="&rdf;PlainLiteral">[-_]?</Literal>
+            </FacetRestriction>
+        </DatatypeRestriction>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="/isLocalNameComponent"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
-        <IRI>/BirdALabel</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">States what property should be used like description for a BirdA instance and the referenced object instances</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/BirdALabel</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">BirdA Label</Literal>
-    </AnnotationAssertion>
+    <DataPropertyRange>
+        <DataProperty IRI="/mapsResource"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/mapsType"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/usesPropertyForDescription"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/usesPropertyForLabel"/>
+        <Datatype abbreviatedIRI="xsd:anyURI"/>
+    </DataPropertyRange>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/DiscardButton</IRI>
@@ -608,14 +658,16 @@
         <Literal datatypeIRI="&rdf;PlainLiteral">Widget</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
-        <IRI>/birdADescription</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">States what property should be used for labeling a BirdA instance and the referenced object instances</Literal>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/hasBaseIRI</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies the base IRI of the target ontology instance
+
+Real domain: owl:Ontology + birda:Form</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/birdADescription</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">BirdA Description</Literal>
+        <IRI>/hasBaseIRI</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has base IRI</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -736,6 +788,21 @@ re.match(re_valid, &apos;[...]&apos;, re.VERBOSE)</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/hasTokenSeparator</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies which serator should be used between tokens during the local name generation. Possibile values are:
+- &quot;&quot;: camelCaseSeparation
+- &quot;-&quot;: dash-separation
+- &quot;_&quot;: underscore_separation
+
+Real domain: owl:Ontology + birda:Form</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/hasTokenSeparator</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has token separator</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/isLocalNameComponent</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">States that this widget value should be used to generate instance local name</Literal>
     </AnnotationAssertion>
@@ -755,37 +822,25 @@ re.match(re_valid, &apos;[...]&apos;, re.VERBOSE)</Literal>
         <Literal datatypeIRI="&rdf;PlainLiteral">Is Part Of</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
-        <IRI>/localNameMembersSeparator</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Separator bewteen local name members, if any (ad es http://example.com/ontology#john-smith-jr). Could be only &quot;_&quot; or &quot;-&quot;.</Literal>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/mapsResource</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">maps resource</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/localNameMembersSeparator</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Local Name Members Separator</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
-        <IRI>/localNameSeparator</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Character that divides URI from Local Name. Should be one char and between &quot;/&quot; and &quot;#&quot;</Literal>
+        <IRI>/mapsType</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">maps type</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/localNameSeparator</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Local Name Separator</Literal>
+        <IRI>/usesPropertyForDescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">uses property for description</Literal>
     </AnnotationAssertion>
-    <SubAnnotationPropertyOf>
-        <AnnotationProperty IRI="/BirdALabel"/>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    </SubAnnotationPropertyOf>
-    <SubAnnotationPropertyOf>
-        <AnnotationProperty IRI="/birdADescription"/>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
-    </SubAnnotationPropertyOf>
-    <AnnotationPropertyRange>
-        <AnnotationProperty IRI="/localNameSeparator"/>
-        <AbbreviatedIRI>xsd:string</AbbreviatedIRI>
-    </AnnotationPropertyRange>
+        <IRI>/usesPropertyForLabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">uses property for label</Literal>
+    </AnnotationAssertion>
 </Ontology>
 
 
