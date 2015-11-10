@@ -131,6 +131,12 @@
         <DataProperty IRI="/hasDescription"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="/hasGeneralDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasGeneralLabel"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="/hasLabel"/>
     </Declaration>
     <Declaration>
@@ -424,6 +430,14 @@
         <Class IRI="/Widget"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="/hasGeneralDescription"/>
+        <Class IRI="/Form"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasGeneralLabel"/>
+        <Class IRI="/Form"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="/hasLabel"/>
         <Class IRI="/Widget"/>
     </DataPropertyDomain>
@@ -506,6 +520,14 @@
     <DataPropertyRange>
         <DataProperty IRI="/hasDescription"/>
         <Datatype abbreviatedIRI="rdf:HTML"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasGeneralDescription"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasGeneralLabel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="/hasLabel"/>
@@ -704,6 +726,26 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/hasGeneralDescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specify the comment used to describe the form outside the form itself</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/hasGeneralDescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has general description</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/hasGeneralLabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specify the label used to describe the form outside the form itself</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/hasGeneralLabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has general label</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasLabel</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Short and explicative description of the Widget. It will be visible aside the input.
 
@@ -832,9 +874,23 @@ Real domain: owl:Ontology + birda:Form</Literal>
         <Literal datatypeIRI="&rdf;PlainLiteral">maps type</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/usesPropertyForDescription</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies which property birda should use to identify the label to display for the indivduals of the target ontology
+
+Real domain: owl:Ontology + birda:Form</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>/usesPropertyForDescription</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">uses property for description</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/usesPropertyForLabel</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies which property birda should use to identify the comment to display for the indivduals of the target ontology
+
+Real domain: owl:Ontology + birda:Form</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
