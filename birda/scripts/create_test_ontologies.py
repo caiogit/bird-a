@@ -12,6 +12,7 @@ SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
 BIRDA = Namespace("http://w3id.org/ontologies/bird-a/")
 CO = Namespace("http://purl.org/co/")
+SKOS = Namespace("http://www.w3.org/2004/02/skos/core")
 FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 
 BINST = Namespace("http://pippo.it/birda-data/")
@@ -71,6 +72,25 @@ def	getID(s, length=6):
 
 # ---------------------------------------------------------------------------- #
 
+def add_string_property(rdf, element, property, strings):
+	"""
+	Add all translations of a specified string property to an element
+
+	:param rdf: the RDF Graph
+	:param element: the subject element
+	:param property: the property used for "labeling"
+	:param strings: dictionary of labels to attach to the widget.
+		Keys are languages, values are the labels in those languages.
+		Es: {'en':"Foo", 'it':"Pippo"}
+
+	:return: None
+	"""
+
+	for lang,s in strings.items():
+		rdf.add((element, property, Literal(s, lang=lang)))
+
+# ---------------------------------------------------------------------------- #
+
 def create_widget(rdf, type='', namespace='', name='',
 				maps_resource=None, maps_type=None, labels={},
 				  label_property=BIRDA.hasLabel):
@@ -84,9 +104,8 @@ def create_widget(rdf, type='', namespace='', name='',
 	:param maps_resource: resource mapped by the widget
 	:param maps_type: type mapped by the widget
 	:param labels: dictionary of labels to attach to the widget.
-		Keys are languagese, values are the labels in those languages.
+		Keys are languages, values are the labels in those languages.
 		Es: {'en':"Foo", 'it':"Pippo"}
-	:param label_property: property used for labeling
 
 	:return: created element URIRef
 	"""
@@ -96,8 +115,7 @@ def create_widget(rdf, type='', namespace='', name='',
 	rdf.add((widget, BIRDA.mapsResource, maps_resource))
 	rdf.add((widget, BIRDA.mapsType, maps_type))
 
-	for lang,label in labels.items():
-		rdf.add((widget, label_property, Literal(label, lang=lang)))
+	add_string_property(rdf, widget, BIRDA.hasLabel, labels)
 
 # ---------------------------------------------------------------------------- #
 
@@ -152,6 +170,19 @@ def create_birda_instace():
 			'en': "FOAF:Person - Light data input",
 			'it': "FOAF:Person - Inserimento dati ristretti",
 		})
+	add_string_property(rdf, form_PersonLight, BIRDA.hasGeneralLabel, {
+		'en': "FOAF:Person Light",
+		'it': "FOAF:Person Minimale",
+	})
+	add_string_property(rdf, form_PersonLight, BIRDA.hasGeneralDescription, {
+		'en': "Used to insert only the minimal FOAF:Person attributes",
+		'it': "Utilizzato per inserire solo gli attributi minimali di FOAF:Person",
+	})
+	# Dubbio: Va bene qui Literal anyURI o usare URIRef?
+	rdf.add((form_PersonLight, BIRDA.hasBaseIRI, Literal("http://pippo.com/foaf-data#", datatype=XSD.anyURI)))
+	rdf.add((form_PersonLight, BIRDA.hasTokenSeparator, Literal("-")))
+	rdf.add((form_PersonLight, BIRDA.usesPropertyForLabel, SKOS.prefLabel))
+	rdf.add((form_PersonLight, BIRDA.usesPropertyForDescription, RDFS.description))
 
 	# FOAF Name
 	input_givenName = BINST.givenName
