@@ -169,6 +169,16 @@
     <Declaration>
         <Datatype abbreviatedIRI="rdf:HTML"/>
     </Declaration>
+    <EquivalentClasses>
+        <Class IRI="/HierarchicalWidget"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/Widget"/>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="http://purl.org/co/element"/>
+                <Class IRI="/Widget"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
     <SubClassOf>
         <Class IRI="/CheckboxInput"/>
         <Class IRI="/InputWidget"/>
@@ -204,6 +214,13 @@
     <SubClassOf>
         <Class IRI="/HierarchicalWidget"/>
         <Class IRI="/Widget"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/HierarchicalWidget"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="http://purl.org/co/element"/>
+            <Class IRI="/Widget"/>
+        </ObjectAllValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="/InputWidget"/>
