@@ -72,7 +72,7 @@ def	getID(s, length=6):
 
 def add_string_property(rdf, element, property, strings):
 	"""
-	Add all translations of a specified string property to an element
+	Adds all translations of a specified string property to an element
 
 	:param rdf: the RDF Graph
 	:param element: the subject element
@@ -94,7 +94,7 @@ def create_widget(
 		maps_resource=None, maps_type=None,
 		labels={}, descriptions={}):
 	"""
-	Create a bird-a Widget and add it to the rdf graph
+	Creates a bird-a Widget and add it to the rdf graph
 
 	:param rdf: the RDF Graph
 	:param type: rdf.type of the widget
@@ -131,6 +131,7 @@ def create_form_widget(
 		target_label_property=RDFS.label,  target_descr_property=RDFS.comment,
 		labels={}, descriptions={}):
 	"""
+	Creates a form widget
 
 	:param rdf: the RDF Graph
 	:param namespace: namespace of the widget
@@ -164,6 +165,26 @@ def create_form_widget(
 	rdf.add((form, BIRDA.usesPropertyForDescription, target_descr_property))
 
 	return form
+
+# ---------------------------------------------------------------------------- #
+
+def set_widget_options(rdf, widget, options={}):
+	"""
+	Set options for a widget
+
+	:param rdf: the RDF Graph
+	:param widget: target widget
+	:param options: dictionary in the form:
+		{'en': ["value1","value2",...], 'it': ["value1","value2",...]}
+
+	:return: None
+	"""
+
+	for lang,opts in options:
+		opts_literal = ', '.join( [repr(o) for o in opts] )
+		rdf.add((widget, BIRDA.hasOptions, Literal(opts_literal, lang=lang)))
+
+# ---------------------------------------------------------------------------- #
 
 def make_co_list(rdf, list_element, elements):
 	"""
@@ -203,7 +224,37 @@ def create_birda_instace():
 
 	# --------------------------------------------------------------- #
 
-	# Form Light
+	# FOAF Name
+	input_givenName = create_widget(
+		rdf, type=BIRDA.TextInput, namespace=BINST, name='GivenName',
+		maps_type=FOAF.givenName, labels={
+			'en': "Name",
+			'it': "Nome"
+		})
+
+	# FOAF Family Name
+	input_FamilyName = create_widget(
+		rdf, type=BIRDA.TextInput, namespace=BINST, name='FamilyName',
+		maps_type=FOAF.familyName, labels={
+			'en': "Family Name",
+			'it': "Cognome"
+		})
+
+	# FOAF Gender
+	input_Gender = create_widget(
+		rdf, type=BIRDA.TextInput, namespace=BINST, name='Gender',
+		maps_type=FOAF.gender, labels={
+			'en': "Gender",
+			'it': "Sesso"
+		})
+	set_widget_options(input_Gender, {
+		'en': ["Male", "Female", "Unknown"],
+		'it': ["Maschio", "Femmina", "Sconosciuto"]
+	})
+
+	# --------------------------------------------------------------- #
+
+	# FOAF Form Light
 	form_PersonLight = create_form_widget(
 		rdf, namespace=BINST, name='PersonLight',
 		maps_resource=URIRef(TINST), maps_type=FOAF.Person,
@@ -218,70 +269,9 @@ def create_birda_instace():
 			'it': "Utilizzato per inserire solo gli attributi minimali di FOAF:Person",
 		})
 
-	# FOAF Name
-	input_givenName = BINST.givenName
-	rdf.add((input_givenName, RDF.type, BIRDA.TextInput))
-	rdf.add((input_givenName, BIRDA.mapsType, FOAF.givenName))
-	#rdf.add((input_givenName, BIRDA.hasFirstWidget, input_givenName))
-	#rdf.add((input_givenName, BIRDA.ifPartOf, formPerson))
-	rdf.add((input_givenName, BIRDA.hasLabel, Literal(
-		"Name", lang='en')))
-	rdf.add((input_givenName, BIRDA.hasLabel, Literal(
-		"Nome", lang='it')))
-
-	# FOAF Family Name
-	input_FamilyName = BINST.FamilyName
-	rdf.add((input_FamilyName, RDF.type, BIRDA.TextInput))
-	rdf.add((input_FamilyName, BIRDA.mapsType, FOAF.familyName))
-	#rdf.add((input_givenName, BIRDA.hasNextWidget, input_FamilyName))
-	#rdf.add((input_FamilyName, BIRDA.ifPartOf, formPerson))
-	rdf.add((input_FamilyName, BIRDA.hasLabel, Literal(
-		"Family Name", lang='en')))
-	rdf.add((input_FamilyName, BIRDA.hasLabel, Literal(
-		"Cognome", lang='it')))
-
-	# FOAF Gender
-	input_Gender = BINST.Gender
-	rdf.add((input_Gender, RDF.type, BIRDA.RadioInput))
-	rdf.add((input_Gender, BIRDA.mapsType, FOAF.gender))
-	rdf.add((input_Gender, BIRDA.hasOptions, Literal(
-		"male,female,unknown", lang='en')))
-	rdf.add((input_Gender, BIRDA.hasOptions, Literal(
-		"maschio,femmina,sconosciuto", lang='it')))
-
-	# Form Light List
-	# formList_PersonLight = BINST.PersonLightFormWList
-	# formList_PersonLight_1 = BINST.PersonLightFormWListE1
-	# formList_PersonLight_2 = BINST.PersonLightFormWListE2
-	# formList_PersonLight_3 = BINST.PersonLightFormWListE3
-	#
-	# rdf.add((form_PersonLight, BIRDA.hasWidgetList, formList_PersonLight))
-	#
-	# rdf.add((formList_PersonLight, RDF.type, CO.List))
-	# #rdf.add((formList_PersonLight, CO.size, Literal("3", datatype=XSD.nonNegativeInteger)))
-	# rdf.add((formList_PersonLight, CO.firstItem, formList_PersonLight_1))
-	# #rdf.add((formList_PersonLight, CO.lastItem, formList_PersonLight_2))
-	#
-	# rdf.add((formList_PersonLight_1, RDF.type, CO.ListItem))
-	# rdf.add((formList_PersonLight, CO.item, formList_PersonLight_1))
-	# #rdf.add((formList_PersonLight_2, URIRef(CO+'index'), Literal("1", datatype=XSD.positiveInteger)))
-	# rdf.add((formList_PersonLight_1, CO.itemContent, input_givenName))
-	# rdf.add((formList_PersonLight_1, CO.nextItem, formList_PersonLight_2))
-	#
-	# rdf.add((formList_PersonLight_2, RDF.type, CO.ListItem))
-	# rdf.add((formList_PersonLight, CO.item, formList_PersonLight_2))
-	# #rdf.add((formList_PersonLight_2, URIRef(CO+'index'), Literal("2", datatype=XSD.positiveInteger)))
-	# rdf.add((formList_PersonLight_2, CO.itemContent, input_FamilyName))
-	#
-	# rdf.add((formList_PersonLight_3, RDF.type, CO.ListItem))
-	# rdf.add((formList_PersonLight, CO.item, formList_PersonLight_3))
-	# #rdf.add((formList_PersonLight_3, URIRef(CO+'index'), Literal("3", datatype=XSD.positiveInteger)))
-	# rdf.add((formList_PersonLight_3, CO.itemContent, input_Gender))
 	make_co_list(rdf, form_PersonLight, [input_givenName, input_FamilyName, input_Gender])
 
-	# --------------------------------------------------------------- #
-
-	# Form Extended
+	# FOAF Form Extended
 	form_PersonExt = BINST.PersonExtForm
 	rdf.add((form_PersonExt, RDF.type, BIRDA.Form))
 	rdf.add((form_PersonExt, BIRDA.mapsResource, URIRef(TINST)))
@@ -297,6 +287,12 @@ def create_birda_instace():
 	rdf.add((subform_Knows, BIRDA.mapsType, FOAF.Person))
 	make_co_list(rdf, subform_Knows, [input_givenName, input_FamilyName])
 
+	subform_Knows = create_widget(
+		rdf, type=BIRDA.SubForm, namespace=BINST, name='PersonKnowsSubForm',
+		maps_resource=URIRef(TINST), maps_type=FOAF.gender, labels={
+			'en': "Gender",
+			'it': "Sesso"
+		})
 
 
 	# Form Ext List
