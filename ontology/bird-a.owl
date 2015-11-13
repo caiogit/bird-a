@@ -68,9 +68,6 @@
         <Class IRI="/LeafWidget"/>
     </Declaration>
     <Declaration>
-        <Class IRI="/List"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="/NextFieldSet"/>
     </Declaration>
     <Declaration>
@@ -107,19 +104,16 @@
         <Class IRI="/Widget"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="/hasNextWidget"/>
+        <DataProperty IRI="/atLeast"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="/hasPart"/>
+        <DataProperty IRI="/atMost"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="/isPartOf"/>
+        <DataProperty IRI="/doAutocomplete"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="/hasBaseIRI"/>
@@ -129,12 +123,6 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="/hasDescription"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="/hasGeneralDescription"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="/hasGeneralLabel"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="/hasLabel"/>
@@ -153,6 +141,9 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="/isLocalNameComponent"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/mapsProperty"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="/mapsResource"/>
@@ -229,10 +220,6 @@
     <SubClassOf>
         <Class IRI="/LeafWidget"/>
         <Class IRI="/Widget"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="/List"/>
-        <Class IRI="/HierarchicalWidget"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="/NextFieldSet"/>
@@ -322,56 +309,6 @@
         <Class IRI="/NextFieldSet"/>
         <Class IRI="/TabbedFieldSet"/>
     </DisjointClasses>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="/hasPart"/>
-        <ObjectProperty IRI="/isPartOf"/>
-    </InverseObjectProperties>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-    </FunctionalObjectProperty>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="/hasNextWidget"/>
-    </FunctionalObjectProperty>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="/hasPart"/>
-    </FunctionalObjectProperty>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="/isPartOf"/>
-    </FunctionalObjectProperty>
-    <InverseFunctionalObjectProperty>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-    </InverseFunctionalObjectProperty>
-    <InverseFunctionalObjectProperty>
-        <ObjectProperty IRI="/hasNextWidget"/>
-    </InverseFunctionalObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-    </AsymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="/hasNextWidget"/>
-    </AsymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="/hasPart"/>
-    </AsymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="/isPartOf"/>
-    </AsymmetricObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-    </IrreflexiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="/hasNextWidget"/>
-    </IrreflexiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="/hasPart"/>
-    </IrreflexiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="/isPartOf"/>
-    </IrreflexiveObjectProperty>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-        <Class IRI="/HierarchicalWidget"/>
-    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
         <Class IRI="/InputWidget"/>
@@ -380,22 +317,6 @@
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
         <Class IRI="/LeafWidget"/>
     </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="/hasNextWidget"/>
-        <Class IRI="/Widget"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="/hasPart"/>
-        <Class IRI="/HierarchicalWidget"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="/isPartOf"/>
-        <Class IRI="/Widget"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="/hasFirstWidget"/>
-        <Class IRI="/Widget"/>
-    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
         <Class IRI="/InputWidget"/>
@@ -404,18 +325,14 @@
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
         <Class IRI="/LeafWidget"/>
     </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="/hasNextWidget"/>
-        <Class IRI="/Widget"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="/hasPart"/>
-        <Class IRI="/Widget"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="/isPartOf"/>
-        <Class IRI="/HierarchicalWidget"/>
-    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/mapsProperty"/>
+        <DataProperty IRI="/mapsResource"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/mapsType"/>
+        <DataProperty IRI="/mapsResource"/>
+    </SubDataPropertyOf>
     <FunctionalDataProperty>
         <DataProperty IRI="/hasDefaultValue"/>
     </FunctionalDataProperty>
@@ -435,6 +352,18 @@
         <DataProperty IRI="/hasOptions"/>
     </FunctionalDataProperty>
     <DataPropertyDomain>
+        <DataProperty IRI="/atLeast"/>
+        <Class IRI="/Widget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/atMost"/>
+        <Class IRI="/Widget"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/doAutocomplete"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="/hasBaseIRI"/>
         <Class abbreviatedIRI="owl:Thing"/>
     </DataPropertyDomain>
@@ -447,14 +376,6 @@
         <Class IRI="/Widget"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="/hasGeneralDescription"/>
-        <Class IRI="/Form"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="/hasGeneralLabel"/>
-        <Class IRI="/Form"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
         <DataProperty IRI="/hasLabel"/>
         <Class IRI="/Widget"/>
     </DataPropertyDomain>
@@ -464,19 +385,11 @@
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="/hasMaximum"/>
-        <Class IRI="/List"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="/hasMaximum"/>
         <Class IRI="/NumberInput"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="/hasMinimum"/>
         <Class IRI="/DateInput"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="/hasMinimum"/>
-        <Class IRI="/List"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="/hasMinimum"/>
@@ -527,6 +440,18 @@
         <Class abbreviatedIRI="owl:Thing"/>
     </DataPropertyDomain>
     <DataPropertyRange>
+        <DataProperty IRI="/atLeast"/>
+        <Datatype abbreviatedIRI="xsd:nonNegativeInteger"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/atMost"/>
+        <Datatype abbreviatedIRI="xsd:positiveInteger"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/doAutocomplete"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="/hasBaseIRI"/>
         <Datatype abbreviatedIRI="xsd:anyURI"/>
     </DataPropertyRange>
@@ -537,14 +462,6 @@
     <DataPropertyRange>
         <DataProperty IRI="/hasDescription"/>
         <Datatype abbreviatedIRI="rdf:HTML"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="/hasGeneralDescription"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="/hasGeneralLabel"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="/hasLabel"/>
@@ -647,16 +564,6 @@
         <Literal datatypeIRI="&rdf;PlainLiteral">Leaf Widget</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/List</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">A set of Widget that can be repeated several times (e.g. first and family names of friends)</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/List</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">List</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>/StaticText</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Static Text</Literal>
@@ -698,6 +605,45 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/atLeast</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies how many ocurrences of that Widget have at least to be inserted in the same Form. 
+
+If zero, the field is optional
+If greater than zero, the field is required (and will show a red &quot;*&quot;)
+If greater than one, atLeast number of (required) widget will be shown</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/atLeast</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">at least</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/atMost</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specifies how many ocurrences of that Widget can at most coexists in the same Form. 
+
+If greater than 1 a plus botton is showed.
+The plus button will be disabled when occurrences number hit atMost</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/atMost</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">at most</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/doAutocomplete</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specify wheter the widget interface should try to autocomplete the field. Deafault &quot;false&quot;
+
+Real domain: owl:Ontology + birda:Widget</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/doAutocomplete</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">do autocomplete</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasBaseIRI</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Specifies the base IRI of the target ontology instance
 
@@ -733,36 +679,6 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/hasFirstWidget</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">For a HierarchicalWidget, indicates which is the first Widget among the contained Widgets</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasFirstWidget</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">First Widget</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/hasGeneralDescription</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Specify the comment used to describe the form outside the form itself</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasGeneralDescription</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">has general description</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/hasGeneralLabel</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Specify the label used to describe the form outside the form itself</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasGeneralLabel</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">has general label</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasLabel</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Short and explicative description of the Widget. It will be visible aside the input.
 
@@ -777,12 +693,12 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasMaximum</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Set the maximum value for the specified input. For Lists indicates the maximum number of items in the list</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Set the maximum value for the specified input.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasMinimum</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Set the minimum value for the specified input. For Lists indicates the minimum number of items in the list</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Set the minimum value for the specified input.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
@@ -793,16 +709,6 @@ hasDesctipiton is translatable and must have the language tag</Literal>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>/hasNextLocalNameCompoent</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Has Next Local Name Component</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/hasNextWidget</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">For a Widget contained in a HierarchicalWidget, specifies the next sibling Widget</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasNextWidget</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Next Widget</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -836,16 +742,6 @@ $                                   # Anchor to end of string.
 re.match(re_valid, &apos;[...]&apos;, re.VERBOSE)</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasPart</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Has Part</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasPart</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Property which connects a HierarchicalWidget to its contained WIdgets</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasTokenSeparator</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Specifies which serator should be used between tokens during the local name generation. Possibile values are:
@@ -871,14 +767,9 @@ Real domain: owl:Ontology + birda:Form</Literal>
         <Literal datatypeIRI="&rdf;PlainLiteral">Is Local Name Component</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/isPartOf</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Property which connects a Widget to the Widget which contains it (if any)</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/isPartOf</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Is Part Of</Literal>
+        <IRI>/mapsProperty</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">maps property</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>

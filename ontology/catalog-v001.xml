@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://purl.org/spar/doco" uri="http://purl.org/spar/doco"/>
     <uri id="Imports Wizard Entry" name="http://purl.org/spar/doco" uri="file:/home/caio/Desktop/doco.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1447209544828" name="https://w3id.org/bird-a" uri="bird-a.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1447296107522" name="https://w3id.org/bird-a" uri="bird-a.owl"/>
     </group>
 </catalog>
