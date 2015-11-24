@@ -662,12 +662,14 @@ Real domain: owl:Ontology + birda:Form</Literal>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>/hasDefaultValue</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Default Value</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">default value</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasDescription</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">More complete descripiton of the field meaning and possibile online help for the user. Intended to be shown like a tooltip.
+
+In Forms, it indicates the description that that BIRD-A Form shold have in Forms List and other non-edit pages
 
 The content could be any valid html.
 hasDesctipiton is translatable and must have the language tag</Literal>
@@ -675,12 +677,14 @@ hasDesctipiton is translatable and must have the language tag</Literal>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>/hasDescription</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Description</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">description</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/hasLabel</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Short and explicative description of the Widget. It will be visible aside the input.
+
+In Forms, it indicates the title that that BIRD-A Form shold have in Forms List and other non-edit pages 
 
 The content could be any valid html.
 hasDesctipiton is translatable and must have the language tag</Literal>
