@@ -1,0 +1,7 @@
+REST API
+========
+
+New ID
+------
+
+Returns a new ID for a target individual without local name specifications.

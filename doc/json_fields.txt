@@ -1,0 +1,38 @@
+{
+	"form": "http://birda.com/form-person-1",
+	"maps_type": "http://xmlns.com/foaf/0.1/",
+	"base_uri": "http://ex.com/",
+	"label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+	"descr_property": "http://www.w3.org/2000/01/rdf-schema#comment",
+	"lang": "it",
+	"fields": [
+		"givenName": {
+			"property": "http://xmlns.com/foaf/0.1/givenName",
+			"label": "Nome",
+			"description": "Usare un campo diverso per ogni nome",
+			"placeholder": "Nome della persona (ad es. \"Pino\")",
+			"at_least": 1,
+		},
+		"familyName": {
+			"property": "http://xmlns.com/foaf/0.1/familyName",
+			"label": "Cognome,
+			"description": "Usare un campo diverso per ogni cognome",
+			"placeholder": "Cognome della persona (ad es. \"Rossi\")",
+			"at_least": 1,
+		}
+	],
+	"local_name":{
+		"fields": ["givenName", "familyMame"],
+		"separator": "-"
+	}
+}
+
+- frontend: directory "app", configurazioni gulp, karma, npm, bower, ecc
+  - README.rst, CHANGES.txt, ...
+- backend: sorgenti python, file di configurazione pyramid, database, ecc
+  - setup.py, README.rst, CHANGES.txt, ...
+  - db: istanza_birda.turtle, istanza_target.turtle , internal_db.sqlite3 (utenti, ecc)
+- doc: ontologia, schemi e tutto quello che ha a che fare 
+- README.rst (readme generale che rimanda ai due readme backend / frontend)
+- MANIFEST.in
+

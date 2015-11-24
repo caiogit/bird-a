@@ -1,0 +1,22 @@
+{
+	"http://ex.com/john-smith-cooper": {
+		"form": "http://birda.com/form-person-1",
+		"type": "http://xmlns.com/foaf/0.1/",
+		"label": "John Smith",
+		"descr": "The famous John Smith Cooper",
+		"authors": [
+			"http://giorgio-bianchi.it/me",
+			"http://people.it/don-camillo#me"
+		],
+		"lang": "en",
+		"properties": [
+			"givenName": ["John"],
+			"familyName": ["Smith", "Cooper"],
+			"gender": ["Male"],
+			"knows": [
+				"http://ex.com/foo",
+				"http://ex.com/bar"
+			]
+		]
+	}
+}
