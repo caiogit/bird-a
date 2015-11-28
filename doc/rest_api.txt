@@ -1,7 +1,212 @@
 REST API
 ========
 
-New ID
-------
+References:
 
-Returns a new ID for a target individual without local name specifications.
+- (https://bourgeois.me/rest/)
+- [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+- [REST Api Quick Tips](http://www.restapitutorial.com/lessons/restquicktips.html)
+- (http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
+
+==========================================================================================
+/api/v1/forms ? [offset={x}] & [limit={x}]
+==========================================================================================
+Example: /api/v1/forms?offset=10&limit=10
+
+GET
+---
+
+Get a list of forms with basilar infos.
+
+Returns:
+{
+	"forms": [
+		{
+			"uri": http://www.birda.it/form-person-1,
+			"label": "...",
+			"description": "..."
+		}
+	]
+}
+
+==========================================================================================
+/api/v1/forms/{form_uri}
+==========================================================================================
+Example:/api/v1/forms/http://www.birda.it/form-person-1
+
+GET
+---
+
+Get complete set of informations relative to a form
+
+Returns:
+{
+	
+}
+
+==========================================================================================
+/api/v1/individuals/{type_uri} ? [offset={x}] & [limit={x}]
+==========================================================================================
+Example: /api/v1/individuals/http://xmlns.com/foaf/0.1/Person?offset=10&limit=10
+
+GET
+---
+
+Research a list of individuals with the specified type
+
+Returns:
+{
+	"individuals": [
+		{
+			"uri": "http://ex.com/john-smith",
+			"label": "John Smith",
+			"Description": "Famous artist"
+		}
+	]
+}
+
+==========================================================================================
+/api/v1/individuals/search
+==========================================================================================
+POST: Resarch a list of individuals with a complex filter
+
+Params: 
+{
+	"properties": [
+		{
+			"uri": "http://xmlns.com/foaf/0.1/givenName"
+		},
+		{
+			"uri": "http://xmlns.com/foaf/0.1/familyName"
+		}
+	],
+	"filters":[
+		{
+			"property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+			"value": "http://xmlns.com/foaf/0.1/Person",
+			"match": "exact"
+		},
+		{
+			"property": "http://xmlns.com/foaf/0.1/familyName",
+			"value": "http://xmlns.com/foaf/0.1/Person",
+			"match": "start_with"
+		}
+	],
+	"limit": 20,
+	"offset": 0
+}
+
+Returns:
+{
+	"individuals": [
+		{
+			"uri": "http://ex.com/john-max-smith",
+			"properties": [
+				{
+					"uri": "http://xmlns.com/foaf/0.1/givenName",
+					"values": ["John", "Max"]
+				},
+				{
+					"uri": "http://xmlns.com/foaf/0.1/familyName",
+					"values": ["Smith"]
+				}
+			]
+		}
+	]
+}
+
+==========================================================================================
+/api/v1/individuals/{individual_uri} ? [form={form_uri}]
+==========================================================================================
+Example: /api/v1/individuals/http://www.birda.it/john-smith?form=http://www.birda.it/form-person-1
+
+GET
+---
+
+Get properties relative to an individual. If a form is specified, it returns only properties
+handled by the specified form or subform.
+
+Returns:
+{
+	"uri": "http://ex.com/john-max-smith",
+	"label": "John Max Smith",
+	"description": "Famous actor",
+	"authors": [
+		{
+			"uri": "http://bigio-bagio.it#me",
+			"description": "Bigio Bagio"
+		}
+	],
+	"last_modified": "2015-11-25 14:33:01",
+	"properties": [
+		{
+			"uri": "http://xmlns.com/foaf/0.1/givenName",
+			"values": ["John", "Max"]
+		},
+		{
+			"uri": "http://xmlns.com/foaf/0.1/familyName",
+			"values": ["Smith"]
+		}
+	]
+}
+
+POST
+----
+
+Update an individual.
+
+Payload:
+{{
+Same as GET JSON except for "uri", "authors" and "last_modified" missing
+}}
+
+Returns:
+{
+	"uri": "http://ex.com/john-max-smith",
+	"authors": [
+		{
+			"uri": "http://bigio-bagio.it#me",
+			"description": "Bigio Bagio"
+		}
+	],
+	"last_modified": "2015-11-25 14:33:01"
+}
+
+==========================================================================================
+/api/v1/individuals
+==========================================================================================
+Example: /api/v1/individuals
+
+PUT
+---
+Create an individual.
+
+Payload:
+{{
+Same as POST JSON payload
+}}
+
+Returns:
+{{
+Same as POST returned JSON
+}}
+
+
+==========================================================================================
+/api/v1/values/{property_uri} ? [subject_type={type_uri}] & [offset={x}] & [limit={x}]
+==========================================================================================
+Example: /api/v1/values/http://xmlns.com/foaf/0.1/givenName?subject_type=http://xmlns.com/foaf/0.1/Person?offset=10&limit=10
+
+GET
+---
+
+Get all values of a specified property (optionally filtered by subject type)
+
+Returns:
+{
+	"values": [
+		"Pippo",
+		"Pluto",
+		"Paperino"
+	]
+}
