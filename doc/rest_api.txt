@@ -8,15 +8,42 @@ References:
 - [REST Api Quick Tips](http://www.restapitutorial.com/lessons/restquicktips.html)
 - (http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
 
+
+Routes
+------
+
+/api/{...}
+	Every request starting with /api/ will be forwarded to the related api if not exists
+	or will rise an error otherwise
+
+/{...}
+	Requests don't matching the previous pattern will serve the HTML/Angular app, which
+	will route as follows:
+ 
+	/
+		Home page with forms list
+
+	/?form={form_uri}
+		List of individuals handled by that form
+
+	/?form={form_uri}&individual={individual_uri | new}
+		Edit of specified individual with the specified form
+
+APIs List
+---------
+
 ==========================================================================================
-/api/v1/forms ? [offset={x}] & [limit={x}]
+/api/v1/forms ? [lang=it] & [offset={x}] & [limit={x}]
 ==========================================================================================
 Example: /api/v1/forms?offset=10&limit=10
 
-GET
----
+------------------------------------------------------------------------------------------
+										GET
+------------------------------------------------------------------------------------------
 
 Get a list of forms with basilar infos.
+
+Used by: Available forms list
 
 Returns:
 {
@@ -25,7 +52,9 @@ Returns:
 			"uri": http://www.birda.it/form-person-1,
 			"label": "...",
 			"description": "..."
-		}
+		},
+		...
+		...
 	]
 }
 
@@ -34,25 +63,104 @@ Returns:
 ==========================================================================================
 Example:/api/v1/forms/http://www.birda.it/form-person-1
 
-GET
----
+------------------------------------------------------------------------------------------
+										GET
+------------------------------------------------------------------------------------------
 
-Get complete set of informations relative to a form
+Get complete set of informations relative to a form. "field" is a nested structure in order
+to handle subforms or other nested structures.
+
+Used by: Form creation in edit view
 
 Returns:
 {
-	
+	"form": "http://birda.com/form-person-1",
+	"maps_type": "http://xmlns.com/foaf/0.1/",
+	"base_uri": "http://ex.com/",
+	"label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+	"descr_property": "http://www.w3.org/2000/01/rdf-schema#comment",
+	"lang": "it",
+	"fields": [
+		{
+			"widget_uri": "http://birda.com/person-givenName-1",
+			"type": "text-input",
+			"property": "http://xmlns.com/foaf/0.1/givenName",
+			"label": "Nome",
+			"description": "Usare un campo diverso per ogni nome",
+			"placeholder": "Nome della persona (ad es. \"Pino\")",
+			"at_least": 1,
+			"validation": {
+				"max_length":25
+			}
+		},
+		{
+			"widget_uri": "http://birda.com/person-familyName-1",
+			"type": "text-input",
+			"property": "http://xmlns.com/foaf/0.1/familyName",
+			"label": "Cognome",
+			"description": "Usare un campo diverso per ogni cognome",
+			"placeholder": "Cognome della persona (ad es. \"Rossi\")",
+			"at_least": 1,
+			"validation": {
+				"max_length":25
+			}
+		},
+		{
+			"widget_uri": "http://birda.com/person-knows-1",
+			"type": "subform",
+			"property": "http://xmlns.com/foaf/0.1/knows",
+			"label": "Persone conosciute",
+			"description": "",
+			"at_least": 0,
+			"at_most":50,
+			
+			"fields": [ 
+				{
+					"widget_uri": "http://birda.com/person-givenName-1",
+					"type": "text-input",
+					"property": "http://xmlns.com/foaf/0.1/givenName",
+					"label": "Nome",
+					"description": "Usare un campo diverso per ogni nome",
+					"placeholder": "Nome della persona (ad es. \"Pino\")",
+					"at_least": 1,
+					"validation": {
+						"max_length":25
+					}
+				},
+				{
+					"widget_uri": "http://birda.com/person-familyName-1",
+					"type": "text-input",
+					"property": "http://xmlns.com/foaf/0.1/familyName",
+					"label": "Cognome",
+					"description": "Usare un campo diverso per ogni cognome",
+					"placeholder": "Cognome della persona (ad es. \"Rossi\")",
+					"at_least": 1,
+					"validation": {
+						"max_length":25
+					}
+				}
+			]
+		}
+	],
+	"local_name":{
+		"fields": ["givenName", "familyMame"],
+		"separator": "-"
+	}
 }
 
+
 ==========================================================================================
-/api/v1/individuals/{type_uri} ? [offset={x}] & [limit={x}]
+/api/v1/individuals/{type_uri} ? [lang=it] & [offset={x}] & [limit={x}]
 ==========================================================================================
 Example: /api/v1/individuals/http://xmlns.com/foaf/0.1/Person?offset=10&limit=10
 
-GET
----
+------------------------------------------------------------------------------------------
+										GET
+------------------------------------------------------------------------------------------
 
-Research a list of individuals with the specified type
+Research a list of individuals with the specified type.
+
+Used by: listing of individuals handled by a specific form
 
 Returns:
 {
@@ -61,14 +169,23 @@ Returns:
 			"uri": "http://ex.com/john-smith",
 			"label": "John Smith",
 			"Description": "Famous artist"
-		}
+		},
+		...
+		...
 	]
 }
 
 ==========================================================================================
-/api/v1/individuals/search
+/api/v1/individuals/search ? [lang=it]
 ==========================================================================================
-POST: Resarch a list of individuals with a complex filter
+
+------------------------------------------------------------------------------------------
+										POST
+------------------------------------------------------------------------------------------
+
+Resarch a list of individuals with a complex filter.
+
+Used by: subform searches
 
 Params: 
 {
@@ -78,7 +195,9 @@ Params:
 		},
 		{
 			"uri": "http://xmlns.com/foaf/0.1/familyName"
-		}
+		},
+		...
+		...
 	],
 	"filters":[
 		{
@@ -89,8 +208,10 @@ Params:
 		{
 			"property": "http://xmlns.com/foaf/0.1/familyName",
 			"value": "http://xmlns.com/foaf/0.1/Person",
-			"match": "start_with"
-		}
+			"match": "starts_with"
+		},
+		...
+		...
 	],
 	"limit": 20,
 	"offset": 0
@@ -109,33 +230,43 @@ Returns:
 				{
 					"uri": "http://xmlns.com/foaf/0.1/familyName",
 					"values": ["Smith"]
-				}
+				},
+				...
+				...
 			]
-		}
+		},
+		...
+		...
 	]
 }
 
 ==========================================================================================
-/api/v1/individuals/{individual_uri} ? [form={form_uri}]
+/api/v1/individuals/{individual_uri} ? [form={form_uri}] & [lang=it]
 ==========================================================================================
 Example: /api/v1/individuals/http://www.birda.it/john-smith?form=http://www.birda.it/form-person-1
 
-GET
----
+------------------------------------------------------------------------------------------
+										GET
+------------------------------------------------------------------------------------------
 
 Get properties relative to an individual. If a form is specified, it returns only properties
 handled by the specified form or subform.
 
+Used for: fill a form with an individual informations
+
 Returns:
 {
 	"uri": "http://ex.com/john-max-smith",
+	"lang": "en",
 	"label": "John Max Smith",
 	"description": "Famous actor",
 	"authors": [
 		{
 			"uri": "http://bigio-bagio.it#me",
 			"description": "Bigio Bagio"
-		}
+		},
+		...
+		...
 	],
 	"last_modified": "2015-11-25 14:33:01",
 	"properties": [
@@ -146,18 +277,24 @@ Returns:
 		{
 			"uri": "http://xmlns.com/foaf/0.1/familyName",
 			"values": ["Smith"]
-		}
+		},
+		...
+		...
 	]
 }
 
-POST
-----
+------------------------------------------------------------------------------------------
+										POST
+------------------------------------------------------------------------------------------
 
-Update an individual.
+Update an individual. Informations possibly changed in the process, like url, authors and
+last_modified should be returned in response and updated on the screen.
+
+Used in: Update an existing individual
 
 Payload:
 {{
-Same as GET JSON except for "uri", "authors" and "last_modified" missing
+Same as GET returned JSON except for "uri", "authors" and "last_modified" missing
 }}
 
 Returns:
@@ -167,7 +304,9 @@ Returns:
 		{
 			"uri": "http://bigio-bagio.it#me",
 			"description": "Bigio Bagio"
-		}
+		},
+		...
+		...
 	],
 	"last_modified": "2015-11-25 14:33:01"
 }
@@ -177,9 +316,14 @@ Returns:
 ==========================================================================================
 Example: /api/v1/individuals
 
-PUT
----
-Create an individual.
+------------------------------------------------------------------------------------------
+										PUT
+------------------------------------------------------------------------------------------
+
+Create an individual. Informations possibly changed in the process, like url, authors and
+last_modified should be returned in response and updated on the screen.
+
+Used by: Creation of a new individual
 
 Payload:
 {{
@@ -197,16 +341,21 @@ Same as POST returned JSON
 ==========================================================================================
 Example: /api/v1/values/http://xmlns.com/foaf/0.1/givenName?subject_type=http://xmlns.com/foaf/0.1/Person?offset=10&limit=10
 
-GET
----
+------------------------------------------------------------------------------------------
+										GET
+------------------------------------------------------------------------------------------
 
 Get all values of a specified property (optionally filtered by subject type)
+
+Used by: Fields autocompletion
 
 Returns:
 {
 	"values": [
 		"Pippo",
 		"Pluto",
-		"Paperino"
+		"Paperino",
+		...
+		...
 	]
 }
