@@ -107,6 +107,38 @@ Returns:
 			}
 		},
 		{
+			"widget_uri": "http://birda.com/person-gender-1",
+			"type": "radio-input",
+			"property": "http://xmlns.com/foaf/0.1/gender",
+			"label": "Genere",
+			"description": "",
+			"placeholder": "",
+			"at_least": 1,
+			"choices": [
+				{
+					"label": "Uomo",
+					"description": "",
+					"type": "xsd:string",
+					"value": "http://w3id.com/gender-ontology/male"
+				},
+				{
+					"label": "Donna",
+					"description": "",
+					"type": "xsd:string",
+					"value": "http://w3id.com/gender-ontology/female"
+				},
+				{
+					"label": "Non specificato",
+					"description": "",
+					"type": "xsd:string",
+					"value": "http://w3id.com/gender-ontology/not-specified"
+				}
+			]
+			"validation": {
+				"required": true
+			}
+		},
+		{
 			"widget_uri": "http://birda.com/person-knows-1",
 			"type": "subform",
 			"property": "http://xmlns.com/foaf/0.1/knows",
@@ -275,6 +307,9 @@ Returns:
 
 Update an individual. Informations possibly changed in the process, like url, authors and
 last_modified should be returned in response and updated on the screen.
+
+In POST the query string "form" is mandatory (backend uses it to deduct which informations
+of the specified indivdual should be deleted and rewritten)
 
 Used in: Update an existing individual
 
