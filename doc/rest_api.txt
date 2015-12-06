@@ -49,7 +49,8 @@ Returns:
 {
 	"forms": [
 		{
-			"uri": http://www.birda.it/form-person-1,
+			"uri": "http://www.birda.it/form-person-1",
+			"type": "http://xmlns.com/foaf/0.1/Person",
 			"label": "...",
 			"description": "..."
 		},
@@ -148,36 +149,10 @@ Returns:
 	}
 }
 
-
 ==========================================================================================
-/api/v1/individuals/{type_uri} ? [lang=it] & [offset={x}] & [limit={x}]
+/api/v1/individuals/search ? [lang=it] & [offset={x}] & [limit={x}]
 ==========================================================================================
-Example: /api/v1/individuals/http://xmlns.com/foaf/0.1/Person?offset=10&limit=10
-
-------------------------------------------------------------------------------------------
-										GET
-------------------------------------------------------------------------------------------
-
-Research a list of individuals with the specified type.
-
-Used by: listing of individuals handled by a specific form
-
-Returns:
-{
-	"individuals": [
-		{
-			"uri": "http://ex.com/john-smith",
-			"label": "John Smith",
-			"Description": "Famous artist"
-		},
-		...
-		...
-	]
-}
-
-==========================================================================================
-/api/v1/individuals/search ? [lang=it]
-==========================================================================================
+Example: /api/v1/individuals?lang=en&offset=10&limit=10
 
 ------------------------------------------------------------------------------------------
 										POST
@@ -213,6 +188,14 @@ Params:
 		...
 		...
 	],
+	"order-by":[
+		{
+			"property": "http://xmlns.com/foaf/0.1/familyName",
+			"order": "desc"
+		},
+		...
+		...
+	]
 	"limit": 20,
 	"offset": 0
 }
@@ -222,6 +205,9 @@ Returns:
 	"individuals": [
 		{
 			"uri": "http://ex.com/john-max-smith",
+			"type": "http://xmlns.com/foaf/0.1/Person",
+			"label": "John Max Smith",
+			"Description": "Famous actor",
 			"properties": [
 				{
 					"uri": "http://xmlns.com/foaf/0.1/givenName",
