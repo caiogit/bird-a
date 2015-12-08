@@ -2,7 +2,6 @@
 *.py[cod]
 
 # Ignore bak directories and log files
-bak/
 *.log
 
 # Ignore sass cache
@@ -12,6 +11,13 @@ bak/
 .idea/
 .project
 .pydevproject
+
+# Frontend exlusions
+fontend/node_modules
+fontend/dist
+fontend/.tmp
+fontend/.sass-cache
+fontend/bower_components
 
 # Other Ignores
 *.egg
