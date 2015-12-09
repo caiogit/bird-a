@@ -1,7 +1,9 @@
 // customize bootstrap variables here:
 //@import "variables";
-@import "../vendor/bootstrap/css/bootstrap";
-@import "../vendor/bootstrap/css/bootstrap-theme";
+
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap";
 
 /* ----------------------------------------------------------------------------- */
 
