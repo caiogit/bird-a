@@ -1,0 +1,6 @@
+# Replicated here for SmartGIT satisfaction
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
