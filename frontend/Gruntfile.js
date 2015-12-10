@@ -19,6 +19,9 @@ module.exports = function (grunt) {
 		cdnify: 'grunt-google-cdn'
 	});
 
+	// Mod rewrite
+	var modRewrite = require('connect-modrewrite');
+
 	// Configurable paths for the application
 	var appConfig = {
 		app: require('./bower.json').appPath || 'app',
@@ -80,6 +83,7 @@ module.exports = function (grunt) {
 					open: true,
 					middleware: function (connect) {
 						return [
+							modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.ico$ /index.html [L]']),
 							connect.static('.tmp'),
 							connect().use(
 								'/bower_components',
@@ -224,7 +228,7 @@ module.exports = function (grunt) {
 				src: ['<%= birda.app %>/styles/{,*/}*.{scss,sass}'],
 				ignorePath: /(\.\.\/){1,2}bower_components\//
 			}
-		}, 
+		},
 
 		// Compiles Sass to CSS and generates necessary files if requested
 		compass: {
