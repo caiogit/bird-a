@@ -8,10 +8,10 @@
  * Controller of the birdaApp
  */
 angular.module('birdaApp')
-	.controller('MainCtrl', function () {
-		this.awesomeThings = [
-			'HTML5 Boilerplate',
-			'AngularJS',
-			'Karma'
-		];
-	});
+	.controller('MainController', ['$location',
+		function ($location) {
+			this.isCurrentPage = function(page) {
+				return $location.path() === page;
+			}
+		}]);
+

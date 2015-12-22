@@ -25,6 +25,15 @@ angular
 			.when('/contact', {
 				templateUrl: 'views/contact.html',
 			})
+			.when('/forms-list', {
+				templateUrl: 'views/forms.html',
+			})
+			.when('/individuals-list', {
+				templateUrl: 'views/individuals.html',
+			})
+			.when('/contact', {
+				templateUrl: 'views/contact.html',
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
