@@ -12,6 +12,6 @@ angular.module('birdaApp')
 		function ($location) {
 			this.isCurrentPage = function(page) {
 				return $location.path() === page;
-			}
+			};
 		}]);
 

@@ -16,12 +16,6 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 	align-items: center;
 }
 
-.birda-sticky-footer {
-	bottom: 0;
-	position: absolute;
-	width: 100%;
-}
-
 /* ----------------------------------------------------------------------------- */
 
 html {
@@ -35,7 +29,7 @@ html, body{
 	height: 100%;
 }
 body {
-	margin-bottom: 60px;
+
 }
 
 /* ----------------------------------------------------------------------------- */
@@ -74,10 +68,9 @@ header {
 
 .main-container {
 	text-align: center;
-	min-height: 70%;
+	height: 78%;
 	display: table;
 	table-layout: fixed;
-
 
 //	main {
 //		display:table-cell;
@@ -116,16 +109,19 @@ header {
 /* ----------------------------------------------------------------------------- */
 
 footer {
-	background-color: #FFF;
+	background-color: #F9F9F9;
+	border-top:solid 1px #DDD;
+	position: static;
+	width: 100%;
 	min-height:60px;
 	text-align: center;
-	@extend .birda-sticky-footer;
+	font-size:18px;
 
-	.row {
-		@extend .birda-vcenter;
-		.copyright {
-			//		@extend .birda-vcenter;
-			color: #777;
-		}
+	.container {
+		display:inline;
 	}
+}
+
+.active {
+	background-color: red;
 }

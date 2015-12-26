@@ -20,7 +20,7 @@ angular
 	.config(function ($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: 'views/main.html',
+				templateUrl: 'views/home.html',
 			})
 			.when('/contact', {
 				templateUrl: 'views/contact.html',
@@ -34,8 +34,12 @@ angular
 			.when('/contact', {
 				templateUrl: 'views/contact.html',
 			})
+
+			.when('/404', {
+				templateUrl: 'views/404.html',
+			})
 			.otherwise({
-				redirectTo: '/'
+				redirectTo: '/404',
 			});
 
 		$locationProvider.html5Mode({
