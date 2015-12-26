@@ -4,6 +4,8 @@
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap";
+@import "../../bower_components/compass-mixins/lib/_compass.scss";
+
 
 /* ----------------------------------------------------------------------------- */
 
@@ -14,6 +16,19 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 .birda-vcenter {
 	display: flex;
 	align-items: center;
+}
+
+@mixin birda-box-shadow($hoff: 0px, $voff: 0px, $blur: 0px, $spread: 0px, $color: inherit, $inset: null) {
+	@if ($inset == null) {
+		-webkit-box-shadow: $hoff $voff $blur $spread $color;
+		   -moz-box-shadow: $hoff $voff $blur $spread $color;
+		        box-shadow: $hoff $voff $blur $spread $color;
+	}
+	@else {
+		-webkit-box-shadow: $hoff $voff $blur $spread $color $inset;
+	       -moz-box-shadow: $hoff $voff $blur $spread $color $inset;
+			    box-shadow: $hoff $voff $blur $spread $color $inset;
+	}
 }
 
 /* ----------------------------------------------------------------------------- */
@@ -88,6 +103,7 @@ header {
 		margin-top: 10%;
 	}
 }
+
 /* ----------------------------------------------------------------------------- */
 
 #login-form {
@@ -101,6 +117,38 @@ header {
 		min-width: 150px;
 		margin-top: 10px;
 		margin-bottom: 15px;
+	}
+}
+
+/* ----------------------------------------------------------------------------- */
+
+#forms-list {
+
+	& > a {
+		 all: unset;
+	}
+
+	.form {
+		cursor: pointer;
+		padding-top:20px;
+		padding-bottom:20px;
+
+		&:hover {
+			@include birda-box-shadow(0px, 0px, 10px, 3px, #DDD);
+		}
+
+		h2 {
+			margin-top:0px;
+		}
+
+		.uri {
+			color: $link-color;
+		}
+
+		.desc {
+			font-size:20px;
+			font-color:#666;
+		}
 	}
 }
 

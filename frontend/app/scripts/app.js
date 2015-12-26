@@ -26,7 +26,9 @@ angular
 				templateUrl: 'views/contact.html',
 			})
 			.when('/forms-list', {
-				templateUrl: 'views/forms.html',
+				templateUrl: 'views/forms-list.html',
+				//controller: 'FormsListController',
+				//controllerAs: 'cFormsList',
 			})
 			.when('/individuals-list', {
 				templateUrl: 'views/individuals.html',

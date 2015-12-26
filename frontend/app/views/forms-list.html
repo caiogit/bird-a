@@ -1,0 +1,10 @@
+<div id="forms-list" ng-controller="FormsListController as cFormsList">
+	<h1 class="page-header">Bird-A Forms</h1>
+	<a ng-repeat="form in cFormsList.forms.forms" ng-href="/individuals-list?form={{form.uri}}">
+		<div class="form row jumbotron">
+			<h2>{{form.label}}</h2>
+			<p class="uri">{{form.uri}}</p>
+			<p class="desc">{{form.description}}</p>
+		</div>
+	</a>
+</div>
