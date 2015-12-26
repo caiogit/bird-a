@@ -21,12 +21,15 @@ Routes
 	will route as follows:
  
 	/
-		Home page with forms list
+		Home page
 
-	/?form={form_uri}
+	/forms-list
+		List of all forms handled by Bird-A
+
+	/individuals-list?form={form_uri}
 		List of individuals handled by that form
 
-	/?form={form_uri}&individual={individual_uri | new}
+	/edit?form={form_uri}&individual={individual_uri | new}
 		Edit of specified individual with the specified form
 
 APIs List
