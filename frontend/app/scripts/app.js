@@ -31,7 +31,7 @@ angular
 				//controllerAs: 'cFormsList',
 			})
 			.when('/individuals-list', {
-				templateUrl: 'views/individuals.html',
+				templateUrl: 'views/individuals-list.html',
 			})
 			.when('/contact', {
 				templateUrl: 'views/contact.html',
