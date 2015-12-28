@@ -44,7 +44,7 @@ Example: /api/v1/forms?offset=10&limit=10
 										GET
 ------------------------------------------------------------------------------------------
 
-Get a list of forms with basilar infos.
+Get a list of forms with basilar infos, stats, etc.
 
 Used by: Available forms list
 
@@ -273,7 +273,7 @@ Example: /api/v1/individuals/http://www.birda.it/john-smith?form=http://www.bird
 Get properties relative to an individual. If a form is specified, it returns only properties
 handled by the specified form or subform.
 
-Used for: fill a form with an individual informations
+Used for: fill a form with informations relative to an individual.
 
 Returns:
 {
