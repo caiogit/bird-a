@@ -87,7 +87,7 @@ Returns:
 	"fields": [
 		{
 			"widget_uri": "http://birda.com/person-givenName-1",
-			"type": "text-input",
+			"w_type": "text-input",
 			"property": "http://xmlns.com/foaf/0.1/givenName",
 			"label": "Nome",
 			"description": "Usare un campo diverso per ogni nome",
@@ -99,7 +99,7 @@ Returns:
 		},
 		{
 			"widget_uri": "http://birda.com/person-familyName-1",
-			"type": "text-input",
+			"w_type": "text-input",
 			"property": "http://xmlns.com/foaf/0.1/familyName",
 			"label": "Cognome",
 			"description": "Usare un campo diverso per ogni cognome",
@@ -111,7 +111,7 @@ Returns:
 		},
 		{
 			"widget_uri": "http://birda.com/person-gender-1",
-			"type": "radio-input",
+			"w_type": "radio-input",
 			"property": "http://xmlns.com/foaf/0.1/gender",
 			"label": "Genere",
 			"description": "",
@@ -143,8 +143,9 @@ Returns:
 		},
 		{
 			"widget_uri": "http://birda.com/person-knows-1",
-			"type": "subform",
-			"property": "http://xmlns.com/foaf/0.1/knows",
+			"w_type": "subform",
+			"maps_property": "http://xmlns.com/foaf/0.1/knows",
+			"maps_type": "http://xmlns.com/foaf/0.1/",
 			"label": "Persone conosciute",
 			"description": "",
 			"at_least": 0,
@@ -153,7 +154,7 @@ Returns:
 			"fields": [ 
 				{
 					"widget_uri": "http://birda.com/person-givenName-1",
-					"type": "text-input",
+					"w_type": "text-input",
 					"property": "http://xmlns.com/foaf/0.1/givenName",
 					"label": "Nome",
 					"description": "Usare un campo diverso per ogni nome",
@@ -165,7 +166,7 @@ Returns:
 				},
 				{
 					"widget_uri": "http://birda.com/person-familyName-1",
-					"type": "text-input",
+					"w_type": "text-input",
 					"property": "http://xmlns.com/foaf/0.1/familyName",
 					"label": "Cognome",
 					"description": "Usare un campo diverso per ogni cognome",
