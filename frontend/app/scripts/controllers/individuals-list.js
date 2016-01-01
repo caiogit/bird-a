@@ -15,48 +15,48 @@ angular.module('birdaApp')
 			this.valid = false;
 
 			this.testData_person1 = {
-				"individuals": [
+				'individuals': [
 					{
-						"uri": "http://ex.com/john-max-smith",
-						"type": "http://xmlns.com/foaf/0.1/Person",
-						"label": "John Max Smith",
-						"Description": "Famous actor",
-						"properties": []
+						'uri': 'http://ex.com/john-max-smith',
+						'type': 'http://xmlns.com/foaf/0.1/Person',
+						'label': 'John Max Smith',
+						'Description': 'Famous actor',
+						'properties': []
 					},
 					{
-						"uri": "http://ex.com/john-max-smith",
-						"type": "http://xmlns.com/foaf/0.1/Person",
-						"label": "John Max Smith",
-						"Description": "Famous actor",
-						"properties": []
+						'uri': 'http://ex.com/john-max-smith',
+						'type': 'http://xmlns.com/foaf/0.1/Person',
+						'label': 'John Max Smith',
+						'Description': 'Famous actor',
+						'properties': []
 					},
 					{
-						"uri": "http://ex.com/john-max-smith",
-						"type": "http://xmlns.com/foaf/0.1/Person",
-						"label": "John Max Smith",
-						"Description": "Famous actor",
-						"properties": []
+						'uri': 'http://ex.com/john-max-smith',
+						'type': 'http://xmlns.com/foaf/0.1/Person',
+						'label': 'John Max Smith',
+						'Description': 'Famous actor',
+						'properties': []
 					},
 					{
-						"uri": "http://ex.com/john-max-smith",
-						"type": "http://xmlns.com/foaf/0.1/Person",
-						"label": "John Max Smith",
-						"Description": "Famous actor",
-						"properties": []
+						'uri': 'http://ex.com/john-max-smith',
+						'type': 'http://xmlns.com/foaf/0.1/Person',
+						'label': 'John Max Smith',
+						'Description': 'Famous actor',
+						'properties': []
 					},
 					{
-						"uri": "http://ex.com/john-max-smith",
-						"type": "http://xmlns.com/foaf/0.1/Person",
-						"label": "John Max Smith",
-						"Description": "Famous actor",
-						"properties": []
+						'uri': 'http://ex.com/john-max-smith',
+						'type': 'http://xmlns.com/foaf/0.1/Person',
+						'label': 'John Max Smith',
+						'Description': 'Famous actor',
+						'properties': []
 					},
 					{
-						"uri": "http://ex.com/john-max-smith",
-						"type": "http://xmlns.com/foaf/0.1/Person",
-						"label": "John Max Smith",
-						"Description": "Famous actor",
-						"properties": []
+						'uri': 'http://ex.com/john-max-smith',
+						'type': 'http://xmlns.com/foaf/0.1/Person',
+						'label': 'John Max Smith',
+						'Description': 'Famous actor',
+						'properties': []
 					}
 				]
 			};
@@ -64,20 +64,20 @@ angular.module('birdaApp')
 			this.testData_person2 = this.testData_person1;
 
 			this.testData_fuff = {
-				"individuals": [
+				'individuals': [
 					{
-						"uri": "http://ex.com/1111",
-						"type": "http://xmlns.com/foaf/0.1/Fuff",
-						"label": "Pippo",
-						"Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae nisl rutrum, placerat nisl ac.",
-						"properties": []
+						'uri': 'http://ex.com/1111',
+						'type': 'http://xmlns.com/foaf/0.1/Fuff',
+						'label': 'Pippo',
+						'Description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae nisl rutrum, placerat nisl ac.',
+						'properties': []
 					},
 					{
-						"uri": "http://ex.com/2222",
-						"type": "http://xmlns.com/foaf/0.1/Fuff",
-						"label": "Pippo",
-						"Description": "Suspendisse non sapien tempus, cursus nisi at, lacinia justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-						"properties": []
+						'uri': 'http://ex.com/2222',
+						'type': 'http://xmlns.com/foaf/0.1/Fuff',
+						'label': 'Pippo',
+						'Description': 'Suspendisse non sapien tempus, cursus nisi at, lacinia justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+						'properties': []
 					},
 				]
 			};
@@ -102,7 +102,7 @@ angular.module('birdaApp')
 			};
 
 			this.isValid = function() {
-				return this.individuals != null;
+				return this.individuals !== null;
 			};
 
 			this.hasValues = function() {
@@ -111,11 +111,11 @@ angular.module('birdaApp')
 
 			this.renderInstList = function() {
 				var query = $location.search();
-				if (! 'form' in query) {
+				if (! ('form' in query) ) {
 					this.individuals = null;
 				} else {
 					this.setTestData(query.form);
 				}
-			}
+			};
 		}]);
 
