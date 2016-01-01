@@ -10,7 +10,9 @@
 angular.module('birdaApp')
 	.controller('MainController', ['$location',
 		function ($location) {
-			this.isCurrentPage = function(page) {
+			var self = this;
+
+			self.isCurrentPage = function(page) {
 				return $location.path() === page;
 			};
 		}]);
