@@ -10,7 +10,7 @@
 	"strict": true,
 	"undef": true,
 	"unused": true,
-	"requireCamelCaseOrUpperCaseIdentifiers":false,
+	"camelcase": false,
 	"globals": {
 		"angular": false
 	}

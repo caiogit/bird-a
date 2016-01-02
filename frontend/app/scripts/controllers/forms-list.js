@@ -13,20 +13,24 @@ angular.module('birdaApp')
 			var self = this;
 			self.forms = null;
 
+			/* ----------------------------------------- */
+
+			function init() {
+				self.retrieveForms();
+				console.log(self);
+				console.log(self.forms);
+			}
+
+			/* ========================================= */
+
 			self.retrieveForms = function() {
 				formsService.retrieveForms();
-				self.forms = formsService.forms;
+				self.forms = formsService.getForms();
 			};
 
 			/* ========================================= */
 
-			// Initialization
-			(function init() {
+			init();
 
-            	self.retrieveForms();
-				console.log(self);
-				console.log(self.forms);
-
-			})();
 		}]);
 

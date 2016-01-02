@@ -10,11 +10,40 @@
 angular.module('birdaApp')
 	.controller('IndividualsListController', ['$scope', '$location',
 		function ($scope, $location) {
-			this.individuals = null;
-			this.found = false;
-			this.valid = false;
+			var self = this;
 
-			this.testData_person1 = {
+			self.individuals = null;
+			self.found = false;
+			self.valid = false;
+
+			/* ----------------------------------------- */
+
+			function init() {
+
+			}
+
+			/* ========================================= */
+
+			self.isValid = function() {
+				return self.individuals !== null;
+			};
+
+			self.hasValues = function() {
+				return self.individuals.individuals.length > 0;
+			};
+
+			self.renderInstList = function() {
+				var query = $location.search();
+				if (! ('form' in query) ) {
+					self.individuals = null;
+				} else {
+					self.setTestData(query.form);
+				}
+			};
+
+			/* ========================================= */
+
+			self.testData_person1 = {
 				'individuals': [
 					{
 						'uri': 'http://ex.com/john-max-smith',
@@ -61,9 +90,9 @@ angular.module('birdaApp')
 				]
 			};
 
-			this.testData_person2 = this.testData_person1;
+			self.testData_person2 = this.testData_person1;
 
-			this.testData_fuff = {
+			self.testData_fuff = {
 				'individuals': [
 					{
 						'uri': 'http://ex.com/1111',
@@ -82,7 +111,7 @@ angular.module('birdaApp')
 				]
 			};
 
-			this.setTestData = function(form) {
+			self.setTestData = function(form) {
 				this.valid = true;
 
 				switch (form) {
@@ -101,21 +130,9 @@ angular.module('birdaApp')
 				}
 			};
 
-			this.isValid = function() {
-				return this.individuals !== null;
-			};
+			/* ========================================= */
 
-			this.hasValues = function() {
-				return this.individuals.individuals.length > 0;
-			};
+			init();
 
-			this.renderInstList = function() {
-				var query = $location.search();
-				if (! ('form' in query) ) {
-					this.individuals = null;
-				} else {
-					this.setTestData(query.form);
-				}
-			};
 		}]);
 

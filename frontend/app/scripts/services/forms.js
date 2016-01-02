@@ -6,16 +6,24 @@
 
 angular.module('birdaApp')
 	.service('formsService', function() {
-		this.query = null;
-		this.forms = null;
 
-		this.retrieveForms = function() {
-			this.forms = this.forms_test1;
+		var self = this;
+		//var query = null;
+		var forms = null;
+
+		/* ========================================= */
+
+		self.getForms = function() {
+			return forms;
+		};
+
+		self.retrieveForms = function() {
+			forms = self.forms_Test1;
 		};
 
 		/* ========================================= */
 
-		this.forms_test1 = {
+		self.forms_Test1 = {
 			'forms': [
 				{
 					'uri': 'http://www.birda.it/form-person-1',
