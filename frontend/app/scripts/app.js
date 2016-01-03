@@ -8,6 +8,16 @@
  *
  * Main module of the application.
  */
+
+/*
+ * Constants declaration
+ */
+const RDF_TYPE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
+
+
+/*
+ * Angular initialization
+ */
 angular
 	.module('birdaApp', [
 		'ngAnimate',

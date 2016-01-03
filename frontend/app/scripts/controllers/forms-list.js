@@ -8,7 +8,7 @@
  * Controller of the birdaApp
  */
 angular.module('birdaApp')
-	.controller('FormsListController', ['$scope', 'formsService',
+	.controller('FormsListController', ['$scope', 'FormsService',
 		function ($scope, formsService) {
 			var self = this;
 			self.forms = null;

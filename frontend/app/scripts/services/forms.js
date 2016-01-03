@@ -5,11 +5,17 @@
  */
 
 angular.module('birdaApp')
-	.service('formsService', function() {
+	.service('FormsService', function() {
 
 		var self = this;
 		//var query = null;
 		var forms = null;
+
+		/* ----------------------------------------- */
+
+		function init() {
+			self.retrieveForms();
+		}
 
 		/* ========================================= */
 
@@ -19,6 +25,18 @@ angular.module('birdaApp')
 
 		self.retrieveForms = function() {
 			forms = self.forms_Test1;
+		};
+
+		self.getFormByUri = function(formUri) {
+			var ret = null;
+
+			angular.forEach(forms.forms, function(form, key) {
+				if (formUri === form.uri) {
+					ret = form;
+				}
+			});
+
+			return ret;
 		};
 
 		/* ========================================= */
@@ -45,4 +63,8 @@ angular.module('birdaApp')
 				}
 			]
 		};
+
+		/* ========================================= */
+
+		init();
 	});

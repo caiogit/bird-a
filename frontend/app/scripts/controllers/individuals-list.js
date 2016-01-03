@@ -8,18 +8,41 @@
  * Controller of the birdaApp
  */
 angular.module('birdaApp')
-	.controller('IndividualsListController', ['$scope', '$location',
-		function ($scope, $location) {
+	.controller('IndividualsListController', ['$location', 'FormsService', 'IndividualsSearchService',
+		function ($location, formsService, individualsSearchService) {
 			var self = this;
 
 			self.individuals = null;
+			self.formUri = null;
+			self.form = null;
+
 			self.found = false;
 			self.valid = false;
+			self.error = '';
 
 			/* ----------------------------------------- */
 
 			function init() {
+				var query = $location.search();
 
+				if ('form' in query) {
+					self.formUri = query.form;
+					self.form = formsService.getFormByUri(self.formUri);
+					if (! self.form) {
+						self.error = 'Form "'+self.formUri+'" not found!';
+					} else {
+						individualsSearchService.clean();
+						individualsSearchService.addFilter({
+							'property': RDF_TYPE,
+							'value': self.form.type,
+							'match': 'exact'
+						});
+						individualsSearchService.search();
+						self.individuals = individualsSearchService.getResults().individuals;
+					}
+				} else {
+
+				}
 			}
 
 			/* ========================================= */
@@ -43,6 +66,7 @@ angular.module('birdaApp')
 
 			/* ========================================= */
 
+			/*
 			self.testData_person1 = {
 				'individuals': [
 					{
@@ -107,28 +131,29 @@ angular.module('birdaApp')
 						'label': 'Pippo',
 						'Description': 'Suspendisse non sapien tempus, cursus nisi at, lacinia justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
 						'properties': []
-					},
+					}
 				]
 			};
 
 			self.setTestData = function(form) {
-				this.valid = true;
+				self.valid = true;
 
 				switch (form) {
 					case 'http://www.birda.it/form-person-1':
-						this.individuals = this.testData_person1;
+						self.individuals = self.testData_person1;
 						break;
 					case 'http://www.birda.it/form-person-2':
-						this.individuals = this.testData_person2;
+						self.individuals = self.testData_person2;
 						break;
 					case 'http://www.birda.it/fuff':
-						this.individuals = this.testData_fuff;
+						self.individuals = self.testData_fuff;
 						break;
 					default:
-						console.log('Error! No such form: ' + form);
-						this.individuals = null;
+						self.error = 'Form "'+self.formUri+'" unknown!';
+						self.individuals = null;
 				}
 			};
+			*/
 
 			/* ========================================= */
 

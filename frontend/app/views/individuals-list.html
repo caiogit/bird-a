@@ -1,4 +1,50 @@
 <div id="individuals-list" ng-controller="IndividualsListController as cIndList">
-	<h1 class="page-header">Bird-A Forms</h1>
+	<div ng-show="! cIndList.isValid()">
+		<h2>Error</h2>
+		<h4>{{cIndList.error}}</h4>
+	</div>
 
+	<div ng-show="cIndList.isValid()">
+		<h1 class="page-header">
+			{{cIndList.form.label}}
+			<br />
+			<small>Instances List</small>
+		</h1>
+
+		<div class="row">
+			<a class="btn btn-success btn-lg" ng-click="cIndList.createIndividual()">Create New</a>
+		</div>
+
+		<div class="row"
+			 ng-repeat="individual in cIndList.individuals"
+			 ng-if="$index % 4 == 0"
+		     ng-hide="! cIndList.individuals">
+
+			<div class="individual col-sm-6 col-md-3"
+				 ng-repeat="individualX in cIndList.individuals.slice($index, $index+4)">
+
+				<h3>{{individualX.label}}</h3>
+				<div class="row uri">{{individualX.uri}}</div>
+				<div class="row description">{{individualX.description}}</div>
+
+				<div class="row buttons">
+					<a class="button-edit btn btn-primary"
+					   ng-href="/edit?form={{cIndList.form.uri}}&individual={{individualX.uri}}">
+						Edit
+					</a>
+					<a class="button-delete btn btn-danger"
+					   ng-click="cIndList.deleteIndividual('{{individualX.uri}}')">
+						Delete
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row"
+		     ng-show="! cIndList.individuals">
+
+			No instances
+		</div>
+	</div>
 </div>
