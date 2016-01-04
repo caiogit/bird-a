@@ -23,10 +23,9 @@ module.exports = function (grunt) {
 	var modRewrite = require('connect-modrewrite');
 
 	// Configurable paths for the application
-	var appConfig = {
-		app: require('./bower.json').appPath || 'app',
-		dist: 'dist'
-	};
+	var appConfig = require('../config/frontend.json');
+	appConfig.app = require('./bower.json').appPath || 'app';
+	appConfig.dist = 'dist';
 
 	// Define the configuration for all the tasks
 	grunt.initConfig({
@@ -73,37 +72,37 @@ module.exports = function (grunt) {
 		// The actual grunt server settings
 		connect: {
 			options: {
-				port: 9000,
+				port: '<%= birda.port %>',
 				// Change this to '0.0.0.0' to access the server from outside.
 				//hostname: 'localhost',
-				hostname: '0.0.0.0',
-				livereload: 35729
+				hostname: '<%= birda.hostname %>',
+				livereload: '<%= birda.portLivereload %>',
+				middleware: function (connect) {
+					return [
+						// Mapping every filetype is unconfortable and error-prone
+						//modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.ico$ /index.html [L]']),
+						modRewrite(['!\\.[a-zA-Z0-9]+$ /index.html [L]']),
+						connect.static('.tmp'),
+						connect().use(
+							'/bower_components',
+							connect.static('./bower_components')
+						),
+						connect().use(
+							'/app/styles',
+							connect.static('./app/styles')
+						),
+						connect.static(appConfig.app)
+					];
+				}
 			},
 			livereload: {
 				options: {
-					open: true,
-					middleware: function (connect) {
-						return [
-							// Mapping every filetype is unconfortable and error-prone
-							//modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.ico$ /index.html [L]']),
-							modRewrite(['!\\.[a-zA-Z0-9]+$ /index.html [L]']),
-							connect.static('.tmp'),
-							connect().use(
-								'/bower_components',
-								connect.static('./bower_components')
-							),
-							connect().use(
-								'/app/styles',
-								connect.static('./app/styles')
-							),
-							connect.static(appConfig.app)
-						];
-					}
+					open: true
 				}
 			},
 			test: {
 				options: {
-					port: 9001,
+					port: '<%= birda.portDev %>',
 					middleware: function (connect) {
 						return [
 							connect.static('.tmp'),
