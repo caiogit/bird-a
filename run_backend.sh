@@ -32,9 +32,9 @@ echo '============================================'
 
 if [[ $PROD ]]
 then
-	echo python beckend/setup.py config/production.ini
+	echo python backend/setup.py install
 else
-	echo python beckend/setup.py config/development.ini
+	echo python backend/setup.py develop
 fi
 
 # ...
