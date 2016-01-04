@@ -224,7 +224,7 @@ Params:
 		...
 		...
 	],
-	"order-by":[
+	"order_by":[
 		{
 			"property": "http://xmlns.com/foaf/0.1/familyName",
 			"order": "desc"
@@ -243,7 +243,7 @@ Returns:
 			"uri": "http://ex.com/john-max-smith",
 			"type": "http://xmlns.com/foaf/0.1/Person",
 			"label": "John Max Smith",
-			"Description": "Famous actor",
+			"description": "Famous actor",
 			"properties": [
 				{
 					"uri": "http://xmlns.com/foaf/0.1/givenName",
@@ -335,6 +335,12 @@ Returns:
 	],
 	"last_modified": "2015-11-25 14:33:01"
 }
+
+------------------------------------------------------------------------------------------
+									  DELETE
+------------------------------------------------------------------------------------------
+
+Delete all data for that individual.
 
 ==========================================================================================
 /api/v1/individuals
