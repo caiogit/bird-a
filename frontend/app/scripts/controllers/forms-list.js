@@ -17,8 +17,6 @@ angular.module('birdaApp')
 
 			function init() {
 				self.retrieveForms();
-				console.log(self);
-				console.log(self.forms);
 			}
 
 			/* ========================================= */

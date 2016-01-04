@@ -90,7 +90,7 @@ angular.module('birdaApp')
 				 (params.filters[0].value === 'http://xmlns.com/foaf/0.1/Person') ) {
 
 				results = self.test_personResults;
-				return
+				return;
 			}
 
 			if ( (params.properties.length === 0) &&
@@ -98,14 +98,13 @@ angular.module('birdaApp')
 				 (params.filters[0].value === 'http://www.birda.it/fuff') ) {
 
 				results = self.test_fuffResults;
-				return
+				return;
 			}
 
 			throw "Azz";
 		};
 
 		self.getResults = function() {
-			console.log(results);
 			return results;
 		};
 
@@ -114,115 +113,115 @@ angular.module('birdaApp')
 		self.test_personResults = {
 			'individuals': [
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-01',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-02',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-03',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-04',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-05',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-06',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-07',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-08',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-09',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-10',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-11',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-12',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-13',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-14',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-15',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-16',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-17',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-18',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'
 				},
 				{
-					'uri': 'http://ex.com/john-max-smith',
+					'uri': 'http://ex.com/john-max-smith-19',
 					'type': 'http://xmlns.com/foaf/0.1/Person',
 					'label': 'John Max Smith',
 					'description': 'Famous actor'

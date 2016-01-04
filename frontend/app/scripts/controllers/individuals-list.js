@@ -19,6 +19,7 @@ angular.module('birdaApp')
 			self.found = false;
 			self.valid = false;
 			self.error = '';
+			self.messages = [];
 
 			/* ----------------------------------------- */
 
@@ -30,6 +31,7 @@ angular.module('birdaApp')
 					self.form = formsService.getFormByUri(self.formUri);
 					if (! self.form) {
 						self.error = 'Form "'+self.formUri+'" not found!';
+						self.valid = false;
 					} else {
 						individualsSearchService.clean();
 						individualsSearchService.addFilter({
@@ -39,9 +41,11 @@ angular.module('birdaApp')
 						});
 						individualsSearchService.search();
 						self.individuals = individualsSearchService.getResults().individuals;
+						self.valid = true;
 					}
 				} else {
-
+					self.valid = false;
+					self.error = '"form" key not in query string';
 				}
 			}
 
@@ -52,7 +56,7 @@ angular.module('birdaApp')
 			};
 
 			self.hasValues = function() {
-				return self.individuals.individuals.length > 0;
+				return self.individuals.length > 0;
 			};
 
 			self.renderInstList = function() {
@@ -64,96 +68,64 @@ angular.module('birdaApp')
 				}
 			};
 
+			self.addMessage = function(message) {
+				var acceptedTypes = ['success', 'warning', 'error'];
+
+				if ( (typeof message !== 'object') || (message === null)  ) {
+					throw 'IndividualsListController: "message" should be a not null object';
+				}
+				if ( (! ('type' in message)) || (! (_.contains(acceptedTypes, message.type)) )) {
+					throw 'IndividualsListController: "message" should have a "type" property (admitted values: '+acceptedTypes.join(', ')+')';
+				}
+				if ( ! ('message' in message) ) {
+					throw 'IndividualsListController: "message" should have a "order" property';
+				}
+
+				self.messages.push(message);
+			};
+
 			/* ========================================= */
 
-			/*
-			self.testData_person1 = {
-				'individuals': [
-					{
-						'uri': 'http://ex.com/john-max-smith',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'John Max Smith',
-						'Description': 'Famous actor',
-						'properties': []
-					},
-					{
-						'uri': 'http://ex.com/john-max-smith',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'John Max Smith',
-						'Description': 'Famous actor',
-						'properties': []
-					},
-					{
-						'uri': 'http://ex.com/john-max-smith',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'John Max Smith',
-						'Description': 'Famous actor',
-						'properties': []
-					},
-					{
-						'uri': 'http://ex.com/john-max-smith',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'John Max Smith',
-						'Description': 'Famous actor',
-						'properties': []
-					},
-					{
-						'uri': 'http://ex.com/john-max-smith',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'John Max Smith',
-						'Description': 'Famous actor',
-						'properties': []
-					},
-					{
-						'uri': 'http://ex.com/john-max-smith',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'John Max Smith',
-						'Description': 'Famous actor',
-						'properties': []
-					}
-				]
+			self.newIndividual = function() {
+				$location.path(
+					'/edit?form='+self.form.uri
+				);
 			};
 
-			self.testData_person2 = this.testData_person1;
-
-			self.testData_fuff = {
-				'individuals': [
-					{
-						'uri': 'http://ex.com/1111',
-						'type': 'http://xmlns.com/foaf/0.1/Fuff',
-						'label': 'Pippo',
-						'Description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae nisl rutrum, placerat nisl ac.',
-						'properties': []
-					},
-					{
-						'uri': 'http://ex.com/2222',
-						'type': 'http://xmlns.com/foaf/0.1/Fuff',
-						'label': 'Pippo',
-						'Description': 'Suspendisse non sapien tempus, cursus nisi at, lacinia justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-						'properties': []
-					}
-				]
+			self.editIndividual = function(individualUri) {
+				$location.path(
+					'/edit?form='+self.form.uri+'&individual='+individualUri
+				);
 			};
 
-			self.setTestData = function(form) {
-				self.valid = true;
+			self.deleteIndividual = function(individualUri) {
+				var success = false;
 
-				switch (form) {
-					case 'http://www.birda.it/form-person-1':
-						self.individuals = self.testData_person1;
-						break;
-					case 'http://www.birda.it/form-person-2':
-						self.individuals = self.testData_person2;
-						break;
-					case 'http://www.birda.it/fuff':
-						self.individuals = self.testData_fuff;
-						break;
-					default:
-						self.error = 'Form "'+self.formUri+'" unknown!';
-						self.individuals = null;
+				/* TODO: Remove debug code here */
+
+				var removedIndividual;
+				if (_.endsWith(individualUri,'1')) {
+					removedIndividual = [];
+				} else {
+					removedIndividual = _.remove(self.individuals, {'uri': individualUri});
+				}
+
+				if (removedIndividual.length > 0) {
+					success = true;
+				}
+
+				if (success) {
+					self.addMessage({
+						'type': 'success',
+						'message': 'Instance "'+individualUri+'" deleted'
+					});
+				} else {
+					self.addMessage({
+						'type': 'error',
+						'message': 'Failed to delete instance "'+individualUri+'"'
+					});
 				}
 			};
-			*/
 
 			/* ========================================= */
 

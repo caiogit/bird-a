@@ -1,50 +1,75 @@
 <div id="individuals-list" ng-controller="IndividualsListController as cIndList">
+	<!-- If any issue arises -->
 	<div ng-show="! cIndList.isValid()">
 		<h2>Error</h2>
 		<h4>{{cIndList.error}}</h4>
 	</div>
 
+	<!-- Body -->
 	<div ng-show="cIndList.isValid()">
+		<!-- Header -->
 		<h1 class="page-header">
 			{{cIndList.form.label}}
 			<br />
 			<small>Instances List</small>
 		</h1>
 
+		<!-- Create Button -->
 		<div class="row">
-			<a class="btn btn-success btn-lg" ng-click="cIndList.createIndividual()">Create New</a>
+			<button class="btn btn-success btn-lg"
+					ng-click="cIndList.newIndividual()">
+				Create New
+			</button>
 		</div>
 
+		<!-- Messages area -->
+		<div class="messages" ng-repeat="message in cIndList.messages">
+			<div class="alert fade in"
+				 ng-class="{
+				 	'alert-success': message.type == 'success',
+				 	'alert-warning': message.type == 'warning',
+				 	'alert-danger': message.type == 'error'
+				 }">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>{{message.type | capitalize}}</strong> {{message.message}}
+			</div>
+		</div>
+
+		<!-- Individuals List -->
 		<div class="row"
 			 ng-repeat="individual in cIndList.individuals"
 			 ng-if="$index % 4 == 0"
-		     ng-hide="! cIndList.individuals">
+		     ng-hide="! cIndList.hasValues()">
 
+			<!-- Row generation -->
 			<div class="individual col-sm-6 col-md-3"
 				 ng-repeat="individualX in cIndList.individuals.slice($index, $index+4)">
 
+				<!-- Instance infos -->
 				<h3>{{individualX.label}}</h3>
 				<div class="row uri">{{individualX.uri}}</div>
 				<div class="row description">{{individualX.description}}</div>
 
+				<!-- Instance actions -->
 				<div class="row buttons">
-					<a class="button-edit btn btn-primary"
-					   ng-href="/edit?form={{cIndList.form.uri}}&individual={{individualX.uri}}">
+					<button class="button-edit btn btn-primary"
+					   ng-click="cIndList.editIndividual(individualX.uri)">
 						Edit
-					</a>
-					<a class="button-delete btn btn-danger"
-					   ng-click="cIndList.deleteIndividual('{{individualX.uri}}')">
+					</button>
+					<button class="button-delete btn btn-danger"
+					   ng-click="cIndList.deleteIndividual(individualX.uri)">
 						Delete
-					</a>
+					</button>
 				</div>
 			</div>
 
 		</div>
 
+		<!-- No instances messages -->
 		<div class="row"
-		     ng-show="! cIndList.individuals">
+		     ng-show="! cIndList.hasValues()">
 
-			No instances
+			<h2>No instances, yet...</h2>
 		</div>
 	</div>
 </div>
