@@ -5,17 +5,21 @@ import pyramid.session
 
 import sqlalchemy
 
+import birda
 import birda.models
 import birda.models.acl
-import birda.routes
+import birda.services
 
 def main(global_config, **settings):
 	"""
 	This function returns a Pyramid WSGI application.
 	"""
+
+	# Database
 	engine = sqlalchemy.engine_from_config(settings, 'sqlalchemy.')
 	birda.models.DBSession.configure(bind=engine)
 
+	# Authentication / Authorization
 	session_factory = pyramid.session.UnencryptedCookieSessionFactoryConfig(
 		settings['session.secret']
 	)
@@ -23,6 +27,7 @@ def main(global_config, **settings):
 	authn_policy = pyramid.authentication.SessionAuthenticationPolicy()
 	authz_policy = pyramid.authorization.ACLAuthorizationPolicy()
 
+	# COnfig creation
 	config = pyramid.config.Configurator(
 		settings=settings,
 		root_factory=birda.models.acl.RootFactory,
@@ -30,20 +35,13 @@ def main(global_config, **settings):
 		authorization_policy=authz_policy,
 		session_factory=session_factory
 	)
-	# config = pyramid.config.Configurator(settings=settings)
 
-	# Add a static view routed on "/static" for the directory "bird-a/static" (relative to
-	# dir "bird-a/config"
-	config.add_static_view(name='static', path='../static')
-
-	# Add all the routes of birda
-	config.include(birda.routes.addroutes)
-
-	# Scan modules for views (i.e. @view_config decorators)
-	config.scan()
+	# Scan modules for cornice services
+	#config.include("birda.services")
+	config.scan("birda.services.test")
 
 	# Import all birda.models modules (necessary?)
-	config.scan('birda.models')
+	#config.scan('birda.models')
 
 	return config.make_wsgi_app()
 
