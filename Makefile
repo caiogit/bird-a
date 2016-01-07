@@ -49,13 +49,15 @@ all:
 
 # Make Backend
 make-be:
-	cd $(BASE_DIR)/backend; $(SUDO) $(VENV)/bin/python setup.py $(BE_SETUP_TARGET)
+	cd $(BASE_DIR)/backend ; \
+#	export PYTHON_PATH=$(BASE_DIR)/backend:$(BASE_DIR)/backend/birda:$PYTHON_PATH ; \
+	$(SUDO) $(VENV)/bin/python setup.py $(BE_SETUP_TARGET)
 
 # -------------------------------- #
 
 # Run Backend
 run-be:
-	cd $(BASE_DIR)/backend ; $(VENV)/bin/pserve ../config/development.ini --reload
+	cd $(BASE_DIR)/backend/birda ; $(VENV)/bin/pserve $(BE_CONF) --reload
 
 # -------------------------------- #
 
@@ -72,7 +74,8 @@ run-fe:
 # ================================ #
 
 clean-be:
-	cd $(BASE_DIR)/backend;  $(SUDO) rm -rvf backend.egg-info
+	cd $(BASE_DIR)/backend;  $(VENV)/bin/python setup.py clean
+	#cd $(BASE_DIR)/backend;  $(SUDO) rm -rvf backend.egg-info
 	cd $(BASE_DIR)/backend;  find . -name "*.pyc" -exec rm -vf '{}' \;
 
 # -------------------------------- #

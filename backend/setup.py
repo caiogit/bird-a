@@ -18,20 +18,21 @@ requires = [
 	'pyramid_debugtoolbar',
 	'pyramid_exclog',
 	'zope.sqlalchemy',
-	'pyramid_simpleform',
+#	'pyramid_simpleform',
 	'cryptacular',
 	'waitress',
 	'pycrypto',
 	'webtest',
 	'rdflib',
 	'cornice',
+	'colander',
 ]
 
 if sys.version_info[:3] < (2,5,0):
     raise RuntimeError('This application requires Python 2.6+')
 
 setup(name='birda',
-      version='0.0.1',
+      version='0.1.1',
       description='Builder of Interfaces for RDF Data Authoring (BIRD-A)',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
