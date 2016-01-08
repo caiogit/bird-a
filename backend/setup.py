@@ -3,9 +3,10 @@ import sys
 
 from setuptools import setup, find_packages
 
-here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, '../README.rst')).read()
-CHANGES = open(os.path.join(here, '../CHANGES.txt')).read()
+# here = os.path.abspath(os.path.dirname(__file__))
+# README = open(os.path.join(here, '../README.rst')).read()
+# CHANGES = open(os.path.join(here, '../CHANGES.txt')).read()
+# long_desc = README + '\n\n' + CHANGES
 
 requires = [
 	'setuptools',
@@ -13,7 +14,7 @@ requires = [
 	'SQLAlchemy',
 	'transaction',
 #	'pyramid_chameleon',
-#	'pyramid_jinja2',
+	'pyramid_jinja2',
 	'pyramid_tm',
 	'pyramid_debugtoolbar',
 	'pyramid_exclog',
@@ -34,7 +35,7 @@ if sys.version_info[:3] < (2,5,0):
 setup(name='birda',
       version='0.1.1',
       description='Builder of Interfaces for RDF Data Authoring (BIRD-A)',
-      long_description=README + '\n\n' + CHANGES,
+      long_description="",
       classifiers=[
         "Framework :: Pylons",
         "Intended Audience :: Developers",

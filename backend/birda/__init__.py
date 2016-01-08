@@ -5,10 +5,8 @@ import pyramid.session
 
 import sqlalchemy
 
-import birda
 import birda.models
 import birda.models.acl
-import birda.services
 
 def main(global_config, **settings):
 	"""
@@ -27,7 +25,7 @@ def main(global_config, **settings):
 	authn_policy = pyramid.authentication.SessionAuthenticationPolicy()
 	authz_policy = pyramid.authorization.ACLAuthorizationPolicy()
 
-	# COnfig creation
+	# Config creation
 	config = pyramid.config.Configurator(
 		settings=settings,
 		root_factory=birda.models.acl.RootFactory,
@@ -42,7 +40,12 @@ def main(global_config, **settings):
 
 	# Scan modules for cornice services
 	#config.include("birda.services")
-	#config.scan("birda:services")
+	config.include('cornice')
+	config.scan("birda.services")
+
+	# Add "home" view, with a simple greeting message
+	config.add_route('home', '/')
+	config.scan()
 
 	# Import all birda.models modules (necessary?)
 	#config.scan('birda.models')

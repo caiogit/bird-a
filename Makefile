@@ -18,10 +18,10 @@ PROD := $(shell echo "$(reply)" | grep "^[pP]$$" | tr '[:lower:]' '[:upper:]')
 # Variables setting
 ifeq ($(PROD), "P")
 	BE_SETUP_TARGET := install
-	BE_CONF := $(PWD)/config/production.ini
+	BE_CONF := production.ini
 else
 	BE_SETUP_TARGET := develop
-	BE_CONF := $(PWD)/config/development.ini
+	BE_CONF := development.ini
 endif
 
 
@@ -33,16 +33,14 @@ all:
 	#@echo "Prod: \"$(PROD)\" (reply: \"$(reply)\")"
 	@echo
 	@echo "make make-be"
-	@echo "     Install the backend"
+	@echo "make run-be"
+	@echo "make clean-be"
+	@echo "     Make, run and clean the backend"
 	@echo
 	@echo "make make-fe"
-	@echo "     Make the frontend"
-	@echo
-	@echo "make run-be"
-	@echo "     Run the backend"
-	@echo
 	@echo "make run-fe"
-	@echo "     Run the frontend"
+	@echo "make clean-fe"
+	@echo "     Make, run and clean the frontend"
 	@echo
 
 # ================================ #
@@ -57,7 +55,7 @@ make-be:
 
 # Run Backend
 run-be:
-	cd $(BASE_DIR)/backend/birda ; $(VENV)/bin/pserve $(BE_CONF) --reload
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/pserve $(BE_CONF) --reload
 
 # -------------------------------- #
 
