@@ -85,4 +85,18 @@ clean-fe:
 
 clean: clean-be clean-fe
 
+# -------------------------------- #
+
+code-lines lines-number:
+#	( \
+#	find $(BASE_DIR)/backend -iname "*.py" ; \
+#	find $(BASE_DIR)/frontend/app -iname "*.js" ; \
+#	find $(BASE_DIR)/frontend/app -iname "*.html" ; \
+#	find $(BASE_DIR)/frontend/app -iname "*.css" ; \
+#	echo $(BASE_DIR)/Makefile ) | \
+#	grep -v 'ascii_utils' | \
+#	xargs wc
+
+	cloc --exclude-dir=node_modules,bower_components --not-match-f=ascii_utils --by-file-by-lang backend/birda frontend/app/
+
 # ================================ #

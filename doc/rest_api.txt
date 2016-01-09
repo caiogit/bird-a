@@ -181,7 +181,9 @@ Returns:
 	],
 	"local_name":{
 		"fields": ["givenName", "familyMame"],
-		"separator": "-"
+		"localNameSeparator": "_",
+		"tokenSeparator": "(\.|\s|-)+",
+		"localNameRenderer": "lowercase"
 	}
 }
 
