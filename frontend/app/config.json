@@ -1,0 +1,11 @@
+{
+	/* Frontend configuration */
+	"hostname": "0.0.0.0",
+	"port": 9000,
+	"portDev": 9001,
+	"portLivereload": 35729,
+
+	/* Backend configuration */
+	"backendHostName": "0.0.0.0",
+	"backendPort":8000
+}
