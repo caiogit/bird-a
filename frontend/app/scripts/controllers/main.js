@@ -8,14 +8,14 @@
  * Controller of the birdaApp
  */
 angular.module('birdaApp')
-	.controller('MainController', ['$location',
-		function ($location) {
+	.controller('MainController', ['$location', 'ConfigService',
+		function ($location, ConfigService) {
 			var self = this;
 
 			/* ----------------------------------------- */
 
 			function init() {
-
+				console.log(ConfigService.config);
 			}
 
 			/* ========================================= */
