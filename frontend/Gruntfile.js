@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 	var modRewrite = require('connect-modrewrite');
 
 	// Configurable paths for the application
-	var appConfig = require('../config/frontend.json');
+	var appConfig = require('./app/config.json');
 	appConfig.app = require('./bower.json').appPath || 'app';
 	appConfig.dist = 'dist';
 

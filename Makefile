@@ -61,13 +61,13 @@ run-be:
 
 # Make Frontend
 make-fe:
-	cd $(BASE_DIR)/frontend; grunt
+	cd $(BASE_DIR)/frontend; grunt --force
 
 # -------------------------------- #
 
 # Run Frontend
 run-fe:
-	cd $(BASE_DIR)/frontend ; grunt serve
+	cd $(BASE_DIR)/frontend ; grunt serve --force
 
 # ================================ #
 
