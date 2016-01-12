@@ -25,7 +25,8 @@ else
 endif
 
 
-.PHONY: all make-be make-fe run-be run-fe
+.PHONY: all make-be run-be make-fe run-fe make-fuseki run-fuseki \
+        clean-be clean-fe clean-fuseki clean lines-of-code
 
 # -------------------------------- #
 
@@ -42,6 +43,12 @@ all:
 	@echo "make clean-fe"
 	@echo "     Make, run and clean the frontend"
 	@echo
+	@echo "make clean"
+	@echo "     Clean backend, frontend and fuseki"
+	@echo
+	@echo "make lines-of-code"
+	@echo "     Display actual Source Lines of Codes (SLOC)"
+	@echo
 
 # ================================ #
 
@@ -50,6 +57,7 @@ make-be:
 	cd $(BASE_DIR)/backend ; \
 #	export PYTHON_PATH=$(BASE_DIR)/backend:$(BASE_DIR)/backend/birda:$PYTHON_PATH ; \
 	$(SUDO) $(VENV)/bin/python setup.py $(BE_SETUP_TARGET)
+	# TODO: Initialization scripts
 
 # -------------------------------- #
 
@@ -57,7 +65,7 @@ make-be:
 run-be:
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/pserve $(BE_CONF) --reload
 
-# -------------------------------- #
+# ================================ #
 
 # Make Frontend
 make-fe:
@@ -68,6 +76,22 @@ make-fe:
 # Run Frontend
 run-fe:
 	cd $(BASE_DIR)/frontend ; grunt serve --force
+
+# ================================ #
+
+# Make Fuseki
+make-fuseki:
+	# TODO: Make Fuseki
+	# 1) packet wget
+	# 2) untar
+	# 3) rm packet
+	# 4) installation?
+
+# -------------------------------- #
+
+# Run Frontend
+run-fuseki:
+	# TODO: Run Fuseki
 
 # ================================ #
 
@@ -83,11 +107,16 @@ clean-fe:
 
 # -------------------------------- #
 
-clean: clean-be clean-fe
+clean-fuseki:
+	# TODO: Clean Fuseki
 
 # -------------------------------- #
 
-code-lines lines-number:
+clean: clean-be clean-fe clean-fuseki
+
+# -------------------------------- #
+
+lines-of-code:
 #	( \
 #	find $(BASE_DIR)/backend -iname "*.py" ; \
 #	find $(BASE_DIR)/frontend/app -iname "*.js" ; \
