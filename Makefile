@@ -1,6 +1,7 @@
 # ================================ #
 
 BASE_DIR := $(PWD)
+GRUNT := ./node_modules/grunt
 
 # Set VENV if not already set
 ifndef VENV
@@ -69,7 +70,8 @@ run-be:
 
 # Make Frontend
 make-fe:
-	cd $(BASE_DIR)/frontend; grunt --force
+	cd $(BASE_DIR)/frontend; npm install
+	cd $(BASE_DIR)/frontend; ./node_modules/grunt --force
 
 # -------------------------------- #
 
@@ -81,6 +83,9 @@ run-fe:
 
 # Make Fuseki
 make-fuseki:
+	wget http://mirrors.muzzy.it/apache/jena/binaries/apache-jena-fuseki-2.3.1.tar.gz
+	tar xzf apache-jena-fuseki-*.tar.gz
+	rm -vf apache-jena-fuseki-*.tar.gz
 	# TODO: Make Fuseki
 	# 1) packet wget
 	# 2) untar
