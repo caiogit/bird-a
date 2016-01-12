@@ -7,14 +7,16 @@ Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 
 
 - Python 2.7
-- Python SQLite3 bindings (debian packages: build-essentials, libsqlite3-dev).
+- Python SQLite3 bindings (debian packages: build-essential, libsqlite3-dev).
+- virtualenv (optional)
 - npm
 - bower
 - grunt
 
 In a debian system:
 
-- apt-get install build-essentials libsqlite3-dev nodejs npm
+
+- apt-get install git virtualenv python2.7 python-dev nodejs npm virtualenv build-essential libsqlite3-dev
 - npm install -g bower grunt
 
 
@@ -28,7 +30,7 @@ Configure virtual env:
 
 Get Bird-A:
 
-	git clone git@github.com:caiogit/bird-a
+	git clone https://github.com/caiogit/bird-a.git
 	cd bird-a
 
 Make backend, frontend and fuseki:
