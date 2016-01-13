@@ -9,7 +9,7 @@ angular.module('birdaApp')
 		function ($http, $uibModal) {
 
 			var self = this;
-			self.config = null;
+			var config = CONFIG;
 
 			/* ----------------------------------------- */
 
@@ -20,6 +20,7 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.loadConf = function() {
+				/*
 				$http.get('config.json').then(
 
 					function success(response) {
@@ -32,7 +33,13 @@ angular.module('birdaApp')
 						modalXhrError($uibModal, response);
 					}
 				);
+				*/
 			};
+
+			self.getConf = function() {
+				return config;
+			};
+
 			/* ========================================= */
 
 			init();

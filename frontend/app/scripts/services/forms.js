@@ -5,12 +5,15 @@
  */
 
 angular.module('birdaApp')
-	.service('FormsService', ['ConfigService',
-		function(ConfigService) {
+	.service('FormsService', ['$resource', 'ConfigService', 'UIService',
+		function($resource, ConfigService, UIService) {
 
 			var self = this;
 			//var query = null;
 			var forms = null;
+			var config = ConfigService.getConf();
+
+			var Forms = $resource(config.buildApiUri('/forms'));
 
 			/* ----------------------------------------- */
 
@@ -21,12 +24,44 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.getForms = function() {
+				console.log('Forms',forms);
 				return forms;
 			};
 
+			/* ----------------------------------------- */
+
 			self.retrieveForms = function() {
-				forms = self.forms_Test1;
+				if (config.dummyData) {
+					forms = getDummyForms(config);
+				} else {
+					// TODO
+					forms = Forms.get();
+					forms.$promise.then(null,UIService.notifyError);
+					//forms.$promise.then(null,function(error) {console.log("Error!!",error);});
+				}
+
 			};
+
+			function getDummyForms() {
+				return self.forms_Test1;
+			}
+
+			function getRealForms(config) {
+				return $http.get('config.json').then(
+
+					function success(response) {
+						console.log('Configuration: ',self.config);
+						return response.data;
+					},
+
+					function error(response) {
+						modalXhrError($uibModal, response);
+						return $q.reject(response.data);
+					}
+				);
+			}
+
+			/* ----------------------------------------- */
 
 			self.getFormByUri = function(formUri) {
 				var ret = null;

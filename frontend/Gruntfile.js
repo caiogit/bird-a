@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 	var modRewrite = require('connect-modrewrite');
 
 	// Configurable paths for the application
-	var appConfig = require('./app/config.json');
+	var appConfig = require('./app/config.js');
 	appConfig.app = require('./bower.json').appPath || 'app';
 	appConfig.dist = 'dist';
 
@@ -77,8 +77,17 @@ module.exports = function (grunt) {
 				//hostname: 'localhost',
 				hostname: '<%= birda.hostname %>',
 				livereload: '<%= birda.portLivereload %>',
-				middleware: function (connect) {
+				middleware: function (connect, options, middlewares) {
+
 					return [
+						// CORS settings
+						//function (req, res, next) {
+						//	res.setHeader('Access-Control-Allow-Origin', '*');
+						//	res.setHeader('Access-Control-Allow-Methods', '*');
+						//	//a console.log('foo') here is helpful to see if it runs
+						//	return next();
+						//},
+
 						// Mapping every filetype is unconfortable and error-prone
 						//modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.ico$ /index.html [L]']),
 						modRewrite(['!\\.[a-zA-Z0-9]+$ /index.html [L]']),
