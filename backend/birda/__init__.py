@@ -2,6 +2,7 @@ import pyramid.config
 import pyramid.authentication
 import pyramid.authorization
 import pyramid.session
+import pyramid.events
 
 import sqlalchemy
 
@@ -50,6 +51,21 @@ def main(global_config, **settings):
 	# Import all birda.models modules (necessary?)
 	#config.scan('birda.models')
 
+	# Add CORS headers
+	def add_cors_headers_response_callback(event):
+		def cors_headers(request, response):
+			response.headers.update({
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'POST,GET,DELETE,PUT,OPTIONS',
+			'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
+			'Access-Control-Allow-Credentials': 'true',
+			'Access-Control-Max-Age': '1728000',
+			})
+		event.request.add_response_callback(cors_headers)
+
+	config.add_subscriber(add_cors_headers_response_callback, pyramid.events.NewRequest)
+
+	# Make and run the application
 	return config.make_wsgi_app()
 
 
