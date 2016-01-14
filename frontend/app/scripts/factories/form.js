@@ -1,11 +1,10 @@
 'use strict';
 
 /**
- * Created by caio on 28/12/15.
+ * Created by caio on 14/01/16.
  */
-
 angular.module('birdaApp')
-	.service('FormsService', ['$resource', 'ConfigService', 'UIService',
+	.factory('FormFactory', ['$resource', 'ConfigService', 'UIService',
 		function($resource, ConfigService, UIService) {
 
 			var self = this;
@@ -20,7 +19,6 @@ angular.module('birdaApp')
 
 			function init() {
 				self.retrieveForms();
-
 			}
 
 			/* ========================================= */
@@ -38,12 +36,7 @@ angular.module('birdaApp')
 				} else {
 					// TODO
 					forms = Forms.get();
-
-					forms.$promise.then(
-						function(response) {
-							console.log(response);
-						},
-						UIService.notifyError);
+					forms.$promise.then(null,UIService.notifyError);
 					//forms.$promise.then(null,function(error) {console.log("Error!!",error);});
 				}
 

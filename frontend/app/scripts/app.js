@@ -47,6 +47,9 @@ angular
 			.when('/contact', {
 				templateUrl: 'views/contact.html',
 			})
+			.when('/edit', {
+				templateUrl: 'views/edit.html',
+			})
 
 			.when('/404', {
 				templateUrl: 'views/404.html',

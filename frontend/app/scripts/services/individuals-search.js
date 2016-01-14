@@ -9,8 +9,11 @@ angular.module('birdaApp')
 		function(ConfigService) {
 
 			var self = this;
+			var config = ConfigService.getConf();
+
 			var params = null;
 			var results = null;
+
 
 			function init() {
 				self.clean();
