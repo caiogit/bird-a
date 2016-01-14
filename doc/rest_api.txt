@@ -244,8 +244,18 @@ Returns:
 		{
 			"uri": "http://ex.com/john-max-smith",
 			"type": "http://xmlns.com/foaf/0.1/Person",
+			"lang": "en",
 			"label": "John Max Smith",
 			"description": "Famous actor",
+			"last_modified": "2015-11-25 14:33:01",
+			"authors": [
+				{
+					"uri": "http://bigio-bagio.it#me",
+					"label": "Bigio Bagio"
+				},
+				...
+				...
+			],
 			"properties": [
 				{
 					"uri": "http://xmlns.com/foaf/0.1/givenName",
@@ -279,33 +289,9 @@ handled by the specified form or subform.
 Used for: fill a form with informations relative to an individual.
 
 Returns:
-{
-	"uri": "http://ex.com/john-max-smith",
-	"lang": "en",
-	"label": "John Max Smith",
-	"description": "Famous actor",
-	"authors": [
-		{
-			"uri": "http://bigio-bagio.it#me",
-			"description": "Bigio Bagio"
-		},
-		...
-		...
-	],
-	"last_modified": "2015-11-25 14:33:01",
-	"properties": [
-		{
-			"uri": "http://xmlns.com/foaf/0.1/givenName",
-			"values": ["John", "Max"]
-		},
-		{
-			"uri": "http://xmlns.com/foaf/0.1/familyName",
-			"values": ["Smith"]
-		},
-		...
-		...
-	]
-}
+{{
+Same as GET /api/v1/individuals/search returned JSON, with only one indvidual
+}}
 
 ------------------------------------------------------------------------------------------
 										POST
@@ -325,18 +311,9 @@ Same as GET returned JSON except for "uri", "authors" and "last_modified" missin
 }}
 
 Returns:
-{
-	"uri": "http://ex.com/john-max-smith",
-	"authors": [
-		{
-			"uri": "http://bigio-bagio.it#me",
-			"description": "Bigio Bagio"
-		},
-		...
-		...
-	],
-	"last_modified": "2015-11-25 14:33:01"
-}
+{{
+Same as GET returned JSON (useful for reload "uri", "authors" and "last_modified")
+}}
 
 ------------------------------------------------------------------------------------------
 									  DELETE
