@@ -25,23 +25,23 @@ class FormsSimple(colander.MappingSchema):
 
 			uri = colander.SchemaNode(
 				colander.String(),
-				missing=None,
+				missing=colander.required,
 				validator=jsons.check_uri(required=True))
 
 			type = colander.SchemaNode(
 				colander.String(),
-				missing=None,
+				missing=colander.required,
 				validator=jsons.check_uri(required=True))
 
 			label = colander.SchemaNode(
 				colander.String(),
-				missing=None)
+				missing=colander.required)
 
 			description = colander.SchemaNode(
 				colander.String(),
-				missing=None)
+				missing=colander.required)
 
-	# ------------------------------------------------------- #
+	# ======================================================= #
 
 	# Coherence check
 	def deserialize(self,in_json):
@@ -52,7 +52,7 @@ class FormsSimple(colander.MappingSchema):
 
 		return res
 
-# ---------------------------------------------------------------------------- #
+# ============================================================================ #
 
 FormSimple_example = json.loads("""
 {
@@ -94,37 +94,38 @@ class FormsFull(colander.MappingSchema):
 
 	uri = colander.SchemaNode(
 		colander.String(),
-		missing=None,
+		missing=colander.required,
 		validator=jsons.check_uri(required=True))
 
 	maps_type = colander.SchemaNode(
 		colander.String(),
-		missing=None,
+		missing=colander.required,
 		validator=jsons.check_uri(required=True))
 
 	base_uri = colander.SchemaNode(
 		colander.String(),
-		missing=None,
+		missing=colander.required,
 		validator=jsons.check_uri(required=True))
 
 	label_property = colander.SchemaNode(
 		colander.String(),
-		missing=None,
+		missing=colander.required,
 		validator=jsons.check_uri(required=True))
 
 	descr_property = colander.SchemaNode(
 		colander.String(),
-		missing=None,
+		missing=colander.required,
 		validator=jsons.check_uri(required=True))
 
 	lang = colander.SchemaNode(
 		colander.String(),
-		missing=None,
+		missing=colander.required,
 		validator=jsons.check_iso_lang(required=True))
 
 	# --------------------------------- #
 
-	@colander.instantiate()
+	@colander.instantiate(
+		missing={})
 	class local_name(colander.MappingSchema):
 
 		@colander.instantiate(
@@ -136,19 +137,19 @@ class FormsFull(colander.MappingSchema):
 
 		localNameSeparator = colander.SchemaNode(
 			colander.String(),
-			missing=None,
+			missing=colander.drop,
 			validator=colander.OneOf(['', '-', '_']))
 
 		tokenSeparator = colander.SchemaNode(
 			colander.String(),
-			missing=None)
+			missing=colander.drop)
 
 		localNameRenderer = colander.SchemaNode(
 			colander.String(),
-			missing=None,
+			missing=colander.drop,
 			validator=colander.OneOf(['lowercase', 'uppercase', 'camelcase']))
 
-	# ------------------------------------------------------- #
+	# ======================================================= #
 
 	# Coherence check
 	def deserialize(self,in_json):
@@ -159,7 +160,7 @@ class FormsFull(colander.MappingSchema):
 
 		return res
 
-# ---------------------------------------------------------------------------- #
+# ============================================================================ #
 
 
 FormFull_example = json.loads("""

@@ -19,7 +19,7 @@ def check_uri(required=True):
         r'localhost|' #localhost...
         r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
         r'(?::\d+)?' # optional port
-        r'(?:/?|[/?]\S+)$',
+        r'(?:/?|[/?]|#?\S+)$',
 		re.IGNORECASE)
 
 	def check(node, value):
@@ -32,7 +32,7 @@ def check_uri(required=True):
 
 		if not re.match(uri_regex, value):
 			raise colander.Invalid(node,
-				'URI "%(value)s" doesn\'t match validation rules', vars())
+				'URI "%(value)s" doesn\'t match validation rules' % vars())
 		else:
 			return None
 
