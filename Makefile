@@ -1,12 +1,12 @@
 # ================================ #
 
 BASE_DIR := $(PWD)
-GRUNT := ./node_modules/grunt
+GRUNT := ./node_modules/.bin/grunt
 
 # Set VENV if not already set
 ifndef VENV
 	VENV := /usr
-	SUDO := sudo
+	SUDO := sudo -E
 else:
 	SUDO :=
 endif
@@ -71,13 +71,14 @@ run-be:
 # Make Frontend
 make-fe:
 	cd $(BASE_DIR)/frontend; npm install
-	cd $(BASE_DIR)/frontend; ./node_modules/grunt --force
+	cd $(BASE_DIR)/frontend; bower install
+	cd $(BASE_DIR)/frontend; $(GRUNT) --force
 
 # -------------------------------- #
 
 # Run Frontend
 run-fe:
-	cd $(BASE_DIR)/frontend ; grunt serve --force
+	cd $(BASE_DIR)/frontend ; $(GRUNT) serve --force
 
 # ================================ #
 

@@ -15,10 +15,12 @@ Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 
 In a debian system:
 
-
-- apt-get install git virtualenv python2.7 python-dev nodejs npm virtualenv build-essential libsqlite3-dev
-- npm install -g bower grunt
-
+- sudo apt-get install git virtualenv python2.7 python-dev python3-dev python-setuptools nodejs nodejs-legacy npm virtualenv build-essential libsqlite3-dev ruby ruby-dev
+- sudo gem update --system
+- sudo gem install compass
+- sudo npm install -g bower grunt
+- sudo pip install --upgrade rdflib
+- sudo easy_install -UZ cryptacular
 
 ## Installing and Running
 
