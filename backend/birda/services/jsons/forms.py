@@ -92,7 +92,7 @@ class FormsFull(colander.MappingSchema):
 	# def schema_type(self, **kw):
 	# 	return colander.Mapping(unknown='raise')
 
-	uri = colander.SchemaNode(
+	form_uri = colander.SchemaNode(
 		colander.String(),
 		missing=colander.required,
 		validator=jsons.check_uri(required=True))
@@ -165,7 +165,7 @@ class FormsFull(colander.MappingSchema):
 
 FormFull_example = json.loads("""
 {
-	"form": "http://birda.com/form-person-1",
+	"form_uri": "http://birda.com/form-person-1",
 	"maps_type": "http://xmlns.com/foaf/0.1/",
 	"base_uri": "http://ex.com/",
 	"label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
