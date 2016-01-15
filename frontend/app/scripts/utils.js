@@ -22,3 +22,9 @@ function modalXhrError($uibModal, response) {
 		size: 'sm'
 	});
 }
+
+function clearObject(obj) {
+	for (var member in obj) {
+		delete obj[member];
+	}
+}

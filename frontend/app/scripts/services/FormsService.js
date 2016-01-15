@@ -5,14 +5,14 @@
  */
 
 angular.module('birdaApp')
-	.service('FormsService', ['$resource', 'ConfigService', 'UIService',
-		function($resource, ConfigService, UIService) {
+	.service('FormsService', ['$resource', '$q', '$timeout', 'ConfigService', 'UIService',
+		function($resource, $q, $timeout, ConfigService, UIService) {
 
 			var self = this;
 			var config = ConfigService.getConf();
 
 			//var query = null;
-			var forms = null;
+			var forms = {};
 
 			var Forms = $resource(config.buildApiUri('/forms'));
 
@@ -20,7 +20,6 @@ angular.module('birdaApp')
 
 			function init() {
 				self.retrieveForms();
-
 			}
 
 			/* ========================================= */
@@ -34,9 +33,18 @@ angular.module('birdaApp')
 
 			self.retrieveForms = function() {
 				if (config.dummyData) {
-					forms = getDummyForms(config);
+					clearObject(forms);
+					var defer = $q.defer();
+
+					// simulated async function
+					$timeout(function() {
+						angular.extend(forms, getDummyForms(config));
+						defer.resolve(forms);
+					}, config.dummyWaitTime);
+
+					return defer.promise;
+
 				} else {
-					// TODO
 					forms = Forms.get();
 
 					forms.$promise.then(
@@ -44,28 +52,14 @@ angular.module('birdaApp')
 							console.log(response);
 						},
 						UIService.notifyError);
-					//forms.$promise.then(null,function(error) {console.log("Error!!",error);});
+
+					return forms.$promise;
 				}
 
 			};
 
 			function getDummyForms() {
 				return self.forms_Test1;
-			}
-
-			function getRealForms(config) {
-				return $http.get('config.json').then(
-
-					function success(response) {
-						console.log('Configuration: ',self.config);
-						return response.data;
-					},
-
-					function error(response) {
-						modalXhrError($uibModal, response);
-						return $q.reject(response.data);
-					}
-				);
 			}
 
 			/* ----------------------------------------- */

@@ -22,7 +22,9 @@ var CONFIG = {
 	},
 
 	/* Tell frontend to load dummy data instead of data retrieved from backend */
-	'dummyData': false
+	'dummyData': true,
+	/* How many milliseconds the dummy response should be deleted */
+	'dummyWaitTime': 2000
 };
 
 // Exports CONFIG in order to be returned by require() (used in grunt)
