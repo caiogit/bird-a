@@ -16,6 +16,12 @@ import __init__ as jsons
 
 class FormsSimple(colander.MappingSchema):
 
+	# Uncomment to enable the "scrict" validation
+	# (i.e. raise an error if an unknown key is present)
+	#
+	# def schema_type(self, **kw):
+	# 	return colander.Mapping(unknown='raise')
+
 	@colander.instantiate(
 		validator=colander.Length(min=1))
 	class forms(colander.SequenceSchema):
