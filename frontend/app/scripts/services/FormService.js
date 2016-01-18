@@ -12,7 +12,7 @@ angular.module('birdaApp')
 			var config = ConfigService.getConf();
 
 			//var query = null;
-			var form = null;
+			var form = {};
 
 			var Form = $resource(config.buildApiUri('/forms/:formUri'), {formUri:'@form_uri'});
 
@@ -67,7 +67,113 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.form_Test1 = {
-				// TODO
+				'form_uri': 'http://birda.com/form-person-1',
+				'maps_type': 'http://xmlns.com/foaf/0.1/',
+				'base_uri': 'http://ex.com/',
+				'label_property': 'http://www.w3.org/2004/02/skos/core#prefLabel',
+				'descr_property': 'http://www.w3.org/2000/01/rdf-schema#comment',
+				'lang': 'it',
+				'fields': [
+					{
+						'widget_uri': 'http://birda.com/person-givenName-1',
+						'w_type': 'text-input',
+						'property': 'http://xmlns.com/foaf/0.1/givenName',
+						'label': 'Nome',
+						'description': 'Usare un campo diverso per ogni nome',
+						'placeholder': 'Nome della persona (ad es. "Pino")',
+						'at_least': 1,
+						'validation': {
+							'max_length':25
+						}
+					},
+					{
+						'widget_uri': 'http://birda.com/person-familyName-1',
+						'w_type': 'text-input',
+						'property': 'http://xmlns.com/foaf/0.1/familyName',
+						'label': 'Cognome',
+						'description': 'Usare un campo diverso per ogni cognome',
+						'placeholder': 'Cognome della persona (ad es. "Rossi")',
+						'at_least': 1,
+						'validation': {
+							'max_length':25
+						}
+					},
+					{
+						'widget_uri': 'http://birda.com/person-gender-1',
+						'w_type': 'radio-input',
+						'property': 'http://xmlns.com/foaf/0.1/gender',
+						'label': 'Genere',
+						'description': '',
+						'placeholder': '',
+						'at_least': 1,
+						'choices': [
+							{
+								'label': 'Uomo',
+								'description': '',
+								'type': 'xsd:string',
+								'value': 'http://w3id.com/gender-ontology/male'
+							},
+							{
+								'label': 'Donna',
+								'description': '',
+								'type': 'xsd:string',
+								'value': 'http://w3id.com/gender-ontology/female'
+							},
+							{
+								'label': 'Non specificato',
+								'description': '',
+								'type': 'xsd:string',
+								'value': 'http://w3id.com/gender-ontology/not-specified'
+							}
+						],
+						'validation': {
+							'required': true
+						}
+					},
+					{
+						'widget_uri': 'http://birda.com/person-knows-1',
+						'w_type': 'subform',
+						'maps_property': 'http://xmlns.com/foaf/0.1/knows',
+						'maps_type': 'http://xmlns.com/foaf/0.1/',
+						'label': 'Persone conosciute',
+						'description': '',
+						'at_least': 0,
+						'at_most':50,
+
+						'fields': [
+							{
+								'widget_uri': 'http://birda.com/person-givenName-1',
+								'w_type': 'text-input',
+								'property': 'http://xmlns.com/foaf/0.1/givenName',
+								'label': 'Nome',
+								'description': 'Usare un campo diverso per ogni nome',
+								'placeholder': 'Nome della persona (ad es. "Pino")',
+								'at_least': 1,
+								'validation': {
+									'max_length':25
+								}
+							},
+							{
+								'widget_uri': 'http://birda.com/person-familyName-1',
+								'w_type': 'text-input',
+								'property': 'http://xmlns.com/foaf/0.1/familyName',
+								'label': 'Cognome',
+								'description': 'Usare un campo diverso per ogni cognome',
+								'placeholder': 'Cognome della persona (ad es. "Rossi")',
+								'at_least': 1,
+								'validation': {
+									'max_length':25
+								}
+							}
+						]
+					}
+				],
+				'local_name':{
+					'fields': ['givenName', 'familyMame'],
+					'localNameSeparator': '_',
+					'tokenSeparator': '(\\\.|\\\s|-)+',
+					'localNameRenderer': 'lowercase'
+				}
 			};
 
 			/* ========================================= */
