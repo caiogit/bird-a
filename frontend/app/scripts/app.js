@@ -28,6 +28,13 @@ angular
 		'ngTouch',
 		'ui.bootstrap'
 	])
+	//.config(['$sceDelegateProvider',
+	//	function($sceDelegateProvider) {
+	//		$sceDelegateProvider.resourceUrlWhitelist([
+	//			'self',
+	//			'http://0.0.0.0:8000/**'
+	//		]);
+	//	}])
 	.config(function ($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', {
@@ -51,6 +58,9 @@ angular
 				templateUrl: 'views/edit.html',
 			})
 
+			.when('/test', {
+				templateUrl: 'views/test.html',
+			})
 			.when('/404', {
 				templateUrl: 'views/404.html',
 			})

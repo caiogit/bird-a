@@ -17,14 +17,17 @@ var CONFIG = {
 	'backendPort': '8000',
 	'backendAPIPath':'/api/v1',
 
+	'getBackendUri': function() {
+		return CONFIG.backendProtocol +'://'+ CONFIG.backendHostName +':'+ CONFIG.backendPort;
+	},
 	'buildApiUri': function(path) {
-		return CONFIG.backendProtocol +'://'+ CONFIG.backendHostName +':'+ CONFIG.backendPort + CONFIG.backendAPIPath + path;
+		return CONFIG.getBackendUri() + CONFIG.backendAPIPath + path;
 	},
 
 	/* Tell frontend to load dummy data instead of data retrieved from backend */
 	'dummyData': true,
 	/* How many milliseconds the dummy response should be deleted */
-	'dummyWaitTime': 2000
+	'dummyWaitTime': 200
 };
 
 // Exports CONFIG in order to be returned by require() (used in grunt)
