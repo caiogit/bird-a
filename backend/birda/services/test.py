@@ -167,6 +167,11 @@ class User(object):
 	def collection_delete(self):
 		return services.request2dict(self.request, 'collection_delete')
 
+
+	@cornice.resource.view(renderer='json')
+	def options(self):
+		return services.request2dict(self.request, 'options')
+
 # ============================================================================ #
 # ============================================================================ #
 

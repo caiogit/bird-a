@@ -17,6 +17,7 @@ __all__ = [ os.path.basename(f)[:-3] for f in services]
 def request2dict(request, function, extended=False):
 	ret = {}
 	ret['function'] = function
+	ret['method'] = request.method
 	ret['matchdict'] = request.matchdict
 	ret['GET'] = dict(request.GET)
 	ret['path_qs'] = request.path_qs
@@ -28,7 +29,6 @@ def request2dict(request, function, extended=False):
 
 	if extended:
 		ret['scheme'] = request.scheme
-		ret['method'] = request.method
 		ret['body'] = request.body
 		ret['urlvars'] = request.urlvars
 		ret['host_url'] = request.host_url
