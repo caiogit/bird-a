@@ -84,14 +84,11 @@ run-fe:
 
 # Make Fuseki
 make-fuseki:
-	wget http://mirrors.muzzy.it/apache/jena/binaries/apache-jena-fuseki-2.3.1.tar.gz
-	tar xzf apache-jena-fuseki-*.tar.gz
-	rm -vf apache-jena-fuseki-*.tar.gz
-	# TODO: Make Fuseki
-	# 1) packet wget
-	# 2) untar
-	# 3) rm packet
-	# 4) installation?
+	rm -rf fuseki
+	wget -c http://it.apache.contactlab.it/jena/binaries/jena-fuseki1-1.3.1-distribution.tar.gz
+	tar xzf jena-fuseki*.tar.gz
+	mv -vi jena-fuseki*/ fuseki
+	rm -vf jena-fuseki*.tar.gz
 
 # -------------------------------- #
 

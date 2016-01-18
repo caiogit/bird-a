@@ -24,13 +24,14 @@ fontend/bower_components
 *.egg-info
 *.sqlite
 *.db
-.DS_Store
+*.DS_Store
 
 # Ignore test ontologies, instances, etc.
-*.rdf
-*.n3
-*.turtle
-*.processed
+backend/birda/scripts/*.rdf
+backend/birda/scripts/*.n3
+backend/birda/scripts/*.turtle
+backend/birda/scripts/*.processed
+backend/birda/scripts/*.nt
 
 # Others
 doc/MockUp.pdf

@@ -386,6 +386,7 @@ if __name__ == '__main__':
 
 	binst = create_birda_instace()
 	output(binst, output_format='turtle', file_name='birda-example', print_triples=False, print_file=True)
+	output(binst, output_format='nt', file_name='birda-example', print_triples=False, print_file=False)
 
 	print '\n'+ '#'*80 + '\n' + '#'*80 + '\n'
 

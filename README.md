@@ -5,13 +5,13 @@ Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 
 ## Requirements
 
-
 - Python 2.7
 - Python SQLite3 bindings (debian packages: build-essential, libsqlite3-dev).
 - virtualenv (optional)
 - npm
 - bower
 - grunt
+- Java Runtime Environment (required by Fuseki)
 
 In a debian system:
 
