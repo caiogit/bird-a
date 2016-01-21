@@ -23,8 +23,34 @@ function modalXhrError($uibModal, response) {
 	});
 }
 
+/**
+ * Clear the given object (doesn't handle arrays, at the moment)
+ * @param obj
+ */
 function clearObject(obj) {
 	for (var member in obj) {
 		delete obj[member];
+	}
+}
+
+/**
+ * Set the "obj" with the content of "new_obj" without breaking references to "obj"
+ * @param obj The existent object to be reset
+ * @param newObj The source object
+ * @param deepCopy (bool) Optional: make deep copy instead of copying reference
+ */
+function clearAndSetObject(obj, newObj, deepCopy) {
+	clearObject(obj);
+	//for (var member in newObj) {
+	//	if (deepCopy) {
+	//		obj[member] = angular.copy(newObj[member]);
+	//	} else {
+	//		obj[member] = newObj[member];
+	//	}
+	//}
+	if (deepCopy) {
+		angular.merge(obj, newObj);
+	} else {
+		angular.extend(obj, newObj);
 	}
 }

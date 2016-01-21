@@ -60,7 +60,7 @@ angular.module('birdaApp')
 
 			};
 
-			function getDummyForm() {
+			function getDummyForm(config) {
 				return self.form_Test1;
 			}
 

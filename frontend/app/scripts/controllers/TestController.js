@@ -5,8 +5,8 @@
  */
 
 angular.module('birdaApp')
-	.controller('TestController', ['$scope', '$q', '$resource', 'ConfigService',
-		function ($scope, $q, $resource, ConfigService) {
+	.controller('TestController', ['$scope', '$q', '$resource', 'ConfigService', 'IndividualsFactory',
+		function ($scope, $q, $resource, ConfigService, IndividualsFactory) {
 			var self = this;
 			var config = ConfigService.getConf();
 
@@ -49,6 +49,24 @@ angular.module('birdaApp')
 				);
 			};
 
+			/* ----------------------------------------- */
+
+			self.indiv1 = {};
+			self.indiv2 = {};
+			self.testInstancesFactory_active = false;
+
+			self.testInstancesFactory = function() {
+				var indivSrv1 = IndividualsFactory.getInstance();
+				var indivSrv2 = IndividualsFactory.getInstance();
+
+				self.indiv1 = indivSrv1.getIndividual();
+				self.indiv2 = indivSrv2.getIndividual();
+
+				indivSrv1.retrieveIndividual('http://ex.com/john-max-smith','');
+				indivSrv2.retrieveIndividual('http://ex.com/john-max-smith-2','');
+
+				self.testInstancesFactory_active = true;
+			};
 			/* ========================================= */
 
 			init();

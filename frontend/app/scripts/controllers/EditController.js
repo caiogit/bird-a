@@ -5,7 +5,7 @@
  */
 
 angular.module('birdaApp')
-	.controller('EditController', ['$scope',
+	.controller('EditController', ['$scope', '$resource',
 		function ($scope) {
 			var self = this;
 			self.forms = null;
@@ -13,7 +13,7 @@ angular.module('birdaApp')
 			/* ----------------------------------------- */
 
 			function init() {
-
+				var Instance = $resource(config.buildApiUri('/api/v1/individuals/:instanceUri'), {formUri:'@form_uri'});
 			}
 
 			/* ========================================= */
