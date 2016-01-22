@@ -42,6 +42,7 @@ angular.module('birdaApp')
 						$timeout(function() {
 							angular.merge(individual, getDummyIndividual(config, individualUri, formUri));
 							defer.resolve(individual);
+							console.log("Individual: ",individual);
 						}, config.dummyWaitTime);
 
 						return defer.promise;
@@ -59,6 +60,7 @@ angular.module('birdaApp')
 								// the only one) individual retrieved from the backend
 								var tmpIndividual = angular.copy(individual.individuals[0]);
 								clearAndSetObject(individual, tmpIndividual, true);
+								console.log("Individual: ",individual);
 							},
 							UIService.notifyError);
 
@@ -68,13 +70,14 @@ angular.module('birdaApp')
 				};
 
 				function getDummyIndividual(config, individualUri, formUri) {
+					console.log(individualUri);
 					return self.test_individuals[individualUri].individuals[0];
 				}
 
 				/* ========================================= */
 
 				self.test_individuals = {
-					'http://ex.com/john-max-smith': {
+					'http://ex.com/john-max-smith-01': {
 						'individuals': [
 							{
 								'uri': 'http://ex.com/john-max-smith',
@@ -103,7 +106,7 @@ angular.module('birdaApp')
 						]
 					},
 
-					'http://ex.com/john-max-smith-2': {
+					'http://ex.com/john-max-smith-02': {
 						'individuals': [
 							{
 								'uri': 'http://ex.com/john-max-smith-2',

@@ -15,7 +15,7 @@ angular.module('birdaApp')
 			/* ----------------------------------------- */
 
 			function init() {
-				console.log(ConfigService.config);
+
 			}
 
 			/* ========================================= */

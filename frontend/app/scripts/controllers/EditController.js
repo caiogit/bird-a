@@ -5,15 +5,39 @@
  */
 
 angular.module('birdaApp')
-	.controller('EditController', ['$scope', '$resource',
-		function ($scope) {
+	.controller('EditController', ['$routeParams', 'FormService', 'IndividualsFactory',
+		function ($routeParams, FormService, IndividualsFactory) {
 			var self = this;
-			self.forms = null;
+
+			self.form_uri = '';
+			self.form = {};
+
+			self.individual_uri = '';
+			self.individual = {};
+
+			var IndividualService = IndividualsFactory.getInstance();
 
 			/* ----------------------------------------- */
 
 			function init() {
-				var Instance = $resource(config.buildApiUri('/api/v1/individuals/:instanceUri'), {formUri:'@form_uri'});
+				console.log('Initialized!');
+
+				/* Retrieve form */
+				if (typeof $routeParams.form === 'undefined') {
+					alert('Missing parameter: "form"');
+					$window.history.back();
+				}
+
+				self.form_uri = $routeParams.form;
+				self.form = FormService.getForm();
+				FormService.retrieveForm(self.form_uri);
+
+				/* Retrieve individual if existent */
+				if (typeof $routeParams.individual !== 'undefined') {
+					self.individual_uri = $routeParams.individual;
+					self.individual = IndividualService.getIndividual();
+					IndividualService.retrieveIndividual(self.individual_uri, self.form_uri);
+				}
 			}
 
 			/* ========================================= */

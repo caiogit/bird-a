@@ -87,9 +87,8 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.newIndividual = function() {
-				$location.path(
-					'/edit?form='+self.form.uri
-				);
+				$location.path('/edit')
+					.search('form',self.form.uri);
 			};
 
 			self.editIndividual = function(individualUri) {

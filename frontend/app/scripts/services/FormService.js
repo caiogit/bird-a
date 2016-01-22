@@ -41,6 +41,7 @@ angular.module('birdaApp')
 					$timeout(function() {
 						angular.extend(form, getDummyForm(config));
 						defer.resolve(form);
+						console.log('Form: ',form);
 					}, config.dummyWaitTime);
 
 					return defer.promise;
@@ -52,6 +53,7 @@ angular.module('birdaApp')
 					form.$promise.then(
 						function(response) {
 							console.log(response);
+							console.log('Form: ',response);
 						},
 						UIService.notifyError);
 
