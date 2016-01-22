@@ -63,6 +63,12 @@ angular
 			})
 			.when('/404', {
 				templateUrl: 'views/404.html',
+				controller: [ '$location',
+					function($location) {
+						this.location = $location.url();
+					}
+				],
+				controllerAs: 'c404',
 			})
 			.otherwise({
 				redirectTo: '/404',
@@ -72,4 +78,13 @@ angular
 			enabled: true,
 			requireBase: false
 		});
-	});
+	})
+	.run(['$rootScope', 'ConfigService',
+		function ($rootScope, ConfigService) {
+			if (ConfigService.getConf().debug_logLocationChanges) {
+				$rootScope.$on('$locationChangeStart', function (evt, absNewUrl, absOldUrl) {
+					console.log('Location changed. Old: ', absOldUrl, ' New: ', absNewUrl, evt);
+				});
+			}
+		}
+	]);

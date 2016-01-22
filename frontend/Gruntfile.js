@@ -88,9 +88,8 @@ module.exports = function (grunt) {
 						//	return next();
 						//},
 
-						// Mapping every filetype is unconfortable and error-prone
-						//modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.ico$ /index.html [L]']),
-						modRewrite(['!\\.[a-zA-Z0-9]+$ /index.html [L]']),
+						//modRewrite(['!\\.[a-zA-Z0-9]+$ /index.html [L]']),
+						modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.ico|\\.woff2$ /index.html [L]']),
 						connect.static('.tmp'),
 						connect().use(
 							'/bower_components',

@@ -27,7 +27,10 @@ var CONFIG = {
 	/* Tell frontend to load dummy data instead of data retrieved from backend */
 	'dummyData': true,
 	/* How many milliseconds the dummy response should be deleted */
-	'dummyWaitTime': 200
+	'dummyWaitTime': 200,
+
+	/* Log the location changes in Angular */
+	'debug_logLocationChanges': true
 };
 
 // Exports CONFIG in order to be returned by require() (used in grunt)
