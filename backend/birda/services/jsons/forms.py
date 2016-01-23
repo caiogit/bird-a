@@ -112,6 +112,14 @@ class FormsFull(colander.MappingSchema):
 		colander.String(),
 		missing=colander.required,
 		validator=jsons.check_uri(required=True))
+	
+	label = colander.SchemaNode(
+		colander.String(),
+		missing=colander.required)
+
+	description = colander.SchemaNode(
+		colander.String(),
+		missing=colander.required)
 
 	label_property = colander.SchemaNode(
 		colander.String(),
@@ -174,6 +182,8 @@ FormFull_example = json.loads("""
 	"form_uri": "http://birda.com/form-person-1",
 	"maps_type": "http://xmlns.com/foaf/0.1/",
 	"base_uri": "http://ex.com/",
+	"label": "Label",
+	"description": "Description",
 	"label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
 	"descr_property": "http://www.w3.org/2000/01/rdf-schema#comment",
 	"lang": "it",

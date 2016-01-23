@@ -72,6 +72,8 @@ angular.module('birdaApp')
 				'form_uri': 'http://birda.com/form-person-1',
 				'maps_type': 'http://xmlns.com/foaf/0.1/',
 				'base_uri': 'http://ex.com/',
+				'label': 'FOAF:Person Light',
+				'description': 'Insert people here',
 				'label_property': 'http://www.w3.org/2004/02/skos/core#prefLabel',
 				'descr_property': 'http://www.w3.org/2000/01/rdf-schema#comment',
 				'lang': 'it',
