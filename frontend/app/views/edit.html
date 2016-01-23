@@ -1,3 +1,83 @@
 <div id="forms-list" ng-controller="EditController as cEdit">
+	<h3 class="page-header">
+		{{cEdit.form.label}}
+		<br />
+		<small>{{cEdit.form.description}}</small>
+	</h3>
+	<div class="form-content container">
 
+		<!-- Header -->
+		<div class="form-content-header row">
+
+			<!-- Instance Label -->
+			<div class="form-group instance-label">
+				<!--<label for="instance-uri">-->
+					<!--Instance URI-->
+				<!--</label>-->
+				<input type="url" id="instance-label"
+					   ng-model="cEdit.individual.label"
+					   class="form-control text-center input-lg"
+					   placeholder="Instance Label" />
+			</div>
+
+			<div class="b-col-8-cen form-content-header-sub">
+				<!-- Instance URI -->
+				<div class="form-group instance-uri">
+					<!--<label for="instance-uri">-->
+						<!--Instance URI-->
+					<!--</label>-->
+					<input type="url" id="instance-uri"
+						   ng-model="cEdit.individual.uri"
+						   ng-readonly="! cEdit.isNew"
+						   class="form-control text-center"
+						   placeholder="{{cEdit.form.base_uri}}..." />
+				</div>
+
+				<!-- Instance Description -->
+				<div class="form-group instance-uri">
+					<!--<label for="instance-description">-->
+						<!--Instance Description-->
+					<!--</label>-->
+					<textarea id="instance-description"
+							  class="form-control text-center" rows="2"
+							  placeholder="Instance description"
+					>{{cEdit.individual.description}}</textarea>
+
+				</div>
+
+				<!-- Instance Authors -->
+				<!--   ...   -->
+				<!--   ...   -->
+				<!--   ...   -->
+
+			</div>
+
+		</div>
+
+		<!-- Actions -->
+		<div class="form-content-actions row">
+			<button class="btn btn-success b-width-150 b-font-110" role="button"
+					ng-click="cEdit.saveIndividual()">
+				<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+				Save
+			</button>
+			<button class="btn btn-danger b-width-150 b-font-110" role="button"
+					ng-click="cEdit.deleteIndividual()">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				Delete
+			</button>
+		</div>
+
+		<hr />
+
+		<!-- Body -->
+		<div class="form-content-body row">
+			<div class="field" ng-repeat="field in cEdit.form.fields">
+				<div ng-switch="field.w_type">
+					<p ng-switch-when="text-input" style="background-color:red">{{field.label}}</p>
+					<p ng-switch-when="radio-input" style="background-color:blue">{{field.label}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
