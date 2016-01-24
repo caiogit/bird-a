@@ -5,8 +5,8 @@
  */
 
 angular.module('birdaApp')
-	.controller('EditController', ['$routeParams', 'FormService', 'IndividualsFactory',
-		function ($routeParams, FormService, IndividualsFactory) {
+	.controller('EditController', ['$route', '$routeParams', 'FormService', 'IndividualsFactory',
+		function ($route, $routeParams, FormService, IndividualsFactory) {
 			var self = this;
 
 			self.form_uri = '';
@@ -53,9 +53,18 @@ angular.module('birdaApp')
 
 			/* ----------------------------------------- */
 
+			self.discardChanges = function() {
+				//window.history.back();
+				//location.reload();
+				$route.reload();
+			};
+
+			/* ----------------------------------------- */
+
 			self.deleteIndividual = function() {
 				alert('Deleted');
 			};
+
 
 			/* ----------------------------------------- */
 

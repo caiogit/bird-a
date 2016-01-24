@@ -95,7 +95,7 @@ angular.module('birdaApp')
 
 					/**
 					 * States if the field admits multiple values
-					 * 
+					 *
 					 * @returns {boolean}
 					 */
 					self.hasMultipleValues = function() {
