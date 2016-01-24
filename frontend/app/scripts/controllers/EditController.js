@@ -51,9 +51,43 @@ angular.module('birdaApp')
 				alert('Saved');
 			};
 
+			/* ----------------------------------------- */
+
 			self.deleteIndividual = function() {
 				alert('Deleted');
 			};
+
+			/* ----------------------------------------- */
+
+			/**
+			 * Search "individual" for the specified property occurrence
+			 * in properties and returns it
+			 *
+			 * @param property String containing property uri
+			 */
+			//self.getIndividualProperty = function(property) {
+			//	self.individual.$promise.then(
+			//		function (response) {
+			//			var propertyObj = null;
+			//
+			//			console.log("OOKE", self.individual);
+			//
+			//			angular.forEach(self.individual.properties,
+			//				function (value, key) {
+			//					console.log(value.uri);
+			//					if (value.uri === property) {
+			//						propertyObj = value;
+			//					}
+			//				});
+			//			console.log("BOOKE", propertyObj);
+			//
+			//			if (!(propertyObj)) {
+			//				throw new Error('Property "' + property + '" not found!');
+			//			}
+			//
+			//			return propertyObj;
+			//		}, null);
+			//};
 
 			/* ========================================= */
 

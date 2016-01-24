@@ -1,0 +1,43 @@
+<div class="b-text-input" style="border:solid 1px #DDD">
+
+	<div class="form-group">
+		<!-- Label -->
+		<label for="{{property.uri}}">
+			{{field.label}}
+			<br />
+			<small>{{field.description}}</small>
+		</label>
+
+		<!-- Input row -->
+		<div class="form-inline"
+			 ng-repeat="value in property.values track by $index">
+
+			<input type="text"
+				   class="form-control"
+				   ng-model="property.values[$index]"
+				   name="{{property.uri}}"
+			/>
+
+			<button
+				class="btn btn-sm btn-primary"
+				ng-show="hasMultipleValues()"
+				ng-click="delValue($index)">
+					<span class="glyphicon glyphicon-remove"></span>
+			</button>
+
+		</div>
+
+		<div ng-show="hasMultipleValues()">
+			<button
+				class="btn btn-sm btn-primary b-width-60"
+				ng-click="addValue()">
+					<span class="glyphicon glyphicon-plus"></span> Row
+			</button>
+			<button
+				class="btn btn-sm btn-primary b-width-60"
+				ng-click="delAllValues()">
+					<span class="glyphicon glyphicon-remove"></span> All
+			</button>
+		</div>
+	</div>
+</div>

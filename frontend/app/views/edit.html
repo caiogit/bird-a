@@ -4,7 +4,7 @@
 		<br />
 		<small>{{cEdit.form.description}}</small>
 	</h3>
-	<div class="form-content container">
+	<form class="form-content container">
 
 		<!-- Header -->
 		<div class="form-content-header row">
@@ -14,7 +14,7 @@
 				<!--<label for="instance-uri">-->
 					<!--Instance URI-->
 				<!--</label>-->
-				<input type="url" id="instance-label"
+				<input type="text" id="instance-label"
 					   ng-model="cEdit.individual.label"
 					   class="form-control text-center input-lg"
 					   placeholder="Instance Label" />
@@ -72,12 +72,18 @@
 
 		<!-- Body -->
 		<div class="form-content-body row">
-			<div class="field" ng-repeat="field in cEdit.form.fields">
+			<div class="form-field" ng-repeat="field in cEdit.form.fields">
 				<div ng-switch="field.w_type">
-					<p ng-switch-when="text-input" style="background-color:red">{{field.label}}</p>
+					<b-text-input
+						ng-switch-when="text-input"
+						form-field="field"
+						individual="cEdit.individual">
+					</b-text-input>
+
+					<!--<p ng-switch-when="text-input" style="background-color:red">{{field.label}}</p>-->
 					<p ng-switch-when="radio-input" style="background-color:blue">{{field.label}}</p>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </div>

@@ -26,7 +26,6 @@ angular.module('birdaApp')
 				/* ========================================= */
 
 				self.getIndividual = function() {
-					console.log('Individual',individual);
 					return individual;
 				};
 
@@ -37,6 +36,7 @@ angular.module('birdaApp')
 					if (config.dummyData) {
 						clearObject(individual);
 						var defer = $q.defer();
+						individual.$promise = defer.promise;
 
 						// simulated async function
 						$timeout(function() {
@@ -45,7 +45,7 @@ angular.module('birdaApp')
 							console.log("Individual: ",individual);
 						}, config.dummyWaitTime);
 
-						return defer.promise;
+						return individual.$promise;
 
 					} else {
 
@@ -69,8 +69,10 @@ angular.module('birdaApp')
 
 				};
 
+				/* ----------------------------------------- */
+
 				function getDummyIndividual(config, individualUri, formUri) {
-					console.log(individualUri);
+					//console.log(individualUri);
 					return self.test_individuals[individualUri].individuals[0];
 				}
 

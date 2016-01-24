@@ -54,3 +54,37 @@ function clearAndSetObject(obj, newObj, deepCopy) {
 		angular.extend(obj, newObj);
 	}
 }
+
+/**
+ * Search "individual" for the specified property occurrence
+ * in properties and returns it
+ *
+ * @param individual Individual object returned by the IndividualService
+ * @param propertyUri String containing property uri
+ */
+function getIndividualProperty($q, individual, propertyUri) {
+	var defer = $q.defer();
+
+	individual.$promise.then(
+		function (response) {
+			var propertyObj = null;
+
+			angular.forEach(individual.properties,
+				function (value, key) {
+					if (value.uri === propertyUri) {
+						propertyObj = value;
+					}
+				});
+			console.log("Property "+propertyUri, propertyObj);
+
+			if (!(propertyObj)) {
+				throw new Error('Property "' + propertyUri + '" not found!');
+			}
+
+			defer.resolve(propertyObj);
+
+		}, null);
+
+	console.log('Property premise',defer.promise);
+	return defer.promise;
+}

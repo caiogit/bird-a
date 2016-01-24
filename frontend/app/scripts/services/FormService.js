@@ -25,7 +25,6 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.getForm = function() {
-				console.log('Forms',form);
 				return form;
 			};
 
@@ -97,7 +96,7 @@ angular.module('birdaApp')
 						'label': 'Cognome',
 						'description': 'Usare un campo diverso per ogni cognome',
 						'placeholder': 'Cognome della persona (ad es. "Rossi")',
-						'at_least': 1,
+						'at_least': 2,
 						'validation': {
 							'max_length':25
 						}
