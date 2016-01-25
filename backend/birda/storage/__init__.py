@@ -12,17 +12,31 @@ import abc
 import rdflib
 import birda.utils.ascii_utils
 
+RDF =   rdflib.namespace.RDF
+RDFS =  rdflib.namespace.RDFS
+XSD =   rdflib.namespace.XSD
+FOAF =  rdflib.namespace.FOAF
+SKOS =  rdflib.namespace.SKOS
+CO =    rdflib.Namespace("http://purl.org/co/")
+BIRDA = rdflib.Namespace("http://w3id.org/ontologies/bird-a/")
+BINST = rdflib.Namespace("http://pippo.it/birda-data/")
+TINST = rdflib.Namespace("http://pippo.it/target-data/")
+
 NAMESPACES = {
-	'rdf': rdflib.namespace.RDF,
-	'rdfs': rdflib.namespace.RDFS,
-	'xsd': rdflib.namespace.XSD,
-	'foaf': rdflib.namespace.FOAF,
-	'skos': rdflib.namespace.SKOS,
-	'co': rdflib.Namespace("http://purl.org/co/"),
-	'birda': rdflib.Namespace("http://w3id.org/ontologies/bird-a/"),
-	'binst': rdflib.Namespace("http://pippo.it/birda-data/"),
-	'tinst': rdflib.Namespace("http://pippo.it/target-data/")
+	'rdf':   RDF,
+	'rdfs':  RDFS,
+	'xsd':   XSD,
+	'foaf':  FOAF,
+	'skos':  SKOS,
+	'co':    CO,
+	'birda': BIRDA,
+	'binst': BINST,
+	'tinst': TINST
 }
+
+_NAMESPACES_ORDERED_KEYS = sorted(NAMESPACES.keys(), (lambda x,y: len(x)-len(y)), reverse=True )
+
+import utils
 
 # ============================================================================ #
 
@@ -78,32 +92,13 @@ class Results(object):
 		
 		# Order namespaces from longest to shortest (in order to match first
 		# full path instead of partial path) 
-		namespaces_ordered = sorted(self.namespaces.keys(), (lambda x,y: len(x)-len(y)), reverse=True )
+		namespaces_ordered_keys = sorted(self.namespaces.keys(), (lambda x,y: len(x)-len(y)), reverse=True )
 		
 		l = []
 		for res in self.sparql_results.bindings:
 			d = {}
 			for k in self.getFields():
-				if type(res[k]) == type(rdflib.term.URIRef('')):
-					uri = str(res[k])
-					
-					# Namespaces substitution
-					for ns in namespaces_ordered:
-						if uri.startswith(str(self.namespaces[ns])):
-							uri = uri.replace(str(self.namespaces[ns]), ns+':')
-							break
-					
-					d[str(k)] = '<'+uri+'>'
-				
-				else:
-					if res[k].datatype:
-						datatype = str(res[k].datatype).split('#')[-1]
-						d[str(k)] = "%s^^%s" % (res[k].value, datatype)
-					else:
-						if res[k].language:
-							d[str(k)] = '"%s"@%s' % (res[k].value, res[k].language)
-						else:
-							d[str(k)] = '"%s"' % (res[k].value)
+				d[str(k)] = utils.prettify(res[k], namespaces=self.namespaces, namespaces_ordered_keys=namespaces_ordered_keys)
 				
 			l += [ d ]
 		
