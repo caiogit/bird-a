@@ -6,7 +6,7 @@ import time
 import rdflib
 import pprint
 
-import storage
+import __init__ as storage
 
 # ============================================================================ #
 
