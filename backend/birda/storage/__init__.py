@@ -7,6 +7,7 @@
 # - Lock acquisition with a decorator: http://stackoverflow.com/questions/489720/what-are-some-common-uses-for-python-decorators/490090#490090
 # - Python thread synchronization guide: http://www.laurentluce.com/posts/python-threads-synchronization-locks-rlocks-semaphores-conditions-events-and-queues/
 
+import os
 import collections
 import abc
 import rdflib
@@ -37,6 +38,16 @@ NAMESPACES = {
 _NAMESPACES_ORDERED_KEYS = sorted(NAMESPACES.keys(), (lambda x,y: len(x)-len(y)), reverse=True )
 
 import utils
+
+# --------------------------------- #
+
+# "Fake settings" for testing purpose
+FAKE_DB_PATH = os.path.dirname( os.path.realpath(__file__) ) + "/../../../db"
+FAKE_SETTINGS = {
+	'birda_storage_type': 'file',
+	'birda_storage_file_birda_db': FAKE_DB_PATH + '/birda.turtle',
+	'birda_storage_file_indiv_db': FAKE_DB_PATH + '/indiv.turtle',
+}
 
 # ============================================================================ #
 
@@ -76,7 +87,11 @@ class Results(object):
 		
 		l = []
 		for res in self.sparql_results.bindings:
-			l += [ dict(res) ]
+			d = {}
+			for k in self.getFields():
+				d[str(k)] = res[k]
+				
+			l += [ d ]
 		
 		return l
 
@@ -126,7 +141,7 @@ class Connection(object):
 	__metaclass__  = abc.ABCMeta
 
 	@abc.abstractmethod
-	def __init__(self, settings, dataset='', namespaces={}):
+	def __init__(self, settings, dataset='', namespaces={}, verbose=False):
 		pass
 
 	@abc.abstractmethod
@@ -178,7 +193,7 @@ class Storage(object):
 	# ----------------------------------------------------------------------- #
 
 	@staticmethod
-	def connect(settings, dataset='', namespaces=NAMESPACES):
+	def connect(settings, dataset='', namespaces=NAMESPACES, verbose=False):
 		"""
 		Creates a connection to a sparql endpoint using "setting" parameters
 
@@ -187,7 +202,7 @@ class Storage(object):
 
 		if settings['birda_storage_type'] == 'file':
 			import file_storage
-			return file_storage.FileConnection(settings, dataset=dataset, namespaces=namespaces)
+			return file_storage.FileConnection(settings, dataset=dataset, namespaces=namespaces, verbose=verbose)
 		else:
 			raise NotImplementedError("Storage type unknown")
 

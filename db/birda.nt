@@ -1,0 +1,72 @@
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasLabel> "FOAF:Person"@en .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasLabel> "FOAF:Person"@it .
+<http://pippo.it/birda-data/Gender-TextInput> <http://w3id.org/ontologies/bird-a/atMost> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/co/List> .
+<http://pippo.it/birda-data/PersonNormal-Form-local-name-list> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/co/List> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonNormal-Form-el3> .
+<http://pippo.it/birda-data/FamilyName-TextInput> <http://w3id.org/ontologies/bird-a/hasLabel> "Family Name"@en .
+<http://pippo.it/birda-data/FamilyName-TextInput> <http://w3id.org/ontologies/bird-a/hasLabel> "Cognome"@it .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el1> .
+<http://pippo.it/birda-data/PersonNormal-Form-el3> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/Gender-TextInput> .
+<http://pippo.it/birda-data/PersonLight-Form-el1> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/GivenName-TextInput> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonLight-Form-el2> .
+<http://pippo.it/birda-data/Gender-TextInput> <http://w3id.org/ontologies/bird-a/hasLabel> "Sesso"@it .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://w3id.org/ontologies/bird-a/hasLabel> "Sesso"@it .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonNormal-Form-el4> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/co/List> .
+<http://pippo.it/birda-data/PersonNormal-Form-el1> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/GivenName-TextInput> .
+<http://pippo.it/birda-data/GivenName-TextInput> <http://w3id.org/ontologies/bird-a/hasLabel> "Nome"@it .
+<http://pippo.it/birda-data/PersonLight-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonLight-Form-el3> .
+<http://pippo.it/birda-data/GivenName-TextInput> <http://w3id.org/ontologies/bird-a/mapsProperty> <http://xmlns.com/foaf/0.1/givenName> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/usesPropertyForLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> .
+<http://pippo.it/birda-data/PersonNormal-Form-el2> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/FamilyName-TextInput> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/mapsType> <http://xmlns.com/foaf/0.1/Person> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasDescription> "Utilizzato per inserire attributi di FOAF:Person"@it .
+<http://pippo.it/birda-data/FamilyName-TextInput> <http://w3id.org/ontologies/bird-a/atLeast> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://pippo.it/birda-data/PersonLight-Form-el2> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/FamilyName-TextInput> .
+<http://pippo.it/birda-data/FamilyName-TextInput> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://w3id.org/ontologies/bird-a/TextInput> .
+<http://pippo.it/birda-data/GivenName-TextInput> <http://w3id.org/ontologies/bird-a/hasLabel> "Name"@en .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasBaseNameList> <http://pippo.it/birda-data/PersonNormal-Form-local-name-list> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el1> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/GivenName-TextInput> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/hasTokenSeparator> "-" .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/hasDescription> "Utilizzato per inserire solo gli attributi minimali di FOAF:Person"@it .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/hasDescription> "Used to insert only the minimal FOAF:Person attributes"@en .
+<http://pippo.it/birda-data/PersonLight-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonLight-Form-el1> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasBaseIRI> "http://pippo.it/target-data/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://w3id.org/ontologies/bird-a/Form> .
+<http://pippo.it/birda-data/GivenName-TextInput> <http://w3id.org/ontologies/bird-a/atLeast> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el2> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/FamilyName-TextInput> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el2> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/FamilyName-TextInput> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://purl.org/co/firstItem> <http://pippo.it/birda-data/PersonNormal-Form-el1> .
+<http://pippo.it/birda-data/GivenName-TextInput> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://w3id.org/ontologies/bird-a/TextInput> .
+<http://pippo.it/birda-data/PersonNormal-Form-local-name-list> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el1> .
+<http://pippo.it/birda-data/PersonLight-Form-el3> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/Gender-TextInput> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/co/List> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/usesPropertyForDescription> <http://www.w3.org/2000/01/rdf-schema#comment> .
+<http://pippo.it/birda-data/Gender-TextInput> <http://w3id.org/ontologies/bird-a/mapsProperty> <http://xmlns.com/foaf/0.1/gender> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/hasLabel> "FOAF:Person Light"@en .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/usesPropertyForDescription> <http://www.w3.org/2000/01/rdf-schema#comment> .
+<http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el1> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/GivenName-TextInput> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/hasBaseIRI> "http://pippo.it/target-data/"^^<http://www.w3.org/2001/XMLSchema#anyURI> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonNormal-Form-el1> .
+<http://pippo.it/birda-data/FamilyName-TextInput> <http://w3id.org/ontologies/bird-a/mapsProperty> <http://xmlns.com/foaf/0.1/familyName> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://w3id.org/ontologies/bird-a/Form> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://w3id.org/ontologies/bird-a/SubForm> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://purl.org/co/firstItem> <http://pippo.it/birda-data/PersonLight-Form-el1> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://w3id.org/ontologies/bird-a/mapsType> <http://xmlns.com/foaf/0.1/Person> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonNormal-Form-el2> .
+<http://pippo.it/birda-data/PersonNormal-Form-local-name-list> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el2> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://purl.org/co/item> <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el2> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasTokenSeparator> "-" .
+<http://pippo.it/birda-data/PersonNormal-Form-local-name-list> <http://purl.org/co/firstItem> <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el1> .
+<http://pippo.it/birda-data/PersonNormal-Form> <http://w3id.org/ontologies/bird-a/hasDescription> "Used to insert FOAF:Person attributes"@en .
+<http://pippo.it/birda-data/Gender-TextInput> <http://w3id.org/ontologies/bird-a/hasLabel> "Gender"@en .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/mapsType> <http://xmlns.com/foaf/0.1/Person> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://w3id.org/ontologies/bird-a/hasLabel> "Gender"@en .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/hasLabel> "FOAF:Person Minimale"@it .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://w3id.org/ontologies/bird-a/mapsProperty> <http://xmlns.com/foaf/0.1/knows> .
+<http://pippo.it/birda-data/PersonLight-Form> <http://w3id.org/ontologies/bird-a/usesPropertyForLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> .
+<http://pippo.it/birda-data/PersonNormal-Form-el4> <http://purl.org/co/itemContent> <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> .
+<http://pippo.it/birda-data/Gender-TextInput> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://w3id.org/ontologies/bird-a/TextInput> .
+<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> <http://purl.org/co/firstItem> <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el1> .
+

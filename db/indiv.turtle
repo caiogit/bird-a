@@ -1,0 +1,31 @@
+@prefix ns1: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://pippo.it/target-data/maria-grazia-rivera> a ns1:Person ;
+    ns1:familyName "Rivera"@it ;
+    ns1:gender "Femmina"@it ;
+    ns1:givenName "Grazia"@it,
+        "Maria"@it ;
+    ns1:knows <http://pippo.it/target-data/iy6pre>,
+        <http://pippo.it/target-data/pierluigi-mariuolo> .
+
+<http://pippo.it/target-data/pierluigi-mariuolo> a ns1:Person ;
+    ns1:familyName "Mariuolo"@it ;
+    ns1:gender "Maschio"@it ;
+    ns1:givenName "Pierluigi"@it ;
+    ns1:knows <http://pippo.it/target-data/iy6pre>,
+        <http://pippo.it/target-data/r7b0m5> .
+
+<http://pippo.it/target-data/r7b0m5> a ns1:Person ;
+    ns1:familyName "Verdi"@it ;
+    ns1:givenName "Anselmo"@it,
+        "Edoardo"@it .
+
+<http://pippo.it/target-data/iy6pre> a ns1:Person ;
+    ns1:familyName "Rossi"@it ;
+    ns1:gender "Maschio"@it ;
+    ns1:givenName "Mario"@it .
+

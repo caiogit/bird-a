@@ -17,12 +17,16 @@ class FileConnection(storage.Connection):
 	dataset = ''
 	namespaces = {}
 	
-	def __init__(self, settings, dataset='', namespaces={}):
+	verbose = False
+	
+	def __init__(self, settings, dataset='', namespaces={}, verbose=False):
 		assert dataset in ('birda','indiv')
 		
 		self.settings = settings
 		self.dataset = dataset
 		self.namespaces = namespaces
+		
+		self.verbose = verbose
 		
 		self.rdf = rdflib.Graph()
 		
@@ -50,11 +54,13 @@ class FileConnection(storage.Connection):
 		results = self.rdf.query(query, initNs=self.namespaces)
 		elapsed_time = time.time() - start_time
 		
-		print dir(results)
-		print results.vars
+		bResults = storage.Results(query, results, elapsed_time, namespaces=self.namespaces)
 		
-		return storage.Results(query, results, elapsed_time, namespaces=self.namespaces)
-
+		if self.verbose:
+			bResults.printQueryResults()
+		
+		return bResults
+		
 	# ----------------------------------------------------------------------- #
 
 	def update(self, query):
@@ -79,17 +85,10 @@ class FileConnection(storage.Connection):
 # ================================================================================================ #
 
 if __name__ == '__main__':
-	db_path = os.path.dirname( os.path.realpath(__file__) ) + "/../../../db"
-	settings = {
-		'birda_storage_type': 'file',
-		'birda_storage_file_birda_db': db_path + '/birda.turtle',
-		'birda_storage_file_indiv_db': db_path + '/indiv.nt',
-	}
-	conn_birda = storage.Storage.connect(settings, dataset='birda')
-	results = conn_birda.query("""
+	bConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='birda', verbose=True)
+	results = bConn.query("""
 	select ?s ?p ?o
 	where {
 		?s ?p ?o
 	}
 	""")
-	results.printQueryResults()
