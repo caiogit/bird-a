@@ -231,6 +231,8 @@ def make_co_list(rdf, list_element, elements, detached_list_property=None, detac
 		if c == len(elements):
 			#rdf.add((list_element, CO.lastItem, el_ref))
 			pass
+		
+		prev_el_ref = el_ref
 
 # ---------------------------------------------------------------------------- #
 
