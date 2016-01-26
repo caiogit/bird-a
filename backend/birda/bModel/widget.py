@@ -57,13 +57,6 @@ class Widget(object):
 		
 		if self.hierarchical:
 			self.descendants = self._get_descendants()
-			print repr(self.descendants)
-		
-		print
-		print self.rdfw.dumps('turtle')
-		print
-		print self
-		print
 		
 	# --------------------------------- #
 	
@@ -101,7 +94,7 @@ class Widget(object):
 	# --------------------------------- #
 	
 	def __str__(self, indentation_level=0):
-		indent = '   '*indentation_level
+		indent = '    '*indentation_level
 		s = []
 		s += [indent + '-'*50]
 		s += [indent + ' %s (%s)' % (self.type_name, prettify(self.uri))]
@@ -110,11 +103,12 @@ class Widget(object):
 		for k in self.attributes.keys():
 			if ( self.attributes[k] ) and ( type(self.attributes[k]) in [type([]), type(())] ):
 				for v in self.attributes[k]:
-					s += [indent + ' > %s: %s'%(k,v) ]
+					s += [indent + '    > %s: %s'%(k,v) ]
 			else:
-				s += [indent + ' > %s: %s'%(k,self.attributes[k]) ]
+				s += [indent + '    > %s: %s'%(k,self.attributes[k]) ]
 		
 		for des in self.descendants:
+			s += ['']
 			s += [ des.__str__(indentation_level=indentation_level+1) ]
 		
 		return '\n'.join(s)
@@ -189,5 +183,9 @@ if __name__ == '__main__':
 # 			actionable=True, hierarchical=True)
 	
 	w = Widget.create_instance(bConn, getattr(storage.BINST,'PersonNormal-Form'))
-	
+	print
+	print w.rdfw.dumps('turtle')
+	print
+	print w
+	print
 	
