@@ -42,6 +42,8 @@ NAMESPACES = {
 
 _NAMESPACES_ORDERED_KEYS = sorted(NAMESPACES.keys(), (lambda x,y: len(x)-len(y)), reverse=True )
 
+SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
+
 import utils
 
 # --------------------------------- #
@@ -143,6 +145,10 @@ class Results(object):
 # ============================================================================ #
 
 class Connection(object):
+	"""
+	Abstract object wrapping all functionalities relative to db interaction.
+	"""
+
 	__metaclass__  = abc.ABCMeta
 
 	@abc.abstractmethod
@@ -170,7 +176,31 @@ class Connection(object):
 		"""
 
 		raise NotImplementedError("This method should be implemented by subclasses")
+	
+	# ----------------------------------------------------------------------- #
+	
+	@abc.abstractmethod
+	def commit(self):
+		"""
+		Commits updates and deletes to db
 
+		:return: None
+		"""
+		
+		raise NotImplementedError("This method should be implemented by subclasses")
+	
+	# ----------------------------------------------------------------------- #
+	
+	@abc.abstractmethod
+	def rollback(self):
+		"""
+		Rollback updates and deletes and restore the initial status
+
+		:return: None
+		"""
+		
+		raise NotImplementedError("This method should be implemented by subclasses")
+	
 	# ----------------------------------------------------------------------- #
 
 	@abc.abstractmethod
@@ -184,10 +214,65 @@ class Connection(object):
 
 # ============================================================================ #
 
+class RDFWrapper(object):
+	"""
+	Object that wraps rdflib.Graph object.
+	
+	It is intended to accumulate rdf statements and dump them in several
+	formats.
+	"""
+	
+	rdf = None
+	
+	# ----------------------------------------------------------------------- #
+	
+	def __init__(self):
+		self.rdf = rdflib.Graph()
+	
+	# ----------------------------------------------------------------------- #
+	
+	def add(self, s, p, o):
+		"""
+		Add the rdf statement to the rdf container
+		
+		:param s: subject of the rdf statement
+		:param p: predicate of the rdf statement
+		:param o: object of the rdf statement
+		:return: None
+		"""
+		
+		assert type(s) in (type(''),type(u'')) or type(s) == type(rdflib.term.URIRef(''))
+		assert type(p) in (type(''),type(u'')) or type(p) == type(rdflib.term.URIRef(''))
+		
+		if type(s) in (type(''),type(u'')):
+			s = rdflib.term.URIRef(s)
+		if type(p) in (type(''),type(u'')):
+			p = rdflib.term.URIRef(p)
+		
+		o = py2rdf(o)
+		
+		self.rdf.add(s,p,o)
+		
+	# ----------------------------------------------------------------------- #
+	
+	def dumps(output_format):
+		"""
+		Dump the rdf graph into a string
+		
+		:param output_format: Format of the dumped rdf
+		:return: String rapresentation of the rdf graph
+		"""
+		
+		assert output_format in SUPPORTED_OUTPUT_TYPES
+		
+		return rdf.serialize(format=output_format)
+		
+
+# ============================================================================ #
+
 class Storage(object):
 	"""
 	Storage abstract class
-
 	"""
 
 	# ----------------------------------------------------------------------- #

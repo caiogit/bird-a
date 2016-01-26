@@ -43,6 +43,22 @@ def rdf2py(value):
 		return value
 	
 	raise ValueError('Object "%s" not supported!' % type(value))
+
+# ---------------------------------------------------------------------------- #
+
+def py2rdf(value):
+	"""
+	Convert the passed python object in the relative rdf counterpart.
+	Refers to this tab: http://rdflib.readthedocs.org/en/latest/rdf_terms.html#python-support
+	
+	:param value: python object
+	:return: rfdlib object
+	"""
+	
+	if type(value) in [type(rdflib.term.URIRef(u'')), type(rdflib.term.Literal(u''))]:
+		return value
+	
+	return rdflib.term.Literal(value)
 	
 # ---------------------------------------------------------------------------- #
 
@@ -84,7 +100,7 @@ def prettify(element,
 def test_prettify(element):
 	print "%r -> %s" % (element,prettify(element))
 
-# ---------------------------------------------------------------------------- #
+# ============================================================================ #
 
 def get_types(conn, subject_uri, lexical=False):
 	"""
@@ -135,6 +151,46 @@ def get_property(conn, subject_uri, property_uri, lexical=False):
 
 # ---------------------------------------------------------------------------- #
 
+def test_classes():
+	
+	class A(object):
+		a = 1
+		c = 1
+		def get_a(self):
+			print self.a
+		def get_c(self):
+			print self.c
+		def set_c(self):
+			print "A.set_c"
+			self.c = c*10
+	
+	class B(A):
+		b = 2
+		c = 3
+		def get_b(self):
+			print self.b
+		def set_c(self):
+			print "B.set_c"
+			self.c = self.c*100
+			#super(A,self).c = super(A,self).c*100
+	
+	b = B()
+	b.get_a()
+	b.get_b()
+	print dir(b)
+	b.a = 4
+	b.get_a()
+	print dir(b)
+	b.get_c()
+	b.set_c()
+	b.get_c()
+	print dir(super(A,b))
+	super(A,b).get_c()
+	super(A,b).set_c()
+	super(A,b).get_c()
+
+# ---------------------------------------------------------------------------- #
+
 if __name__ == '__main__':
 	bConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='birda', verbose=True)
 	iConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='indiv', verbose=True)
@@ -161,20 +217,6 @@ if __name__ == '__main__':
 	print '-------------------------------------'
 	print
 	
-	class A(object):
-		a = 1
-		def get_a(self):
-			print self.a
+	test_classes()
+
 	
-	class B(A):
-		b = 2
-		def get_b(self):
-			print self.b
-	
-	b = B()
-	b.get_a()
-	b.get_b()
-	print dir(b)
-	b.a = 3
-	b.get_a()
-	print dir(b)
