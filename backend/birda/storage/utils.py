@@ -160,3 +160,21 @@ if __name__ == '__main__':
 	print types
 	print '-------------------------------------'
 	print
+	
+	class A(object):
+		a = 1
+		def get_a(self):
+			print self.a
+	
+	class B(A):
+		b = 2
+		def get_b(self):
+			print self.b
+	
+	b = B()
+	b.get_a()
+	b.get_b()
+	print dir(b)
+	b.a = 3
+	b.get_a()
+	print dir(b)
