@@ -1,6 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
+
 import sys
 import os
 import rdflib
@@ -9,6 +15,8 @@ import tempfile
 
 SUPPORTED_INPUT_TYPES = ['xml', 'pretty-xml', 'nt', 'n3', 'turtle']
 SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
+
+# ============================================================================ #
 
 def load_ontology(input_file):
 

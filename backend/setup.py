@@ -1,3 +1,9 @@
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
+
 import os
 import sys
 

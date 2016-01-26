@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
+
 from sqlalchemy import (
 	Table,
 	Column,

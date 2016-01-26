@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-Created by caio on 08/01/16.
-"""
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
 
 import json
 import colander

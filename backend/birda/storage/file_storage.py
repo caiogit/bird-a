@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
+
 import time
 import rdflib
-import pprint
 
 import __init__ as storage
 

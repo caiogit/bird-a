@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-Created by caio on 25/01/16.
-"""
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
 
 import rdflib
 import __init__ as storage
 from rdflib.namespace import RDF, RDFS, XSD
 
-# ---------------------------------------------------------------------------- #
+# ============================================================================ #
 
 def rdf2py(value):
 	"""

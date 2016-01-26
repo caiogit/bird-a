@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-Created by caio on 05/01/16.
-"""
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
 
 import os
 import glob
@@ -12,7 +14,10 @@ import glob
 services = glob.glob(os.path.dirname(__file__)+"/*.py")
 __all__ = [ os.path.basename(f)[:-3] for f in services]
 
-# ---------------------------------------------------------------------------- #
+# Patch for unicode strings (to be removed in Python3)
+__all__ = [n.encode('ascii') for n in __all__]
+
+# ============================================================================ #
 
 def request2dict(request, function, extended=False):
 	ret = {}

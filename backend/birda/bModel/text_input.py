@@ -1,6 +1,17 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
+
 import widget
 
-class ActionableWidget(widget.Widget):
+# ============================================================================ #
+
+class TextInputWidget(widget.Widget):
 	
 	def __init__(self):
 		pass

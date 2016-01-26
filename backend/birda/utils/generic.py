@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-'''
-Created on 23/nov/2014
-
-@author: caio
-'''
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
 
 import os
 import sys
 
-# -------------------------------------------------------------------- #
+# ============================================================================ #
 
 def import_file(full_path_to_module, dryrun=False):
 	'''

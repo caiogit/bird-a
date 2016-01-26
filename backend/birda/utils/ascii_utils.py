@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-'''
-Created on 22/nov/2014
-
-@author: caio
-'''
+# -------------------------------------- #
+# Enables python3-like strings handling
+from __future__ import unicode_literals
+str = unicode
+# -------------------------------------- #
 
 import sys
 import select
