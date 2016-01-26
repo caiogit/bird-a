@@ -228,6 +228,8 @@ class RDFWrapper(object):
 	
 	def __init__(self):
 		self.rdf = rdflib.Graph()
+		for ns in NAMESPACES.keys():
+			self.rdf.bind(ns, NAMESPACES[ns])
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -249,13 +251,13 @@ class RDFWrapper(object):
 		if type(p) in (type(''),type(u'')):
 			p = rdflib.term.URIRef(p)
 		
-		o = py2rdf(o)
+		o = utils.py2rdf(o)
 		
-		self.rdf.add(s,p,o)
+		self.rdf.add((s,p,o))
 		
 	# ----------------------------------------------------------------------- #
 	
-	def dumps(output_format):
+	def dumps(self, output_format):
 		"""
 		Dump the rdf graph into a string
 		
@@ -265,7 +267,7 @@ class RDFWrapper(object):
 		
 		assert output_format in SUPPORTED_OUTPUT_TYPES
 		
-		return rdf.serialize(format=output_format)
+		return self.rdf.serialize(format=output_format)
 		
 
 # ============================================================================ #

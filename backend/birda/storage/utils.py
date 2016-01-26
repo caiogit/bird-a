@@ -9,7 +9,7 @@ str = unicode
 
 import rdflib
 import __init__ as storage
-from rdflib.namespace import RDF, RDFS, XSD
+from __init__ import RDF, RDFS, XSD, CO, BIRDA
 
 # ============================================================================ #
 
@@ -74,7 +74,7 @@ def prettify(element,
 	:return: prettified string
 	"""
 	
-	if type(element) == type(rdflib.term.URIRef('')):
+	if type(element) in [ type(''), type(u''), type(rdflib.term.URIRef('')) ]:
 		uri = str(element)
 		
 		# Namespaces substitution
@@ -102,7 +102,7 @@ def test_prettify(element):
 
 # ============================================================================ #
 
-def get_types(conn, subject_uri, lexical=False):
+def get_types(conn, subject_uri, lexical=False, rdfw=None):
 	"""
 	Get individual classes (related with rdf:type)
 	
@@ -113,7 +113,7 @@ def get_types(conn, subject_uri, lexical=False):
 	:return: List of URIRef
 	"""
 
-	values = get_property(conn, subject_uri, getattr(storage.RDF,'type'), lexical=lexical)
+	values = get_property(conn, subject_uri, getattr(storage.RDF,'type'), lexical=lexical, rdfw=rdfw)
 	
 	if lexical:
 		return values
@@ -122,15 +122,17 @@ def get_types(conn, subject_uri, lexical=False):
 
 # ---------------------------------------------------------------------------- #
 
-def get_property(conn, subject_uri, property_uri, lexical=False):
+def get_property(conn, subject_uri, property_uri, lexical=False, rdfw=None, single=False):
 	"""
 	Get property value for the given subject
 	
-	:param conn: 
+	:param conn: RDF connection
 	:param subject_uri: 
-	:param property_uri:
+	:param property_uri: 
 	:param lexical: If true the original rdflib object is returned, otherwise
 		the best python object that fits the type is returned
+	:param rdfw: RDFWrapper object
+	:param single: if True returns a single value or None if not present, if False an array
 	:return: List of values relative to this property
 	"""
 	
@@ -143,11 +145,55 @@ def get_property(conn, subject_uri, property_uri, lexical=False):
 	
 	dlist = results.getDictList()
 	
-	if lexical:
-		return [ d['value'] for d in dlist ]
-	else:
-		return [ rdf2py(d['value']) for d in dlist ]
+	if rdfw:
+		for d in dlist:
+			rdfw.add(subject_uri, property_uri, d['value'])
 	
+	if lexical:
+		ret = [ d['value'] for d in dlist ]
+	else:
+		ret = [ rdf2py(d['value']) for d in dlist ]
+	
+	if single:
+		if len(ret) > 1:
+			raise Exception('Error! Found more than one value (vars: %s)' % vars())
+		if ret:
+			ret = ret[0]
+		else:
+			ret = None
+	
+	return ret
+
+# ---------------------------------------------------------------------------- #
+
+def get_co_list(conn, list_node, rdfw=None):
+	"""
+	Get uri elements of a co:List
+	
+	:param conn: RDF connection
+	:param list_node: URI of the co:List element
+	:param rdfw: Object RDFWrapper
+	
+	:return: List of string URIs
+	"""
+	
+	el_list = []
+	
+	current_element = get_property(conn, list_node, CO.firstItem, rdfw=rdfw, single=True)
+	
+	while current_element != None:
+		elem = get_property(conn, current_element, CO.itemContent, rdfw=rdfw, single=True)
+		if not elem:
+			raise ValueError('Elemento non trovato! (%s)' % vars())
+		el_list += [elem]
+		
+		current_element = get_property(conn, current_element, CO.nextItem, rdfw=rdfw, single=True)
+			
+	# Not useful, it onlty populates rdfw
+	if rdfw:
+		current_element = get_property(conn, list_node, CO.item, rdfw=rdfw)
+	
+	return el_list
 
 # ---------------------------------------------------------------------------- #
 
@@ -217,6 +263,12 @@ if __name__ == '__main__':
 	print '-------------------------------------'
 	print
 	
-	test_classes()
+	el_list = get_co_list(bConn, getattr(storage.BINST,'PersonLight-Form'), rdfw=None)
+	print '-------------------------------------'
+	for el in el_list: print el
+	print '-------------------------------------'
+	print
+	
+	#test_classes()
 
 	
