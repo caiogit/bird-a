@@ -196,6 +196,7 @@ FormFull_example = json.loads("""
 			"property": "http://xmlns.com/foaf/0.1/givenName",
 			"label": "Nome",
 			"description": "Usare un campo diverso per ogni nome",
+			"default": "",
 			"placeholder": "Nome della persona (ad es. \\\"Pino\\\")",
 			"at_least": 1,
 			"validation": {
@@ -208,6 +209,7 @@ FormFull_example = json.loads("""
 			"property": "http://xmlns.com/foaf/0.1/familyName",
 			"label": "Cognome",
 			"description": "Usare un campo diverso per ogni cognome",
+			"default": "",
 			"placeholder": "Cognome della persona (ad es. \\\"Rossi\\\")",
 			"at_least": 1,
 			"validation": {
@@ -239,7 +241,8 @@ FormFull_example = json.loads("""
 					"label": "Non specificato",
 					"description": "",
 					"type": "xsd:string",
-					"value": "http://w3id.com/gender-ontology/not-specified"
+					"value": "http://w3id.com/gender-ontology/not-specified",
+					"default": true
 				}
 			],
 			"validation": {
@@ -263,6 +266,7 @@ FormFull_example = json.loads("""
 					"property": "http://xmlns.com/foaf/0.1/givenName",
 					"label": "Nome",
 					"description": "Usare un campo diverso per ogni nome",
+					"default": "",
 					"placeholder": "Nome della persona (ad es. \\\"Pino\\\")",
 					"at_least": 1,
 					"validation": {
@@ -275,6 +279,7 @@ FormFull_example = json.loads("""
 					"property": "http://xmlns.com/foaf/0.1/familyName",
 					"label": "Cognome",
 					"description": "Usare un campo diverso per ogni cognome",
+					"default": "",
 					"placeholder": "Cognome della persona (ad es. \\\"Rossi\\\")",
 					"at_least": 1,
 					"validation": {

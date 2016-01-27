@@ -83,6 +83,7 @@ angular.module('birdaApp')
 						'property': 'http://xmlns.com/foaf/0.1/givenName',
 						'label': 'Nome',
 						'description': 'Usare un campo diverso per ogni nome',
+						'default': '',
 						'placeholder': 'Nome della persona (ad es. "Pino")',
 						'at_least': 1,
 						'validation': {
@@ -95,6 +96,7 @@ angular.module('birdaApp')
 						'property': 'http://xmlns.com/foaf/0.1/familyName',
 						'label': 'Cognome',
 						'description': 'Usare un campo diverso per ogni cognome',
+						'default': 'Labislacco',
 						'placeholder': 'Cognome della persona (ad es. "Rossi")',
 						'at_least': 1,
 						'at_most': 1,
@@ -127,7 +129,8 @@ angular.module('birdaApp')
 								'label': 'Non specificato',
 								'description': '',
 								'type': 'xsd:string',
-								'value': 'http://w3id.com/gender-ontology/not-specified'
+								'value': 'http://w3id.com/gender-ontology/not-specified',
+								'default': true
 							}
 						],
 						'validation': {
@@ -151,6 +154,7 @@ angular.module('birdaApp')
 								'property': 'http://xmlns.com/foaf/0.1/givenName',
 								'label': 'Nome',
 								'description': 'Usare un campo diverso per ogni nome',
+								'default': '',
 								'placeholder': 'Nome della persona (ad es. "Pino")',
 								'at_least': 1,
 								'validation': {
@@ -163,6 +167,7 @@ angular.module('birdaApp')
 								'property': 'http://xmlns.com/foaf/0.1/familyName',
 								'label': 'Cognome',
 								'description': 'Usare un campo diverso per ogni cognome',
+								'default': '',
 								'placeholder': 'Cognome della persona (ad es. "Rossi")',
 								'at_least': 1,
 								'validation': {

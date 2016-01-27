@@ -65,7 +65,8 @@ angular.module('birdaApp')
 						if (typeof index === 'undefined') {
 							self.property.values.push(value);
 						} else {
-
+							// TODO
+							throw Error('Not implemented');
 						}
 					};
 
@@ -99,7 +100,7 @@ angular.module('birdaApp')
 					 * @returns {boolean}
 					 */
 					self.hasMultipleValues = function() {
-						if (self.field.at_most != 1) {
+						if (self.field.at_most !== 1) {
 							return true;
 						} else {
 							return false;
