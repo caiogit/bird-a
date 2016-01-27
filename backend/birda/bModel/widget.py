@@ -147,8 +147,6 @@ class Widget(object):
 		j = collections.OrderedDict()
 		j['wideget_uri'] = self.uri
 		j['w_type'] = self.type_name
-		print self.attributes
-		print self.attributes.has_key('maps_property')
 		if self.attributes['maps_property']:
 			j['property'] = self.attributes['maps_property']
 		j['label'] = self.get_label(lang)

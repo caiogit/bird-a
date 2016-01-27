@@ -81,7 +81,7 @@ FormSimple_example = json.loads("""
 			"uri": "http://www.birda.it/fuff",
 			"type": "http://xmlns.com/foaf/0.1/Fuff",
 			"label": "FUFF Object",
-			"description": "Nothing much here"
+			"description": ""
 		}
 	]
 }

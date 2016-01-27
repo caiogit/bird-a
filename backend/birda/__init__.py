@@ -88,7 +88,7 @@ def main(global_config, **settings):
 	
 	# Activate and set application wide services (singletons)
 	config.include('pyramid_services')
-	config.register_service(FormFactory(settings), iface=IFormFactory)
+	config.register_service(FormFactory(settings), iface=IFormFactory, name='FormFactory')
 
 	# Make and run the application
 	return config.make_wsgi_app()
