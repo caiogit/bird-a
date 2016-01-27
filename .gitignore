@@ -19,12 +19,16 @@ fontend/.tmp
 fontend/.sass-cache
 fontend/bower_components
 
+# Fuseki exclusion
+fuseki/
+
 # Other Ignores
 *.egg
 *.egg-info
 *.sqlite
 *.db
 *.DS_Store
+semantic-web.zip
 
 # Ignore test ontologies, instances, etc.
 backend/birda/scripts/*.rdf
