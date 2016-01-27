@@ -51,9 +51,9 @@ import utils
 # "Fake settings" for testing purpose
 FAKE_DB_PATH = os.path.dirname( os.path.realpath(__file__) ) + "/../../../db"
 FAKE_SETTINGS = {
-	'birda_storage_type': 'file',
-	'birda_storage_file_birda_db': FAKE_DB_PATH + '/birda.turtle',
-	'birda_storage_file_indiv_db': FAKE_DB_PATH + '/indiv.turtle',
+	'birda.storage_type': 'file',
+	'birda.storage_file_birda_db': FAKE_DB_PATH + '/birda.turtle',
+	'birda.storage_file_indiv_db': FAKE_DB_PATH + '/indiv.turtle',
 }
 
 # ============================================================================ #
@@ -292,7 +292,7 @@ class Storage(object):
 		:return: Connection object (sublass of storage.Connection)
 		"""
 
-		if settings['birda_storage_type'] == 'file':
+		if settings['birda.storage_type'] == 'file':
 			import file_storage
 			return file_storage.FileConnection(settings, dataset=dataset, namespaces=namespaces, verbose=verbose)
 		else:

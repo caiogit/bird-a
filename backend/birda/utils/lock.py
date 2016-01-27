@@ -94,7 +94,7 @@ def release_lock(lock):
 	# -------------------------------------- #
 	
 	if DEBUG:
-		print "Lock released",
+		print "Lock released"
 		sys.stdout.flush()
 
 # ============================================================================ #

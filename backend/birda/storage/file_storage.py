@@ -45,9 +45,9 @@ class FileConnection(storage.Connection):
 		
 		# Determines the database file name and format
 		if dataset == 'birda':
-			self.db_file = settings['birda_storage_file_birda_db']
+			self.db_file = settings['birda.storage_file_birda_db']
 		elif dataset == 'indiv':
-			self.db_file = settings['birda_storage_file_indiv_db']
+			self.db_file = settings['birda.storage_file_indiv_db']
 		else:
 			raise NotImplementedError("")
 		

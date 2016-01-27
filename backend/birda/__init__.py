@@ -18,6 +18,8 @@ import sqlalchemy
 import birda.models
 import birda.models.acl
 
+from birda.bController.form_factory import FormFactory, IFormFactory
+
 # ============================================================================ #
 
 # Add CORS headers
@@ -83,6 +85,10 @@ def main(global_config, **settings):
 	#config.scan('birda.models')
 
 	config.add_subscriber(add_cors_headers_response_callback, pyramid.events.NewRequest)
+	
+	# Activate and set application wide services (singletons)
+	config.include('pyramid_services')
+	config.register_service(FormFactory(settings), iface=IFormFactory)
 
 	# Make and run the application
 	return config.make_wsgi_app()
