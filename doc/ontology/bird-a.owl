@@ -107,6 +107,9 @@
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#hasPlaceholder"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="/atLeast"/>
     </Declaration>
     <Declaration>
@@ -513,6 +516,16 @@
         <DataProperty IRI="/usesPropertyForLabel"/>
         <Datatype abbreviatedIRI="xsd:anyURI"/>
     </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>#hasPlaceholder</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specify a placeholder for inputs that admit it</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasPlaceholder</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">placeholder</Literal>
+    </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/DiscardButton</IRI>
