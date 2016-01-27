@@ -9,11 +9,18 @@ str = unicode
 
 import time
 import collections
+import rdflib
 
 from birda import storage
 
-from birda.storage import CO, BIRDA
-from birda.storage.utils import get_types, get_property, prettify, get_co_list
+from birda.storage import BIRDA
+from birda.storage.utils import (
+	get_types,
+	get_property,
+	prettify,
+	get_co_list, 
+	get_by_lang
+)
 
 # ============================================================================ #
 
@@ -67,7 +74,7 @@ class Widget(object):
 		:return: Dictionary containing widget properties
 		"""
 		
-		a = collections.OrderedDict(())
+		a = collections.OrderedDict()
 		a['labels'] = get_property(self.conn, self.uri, BIRDA.hasLabel, rdfw=self.rdfw, lexical=True)
 		a['descriptions'] = get_property(self.conn, self.uri, BIRDA.hasDescription, rdfw=self.rdfw, lexical=True)
 		a['maps_property'] = get_property(self.conn, self.uri, BIRDA.mapsProperty, rdfw=self.rdfw, single=True)
@@ -112,6 +119,50 @@ class Widget(object):
 			s += [ des.__str__(indentation_level=indentation_level+1) ]
 		
 		return '\n'.join(s)
+		
+	# --------------------------------- #
+	
+	def get_label(self, lang):
+		assert self.attributes.has_key('labels')
+		
+		return get_by_lang(self.attributes['labels'], lang)
+		
+	# --------------------------------- #
+	
+	def get_description(self, lang):
+		assert self.attributes.has_key('descriptions')
+		
+		return get_by_lang(self.attributes['descriptions'], lang)
+	
+	# --------------------------------- #
+	
+	def getJSON(self, lang):
+		"""
+		Build a JSON representation of the object
+		
+		:param lang: Language of the description fields
+		:return: Dictionary containing the JSON keys
+		"""
+		
+		j = collections.OrderedDict()
+		j['wideget_uri'] = self.uri
+		j['w_type'] = self.type_name
+		print self.attributes
+		print self.attributes.has_key('maps_property')
+		if self.attributes['maps_property']:
+			j['property'] = self.attributes['maps_property']
+		j['label'] = self.get_label(lang)
+		j['description'] = self.get_description(lang)
+		if self.attributes['at_least']:
+			j['at_least'] = self.attributes['at_least']
+		if self.attributes['at_most']:
+			j['at_most'] = self.attributes['at_most']
+			
+		if self.hierarchical:
+			# Descends the tree if widget is not a leaf
+			j['fields'] = [ desc.getJSON(lang) for desc in self.descendants ]
+		
+		return j
 	
 	# ================================= #
 	
@@ -131,7 +182,7 @@ class Widget(object):
 			if type.startswith(BIRDA):
 				return type
 		
-		raise Error("No type found")
+		raise Exception("No type found")
 	
 	# --------------------------------- #
 	
@@ -158,13 +209,19 @@ class Widget(object):
 		:param rdfw: Object RDFWrapper
 		:return: *Widget Obj
 		"""
+		import widget_catalog
 		
 		type_name = Widget.get_type_name( Widget.get_type(conn, uri, rdfw=rdfw) )
 		
 		# TODO
 		#if type_name == 'Form':
 		#	return ...
+		if type_name == 'TextInput':
+			return widget_catalog.TextInputWidget(
+				conn, rdfw=rdfw, uri=uri,
+			)
 		
+		# raise ValueError('Type "%s" unknown' % type_name)
 		return Widget(
 			conn, rdfw=rdfw, uri=uri,
 			actionable=True, hierarchical=True)
@@ -183,9 +240,12 @@ if __name__ == '__main__':
 # 			actionable=True, hierarchical=True)
 	
 	w = Widget.create_instance(bConn, getattr(storage.BINST,'PersonNormal-Form'))
+	
 	print
 	print w.rdfw.dumps('turtle')
 	print
 	print w
 	print
-	
+	print
+	import json
+	print json.dumps(w.getJSON('en'), indent=4)

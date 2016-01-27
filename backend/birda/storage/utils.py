@@ -197,6 +197,45 @@ def get_co_list(conn, list_node, rdfw=None):
 
 # ---------------------------------------------------------------------------- #
 
+def get_by_lang(lit_list, lang):
+	"""
+	Finds the occurrence of <lang> in the specified literals list
+	
+	:param lit_list: Literals list
+	:param lang: Language in 2 chars iso format
+	:return: Found Literal, a default Literal or Literal('') if no literals were present
+	"""
+	
+	if not lit_list:
+		# If there is nothing to return, returns ''
+		return rdflib.term.Literal('')
+	
+	default1 = None
+	default2 = None
+	for l in lit_list:
+		assert type(l) == type(rdflib.term.Literal(''))
+		
+		if l.language == lang:
+			# If lang was found, returns it
+			return l
+		elif l.language == 'en':
+			default1 = l
+		elif l.language == None:
+			default2 = l
+	
+	if default1:
+		# If lang was not found, return english
+		return default1
+	elif default2:
+		# If lang was not found, return the literal without language informations
+		return default2
+	else:
+		# If even english was not found, return the first available
+		return lit_list[0]
+		
+
+# ---------------------------------------------------------------------------- #
+
 def test_classes():
 	
 	class A(object):
