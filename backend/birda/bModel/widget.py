@@ -214,6 +214,10 @@ class Widget(object):
 		# TODO
 		#if type_name == 'Form':
 		#	return ...
+		if type_name == 'SubForm':
+			return widget_catalog.SubFormWidget(
+				conn, rdfw=rdfw, uri=uri,
+			)
 		if type_name == 'TextInput':
 			return widget_catalog.TextInputWidget(
 				conn, rdfw=rdfw, uri=uri,
