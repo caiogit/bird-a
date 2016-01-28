@@ -185,12 +185,16 @@ Returns:
 		}
 	],
 	"local_name":{
-		"fields": ["givenName", "familyMame"],
-		"localNameSeparator": "_",
+		"fields": [
+			"http://birda.com/person-givenName-1",
+			"http://birda.com/person-familyName-1"
+		],
+		"separator": "_",
 		"tokenSeparator": "(\.|\s|-)+",
-		"localNameRenderer": "lowercase"
+		"renderer": "lowercase"
 	}
 }
+
 
 ==========================================================================================
 /api/v1/individuals/search ? [lang=it] & [offset={x}] & [limit={x}]
