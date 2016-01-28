@@ -67,6 +67,26 @@ angular.module('birdaApp')
 
 				self.testInstancesFactory_active = true;
 			};
+
+			/* ----------------------------------------- */
+
+			self.test_obj = function() {
+				this.pippo = 1;
+				this.peppo = 2;
+				this.print_pippo = function() {
+					console.log(this.pippo);
+				};
+				this.print_puppo = function() {
+					console.log(this.puppo);
+				};
+			}
+
+			self.testObjectCreation = function() {
+				var obj = new self.test_obj();
+
+			}
+
+
 			/* ========================================= */
 
 			init();

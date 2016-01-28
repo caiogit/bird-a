@@ -80,13 +80,19 @@
 			<div class="form-field" ng-repeat="field in cEdit.form.fields">
 				<div ng-switch="field.w_type">
 					<b-text-input
-						ng-switch-when="text-input"
+						ng-switch-when="TextInput"
 						form-field="field"
 						individual="cEdit.individual">
 					</b-text-input>
 
+					<b-date-input
+						ng-switch-when="DateInput"
+						form-field="field"
+						individual="cEdit.individual">
+					</b-date-input>
+
 					<!--<p ng-switch-when="text-input" style="background-color:red">{{field.label}}</p>-->
-					<p ng-switch-when="radio-input" style="background-color:blue">{{field.label}}</p>
+					<p ng-switch-when="RadioInput" style="background-color:blue">{{field.label}}</p>
 				</div>
 			</div>
 		</div>

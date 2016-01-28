@@ -79,7 +79,7 @@ angular.module('birdaApp')
 				'fields': [
 					{
 						'widget_uri': 'http://birda.com/person-givenName-1',
-						'w_type': 'text-input',
+						'w_type': 'TextInput',
 						'property': 'http://xmlns.com/foaf/0.1/givenName',
 						'label': 'Nome',
 						'description': 'Usare un campo diverso per ogni nome',
@@ -92,7 +92,7 @@ angular.module('birdaApp')
 					},
 					{
 						'widget_uri': 'http://birda.com/person-familyName-1',
-						'w_type': 'text-input',
+						'w_type': 'TextInput',
 						'property': 'http://xmlns.com/foaf/0.1/familyName',
 						'label': 'Cognome',
 						'description': 'Usare un campo diverso per ogni cognome',
@@ -106,7 +106,7 @@ angular.module('birdaApp')
 					},
 					{
 						'widget_uri': 'http://birda.com/person-gender-1',
-						'w_type': 'radio-input',
+						'w_type': 'RadioInput',
 						'property': 'http://xmlns.com/foaf/0.1/gender',
 						'label': 'Genere',
 						'description': '',
@@ -138,8 +138,21 @@ angular.module('birdaApp')
 						}
 					},
 					{
+						'widget_uri': 'http://birda.com/person-birthdate-1',
+						'w_type': 'DateInput',
+						'property': 'http://xmlns.com/foaf/0.1/birthDate',
+						'label': 'Data di nascita',
+						'description': 'Quando è nata questa persona?',
+						'placeholder': 'es. 19/05/1985',
+						'at_least': 1,
+						'at_most': 1,
+						'validation': {
+							'required': true
+						}
+					},
+					{
 						'widget_uri': 'http://birda.com/person-knows-1',
-						'w_type': 'subform',
+						'w_type': 'SubForm',
 						'maps_property': 'http://xmlns.com/foaf/0.1/knows',
 						'maps_type': 'http://xmlns.com/foaf/0.1/',
 						'label': 'Persone conosciute',
@@ -150,7 +163,7 @@ angular.module('birdaApp')
 						'fields': [
 							{
 								'widget_uri': 'http://birda.com/person-givenName-1',
-								'w_type': 'text-input',
+								'w_type': 'TextInput',
 								'property': 'http://xmlns.com/foaf/0.1/givenName',
 								'label': 'Nome',
 								'description': 'Usare un campo diverso per ogni nome',
@@ -163,7 +176,7 @@ angular.module('birdaApp')
 							},
 							{
 								'widget_uri': 'http://birda.com/person-familyName-1',
-								'w_type': 'text-input',
+								'w_type': 'TextInput',
 								'property': 'http://xmlns.com/foaf/0.1/familyName',
 								'label': 'Cognome',
 								'description': 'Usare un campo diverso per ogni cognome',

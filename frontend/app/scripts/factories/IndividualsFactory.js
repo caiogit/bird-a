@@ -131,6 +131,10 @@ angular.module('birdaApp')
 									{
 										'uri': 'http://xmlns.com/foaf/0.1/familyName',
 										'values': ['Smith']
+									},
+									{
+										'uri': 'http://xmlns.com/foaf/0.1/birthDate',
+										'values': []
 									}
 								]
 							}
