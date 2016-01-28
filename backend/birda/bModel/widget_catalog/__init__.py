@@ -8,9 +8,11 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import form
 import subform
 import text_input
 
+FormWidget = form.FormWidget
 SubFormWidget = subform.SubFormWidget
 TextInputWidget = text_input.TextInputWidget
 

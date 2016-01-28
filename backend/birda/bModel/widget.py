@@ -101,6 +101,8 @@ class Widget(object):
 	# --------------------------------- #
 	
 	def __str__(self, indentation_level=0):
+		import json
+	
 		indent = '    '*indentation_level
 		s = []
 		s += [indent + '-'*50]
@@ -111,6 +113,7 @@ class Widget(object):
 			if ( self.attributes[k] ) and ( type(self.attributes[k]) in [type([]), type(())] ):
 				for v in self.attributes[k]:
 					s += [indent + '    > %s: %s'%(k,v) ]
+			
 			else:
 				s += [indent + '    > %s: %s'%(k,self.attributes[k]) ]
 		
@@ -212,8 +215,10 @@ class Widget(object):
 		type_name = Widget.get_type_name( Widget.get_type(conn, uri, rdfw=rdfw) )
 		
 		# TODO
-		#if type_name == 'Form':
-		#	return ...
+		if type_name == 'Form':
+			return widget_catalog.FormWidget(
+				conn, rdfw=rdfw, uri=uri,
+			)
 		if type_name == 'SubForm':
 			return widget_catalog.SubFormWidget(
 				conn, rdfw=rdfw, uri=uri,
