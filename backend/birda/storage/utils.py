@@ -232,47 +232,6 @@ def get_by_lang(lit_list, lang):
 	else:
 		# If even english was not found, return the first available
 		return lit_list[0]
-		
-
-# ---------------------------------------------------------------------------- #
-
-def test_classes():
-	
-	class A(object):
-		a = 1
-		c = 1
-		def get_a(self):
-			print self.a
-		def get_c(self):
-			print self.c
-		def set_c(self):
-			print "A.set_c"
-			self.c = c*10
-	
-	class B(A):
-		b = 2
-		c = 3
-		def get_b(self):
-			print self.b
-		def set_c(self):
-			print "B.set_c"
-			self.c = self.c*100
-			#super(A,self).c = super(A,self).c*100
-	
-	b = B()
-	b.get_a()
-	b.get_b()
-	print dir(b)
-	b.a = 4
-	b.get_a()
-	print dir(b)
-	b.get_c()
-	b.set_c()
-	b.get_c()
-	print dir(super(A,b))
-	super(A,b).get_c()
-	super(A,b).set_c()
-	super(A,b).get_c()
 
 # ---------------------------------------------------------------------------- #
 
