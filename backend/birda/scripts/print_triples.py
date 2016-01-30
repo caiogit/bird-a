@@ -13,6 +13,8 @@ import rdflib
 import argparse
 import tempfile
 
+import birda.bModel.ontology as ontology
+
 SUPPORTED_INPUT_TYPES = ['xml', 'pretty-xml', 'nt', 'n3', 'turtle']
 SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
@@ -23,7 +25,7 @@ def load_ontology(input_file):
 	for type in SUPPORTED_INPUT_TYPES:
 		try:
 			print "Trying %(type)s: " % vars(),
-			rdf = rdflib.Graph()
+			rdf = ontology.new_rdf_Graph()
 			rdf.load(input_file, format=type)
 			print\
 				"Ok"

@@ -12,7 +12,8 @@ import collections
 from birda.bModel.widget import Widget
 
 
-from birda.storage import BIRDA
+from birda.bModel import BIRDA
+
 from birda.storage.utils import (
 	get_types,
 	get_property,

@@ -18,7 +18,7 @@ import math
 from rdflib import Literal, URIRef
 
 import __init__ as bModel
-from __init__ import RDF, RDFS, XSD, CO, B_HAS_BASE_NAME_LIST
+from __init__ import NAMESPACES, RDF, RDFS, XSD, CO, B_HAS_BASE_NAME_LIST
 
 # ============================================================================ #
 
@@ -37,6 +37,22 @@ def	create_random_id(length=6):
 	base = len(chr_range)
 	rand = random.randint(1, base**length)
 	return int2base(rand,base)
+
+# ---------------------------------------------------------------------------- #
+
+def new_rdf_Graph():
+	"""
+	Creates a new rdflib Graph and bind to it all birda defined namespaces
+	
+	:return: rdflib.Graph
+	"""
+	
+	rdf = rdflib.Graph()
+	
+	for ns in NAMESPACES.keys():
+		rdf.bind(ns,NAMESPACES[ns])
+		
+	return rdf
 
 # ---------------------------------------------------------------------------- #
 

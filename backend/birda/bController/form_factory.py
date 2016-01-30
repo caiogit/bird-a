@@ -11,7 +11,8 @@ str = unicode
 # -------------------------------------- #
 
 import zope.interface
-from birda.storage import Storage, FAKE_SETTINGS, BINST
+from birda.storage import Storage, FAKE_SETTINGS
+from birda.bModel import BINST
 from birda.bModel.widget import Widget
 
 # ============================================================================ #

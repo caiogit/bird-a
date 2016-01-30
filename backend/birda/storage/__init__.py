@@ -17,36 +17,14 @@ import os
 import abc
 import rdflib
 import birda.utils.ascii_utils
-
-RDF =   rdflib.namespace.RDF
-RDFS =  rdflib.namespace.RDFS
-XSD =   rdflib.namespace.XSD
-FOAF =  rdflib.namespace.FOAF
-SKOS =  rdflib.namespace.SKOS
-CO =    rdflib.Namespace("http://purl.org/co/")
-BIRDA = rdflib.Namespace("http://w3id.org/ontologies/bird-a/")
-BINST = rdflib.Namespace("http://pippo.it/birda-data/")
-TINST = rdflib.Namespace("http://pippo.it/target-data/")
-
-NAMESPACES = {
-	'rdf':   RDF,
-	'rdfs':  RDFS,
-	'xsd':   XSD,
-	'foaf':  FOAF,
-	'skos':  SKOS,
-	'co':    CO,
-	'birda': BIRDA,
-	'binst': BINST,
-	'tinst': TINST
-}
-
-_NAMESPACES_ORDERED_KEYS = sorted(NAMESPACES.keys(), (lambda x,y: len(x)-len(y)), reverse=True )
-
-SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
-
 import utils
 
+import birda.bModel as bModel
+import birda.bModel.ontology as ontology
+
 # --------------------------------- #
+
+SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
 # "Fake settings" for testing purpose
 FAKE_DB_PATH = os.path.dirname( os.path.realpath(__file__) ) + "/../../../db"
@@ -227,9 +205,7 @@ class RDFWrapper(object):
 	# ----------------------------------------------------------------------- #
 	
 	def __init__(self):
-		self.rdf = rdflib.Graph()
-		for ns in NAMESPACES.keys():
-			self.rdf.bind(ns, NAMESPACES[ns])
+		self.rdf = ontology.new_rdf_Graph()
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -285,7 +261,7 @@ class Storage(object):
 	# ----------------------------------------------------------------------- #
 
 	@staticmethod
-	def connect(settings, dataset='', namespaces=NAMESPACES, verbose=False):
+	def connect(settings, dataset='', namespaces=bModel.NAMESPACES, verbose=False):
 		"""
 		Creates a connection to a sparql endpoint using "setting" parameters
 

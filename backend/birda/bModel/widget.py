@@ -13,7 +13,8 @@ import rdflib
 
 from birda import storage
 
-from birda.storage import BIRDA
+from __init__ import BIRDA, BINST
+
 from birda.storage.utils import (
 	get_types,
 	get_property,
@@ -246,7 +247,7 @@ if __name__ == '__main__':
 # 			bConn, rdfw=storage.RDFWrapper(), uri=getattr(storage.BINST,'PersonLight-Form'),
 # 			actionable=True, hierarchical=True)
 	
-	w = Widget.create_instance(bConn, getattr(storage.BINST,'PersonNormal-Form'))
+	w = Widget.create_instance(bConn, getattr(BINST,'PersonNormal-Form'))
 	
 	print
 	print w.rdfw.dumps('turtle')

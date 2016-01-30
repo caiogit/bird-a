@@ -11,6 +11,7 @@ import time
 import rdflib
 import birda.utils.lock
 
+import birda.bModel.ontology as ontology
 import __init__ as storage
 
 # ============================================================================ #
@@ -41,12 +42,8 @@ class FileConnection(storage.Connection):
 		
 		self.verbose = verbose
 		
-		self.rdf = rdflib.Graph()
-		
-		# Bind namespaces:
-		for ns in self.namespaces.keys():
-			self.rdf.bind(ns, self.namespaces[ns])
-		
+		self.rdf = ontology.new_rdf_Graph()
+				
 		# Determines the database file name and format
 		if dataset == 'birda':
 			self.db_file = settings['birda.storage_file_birda_db']

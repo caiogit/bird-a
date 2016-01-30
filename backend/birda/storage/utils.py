@@ -8,8 +8,11 @@ str = unicode
 # -------------------------------------- #
 
 import rdflib
+import birda.bModel as bModel
 import __init__ as storage
-from __init__ import RDF, RDFS, XSD, CO, BIRDA
+
+from rdflib.namespace import RDF, RDFS, XSD
+from birda.bModel import CO, BIRDA, BINST, TINST
 
 # ============================================================================ #
 
@@ -63,8 +66,8 @@ def py2rdf(value):
 # ---------------------------------------------------------------------------- #
 
 def prettify(element, 
-			 namespaces=storage.NAMESPACES, 
-			 namespaces_ordered_keys=storage._NAMESPACES_ORDERED_KEYS):
+			 namespaces=bModel.NAMESPACES, 
+			 namespaces_ordered_keys=bModel._NAMESPACES_ORDERED_KEYS):
 	"""
 	Prettify an RDF element for human readability
 	
@@ -113,7 +116,7 @@ def get_types(conn, subject_uri, lexical=False, rdfw=None):
 	:return: List of URIRef
 	"""
 
-	values = get_property(conn, subject_uri, getattr(storage.RDF,'type'), lexical=lexical, rdfw=rdfw)
+	values = get_property(conn, subject_uri, getattr(RDF,'type'), lexical=lexical, rdfw=rdfw)
 	
 	if lexical:
 		return values
@@ -249,19 +252,19 @@ if __name__ == '__main__':
 	print '-------------------------------------'
 	print
 	
-	values = get_property(bConn, getattr(storage.BINST,'PersonLight-Form'), getattr(storage.RDF,'type'), lexical=True)
+	values = get_property(bConn, getattr(BINST,'PersonLight-Form'), getattr(rdflib.namespace.RDF,'type'), lexical=True)
 	print '-------------------------------------'
 	print values
 	print '-------------------------------------'
 	print
 	
-	types = get_types(bConn, getattr(storage.BINST,'PersonLight-Form'), lexical=True)
+	types = get_types(bConn, getattr(BINST,'PersonLight-Form'), lexical=True)
 	print '-------------------------------------'
 	print types
 	print '-------------------------------------'
 	print
 	
-	el_list = get_co_list(bConn, getattr(storage.BINST,'PersonLight-Form'), rdfw=None)
+	el_list = get_co_list(bConn, getattr(BINST,'PersonLight-Form'), rdfw=None)
 	print '-------------------------------------'
 	for el in el_list: print el
 	print '-------------------------------------'
