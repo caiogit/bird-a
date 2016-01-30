@@ -9,6 +9,8 @@ str = unicode
 
 import os
 import glob
+import json
+import webob
 
 # Allow "import services.models.*"
 services = glob.glob(os.path.dirname(__file__)+"/*.py")
@@ -18,6 +20,15 @@ __all__ = [ os.path.basename(f)[:-3] for f in services]
 __all__ = [n.encode('ascii') for n in __all__]
 
 # ============================================================================ #
+
+class ServiceError(webob.exc.HTTPError):
+	def __init__(self, status=0, msg=''):
+		body = {'status': status, 'message': msg}
+		webob.Response.__init__(self, json.dumps(body))
+		self.status = status
+		self.content_type = 'application/json'
+
+# ---------------------------------------------------------------------------- #
 
 def request2dict(request, function, extended=False):
 	ret = {}

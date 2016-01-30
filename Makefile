@@ -115,6 +115,9 @@ test-be:
 	$(call intestation2,GET /api/v1/forms)
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/prequest -mGET $(BE_CONF) /api/v1/forms
 	
+	$(call intestation2,GET /api/v1/forms/{form_uri})
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/prequest -mGET $(BE_CONF) /api/v1/forms/http://pippo.it/birda-data/PersonNormal-Form
+	
 	$(call test_ok)
 	
 # ================================ #

@@ -18,11 +18,10 @@ import __init__ as jsons
 
 class FormsSimple(colander.MappingSchema):
 
-	# Uncomment to enable the "scrict" validation
-	# (i.e. raise an error if an unknown key is present)
-	#
-	# def schema_type(self, **kw):
-	# 	return colander.Mapping(unknown='raise')
+	# "raise" for prohibit any extraneous key, "ignore" for discarding them, 
+	# "preserve" for preserving them in json
+	def schema_type(self, **kw):
+		return colander.Mapping(unknown='raise')
 
 	@colander.instantiate(
 		validator=colander.Length(min=1))
@@ -92,13 +91,47 @@ FormSimple_example = json.loads("""
 #								 FORM FULL
 # ============================================================================ #
 
+# TODO: Find a way to make a recursive schema
+# At the moment, the extraneous keys will be preserved in order to validate
+
+class FormsFullFields(colander.SequenceSchema):
+	
+	@colander.instantiate()
+	class row(colander.MappingSchema):
+		
+		# "raise" for prohibit any extraneous key, "ignore" for discarding them, 
+		# "preserve" for preserving them in json
+		def schema_type(self, **kw):
+			return colander.Mapping(unknown='preserve')
+		
+		widget_uri = colander.SchemaNode(
+			colander.String(),
+			missing=colander.required,
+			validator=jsons.check_uri(required=True))
+
+		w_type = colander.SchemaNode(
+			colander.String(),
+			missing=colander.required)
+
+		label = colander.SchemaNode(
+			colander.String(),
+			missing=colander.required)
+
+		description = colander.SchemaNode(
+			colander.String(),
+			missing="")
+
+FormsFullFieldsInstance = FormsFullFields()
+FormsFullFields.add(FormsFullFieldsInstance, FormsFullFields)
+
+# ---------------------------------------------------------------------------- #
+
 class FormsFull(colander.MappingSchema):
 
-	# Uncomment to enable the "scrict" validation
-	# (i.e. raise an error if an unknown key is present)
-	#
-	# def schema_type(self, **kw):
-	# 	return colander.Mapping(unknown='raise')
+	# "raise" for prohibit any extraneous key, "ignore" for discarding them, 
+	# "preserve" for preserving them in json
+	def schema_type(self, **kw):
+		return colander.Mapping(unknown='raise')
 
 	form_uri = colander.SchemaNode(
 		colander.String(),
@@ -137,6 +170,10 @@ class FormsFull(colander.MappingSchema):
 		colander.String(),
 		missing=colander.required,
 		validator=jsons.check_iso_lang(required=True))
+
+	# --------------------------------- #
+	
+	fields = FormsFullFields()
 
 	# --------------------------------- #
 

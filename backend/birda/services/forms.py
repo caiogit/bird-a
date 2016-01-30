@@ -8,6 +8,7 @@ str = unicode
 # -------------------------------------- #
 
 import cornice
+from __init__ import ServiceError
 from jsons.forms import FormsSimple, FormsFull
 
 # ============================================================================ #
@@ -35,6 +36,46 @@ def forms_get(request):
 	
 	# Try to deserialize the json in order to test its correctness
 	deserialized = FormsSimple().deserialize(j)
+	
+	return deserialized
+
+# ============================================================================ #
+
+form = cornice.Service(
+		name='form',
+		path='/api/forms/*form_uri',
+		description="Form full infos")
+
+formV1 = cornice.Service(
+		name='formV1',
+		path='/api/v1/forms/*form_uri',
+		description="Form full infos")
+
+# ---------------------------------------------------------------------------- #
+
+@form.get()
+@formV1.get()
+def form_get(request):
+	
+	if not request.matchdict['form_uri']:
+		# With only a trailing slash, it's probably been invoked the forms_get...
+		return forms_get(request)
+	
+	u = request.matchdict['form_uri']
+	form_uri = u[0] + '//' + '/'.join(u[1:])
+	lang = request.GET.get('lang','en')
+	
+	form_factory = request.find_service(name='FormFactory')
+	
+	form = form_factory.get_form(form_uri)
+	
+	if not form:
+		raise ServiceError(status=404, msg="Form '%(form_uri)s' not found" % vars())
+	
+	j = form.getJSON(lang)
+	
+	# Try to deserialize the json in order to test its correctness
+	deserialized = FormsFull().deserialize(j)
 	
 	return deserialized
 

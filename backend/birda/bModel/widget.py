@@ -149,7 +149,7 @@ class Widget(object):
 		"""
 		
 		j = collections.OrderedDict()
-		j['wideget_uri'] = self.uri
+		j['widget_uri'] = self.uri
 		j['w_type'] = self.type_name
 		if self.attributes['maps_property']:
 			j['property'] = self.attributes['maps_property']
@@ -159,6 +159,7 @@ class Widget(object):
 			j['at_least'] = self.attributes['at_least']
 		if self.attributes['at_most']:
 			j['at_most'] = self.attributes['at_most']
+		j['lang'] = lang
 			
 		if self.hierarchical:
 			# Descends the tree if widget is not a leaf

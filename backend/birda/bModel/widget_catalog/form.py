@@ -46,7 +46,10 @@ class FormWidget(Widget):
 		
 		a = collections.OrderedDict()
 		a['maps_type'] = get_property(self.conn, self.uri, BIRDA.mapsType, rdfw=self.rdfw, lexical=True, single=True)
-		a['base_uri'] = get_property(self.conn, self.uri, BIRDA.hasBaseURI, rdfw=self.rdfw, lexical=True, single=True)
+		a['base_uri'] = get_property(self.conn, self.uri, BIRDA.hasBaseIRI, rdfw=self.rdfw, lexical=True, single=True)
+		
+		a['label_property'] = get_property(self.conn, self.uri, BIRDA.usesPropertyForLabel, rdfw=self.rdfw, lexical=True, single=True)
+		a['descr_property'] = get_property(self.conn, self.uri, BIRDA.usesPropertyForDescription, rdfw=self.rdfw, lexical=True, single=True)
 		
 		def fields2list(fields):
 			if fields:
@@ -74,8 +77,22 @@ class FormWidget(Widget):
 		j = super(FormWidget, self).getJSON(lang)
 		fields = j.pop('fields')
 		
+		uri = j.pop('w_type')
+		uri = j.pop('widget_uri')
+		j['form_uri'] = uri
+		
 		j['maps_type'] = self.attributes['maps_type']
-		j['local_name'] = self.attributes['local_name']
+		j['base_uri'] = self.attributes['base_uri']
+		
+		j['label_property'] = self.attributes['label_property']
+		j['descr_property'] = self.attributes['descr_property']
+		
+		if self.attributes['local_name']['fields']:
+			j['local_name'] = self.attributes['local_name']
+		else:
+			# Will be created by the schema
+			#j['local_name'] = {}
+			pass
 		
 		j['fields'] = fields
 		return j
