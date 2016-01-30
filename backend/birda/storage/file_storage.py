@@ -43,6 +43,10 @@ class FileConnection(storage.Connection):
 		
 		self.rdf = rdflib.Graph()
 		
+		# Bind namespaces:
+		for ns in self.namespaces.keys():
+			self.rdf.bind(ns, self.namespaces[ns])
+		
 		# Determines the database file name and format
 		if dataset == 'birda':
 			self.db_file = settings['birda.storage_file_birda_db']
@@ -103,7 +107,7 @@ class FileConnection(storage.Connection):
 		
 		# Write changes (if any) to file
 		if self.writed:
-			rdf.serialize(self.db_file, format=self.db_format)
+			self.rdf.serialize(self.db_file, format=self.db_format)
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -115,7 +119,7 @@ class FileConnection(storage.Connection):
 		"""
 		
 		# Reload the file
-		self.rdf.load(db_file, format=self.db_format)
+		self.rdf.load(self.db_file, format=self.db_format)
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -144,6 +148,9 @@ if __name__ == '__main__':
 		?s ?p ?o
 	}
 	""")
-	time.sleep(20)
+	
+	# Sleep in order to try the lock system
+	#time.sleep(20)
+	
 	bConn.close()
 	

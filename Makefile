@@ -31,18 +31,34 @@ endif
 
 # -------------------------------- #
 
+# Functions
+
+# intestation2(string)
+define intestation2 =
+@$(VENV)/bin/python -c 'print "\n"; print "="*80; print "$1".center(80); print "="*80; print'
+endef
+
+# test_ok()
+define test_ok =
+$(call intestation2,All tests successfully finished)
+endef
+
+# ================================ #
+
 all:
 	#@echo "Prod: \"$(PROD)\" (reply: \"$(reply)\")"
 	@echo
 	@echo "make make-be"
 	@echo "make run-be"
+	@echo "make test-be"
 	@echo "make clean-be"
-	@echo "     Make, run and clean the backend"
+	@echo "     Make, run, test and clean the backend"
 	@echo
 	@echo "make make-fe"
 	@echo "make run-fe"
+	@echo "make test-fe"
 	@echo "make clean-fe"
-	@echo "     Make, run and clean the frontend"
+	@echo "     Make, run, test and clean the frontend"
 	@echo
 	@echo "make clean"
 	@echo "     Clean backend, frontend and fuseki"
@@ -58,14 +74,38 @@ make-be:
 	cd $(BASE_DIR)/backend ; \
 #	export PYTHON_PATH=$(BASE_DIR)/backend:$(BASE_DIR)/backend/birda:$PYTHON_PATH ; \
 	$(SUDO) $(VENV)/bin/python setup.py $(BE_SETUP_TARGET)
+	
 	# TODO: Initialization scripts
+	@echo
+	@echo "========================"
+	@echo " Initialize users db"
+	@echo "========================"
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/birda_init_db $(BE_CONF)
 
 # -------------------------------- #
 
 # Run Backend
 run-be:
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/pserve $(BE_CONF) --reload
+	
+# -------------------------------- #
 
+# Test Backend
+test-be:
+	$(call intestation2,bModel/widget.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/bModel/widget.py
+	
+	$(call intestation2,storage/file_storage.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/storage/file_storage.py
+
+	$(call intestation2,storage/utils.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/storage/utils.py
+	
+	$(call intestation2,scripts/create_test_instance.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/scripts/create_test_ontologies.py
+	
+	$(call test_ok)
+	
 # ================================ #
 
 # Make Frontend
@@ -79,6 +119,12 @@ make-fe:
 # Run Frontend
 run-fe:
 	cd $(BASE_DIR)/frontend ; $(GRUNT) serve --force
+	
+# -------------------------------- #
+
+# Test Frontend
+test-fe:
+	# TODO
 
 # ================================ #
 

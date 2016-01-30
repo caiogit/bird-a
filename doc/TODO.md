@@ -10,7 +10,8 @@
     - Make the script run with pyramid configuration
     - Make write the files in /db
 
-
+ - Make `scripts/initialize_db.py` running
+ 
 ## Frontend
 
  - Portare tutti i dummy JSON in un unico file

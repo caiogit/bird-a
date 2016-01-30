@@ -52,8 +52,8 @@ setup(name='birda',
         "Topic :: Internet :: WWW/HTTP :: WSGI",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author="Silvio Peroni, Francesco Caliumi",
-      author_email="silvio.peroni@unibo.it, francesco.caliumi@gmail.com",
+      author="Francesco Caliumi, Silvio Peroni",
+      author_email="francesco.caliumi@gmail.com, silvio.peroni@unibo.it",
       url='...',
       license="...",
       keywords='birda rdf ontology',
@@ -66,7 +66,7 @@ setup(name='birda',
       [paste.app_factory]
       main = birda:main
       [console_scripts]
-      initialize_birda_db = birda.scripts.initialize_db:main
+      birda_init_db = birda.scripts.initialize_db:main
       """,
       paster_plugins=['pyramid']
 )

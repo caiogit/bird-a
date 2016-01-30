@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""
+Script that initializes sqlite db with default users
+"""
 # -------------------------------------- #
 # Enables python3-like strings handling
 from __future__ import unicode_literals
@@ -7,6 +10,7 @@ str = unicode
 # -------------------------------------- #
 
 import sys
+import os
 
 import sqlalchemy
 import transaction
@@ -42,4 +46,7 @@ def main(argv=sys.argv):
 			editor = birda.models.users.User(u'editor', u'editor', u'Editor', u'dummy@mail.com')
 			birda.models.DBSession.add(editor)
 
+# ============================================================================ #
 
+if __name__ == '__main__':
+	main()

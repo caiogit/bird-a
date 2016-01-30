@@ -18,8 +18,6 @@ import birda.bModel as bModel
 DIR_PATH = os.path.dirname( os.path.realpath(__file__) )
 SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
-
-
 # ---------------------------------------------------------------------------- #
 
 def create_birda_instace():
@@ -158,15 +156,18 @@ def output(rdf, output_format='nt', file_name='', print_triples=False, print_fil
 # ============================================================================ #
 
 if __name__ == '__main__':
-	#simple = create_simple_birda_instance()
-	#output(simple, output_format='turtle', file_name='', print_triples=True, print_file=True)
-	#print '\n'+ '#'*80 + '\n' + '#'*80 + '\n'
 
 	binst = create_birda_instace()
-	output(binst, output_format='turtle', file_name='birda-example', print_triples=False, print_file=True)
-	output(binst, output_format='nt', file_name='birda-example', print_triples=False, print_file=False)
+	
+	output(
+		binst, output_format='turtle', file_name='birda', 
+		print_triples=False, print_file=True)
 
 	print '\n'+ '#'*80 + '\n' + '#'*80 + '\n'
 
 	tinst = create_target_instace()
-	output(tinst, output_format='turtle', file_name='target-instance-example', print_triples=False, print_file=True)
+	
+	output(
+		tinst, output_format='turtle', file_name='indiv',
+		print_triples=False, print_file=True)
+	
