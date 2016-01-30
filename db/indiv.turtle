@@ -1,31 +1,36 @@
-@prefix ns1: <http://xmlns.com/foaf/0.1/> .
+@prefix binst: <http://pippo.it/birda-data/> .
+@prefix birda: <http://w3id.org/ontologies/bird-a/> .
+@prefix co: <http://purl.org/co/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tinst: <http://pippo.it/target-data/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://pippo.it/target-data/maria-grazia-rivera> a ns1:Person ;
-    ns1:familyName "Rivera"@it ;
-    ns1:gender "Femmina"@it ;
-    ns1:givenName "Grazia"@it,
+tinst:maria-grazia-rivera a foaf:Person ;
+    foaf:familyName "Rivera"@it ;
+    foaf:gender "Femmina"@it ;
+    foaf:givenName "Grazia"@it,
         "Maria"@it ;
-    ns1:knows <http://pippo.it/target-data/iy6pre>,
-        <http://pippo.it/target-data/pierluigi-mariuolo> .
+    foaf:knows tinst:pierluigi-mariuolo,
+        tinst:ym06oh .
 
-<http://pippo.it/target-data/pierluigi-mariuolo> a ns1:Person ;
-    ns1:familyName "Mariuolo"@it ;
-    ns1:gender "Maschio"@it ;
-    ns1:givenName "Pierluigi"@it ;
-    ns1:knows <http://pippo.it/target-data/iy6pre>,
-        <http://pippo.it/target-data/r7b0m5> .
+tinst:pierluigi-mariuolo a foaf:Person ;
+    foaf:familyName "Mariuolo"@it ;
+    foaf:gender "Maschio"@it ;
+    foaf:givenName "Pierluigi"@it ;
+    foaf:knows tinst:wo4yw1,
+        tinst:ym06oh .
 
-<http://pippo.it/target-data/r7b0m5> a ns1:Person ;
-    ns1:familyName "Verdi"@it ;
-    ns1:givenName "Anselmo"@it,
+tinst:wo4yw1 a foaf:Person ;
+    foaf:familyName "Verdi"@it ;
+    foaf:givenName "Anselmo"@it,
         "Edoardo"@it .
 
-<http://pippo.it/target-data/iy6pre> a ns1:Person ;
-    ns1:familyName "Rossi"@it ;
-    ns1:gender "Maschio"@it ;
-    ns1:givenName "Mario"@it .
+tinst:ym06oh a foaf:Person ;
+    foaf:familyName "Rossi"@it ;
+    foaf:gender "Maschio"@it ;
+    foaf:givenName "Mario"@it .
 

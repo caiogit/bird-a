@@ -1,103 +1,107 @@
-@prefix ns1: <http://purl.org/co/> .
-@prefix ns2: <http://w3id.org/ontologies/bird-a/> .
+@prefix binst: <http://pippo.it/birda-data/> .
+@prefix birda: <http://w3id.org/ontologies/bird-a/> .
+@prefix co: <http://purl.org/co/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tinst: <http://pippo.it/target-data/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://pippo.it/birda-data/PersonLight-Form> a ns1:List,
-        ns2:Form ;
-    ns1:firstItem <http://pippo.it/birda-data/PersonLight-Form-el1> ;
-    ns1:item <http://pippo.it/birda-data/PersonLight-Form-el1>,
-        <http://pippo.it/birda-data/PersonLight-Form-el2>,
-        <http://pippo.it/birda-data/PersonLight-Form-el3> ;
-    ns2:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
-    ns2:hasDescription "Used to insert only the minimal FOAF:Person attributes"@en,
+binst:PersonLight-Form a co:List,
+        birda:Form ;
+    co:firstItem binst:PersonLight-Form-el1 ;
+    co:item binst:PersonLight-Form-el1,
+        binst:PersonLight-Form-el2,
+        binst:PersonLight-Form-el3 ;
+    birda:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
+    birda:hasDescription "Used to insert only the minimal FOAF:Person attributes"@en,
         "Utilizzato per inserire solo gli attributi minimali di FOAF:Person"@it ;
-    ns2:hasLabel "FOAF:Person Light"@en,
+    birda:hasLabel "FOAF:Person Light"@en,
         "FOAF:Person Minimale"@it ;
-    ns2:hasTokenSeparator "-" ;
-    ns2:mapsType <http://xmlns.com/foaf/0.1/Person> ;
-    ns2:usesPropertyForDescription rdfs:comment ;
-    ns2:usesPropertyForLabel <http://www.w3.org/2004/02/skos/core#prefLabel> .
+    birda:hasTokenSeparator "-" ;
+    birda:mapsType foaf:Person ;
+    birda:usesPropertyForDescription rdfs:comment ;
+    birda:usesPropertyForLabel skos:prefLabel .
 
-<http://pippo.it/birda-data/PersonNormal-Form> a ns1:List,
-        ns2:Form ;
-    ns1:firstItem <http://pippo.it/birda-data/PersonNormal-Form-el1> ;
-    ns1:item <http://pippo.it/birda-data/PersonNormal-Form-el1>,
-        <http://pippo.it/birda-data/PersonNormal-Form-el2>,
-        <http://pippo.it/birda-data/PersonNormal-Form-el3>,
-        <http://pippo.it/birda-data/PersonNormal-Form-el4> ;
-    ns2:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
-    ns2:hasBaseNameList <http://pippo.it/birda-data/PersonNormal-Form-local-name-list> ;
-    ns2:hasDescription "Used to insert FOAF:Person attributes"@en,
+binst:PersonNormal-Form a co:List,
+        birda:Form ;
+    co:firstItem binst:PersonNormal-Form-el1 ;
+    co:item binst:PersonNormal-Form-el1,
+        binst:PersonNormal-Form-el2,
+        binst:PersonNormal-Form-el3,
+        binst:PersonNormal-Form-el4 ;
+    birda:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
+    birda:hasBaseNameList binst:PersonNormal-Form-local-name-list ;
+    birda:hasDescription "Used to insert FOAF:Person attributes"@en,
         "Utilizzato per inserire attributi di FOAF:Person"@it ;
-    ns2:hasLabel "FOAF:Person"@en,
+    birda:hasLabel "FOAF:Person"@en,
         "FOAF:Person"@it ;
-    ns2:hasTokenSeparator "-" ;
-    ns2:mapsType <http://xmlns.com/foaf/0.1/Person> ;
-    ns2:usesPropertyForDescription rdfs:comment ;
-    ns2:usesPropertyForLabel <http://www.w3.org/2004/02/skos/core#prefLabel> .
+    birda:hasTokenSeparator "-" ;
+    birda:mapsType foaf:Person ;
+    birda:usesPropertyForDescription rdfs:comment ;
+    birda:usesPropertyForLabel skos:prefLabel .
 
-<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> a ns1:List,
-        ns2:SubForm ;
-    ns1:firstItem <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el1> ;
-    ns1:item <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el1>,
-        <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el2> ;
-    ns2:hasLabel "Gender"@en,
+binst:PersonKnowsSubForm-SubForm a co:List,
+        birda:SubForm ;
+    co:firstItem binst:PersonKnowsSubForm-SubForm-el1 ;
+    co:item binst:PersonKnowsSubForm-SubForm-el1,
+        binst:PersonKnowsSubForm-SubForm-el2 ;
+    birda:hasLabel "Gender"@en,
         "Sesso"@it ;
-    ns2:mapsProperty <http://xmlns.com/foaf/0.1/knows> ;
-    ns2:mapsType <http://xmlns.com/foaf/0.1/Person> .
+    birda:mapsProperty foaf:knows ;
+    birda:mapsType foaf:Person .
 
-<http://pippo.it/birda-data/PersonNormal-Form-local-name-list> a ns1:List ;
-    ns1:firstItem <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el1> ;
-    ns1:item <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el1>,
-        <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el2> .
+binst:PersonNormal-Form-local-name-list a co:List ;
+    co:firstItem binst:PersonNormal-Form-local-name-list-el1 ;
+    co:item binst:PersonNormal-Form-local-name-list-el1,
+        binst:PersonNormal-Form-local-name-list-el2 .
 
-<http://pippo.it/birda-data/Gender-TextInput> a ns2:TextInput ;
-    ns2:atMost 1 ;
-    ns2:hasLabel "Gender"@en,
+binst:Gender-TextInput a birda:TextInput ;
+    birda:atMost 1 ;
+    birda:hasLabel "Gender"@en,
         "Sesso"@it ;
-    ns2:mapsProperty <http://xmlns.com/foaf/0.1/gender> .
+    birda:mapsProperty foaf:gender .
 
-<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el1> ns1:itemContent <http://pippo.it/birda-data/GivenName-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el2> .
+binst:PersonKnowsSubForm-SubForm-el1 co:itemContent binst:GivenName-TextInput ;
+    co:nextItem binst:PersonKnowsSubForm-SubForm-el2 .
 
-<http://pippo.it/birda-data/PersonKnowsSubForm-SubForm-el2> ns1:itemContent <http://pippo.it/birda-data/FamilyName-TextInput> .
+binst:PersonKnowsSubForm-SubForm-el2 co:itemContent binst:FamilyName-TextInput .
 
-<http://pippo.it/birda-data/PersonLight-Form-el1> ns1:itemContent <http://pippo.it/birda-data/GivenName-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonLight-Form-el2> .
+binst:PersonLight-Form-el1 co:itemContent binst:GivenName-TextInput ;
+    co:nextItem binst:PersonLight-Form-el2 .
 
-<http://pippo.it/birda-data/PersonLight-Form-el2> ns1:itemContent <http://pippo.it/birda-data/FamilyName-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonLight-Form-el3> .
+binst:PersonLight-Form-el2 co:itemContent binst:FamilyName-TextInput ;
+    co:nextItem binst:PersonLight-Form-el3 .
 
-<http://pippo.it/birda-data/PersonLight-Form-el3> ns1:itemContent <http://pippo.it/birda-data/Gender-TextInput> .
+binst:PersonLight-Form-el3 co:itemContent binst:Gender-TextInput .
 
-<http://pippo.it/birda-data/PersonNormal-Form-el1> ns1:itemContent <http://pippo.it/birda-data/GivenName-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonNormal-Form-el2> .
+binst:PersonNormal-Form-el1 co:itemContent binst:GivenName-TextInput ;
+    co:nextItem binst:PersonNormal-Form-el2 .
 
-<http://pippo.it/birda-data/PersonNormal-Form-el2> ns1:itemContent <http://pippo.it/birda-data/FamilyName-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonNormal-Form-el3> .
+binst:PersonNormal-Form-el2 co:itemContent binst:FamilyName-TextInput ;
+    co:nextItem binst:PersonNormal-Form-el3 .
 
-<http://pippo.it/birda-data/PersonNormal-Form-el3> ns1:itemContent <http://pippo.it/birda-data/Gender-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonNormal-Form-el4> .
+binst:PersonNormal-Form-el3 co:itemContent binst:Gender-TextInput ;
+    co:nextItem binst:PersonNormal-Form-el4 .
 
-<http://pippo.it/birda-data/PersonNormal-Form-el4> ns1:itemContent <http://pippo.it/birda-data/PersonKnowsSubForm-SubForm> .
+binst:PersonNormal-Form-el4 co:itemContent binst:PersonKnowsSubForm-SubForm .
 
-<http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el1> ns1:itemContent <http://pippo.it/birda-data/GivenName-TextInput> ;
-    ns1:nextItem <http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el2> .
+binst:PersonNormal-Form-local-name-list-el1 co:itemContent binst:GivenName-TextInput ;
+    co:nextItem binst:PersonNormal-Form-local-name-list-el2 .
 
-<http://pippo.it/birda-data/PersonNormal-Form-local-name-list-el2> ns1:itemContent <http://pippo.it/birda-data/FamilyName-TextInput> .
+binst:PersonNormal-Form-local-name-list-el2 co:itemContent binst:FamilyName-TextInput .
 
-<http://pippo.it/birda-data/FamilyName-TextInput> a ns2:TextInput ;
-    ns2:atLeast 1 ;
-    ns2:hasLabel "Family Name"@en,
+binst:FamilyName-TextInput a birda:TextInput ;
+    birda:atLeast 1 ;
+    birda:hasLabel "Family Name"@en,
         "Cognome"@it ;
-    ns2:mapsProperty <http://xmlns.com/foaf/0.1/familyName> .
+    birda:mapsProperty foaf:familyName .
 
-<http://pippo.it/birda-data/GivenName-TextInput> a ns2:TextInput ;
-    ns2:atLeast 1 ;
-    ns2:hasLabel "Name"@en,
+binst:GivenName-TextInput a birda:TextInput ;
+    birda:atLeast 1 ;
+    birda:hasLabel "Name"@en,
         "Nome"@it ;
-    ns2:mapsProperty <http://xmlns.com/foaf/0.1/givenName> .
+    birda:mapsProperty foaf:givenName .
 
