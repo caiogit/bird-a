@@ -47,7 +47,7 @@ class FormsSimple(colander.MappingSchema):
 
 			description = colander.SchemaNode(
 				colander.String(),
-				missing=colander.required)
+				missing="")
 
 	# ======================================================= #
 

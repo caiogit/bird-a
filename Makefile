@@ -20,9 +20,11 @@ PROD := $(shell echo "$(reply)" | grep "^[pP]$$" | tr '[:lower:]' '[:upper:]')
 ifeq ($(PROD), "P")
 	BE_SETUP_TARGET := install
 	BE_CONF := production.ini
+	BE_RELOAD := 
 else
 	BE_SETUP_TARGET := develop
 	BE_CONF := development.ini
+	BE_RELOAD := --reload
 endif
 
 
@@ -86,7 +88,7 @@ make-be:
 
 # Run Backend
 run-be:
-	cd $(BASE_DIR)/backend ; $(VENV)/bin/pserve $(BE_CONF) --reload
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/pserve $(BE_CONF) $(BE_RELOAD)
 	
 # -------------------------------- #
 
@@ -103,6 +105,15 @@ test-be:
 	
 	$(call intestation2,scripts/create_test_instance.py)
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/scripts/create_test_ontologies.py
+	
+	$(call intestation2,birda/services/jsons/forms.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/services/jsons/forms.py
+	
+	$(call intestation2,birda/services/jsons/individuals.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/services/jsons/individuals.py
+	
+	$(call intestation2,GET /api/v1/forms)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/prequest -mGET $(BE_CONF) /api/v1/forms
 	
 	$(call test_ok)
 	

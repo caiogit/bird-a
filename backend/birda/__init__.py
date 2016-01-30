@@ -71,6 +71,10 @@ def main(global_config, **settings):
 	# Disabling exception logger in order to avoid conflicts with cornice
 	# (exc_logger will be removed in .ini sometime in the future...)
 	config.add_settings(handle_exceptions=False)
+	
+	# Add pretty printing to jsons
+	if settings.get('birda.pretty_json_output','false') == 'true':
+		config.add_renderer('json', pyramid.renderers.JSON(indent=4))
 
 	# Scan modules for cornice services
 	#config.include("birda.services")
