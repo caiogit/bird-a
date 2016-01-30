@@ -17,19 +17,25 @@ from birda.bModel.widget import Widget
 
 # ============================================================================ #
 
-class IFormFactory(zope.interface.Interface):
+class IFormsFactory(zope.interface.Interface):
 	def reload_forms():
+		pass
+	
+	def reload_forms(self):
 		pass
 		
 	def get_forms(self):
 		pass
 		
-	def get_form(form_uri):
+	def get_form(self, form_uri):
+		pass
+	
+	def get_forms_JSON(self, lang):
 		pass
 
 # ============================================================================ #
 
-class FormFactory(object):
+class FormsFactory(object):
 	
 	settings = None
 	
@@ -164,7 +170,7 @@ if __name__ == '__main__':
 	#bConn = Storage.connect(FAKE_SETTINGS, dataset='birda', verbose=True)
 	#iConn = Storage.connect(FAKE_SETTINGS, dataset='indiv', verbose=True)
 	
-	ff = FormFactory(FAKE_SETTINGS)
+	ff = FormsFactory(FAKE_SETTINGS)
 	print ff.get_forms()
 	print ff.get_form(getattr(BINST, 'PersonNormal-Form'))
 	

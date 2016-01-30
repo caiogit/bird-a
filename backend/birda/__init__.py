@@ -18,7 +18,7 @@ import sqlalchemy
 import birda.models
 import birda.models.acl
 
-from birda.bController.form_factory import FormFactory, IFormFactory
+from birda.bController.forms_factory import FormsFactory, IFormsFactory
 
 # ============================================================================ #
 
@@ -92,7 +92,7 @@ def main(global_config, **settings):
 	
 	# Activate and set application wide services (singletons)
 	config.include('pyramid_services')
-	config.register_service(FormFactory(settings), iface=IFormFactory, name='FormFactory')
+	config.register_service(FormsFactory(settings), iface=IFormsFactory, name='FormsFactory')
 
 	# Make and run the application
 	return config.make_wsgi_app()

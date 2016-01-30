@@ -77,7 +77,7 @@ class FormWidget(Widget):
 		j = super(FormWidget, self).getJSON(lang)
 		fields = j.pop('fields')
 		
-		uri = j.pop('w_type')
+		j.pop('w_type')
 		uri = j.pop('widget_uri')
 		j['form_uri'] = uri
 		

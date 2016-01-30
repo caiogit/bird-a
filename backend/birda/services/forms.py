@@ -31,7 +31,7 @@ def forms_get(request):
 	
 	lang = request.GET.get('lang','en')
 	
-	form_factory = request.find_service(name='FormFactory')
+	form_factory = request.find_service(name='FormsFactory')
 	j = form_factory.get_forms_JSON(lang)
 	
 	# Try to deserialize the json in order to test its correctness
@@ -65,7 +65,7 @@ def form_get(request):
 	form_uri = u[0] + '//' + '/'.join(u[1:])
 	lang = request.GET.get('lang','en')
 	
-	form_factory = request.find_service(name='FormFactory')
+	form_factory = request.find_service(name='FormsFactory')
 	
 	form = form_factory.get_form(form_uri)
 	
