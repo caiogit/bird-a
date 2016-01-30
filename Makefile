@@ -45,6 +45,12 @@ define test_ok =
 $(call intestation2,All tests successfully finished)
 endef
 
+# Function test_be_api(method, service_name, service_full_uri)
+define test_be_api =
+$(call intestation2,$(1) $(2))
+cd $(BASE_DIR)/backend ; ./birda/scripts/test_service.sh $(VENV) $(BE_CONF) $(1) $(3)
+endef
+
 # ================================ #
 
 all:
@@ -94,6 +100,7 @@ run-be:
 
 # Test Backend
 test-be:
+	
 	$(call intestation2,bModel/widget.py)
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/bModel/widget.py
 	
@@ -112,11 +119,9 @@ test-be:
 	$(call intestation2,birda/services/jsons/individuals.py)
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/services/jsons/individuals.py
 	
-	$(call intestation2,GET /api/v1/forms)
-	cd $(BASE_DIR)/backend ; $(VENV)/bin/prequest -mGET $(BE_CONF) /api/v1/forms
+	$(call test_be_api,GET,/api/v1/forms,/api/v1/forms)
 	
-	$(call intestation2,GET /api/v1/forms/{form_uri})
-	cd $(BASE_DIR)/backend ; $(VENV)/bin/prequest -mGET $(BE_CONF) /api/v1/forms/http://pippo.it/birda-data/PersonNormal-Form
+	$(call test_be_api,GET,/api/v1/forms/{form_uri},/api/v1/forms/http://pippo.it/birda-data/PersonNormal-Form)
 	
 	$(call test_ok)
 	
