@@ -40,3 +40,18 @@
  - Link config files in config/
  - Create test ontologies
  - make run-fe Production
+ 
+## Maybe next steps
+ 
+ - Authentication
+ - Authorization
+ - Multilanguage
+ - Individuals authors
+ - Individuals modified time
+ - Other output formats besides json (e.g. turtle, nt, etc.)
+ - Storage on other databases besides files
+
+ - Validation of produced individuals
+ - Facilitated creation of birda widgets
+ - Unittests
+ 

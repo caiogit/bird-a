@@ -138,9 +138,10 @@ class Widget(object):
 		#assert self.type_name in ('Form', 'SubForm')
 		
 		properties = []
-		for w in self.self.descendants:
-			properties += [ w.attributes['map_property'] ]
-			
+		for w in self.descendants:
+			if w.attributes.has_key('maps_property'):
+				properties += [ w.attributes['maps_property'] ]
+		
 		return properties
 	
 	# --------------------------------- #

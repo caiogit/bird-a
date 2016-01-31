@@ -118,18 +118,24 @@ def create_target_instace():
 
 	p1 = getattr(TINST, ontology.create_random_id())
 	rdf.add((p1, RDF.type, FOAF.Person))
+	rdf.add((p1, SKOS.prefLabel, Literal('Mario Rossi',lang='it')))
+	rdf.add((p1, RDFS.comment, Literal('Il ben noto Mario',lang='it')))
 	rdf.add((p1, FOAF.givenName, Literal('Mario',lang='it')))
 	rdf.add((p1, FOAF.familyName, Literal('Rossi',lang='it')))
 	rdf.add((p1, FOAF.gender, Literal('Maschio',lang='it')))
-
+	
 	p2 = getattr(TINST, ontology.create_random_id())
 	rdf.add((p2, RDF.type, FOAF.Person))
+	rdf.add((p2, SKOS.prefLabel, Literal('Anselmo Edoardo Verdi',lang='it')))
+	rdf.add((p2, RDFS.comment, Literal('Sempre il solito Anselmo',lang='it')))
 	rdf.add((p2, FOAF.givenName, Literal('Anselmo',lang='it')))
 	rdf.add((p2, FOAF.givenName, Literal('Edoardo',lang='it')))
 	rdf.add((p2, FOAF.familyName, Literal('Verdi',lang='it')))
 
 	p3 = getattr(TINST,'pierluigi-mariuolo')
 	rdf.add((p3, RDF.type, FOAF.Person))
+	rdf.add((p3, SKOS.prefLabel, Literal('Dr. Pierluigi Mariuolo',lang='it')))
+	rdf.add((p3, RDFS.comment, Literal('Grande primario di tetratricologia',lang='it')))
 	rdf.add((p3, FOAF.givenName, Literal('Pierluigi',lang='it')))
 	rdf.add((p3, FOAF.familyName, Literal('Mariuolo',lang='it')))
 	rdf.add((p3, FOAF.gender, Literal('Maschio',lang='it')))
@@ -138,6 +144,8 @@ def create_target_instace():
 
 	p4 = getattr(TINST,'maria-grazia-rivera')
 	rdf.add((p4, RDF.type, FOAF.Person))
+	rdf.add((p4, SKOS.prefLabel, Literal('Maria Grazia Rivera',lang='it')))
+	rdf.add((p4, RDFS.comment, Literal('La mitica Mary G',lang='it')))
 	rdf.add((p4, FOAF.givenName, Literal('Maria',lang='it')))
 	rdf.add((p4, FOAF.givenName, Literal('Grazia',lang='it')))
 	rdf.add((p4, FOAF.familyName, Literal('Rivera',lang='it')))

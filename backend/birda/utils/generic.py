@@ -41,7 +41,29 @@ def import_file(full_path_to_module, dryrun=False):
 
 # -------------------------------------------------------------------- #
 
+def add_to_dict(d, key, val, init_value):
+	"""
+	
+	:param d: 
+	:param key: 
+	:param val: 
+	:param item_type: 
+	:return: 
+	"""
+	
+	if not d.has_key(key):
+		d[key] = init_value
 
+	if type(init_value) in [ type([]) ]:
+		d[key] += [ val ]
+	
+	raise ValueError('Unknown init_value type "%s"' % type(init_value))
+	
+	
+	
+	
+	
+	
 # -------------------------------------------------------------------- #
 
 if __name__ == '__main__':

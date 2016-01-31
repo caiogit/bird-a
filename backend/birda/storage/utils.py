@@ -238,6 +238,35 @@ def get_by_lang(lit_list, lang):
 
 # ---------------------------------------------------------------------------- #
 
+def get_by_lang_mul(lit_list, lang):
+	"""
+	Finds the occurrences of <lang> in the specified Literal or URIRef list
+	
+	:param lit_list: Literals or URIRef list
+	:param lang: Language in 2 chars iso format
+	:return: List of found Literals with specified language or, if no one match
+		that language, a list of literals without any language information
+	"""
+	
+	lang_list = []
+	neutral_list = []
+
+	for l in lit_list:
+		assert type(l) in [ type(rdflib.term.Literal('')), type(rdflib.term.URIRef('')) ]
+		
+		if (type(l) == type(rdflib.term.Literal(''))) and (l.language == lang):
+			lang_list += [ l ]
+		
+		if (type(l) == type(rdflib.term.URIRef(''))) or (l.language == None):
+			neutral_list += [ l ]
+	
+	if lang_list:
+		return lang_list
+	else:
+		return neutral_list
+
+# ---------------------------------------------------------------------------- #
+
 if __name__ == '__main__':
 	bConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='birda', verbose=True)
 	iConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='indiv', verbose=True)

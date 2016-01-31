@@ -104,6 +104,9 @@ test-be:
 	$(call intestation2,bModel/widget.py)
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/bModel/widget.py
 	
+	$(call intestation2,bModel/individual.py)
+	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/bModel/individual.py
+	
 	$(call intestation2,storage/file_storage.py)
 	cd $(BASE_DIR)/backend ; $(VENV)/bin/python birda/storage/file_storage.py
 
