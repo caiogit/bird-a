@@ -46,6 +46,7 @@ class SubFormWidget(Widget):
 		
 		a = collections.OrderedDict()
 		a['maps_type'] = get_property(self.conn, self.uri, BIRDA.mapsType, rdfw=self.rdfw, lexical=True, single=True)
+		a['reference_form'] = get_property(self.conn, self.uri, BIRDA.hasReferenceForm, rdfw=self.rdfw, lexical=True, single=True)
 		
 		return a
 	
@@ -60,6 +61,7 @@ class SubFormWidget(Widget):
 		fields = j.pop('fields')
 		
 		j['maps_type'] = self.attributes['maps_type']
+		j['reference_form'] = self.attributes['reference_form']
 		
 		j['fields'] = fields
 		return j

@@ -123,7 +123,26 @@ class Widget(object):
 			s += [ des.__str__(indentation_level=indentation_level+1) ]
 		
 		return '\n'.join(s)
+	
 		
+	# --------------------------------- #
+	
+	def get_managed_properties(self):
+		"""
+		Returns properties managed by descendants or a hierarchical widget
+		
+		:return: List of URI strings representing properties
+		"""
+		
+		assert self.hierarchical
+		#assert self.type_name in ('Form', 'SubForm')
+		
+		properties = []
+		for w in self.self.descendants:
+			properties += [ w.attributes['map_property'] ]
+			
+		return properties
+	
 	# --------------------------------- #
 	
 	def get_label(self, lang):

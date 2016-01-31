@@ -9,22 +9,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-binst:PersonLight-Form a co:List,
-        birda:Form ;
-    co:firstItem binst:PersonLight-Form-el1 ;
-    co:item binst:PersonLight-Form-el1,
-        binst:PersonLight-Form-el2,
-        binst:PersonLight-Form-el3 ;
-    birda:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
-    birda:hasDescription "Used to insert only the minimal FOAF:Person attributes"@en,
-        "Utilizzato per inserire solo gli attributi minimali di FOAF:Person"@it ;
-    birda:hasLabel "FOAF:Person Light"@en,
-        "FOAF:Person Minimale"@it ;
-    birda:hasTokenSeparator "-" ;
-    birda:mapsType foaf:Person ;
-    birda:usesPropertyForDescription rdfs:comment ;
-    birda:usesPropertyForLabel skos:prefLabel .
-
 binst:PersonNormal-Form a co:List,
         birda:Form ;
     co:firstItem binst:PersonNormal-Form-el1 ;
@@ -50,8 +34,25 @@ binst:PersonKnowsSubForm-SubForm a co:List,
         binst:PersonKnowsSubForm-SubForm-el2 ;
     birda:hasLabel "Gender"@en,
         "Sesso"@it ;
+    birda:hasReferenceForm binst:PersonLight-Form ;
     birda:mapsProperty foaf:knows ;
     birda:mapsType foaf:Person .
+
+binst:PersonLight-Form a co:List,
+        birda:Form ;
+    co:firstItem binst:PersonLight-Form-el1 ;
+    co:item binst:PersonLight-Form-el1,
+        binst:PersonLight-Form-el2,
+        binst:PersonLight-Form-el3 ;
+    birda:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
+    birda:hasDescription "Used to insert only the minimal FOAF:Person attributes"@en,
+        "Utilizzato per inserire solo gli attributi minimali di FOAF:Person"@it ;
+    birda:hasLabel "FOAF:Person Light"@en,
+        "FOAF:Person Minimale"@it ;
+    birda:hasTokenSeparator "-" ;
+    birda:mapsType foaf:Person ;
+    birda:usesPropertyForDescription rdfs:comment ;
+    birda:usesPropertyForLabel skos:prefLabel .
 
 binst:PersonNormal-Form-local-name-list a co:List ;
     co:firstItem binst:PersonNormal-Form-local-name-list-el1 ;

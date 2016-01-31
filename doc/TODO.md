@@ -29,6 +29,9 @@
         - Add child "hasLocalNameSeparator"
         - Add child "hasLocalNameTokenSeparator"
         - Add child "hasLocalNameRenderer"
+	- Add "hasReferenceForm"
+	    - Only for SubForms
+	    - States what is the preferred form for inserting elements
     
 
 ## Low Priority

@@ -256,6 +256,20 @@ def add_local_name_list(rdf, form, widget_list):
 
 	make_co_list(rdf, form, widget_list, detached_list_property=B_HAS_BASE_NAME_LIST, detached_list_name='local-name-list')
 
+# ---------------------------------------------------------------------------- #
+
+def set_reference_form(rdf, subform, form):
+	"""
+	Set the reference form for the specified subform
+	
+	:param rdf: graph to which attach the list
+	:param subform: 
+	:param form: 
+	:return: None
+	"""
+	
+	rdf.add((subform, bModel.BIRDA.hasReferenceForm, form))
+
 # ============================================================================ #
 
 if __name__ == '__main__':

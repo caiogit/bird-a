@@ -32,7 +32,9 @@ def create_birda_instace():
 			'en': "Name",
 			'it': "Nome"
 		})
-
+	
+	# ----------------------- #
+	
 	# FOAF Family Name
 	input_FamilyName = ontology.create_widget(
 		rdf, type=BIRDA.TextInput, namespace=BINST, name='FamilyName',
@@ -40,7 +42,9 @@ def create_birda_instace():
 			'en': "Family Name",
 			'it': "Cognome"
 		})
-
+	
+	# ----------------------- #
+	
 	# FOAF Gender
 	input_Gender = ontology.create_widget(
 		rdf, type=BIRDA.TextInput, namespace=BINST, name='Gender',
@@ -52,17 +56,7 @@ def create_birda_instace():
 		'en': ["Male", "Female", "Unknown"],
 		'it': ["Maschio", "Femmina", "Sconosciuto"]
 	})
-
-	# FOAF knows
-	subform_Knows = ontology.create_widget(
-		rdf, type=BIRDA.SubForm, namespace=BINST, name='PersonKnowsSubForm',
-		maps_type=FOAF.Person, maps_property=FOAF.knows, labels={
-			'en': "Gender",
-			'it': "Sesso"
-		})
-	ontology.make_co_list(rdf, subform_Knows, [input_givenName, input_FamilyName])
-
-
+	
 	# --------------------------------------------------------------- #
 
 	# FOAF Form Light
@@ -79,9 +73,24 @@ def create_birda_instace():
 			'en': "Used to insert only the minimal FOAF:Person attributes",
 			'it': "Utilizzato per inserire solo gli attributi minimali di FOAF:Person",
 		})
-
+	
 	ontology.make_co_list(rdf, form_PersonLight, [input_givenName, input_FamilyName, input_Gender])
-
+	
+	# ----------------------- #
+	
+	# FOAF SubForm knows
+	subform_Knows = ontology.create_widget(
+		rdf, type=BIRDA.SubForm, namespace=BINST, name='PersonKnowsSubForm',
+		maps_type=FOAF.Person, maps_property=FOAF.knows, labels={
+			'en': "Gender",
+			'it': "Sesso"
+		})
+	
+	ontology.make_co_list(rdf, subform_Knows, [input_givenName, input_FamilyName])
+	ontology.set_reference_form(rdf, subform_Knows, form_PersonLight)
+	
+	# ----------------------- #
+	
 	# FOAF Form Extended
 	form_PersonNormal = ontology.create_form_widget(
 		rdf, namespace=BINST, name='PersonNormal',
