@@ -29,7 +29,7 @@ class FileConnection(storage.Connection):
 	db_format = ''
 	lock = None
 	
-	writed = False
+	written = False
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -89,10 +89,17 @@ class FileConnection(storage.Connection):
 		:return: ???
 		"""
 		
-		self.writed = True
+		self.written = True
 		
-		raise NotImplementedError("This method should be implemented by subclasses")
-
+		start_time = time.time()
+		results = self.rdf.update(query, initNs=self.namespaces)
+		elapsed_time = time.time() - start_time
+		
+		bResults = storage.Results(query, results, elapsed_time, namespaces=self.namespaces)
+		
+		if self.verbose:
+			bResults.printQueryResults()
+		
 	# ----------------------------------------------------------------------- #
 	
 	def commit(self):
@@ -103,8 +110,9 @@ class FileConnection(storage.Connection):
 		"""
 		
 		# Write changes (if any) to file
-		if self.writed:
+		if self.written:
 			self.rdf.serialize(self.db_file, format=self.db_format)
+			self.written = False
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -117,6 +125,7 @@ class FileConnection(storage.Connection):
 		
 		# Reload the file
 		self.rdf.load(self.db_file, format=self.db_format)
+		self.written = False
 	
 	# ----------------------------------------------------------------------- #
 	
@@ -127,7 +136,7 @@ class FileConnection(storage.Connection):
 		:return: None
 		"""
 		
-		# The changes are automatically discarded, so rollback is not necessary 
+		# The changes are automatically discarded, so explicit rollback is not necessary 
 		#self.rollback()
 		
 		# Release the acquired lock on the file
@@ -143,6 +152,12 @@ if __name__ == '__main__':
 	select ?s ?p ?o
 	where {
 		?s ?p ?o
+	}
+	""")
+	
+	bConn.update("""
+	INSERT DATA {
+		<birda:pippetto> birda:hasLabel "foo"@it .
 	}
 	""")
 	

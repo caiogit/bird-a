@@ -116,8 +116,11 @@ class Results(object):
 		print '===================================='
 		print self.query.replace('\t','  ')
 		print '===================================='
-		print birda.utils.ascii_utils.render_list_dict( self.getPrettyDictList(), map=self.getFields() ) ,
-		print "%s rows in set (%s sec)" % ( len(self.getPrettyDictList()), birda.utils.ascii_utils.hhmmss(self.elapsed_time,tutto=False) )
+		if self.sparql_results != None:
+			print birda.utils.ascii_utils.render_list_dict( self.getPrettyDictList(), map=self.getFields() ) ,
+			print "%s rows in set (%s sec)" % ( len(self.getPrettyDictList()), birda.utils.ascii_utils.hhmmss(self.elapsed_time,tutto=False) )
+		else:
+			print "Updated (%s sec)" % birda.utils.ascii_utils.hhmmss(self.elapsed_time,tutto=False)
 		print
 		
 # ============================================================================ #

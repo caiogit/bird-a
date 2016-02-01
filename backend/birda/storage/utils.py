@@ -184,6 +184,17 @@ def get_property(conn, subject_uri, property_uri, lexical=False, rdfw=None, sing
 # ---------------------------------------------------------------------------- #
 
 def get_all_properties(conn, subject_uri, lexical=False, rdfw=None):
+	"""
+	Get all properties relative to a subject
+	
+	:param conn: RDF connection
+	:param subject_uri: 
+	:param lexical: If true the original rdflib object is returned, otherwise
+		the best python object that fits the type is returned
+	:param rdfw: RDFWrapper object
+	:return: Dictionary property -> list of values
+	"""
+	
 	results = conn.query("""
 	select ?property ?value
 	where {{
@@ -245,6 +256,23 @@ def get_co_list(conn, list_node, rdfw=None):
 		current_element = get_property(conn, list_node, CO.item, rdfw=rdfw)
 	
 	return el_list
+
+# ============================================================================ #
+
+# Refer to: http://stackoverflow.com/questions/19502398/sparql-update-example-for-updating-more-than-one-triple-in-a-single-query
+
+def insert_triple(conn, subject_uri, property_uri, value, lang=None):
+	pass
+
+# ---------------------------------------------------------------------------- #
+
+def delete_triple(conn, subject_uri, property_uri, value, lang=None):
+	pass
+
+# ---------------------------------------------------------------------------- #
+
+def update_triple(conn, subject_uri, property_uri, value, lang=None):
+	pass
 
 # ============================================================================ #
 
