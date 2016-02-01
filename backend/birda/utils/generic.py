@@ -8,6 +8,7 @@ str = unicode
 
 import os
 import sys
+import re
 
 # ============================================================================ #
 
@@ -41,28 +42,25 @@ def import_file(full_path_to_module, dryrun=False):
 
 # -------------------------------------------------------------------- #
 
-def add_to_dict(d, key, val, init_value):
+def is_uri(s):
+	"""
+	Tell if input string matches the uri syntax
+	
+	:param s: Input string
+	:return: True string matches uri syntax, False otherwise
 	"""
 	
-	:param d: 
-	:param key: 
-	:param val: 
-	:param item_type: 
-	:return: 
-	"""
+	# Stolen from Django (and slightly enhanced to handle "...#resource_fragment")
+	uri_regex = re.compile(
+        r'^(?:http|ftp)s?://' # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
+        r'localhost|' #localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
+        r'(?::\d+)?' # optional port
+        r'(?:/?|[/?]|#?\S+)$',
+		re.IGNORECASE)
 	
-	if not d.has_key(key):
-		d[key] = init_value
-
-	if type(init_value) in [ type([]) ]:
-		d[key] += [ val ]
-	
-	raise ValueError('Unknown init_value type "%s"' % type(init_value))
-	
-	
-	
-	
-	
+	return re.match(uri_regex, s)
 	
 # -------------------------------------------------------------------- #
 

@@ -3,15 +3,12 @@
 ## Backend
  
  - `create_test_ontologies`: 
-    - Migrate utility functions to storage.utilies
     - Add local_name management
         -  Create an example
     - Add Forms and fields
     - Make the script run with pyramid configuration
-    - Make write the files in /db
+    - Write the files in /db
 
- - Make `scripts/initialize_db.py` running
- 
 ## Frontend
 
  - Portare tutti i dummy JSON in un unico file
@@ -42,10 +39,12 @@
  - make run-fe Production
  
 ## Maybe next steps
- 
+
+### Features
+
  - Authentication
  - Authorization
- - Multilanguage
+ - Multilanguage on frontend
  - Individuals authors
  - Individuals modified time
  - Other output formats besides json (e.g. turtle, nt, etc.)
@@ -54,4 +53,12 @@
  - Validation of produced individuals
  - Facilitated creation of birda widgets
  - Unittests
- 
+
+### Improvements
+ - Backend: Proper handling of datatype "anyURI"
+ - Backend: Proper handling of no-need-to-be-translated properties
+ - Backend: Proper caching of form widget by the form_factory for large number of forms
+
+### Performance
+ - Backend: lazy loading individual (and forms?) translations form db
+ - Backend: reduce db accesses by taking advance from data already at hand

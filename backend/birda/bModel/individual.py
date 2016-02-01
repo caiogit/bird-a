@@ -10,6 +10,7 @@ str = unicode
 
 import json
 import collections
+import rdflib
 
 import birda.storage as storage
 import birda.bModel as bModel
@@ -24,7 +25,8 @@ from birda.storage.utils import (
 	prettify,
 	get_co_list, 
 	get_by_lang,
-	get_by_lang_mul
+	get_by_lang_mul,
+	py2rdf
 )
 
 # Consts ...
@@ -43,8 +45,13 @@ class Individual(object):
 	label_property = RDFS.label
 	descr_property = RDFS.comment
 	
-	from_db = {}
-	from_json = {}
+	# Stores data retrieved by DB (readonly data)
+	data_orig = {}
+	
+	# Stores current data (read/write data)
+	data_current = {}
+	# Indicates the language currently loaded in data_current
+	lang_current = ''
 	
 	# -------------------------------------- #
 	
@@ -84,9 +91,9 @@ class Individual(object):
 		s += ['-'*50]
 		s += [' + Type: %s' % prettify(self.type)]
 		for k in ['labels', 'descriptions']:
-			for val in self.from_db[k]:
+			for val in self.data_current[k]:
 				s += [' + %s: %s' % (k,prettify(val))]
-		for property, val_list in self.from_db['properties'].items():
+		for property, val_list in self.data_current['properties'].items():
 			for val in val_list:
 				s += [' > %s: %s' % (prettify(property),prettify(val))]
 		
@@ -94,26 +101,85 @@ class Individual(object):
 	
 	# -------------------------------------- #
 	
+	def is_present_at_db(self):
+		"""
+		Tell if this individual is present at db
+		
+		:return: True if present, False otherwise
+		"""
+	
+	# -------------------------------------- #
+	
 	def load_from_db(self):
 		
-		a = collections.OrderedDict()
-		a['type'] = self.type
-		a['labels'] = get_property(self.conn, self.individual_uri, self.label_property, rdfw=self.rdfw, lexical=True)
-		a['descriptions'] = get_property(self.conn, self.individual_uri, self.descr_property, rdfw=self.rdfw, lexical=True)
+		d = collections.OrderedDict()
+		
+		types = get_types(self.conn, self.individual_uri, rdfw=self.rdfw, lexical=True)
+		for type in types:
+			if type == self.type:
+				d['type'] = type
+				break
+		else:
+			d['type'] = None
+		
+		d['labels'] = get_property(self.conn, self.individual_uri, self.label_property, rdfw=self.rdfw, lexical=True)
+		d['descriptions'] = get_property(self.conn, self.individual_uri, self.descr_property, rdfw=self.rdfw, lexical=True)
 		
 		# a['authors'] = ...
 		# a['modified_time'] = ...
 		
-		a['properties'] = collections.OrderedDict()
+		d['properties'] = collections.OrderedDict()
 		for property in self.w_form.get_managed_properties():
-			a['properties'][property] = get_property(self.conn, self.individual_uri, property, rdfw=self.rdfw, lexical=True)
+			d['properties'][property] = get_property(self.conn, self.individual_uri, property, rdfw=self.rdfw, lexical=True)
 		
-		self.from_db = a
+		self.data_orig = d
+		self.data_current = d.copy()
+		self.lang_current = ''
 		
 	# -------------------------------------- #
 	
-	def load_json(self, json):
-		pass
+	def load_json(self, in_json):
+		"""
+		Load an Individual JSON in data_current
+		
+		:param in_json: Individual JSON
+		:return: None
+		"""
+		
+		d = collections.OrderedDict()
+		d['type'] = in_json['type']
+		d['labels'] = [ rdflib.term.Literal(in_json['label'],lang=in_json['lang']) ]
+		d['descriptions'] = [ rdflib.term.Literal(in_json['description'],lang=in_json['lang']) ]
+		
+		# d['authors'] = ...
+		# d['modified_time'] = ...
+		
+		d['properties'] = collections.OrderedDict()
+		for prop in in_json['properties']:
+			# FIXME
+			# Warning: matching uri-like strings and assign them a URIRef type is not
+			# correct. Some method should be used to discern URIRef from datatype anyUri
+			d['properties'][prop['uri']] = [
+				py2rdf(val) for val in prop['values']
+			]
+		
+		self.data_current = d
+		self.lang_current = in_json['lang']
+	
+	# -------------------------------------- #
+	
+	def update_db(self):
+		"""
+		Compare current data vs the original data retrieved from db and
+		delete or delete/insert in order to make the letter be equal to
+		the former
+		
+		:return: None
+		"""
+		
+		# Label
+		# get_by_lang(,self.lang_current)
+		
 	
 	# -------------------------------------- #
 	
@@ -123,28 +189,23 @@ class Individual(object):
 		j['uri'] = self.individual_uri
 		j['type'] = self.type
 		j['lang'] = lang
-		j['label'] = get_by_lang(self.from_db['labels'], lang)
-		j['description'] = get_by_lang(self.from_db['descriptions'], lang)
+		j['label'] = get_by_lang(self.data_current['labels'], lang)
+		j['description'] = get_by_lang(self.data_current['descriptions'], lang)
 		# j['last_modified'] = ...
 		# j['authors'] = ...
 		
 		j['properties'] = []
-		for property in self.from_db['properties']:
+		for property in self.data_current['properties']:
 			d = collections.OrderedDict()
 			d['uri'] = property
-			d['values'] = get_by_lang_mul(self.from_db['properties'][property], lang)
+			d['values'] = get_by_lang_mul(self.data_current['properties'][property], lang)
 			j['properties'] += [ d ]
 		
 		return j
 	
-	# -------------------------------------- #
-	
-	def update_db(self):
-		pass
-	
 # ---------------------------------------------------------------------------- #
 
-def test_individual(iConn, form_factory, individual, form_uri):
+def test_individual_1(iConn, form_factory, individual, form_uri):
 	
 	ind = Individual(iConn, individual_uri=individual, w_form=form_factory.get_form(form_uri))
 	ind.load_from_db()
@@ -155,12 +216,23 @@ def test_individual(iConn, form_factory, individual, form_uri):
 	print
 	print json.dumps(ind.get_json('en'), indent=4)
 	print
+
+# ---------------------------------------------------------------------------- #
+
+def test_individual_2(iConn, form_factory, individual, form_uri):
 	
+	ind = Individual(iConn, individual_uri=individual, w_form=form_factory.get_form(form_uri))
+	ind.load_from_db()
+	j = ind.get_json('it')
+	ind.load_json(j)
+	print json.dumps(ind.data_orig, indent=4)
+	print json.dumps(ind.data_current, indent=4)
+
 # ============================================================================ #
 
 if __name__ == '__main__':
 	ff = FormsFactory(storage.FAKE_SETTINGS)
 	iConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='indiv', verbose=False)
 	
-	test_individual(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonLight-Form'))
-	test_individual(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonNormal-Form'))
+	#test_individual_2(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonLight-Form'))
+	test_individual_2(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonNormal-Form'))

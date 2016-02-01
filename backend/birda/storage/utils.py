@@ -7,12 +7,15 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import json
 import rdflib
 import birda.bModel as bModel
 import __init__ as storage
 
 from rdflib.namespace import RDF, RDFS, XSD
 from birda.bModel import CO, BIRDA, BINST, TINST
+
+from birda.utils.generic import is_uri
 
 # ============================================================================ #
 
@@ -49,19 +52,30 @@ def rdf2py(value):
 
 # ---------------------------------------------------------------------------- #
 
-def py2rdf(value):
+def py2rdf(value, force='', lang=None):
 	"""
 	Convert the passed python object in the relative rdf counterpart.
 	Refers to this tab: http://rdflib.readthedocs.org/en/latest/rdf_terms.html#python-support
 	
 	:param value: python object
+	:param force: force interpretation to specified type.
+		Allowed types: 'uri'
+	:param lang: 
 	:return: rfdlib object
 	"""
+	
+	assert (not force) or (force in ['uri', 'any_uri'])
 	
 	if type(value) in [type(rdflib.term.URIRef(u'')), type(rdflib.term.Literal(u''))]:
 		return value
 	
-	return rdflib.term.Literal(value)
+	if force == 'any_uri':
+		return rdflib.term.Literal(value,datatype=XSD.anyURI)
+	
+	if force == 'uri' or is_uri(value):
+		return rdflib.term.URIRef(value)
+	
+	return rdflib.term.Literal(value, lang=lang)
 	
 # ---------------------------------------------------------------------------- #
 
@@ -169,6 +183,40 @@ def get_property(conn, subject_uri, property_uri, lexical=False, rdfw=None, sing
 
 # ---------------------------------------------------------------------------- #
 
+def get_all_properties(conn, subject_uri, lexical=False, rdfw=None):
+	results = conn.query("""
+	select ?property ?value
+	where {{
+		<{subject_uri}> ?property ?value
+	}}
+	""".format(**vars()))
+	
+	dlist = results.getDictList()
+	
+	if rdfw:
+		for d in dlist:
+			rdfw.add(subject_uri, d['property'], d['value'])
+	
+	# Build property dictionary
+	p_dict = {}
+	for d in dlist:
+		if lexical:
+			key = d['property']
+			value = d['value']
+		else:
+			key = rdf2py(d['property'])
+			value = rdf2py(d['value'])
+		
+		if not p_dict.has_key(key):
+			p_dict[key] = []
+		
+		p_dict[key] += [ value ]
+		
+	
+	return p_dict
+
+# ---------------------------------------------------------------------------- #
+
 def get_co_list(conn, list_node, rdfw=None):
 	"""
 	Get uri elements of a co:List
@@ -198,7 +246,7 @@ def get_co_list(conn, list_node, rdfw=None):
 	
 	return el_list
 
-# ---------------------------------------------------------------------------- #
+# ============================================================================ #
 
 def get_by_lang(lit_list, lang):
 	"""
@@ -290,6 +338,12 @@ if __name__ == '__main__':
 	types = get_types(bConn, getattr(BINST,'PersonLight-Form'), lexical=True)
 	print '-------------------------------------'
 	print types
+	print '-------------------------------------'
+	print
+	
+	properties = get_all_properties(iConn, getattr(TINST, 'pierluigi-mariuolo'), lexical=False, rdfw=None)
+	print '-------------------------------------'
+	print json.dumps(properties, indent=4)
 	print '-------------------------------------'
 	print
 	

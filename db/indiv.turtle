@@ -16,10 +16,10 @@ tinst:maria-grazia-rivera a foaf:Person ;
     foaf:gender "Femmina"@it ;
     foaf:givenName "Grazia"@it,
         "Maria"@it ;
-    foaf:knows <http://pippo.it/target-data/8o67g3>,
+    foaf:knows tinst:hfxdub,
         tinst:pierluigi-mariuolo .
 
-<http://pippo.it/target-data/5jc3op> a foaf:Person ;
+tinst:c62pa a foaf:Person ;
     rdfs:comment "Sempre il solito Anselmo"@it ;
     skos:prefLabel "Anselmo Edoardo Verdi"@it ;
     foaf:familyName "Verdi"@it ;
@@ -27,15 +27,20 @@ tinst:maria-grazia-rivera a foaf:Person ;
         "Edoardo"@it .
 
 tinst:pierluigi-mariuolo a foaf:Person ;
-    rdfs:comment "Grande primario di tetratricologia"@it ;
-    skos:prefLabel "Dr. Pierluigi Mariuolo"@it ;
-    foaf:familyName "Mariuolo"@it ;
-    foaf:gender "Maschio"@it ;
-    foaf:givenName "Pierluigi"@it ;
-    foaf:knows <http://pippo.it/target-data/5jc3op>,
-        <http://pippo.it/target-data/8o67g3> .
+    rdfs:comment "Great head physician of tetratricology"@en,
+        "Grande primario di tetratricologia"@it ;
+    skos:prefLabel "MD. Pierluigi Mariuolo"@en,
+        "Dr. Pierluigi Mariuolo"@it ;
+    foaf:familyName "Mariuolo"@en,
+        "Mariuolo"@it ;
+    foaf:gender "Male"@en,
+        "Maschio"@it ;
+    foaf:givenName "Pierluigi"@en,
+        "Pierluigi"@it ;
+    foaf:knows tinst:c62pa,
+        tinst:hfxdub .
 
-<http://pippo.it/target-data/8o67g3> a foaf:Person ;
+tinst:hfxdub a foaf:Person ;
     rdfs:comment "Il ben noto Mario"@it ;
     skos:prefLabel "Mario Rossi"@it ;
     foaf:familyName "Rossi"@it ;

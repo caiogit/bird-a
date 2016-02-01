@@ -12,19 +12,11 @@ import colander
 import json
 import pprint
 
+import birda.utils.generic as utils 
+
 # ============================================================================ #
 
 def check_uri(required=True):
-
-	# Stolen from Django
-	uri_regex = re.compile(
-        r'^(?:http|ftp)s?://' # http:// or https://
-        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
-        r'localhost|' #localhost...
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
-        r'(?::\d+)?' # optional port
-        r'(?:/?|[/?]|#?\S+)$',
-		re.IGNORECASE)
 
 	def check(node, value):
 		if not value:
@@ -34,7 +26,7 @@ def check_uri(required=True):
 			else:
 				return None
 
-		if not re.match(uri_regex, value):
+		if not utils.is_uri(value):
 			raise colander.Invalid(node,
 				'URI "%(value)s" doesn\'t match validation rules' % vars())
 		else:
