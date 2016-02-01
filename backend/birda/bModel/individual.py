@@ -177,8 +177,38 @@ class Individual(object):
 		:return: None
 		"""
 		
-		# Label
-		# get_by_lang(,self.lang_current)
+		modified = False
+		
+		# ----------------------------- #
+		
+		if self.data_current['type'] != self.data_orig['type']:
+			if self.data_orig['type'] == None:
+				insert_triple(self.individual_uri, RDF.type, self.data_current['type'])
+				modified = True
+			else:
+				raise Exception('This condition should not arise (curr: %s != orig: %s)' % 
+									(self.data_current['type'], self.data_orig['type']))
+		
+		# ----------------------------- #
+		
+		# Utility Function
+		def update_single_field(d_orig, d_curr, field, property, lang):
+			old_value = get_by_lang(d_orig[field], lang)
+			new_value = get_by_lang(d_curr[field], lang)
+			if old_value != new_value:
+				print "%(new_value)s != %(old_value)s" % vars()
+				update_triple(self.individual_uri, property, old_value, new_value)
+				return True
+			else:
+				return False
+				
+		# ----------------------------- #
+		
+		modified |= update_single_field(self.data_orig, self.data_current, 'labels', self.label_property, self.lang_current)
+		modified |= update_single_field(self.data_orig, self.data_current, 'descriptions', self.descr_property, self.lang_current)
+		
+		# We start from data_current and not by data_orig becouse ...
+		for self.data_current['properties']
 		
 	
 	# -------------------------------------- #

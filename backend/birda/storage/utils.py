@@ -28,8 +28,8 @@ def rdf2py(value):
 	:return: python object
 	"""
 	
-	# URIRef
 	if type(value) == type(rdflib.term.URIRef(u'')):
+		# URIRef
 		return unicode(value)
 	
 	if type(value) == type(rdflib.term.Literal(1)):
@@ -50,6 +50,22 @@ def rdf2py(value):
 	
 	raise ValueError('Object "%s" not supported!' % type(value))
 
+# ---------------------------------------------------------------------------- #
+
+def rdf2sparql(element, lang=None):
+	
+	if type(element) != type(rdflib.term.Literal('')):
+		element = rdflib.term.Literal(element, lang=lang)
+		
+	if element.datatype:
+		datatype = str(element.datatype).split('#')[-1]
+		return '"%s"^^xsd:%s' % (element.value, datatype)
+	else:
+		if element.language:
+			return '"%s"@%s' % (element.value, element.language)
+		else:
+			return '"%s"' % (element.value)
+	
 # ---------------------------------------------------------------------------- #
 
 def py2rdf(value, force='', lang=None):
@@ -262,17 +278,32 @@ def get_co_list(conn, list_node, rdfw=None):
 # Refer to: http://stackoverflow.com/questions/19502398/sparql-update-example-for-updating-more-than-one-triple-in-a-single-query
 
 def insert_triple(conn, subject_uri, property_uri, value, lang=None):
-	pass
+	
+	value = rdf2sparql(value, lang=lang)
+	
+	conn.update("""
+	INSERT DATA {{
+		<{subject_uri}> <{property_uri}> {value} .
+	}}
+	""".format(**vars()))
 
 # ---------------------------------------------------------------------------- #
 
 def delete_triple(conn, subject_uri, property_uri, value, lang=None):
-	pass
+	
+	value = rdf2sparql(value, lang=lang)
+	
+	conn.update("""
+	DELETE DATA {{
+		<{subject_uri}> <{property_uri}> {value} .
+	}}
+	""".format(**vars()))
 
 # ---------------------------------------------------------------------------- #
 
-def update_triple(conn, subject_uri, property_uri, value, lang=None):
-	pass
+def update_triple(conn, subject_uri, property_uri, old_value, new_value, lang=None):
+	delete_triple(conn, subject_uri, property_uri, old_value, lang=lang)
+	insert_triple(conn, subject_uri, property_uri, new_value, lang=lang)
 
 # ============================================================================ #
 
@@ -346,41 +377,46 @@ def get_by_lang_mul(lit_list, lang):
 if __name__ == '__main__':
 	bConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='birda', verbose=True)
 	iConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='indiv', verbose=True)
+	tConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='test', verbose=True)
 	
-	print '-------------------------------------'
-	test_prettify(rdflib.URIRef(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'))
-	test_prettify(rdflib.term.URIRef(u'http://w3id.org/ontologies/bird-a/atLeast'))
-	test_prettify(rdflib.term.Literal(u'-'))
-	test_prettify(rdflib.term.Literal(u'Used to insert FOAF:Person attributes', lang=u'en'))
-	test_prettify(rdflib.term.Literal(u'http://pippo.it/target-data/', datatype=rdflib.term.URIRef(u'http://www.w3.org/2001/XMLSchema#anyURI')))
-	test_prettify(rdflib.term.Literal(u'1', datatype=rdflib.term.URIRef(u'http://www.w3.org/2001/XMLSchema#integer')))
-	print '-------------------------------------'
-	print
+# 	print '-------------------------------------'
+# 	test_prettify(rdflib.URIRef(u'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'))
+# 	test_prettify(rdflib.term.URIRef(u'http://w3id.org/ontologies/bird-a/atLeast'))
+# 	test_prettify(rdflib.term.Literal(u'-'))
+# 	test_prettify(rdflib.term.Literal(u'Used to insert FOAF:Person attributes', lang=u'en'))
+# 	test_prettify(rdflib.term.Literal(u'http://pippo.it/target-data/', datatype=rdflib.term.URIRef(u'http://www.w3.org/2001/XMLSchema#anyURI')))
+# 	test_prettify(rdflib.term.Literal(u'1', datatype=rdflib.term.URIRef(u'http://www.w3.org/2001/XMLSchema#integer')))
+# 	print '-------------------------------------'
+# 	print
+# 	
+# 	values = get_property(bConn, getattr(BINST,'PersonLight-Form'), getattr(rdflib.namespace.RDF,'type'), lexical=True)
+# 	print '-------------------------------------'
+# 	print values
+# 	print '-------------------------------------'
+# 	print
+# 	
+# 	types = get_types(bConn, getattr(BINST,'PersonLight-Form'), lexical=True)
+# 	print '-------------------------------------'
+# 	print types
+# 	print '-------------------------------------'
+# 	print
+# 	
+# 	properties = get_all_properties(iConn, getattr(TINST, 'pierluigi-mariuolo'), lexical=False, rdfw=None)
+# 	print '-------------------------------------'
+# 	print json.dumps(properties, indent=4)
+# 	print '-------------------------------------'
+# 	print
+# 	
+# 	el_list = get_co_list(bConn, getattr(BINST,'PersonLight-Form'), rdfw=None)
+# 	print '-------------------------------------'
+# 	for el in el_list: print el
+# 	print '-------------------------------------'
+# 	print
 	
-	values = get_property(bConn, getattr(BINST,'PersonLight-Form'), getattr(rdflib.namespace.RDF,'type'), lexical=True)
-	print '-------------------------------------'
-	print values
-	print '-------------------------------------'
-	print
+	insert_triple(tConn, TINST.provolo, BIRDA.hasLabel, 'asd', lang='it')
+	update_triple(tConn, TINST.provolo, BIRDA.hasLabel, 'asd', 'masd', lang='it')
+	delete_triple(tConn, TINST.provolo, BIRDA.hasLabel, 'asd', lang='it')
+	tConn.commit()
+	tConn.close()
 	
-	types = get_types(bConn, getattr(BINST,'PersonLight-Form'), lexical=True)
-	print '-------------------------------------'
-	print types
-	print '-------------------------------------'
-	print
-	
-	properties = get_all_properties(iConn, getattr(TINST, 'pierluigi-mariuolo'), lexical=False, rdfw=None)
-	print '-------------------------------------'
-	print json.dumps(properties, indent=4)
-	print '-------------------------------------'
-	print
-	
-	el_list = get_co_list(bConn, getattr(BINST,'PersonLight-Form'), rdfw=None)
-	print '-------------------------------------'
-	for el in el_list: print el
-	print '-------------------------------------'
-	print
-	
-	#test_classes()
-
 	

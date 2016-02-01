@@ -32,6 +32,7 @@ FAKE_SETTINGS = {
 	'birda.storage_type': 'file',
 	'birda.storage_file_birda_db': FAKE_DB_PATH + '/birda.turtle',
 	'birda.storage_file_indiv_db': FAKE_DB_PATH + '/indiv.turtle',
+	'birda.storage_file_test_db': FAKE_DB_PATH + '/test.turtle',
 }
 
 # ============================================================================ #
@@ -113,8 +114,11 @@ class Results(object):
 		:return: None
 		"""
 		
+		query_rows = self.query.replace('\t','  ').split('\n')
+		query = "\n".join([ r for r in query_rows if r.strip() ])
+		
 		print '===================================='
-		print self.query.replace('\t','  ')
+		print query
 		print '===================================='
 		if self.sparql_results != None:
 			print birda.utils.ascii_utils.render_list_dict( self.getPrettyDictList(), map=self.getFields() ) ,

@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import os
 import time
 import rdflib
 import birda.utils.lock
@@ -34,7 +35,7 @@ class FileConnection(storage.Connection):
 	# ----------------------------------------------------------------------- #
 	
 	def __init__(self, settings, dataset='', namespaces={}, verbose=False):
-		assert dataset in ('birda','indiv')
+		assert dataset in ('birda','indiv','test')
 		
 		self.settings = settings
 		self.dataset = dataset
@@ -49,6 +50,8 @@ class FileConnection(storage.Connection):
 			self.db_file = settings['birda.storage_file_birda_db']
 		elif dataset == 'indiv':
 			self.db_file = settings['birda.storage_file_indiv_db']
+		elif dataset == 'test':
+			self.db_file = settings['birda.storage_file_test_db']
 		else:
 			raise NotImplementedError("")
 		
@@ -56,6 +59,11 @@ class FileConnection(storage.Connection):
 		
 		# Acquires the lock
 		self.lock = birda.utils.lock.wait_for_lock(self.db_file, max_sleep=0.2)
+		
+		# Creates the file if it doesn't exist
+		if not os.path.isfile(self.db_file):
+			f = open(self.db_file,'w')
+			f.close()
 		
 		# Load the file
 		self.rdf.load(self.db_file, format=self.db_format)
@@ -124,6 +132,7 @@ class FileConnection(storage.Connection):
 		"""
 		
 		# Reload the file
+		self.rdf = ontology.new_rdf_Graph()
 		self.rdf.load(self.db_file, format=self.db_format)
 		self.written = False
 	
@@ -147,22 +156,22 @@ class FileConnection(storage.Connection):
 # ================================================================================================ #
 
 if __name__ == '__main__':
-	bConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='birda', verbose=True)
-	results = bConn.query("""
-	select ?s ?p ?o
-	where {
-		?s ?p ?o
-	}
-	""")
-	
-	bConn.update("""
+	tConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='test', verbose=True)
+	tConn.update("""
 	INSERT DATA {
 		<birda:pippetto> birda:hasLabel "foo"@it .
 	}
 	""")
-	
-	# Sleep in order to try the lock system
-	#time.sleep(20)
-	
-	bConn.close()
-	
+	tConn.update("""
+	INSERT DATA {
+		<birda:pippetto> birda:hasLabel "foo" .
+	}
+	""")
+	tConn.update("""
+	DELETE DATA {
+		<birda:pippetto> birda:hasLabel "foo"@it .
+	}
+	""")
+	tConn.commit()
+	results = tConn.query("select ?s ?p ?o where { ?s ?p ?o }")
+	tConn.close()

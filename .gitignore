@@ -39,3 +39,4 @@ backend/birda/scripts/*.nt
 
 # Others
 doc/MockUp.pdf
+db/test.turtle
