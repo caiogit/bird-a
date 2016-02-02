@@ -199,7 +199,7 @@ class Individual(object):
 		delete or delete/insert in order to make the letter be equal to
 		the former
 		
-		:return: None
+		:return: True database was changed, False otherwise
 		"""
 		
 		modified = False
@@ -213,7 +213,7 @@ class Individual(object):
 		if self.data_current['type'] != self.data_orig['type']:
 			if self.data_orig['type'] == None:
 				if verbose: print "Added type: %s" % (prettify(self.data_current['type']))
-				insert_triple(self.individual_uri, RDF.type, self.data_current['type'])
+				insert_triple(self.conn, self.individual_uri, RDF.type, self.data_current['type'])
 				modified = True
 			else:
 				raise Exception('RDF Types mismatch! new: %s, orig: %s' % 
@@ -228,7 +228,9 @@ class Individual(object):
 			
 			old_value = get_by_lang(d_orig[field], lang)
 			new_value = get_by_lang(d_curr[field], lang)
-			assert old_value.language == new_value.language
+			print repr(old_value)
+			assert (not old_value and old_value.language == None) or (old_value.language == new_value.language), \
+				"old language %r differ from new language %r" % (old_value.language, new_value.language)
 			
 			if old_value != new_value:
 				if verbose: print "%(field)s (%(property)s): %(old_value)r -> %(new_value)r" % vars()
@@ -280,6 +282,14 @@ class Individual(object):
 				modified = True
 		
 		if verbose: print "Modified: %s" % modified
+		
+		# After an update, data_orig and data_current should be reset
+		if modified:
+			self.load_from_db()
+		else:
+			self.data_current = self.data_orig.copy()
+		
+		return modified
 	
 # ============================================================================ #
 
@@ -307,6 +317,9 @@ def test_individual_2(iConn, form_factory, individual, form_uri):
 	print json.dumps(ind.data_current, indent=4)
 	
 	iConn.verbose = True
+	
+	# Test Update #
+	
 	#ind.data_current['type'] = BINST.pippo
 	ind.data_current['labels'] = [ rdflib.term.Literal('Mariottide',lang='it') ]
 	#ind.data_current['descriptions'] = [ rdflib.term.Literal('Maranello',lang='en') ]
@@ -320,8 +333,35 @@ def test_individual_2(iConn, form_factory, individual, form_uri):
 	print
 	ind.update_db(verbose=True)
 	print
+	
 	iConn.rollback()
 
+# ---------------------------------------------------------------------------- #
+
+def test_individual_3(iConn, form_factory, individual, form_uri):
+	
+	ind = Individual(iConn, individual_uri=individual, w_form=form_factory.get_form(form_uri))
+	ind.load_from_db()
+	j = ind.get_json('it')
+	
+	new_ind = Individual(iConn, individual_uri=individual+'-bis', w_form=form_factory.get_form(form_uri))
+	new_ind.load_from_db()
+	new_ind.load_json(j)
+	print json.dumps(new_ind.data_orig, indent=4)
+	print json.dumps(new_ind.data_current, indent=4)
+	
+	iConn.verbose = True
+	
+	# Test Insert #
+	
+	print
+	new_ind.update_db(verbose=True)
+	print
+	
+	print json.dumps(new_ind.data_orig, indent=4)
+	
+	iConn.rollback()
+	
 # ============================================================================ #
 
 if __name__ == '__main__':
@@ -330,3 +370,5 @@ if __name__ == '__main__':
 	
 	#test_individual_2(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonLight-Form'))
 	test_individual_2(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonNormal-Form'))
+	test_individual_3(iConn, ff, getattr(bModel.TINST, 'pierluigi-mariuolo'), getattr(BINST, 'PersonNormal-Form'))
+	
