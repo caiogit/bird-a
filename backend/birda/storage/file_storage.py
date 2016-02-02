@@ -77,6 +77,9 @@ class FileConnection(storage.Connection):
 		:return: Result object
 		"""
 		
+		if self.verbose:
+			storage.Results.printQuery(query)
+		
 		start_time = time.time()
 		results = self.rdf.query(query, initNs=self.namespaces)
 		elapsed_time = time.time() - start_time
@@ -98,6 +101,9 @@ class FileConnection(storage.Connection):
 		"""
 		
 		self.written = True
+		
+		if self.verbose:
+			storage.Results.printQuery(query)
 		
 		start_time = time.time()
 		results = self.rdf.update(query, initNs=self.namespaces)

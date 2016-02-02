@@ -114,18 +114,23 @@ class Results(object):
 		:return: None
 		"""
 		
-		query_rows = self.query.replace('\t','  ').split('\n')
-		query = "\n".join([ r for r in query_rows if r.strip() ])
-		
-		print '===================================='
-		print query
-		print '===================================='
 		if self.sparql_results != None:
 			print birda.utils.ascii_utils.render_list_dict( self.getPrettyDictList(), map=self.getFields() ) ,
 			print "%s rows in set (%s sec)" % ( len(self.getPrettyDictList()), birda.utils.ascii_utils.hhmmss(self.elapsed_time,tutto=False) )
 		else:
 			print "Updated (%s sec)" % birda.utils.ascii_utils.hhmmss(self.elapsed_time,tutto=False)
 		print
+	
+	# ----------------------------------------------------------------------- #
+	
+	@staticmethod
+	def printQuery(query):
+		query_rows = query.replace('\t','  ').split('\n')
+		query = "\n".join([ r for r in query_rows if r.strip() ])
+		
+		print '===================================='
+		print query
+		print '===================================='
 		
 # ============================================================================ #
 

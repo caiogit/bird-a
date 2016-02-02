@@ -19,6 +19,7 @@ import birda.models
 import birda.models.acl
 
 from birda.bController.forms_factory import FormsFactory, IFormsFactory
+from birda.bController.individuals_factory import IndividualsFactory, IIndividualsFactory
 
 # ============================================================================ #
 
@@ -91,8 +92,12 @@ def main(global_config, **settings):
 	config.add_subscriber(add_cors_headers_response_callback, pyramid.events.NewRequest)
 	
 	# Activate and set application wide services (singletons)
+	forms_factory = FormsFactory(settings)
+	individuals_factory = IndividualsFactory(settings, forms_factory)
+	
 	config.include('pyramid_services')
-	config.register_service(FormsFactory(settings), iface=IFormsFactory, name='FormsFactory')
+	config.register_service(forms_factory, iface=IFormsFactory, name='FormsFactory')
+	config.register_service(individuals_factory, iface=IIndividualsFactory, name='IndividualsFactory')
 
 	# Make and run the application
 	return config.make_wsgi_app()

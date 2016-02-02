@@ -308,6 +308,16 @@ def update_triple(conn, subject_uri, property_uri, old_value, new_value, lang=No
 	delete_triple(conn, subject_uri, property_uri, old_value, lang=lang)
 	insert_triple(conn, subject_uri, property_uri, new_value, lang=lang)
 
+# ---------------------------------------------------------------------------- #
+
+def delete_all_triples(conn, subject_uri):
+	
+	conn.update("""
+	DELETE DATA {{
+		<{subject_uri}> ?p ?o .
+	}}
+	""".format(**vars()))
+	
 # ============================================================================ #
 
 def get_by_lang(lit_list, lang):

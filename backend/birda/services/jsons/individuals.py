@@ -59,13 +59,13 @@ class IndividualsInfos(colander.MappingSchema):
 
 			last_modified = colander.SchemaNode(
 				colander.DateTime(),
-				missing=colander.required,
+				missing=None,
 				validator=None)
 
 			# ------------------------------------------------------- #
 
 			@colander.instantiate(
-				missing=colander.required,
+				missing=[],
 				validator=colander.Length(min=0))
 			class authors(colander.SequenceSchema):
 

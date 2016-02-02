@@ -29,7 +29,8 @@ from birda.storage.utils import (
 	py2rdf,
 	insert_triple,
 	delete_triple,
-	update_triple
+	update_triple,
+	delete_all_triples
 )
 
 # Consts ...
@@ -85,6 +86,9 @@ class Individual(object):
 		if self.w_form.attributes['descr_property']:
 			self.descr_property = self.w_form.attributes['descr_property']
 		
+		# Load from db, if he istance exists
+		self.load_from_db()
+		
 	# -------------------------------------- #
 	
 	def __str__(self):
@@ -110,6 +114,8 @@ class Individual(object):
 		
 		:return: True if present, False otherwise
 		"""
+		
+		return self.data_current['type'] != None
 	
 	# -------------------------------------- #
 	
@@ -290,7 +296,13 @@ class Individual(object):
 			self.data_current = self.data_orig.copy()
 		
 		return modified
+		
+	# -------------------------------------- #
 	
+	def delete(self):
+		delete_all_triples(self.conn, self.individual_uri)
+		self.load_from_db()
+			
 # ============================================================================ #
 
 def test_individual_1(iConn, form_factory, individual, form_uri):
