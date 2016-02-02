@@ -7,6 +7,8 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import datetime
+
 import pyramid.config
 import pyramid.authentication
 import pyramid.authorization
@@ -41,6 +43,23 @@ def add_cors_headers_response_callback(event):
 		
 	event.request.add_response_callback(cors_headers)
 
+# ---------------------------------------------------------------------------- #
+
+def define_json_renderer(settings):
+	
+	# Prettify output in development environment
+	if settings.get('birda.pretty_json_output','false') == 'true':
+		json_renderer = pyramid.renderers.JSON(indent=4)
+	else:
+		json_renderer = pyramid.renderers.JSON()
+	
+	# Altering date format
+	def datetime_adapter(obj, request):
+		return obj.isoformat()
+	json_renderer.add_adapter(datetime.datetime, datetime_adapter)
+
+	return json_renderer
+
 # ============================================================================ #
 
 def main(global_config, **settings):
@@ -73,10 +92,9 @@ def main(global_config, **settings):
 	# (exc_logger will be removed in .ini sometime in the future...)
 	config.add_settings(handle_exceptions=False)
 	
-	# Add pretty printing to jsons
-	if settings.get('birda.pretty_json_output','false') == 'true':
-		config.add_renderer('json', pyramid.renderers.JSON(indent=4))
-
+	# Tailorization of default pyramid json renderer
+	config.add_renderer('json', define_json_renderer(settings))	
+	
 	# Scan modules for cornice services
 	#config.include("birda.services")
 	config.include('cornice')

@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import colander
 import cornice
 import jsons.individuals
 
@@ -56,7 +57,10 @@ def individual_get(request):
 		"individuals": [ j ] 
 	}
 	
-	deserialized = IndividualsInfos().deserialize(j)
+	try:
+		deserialized = IndividualsInfos().deserialize(j)
+	except colander.Invalid as e:
+		raise ServiceError(status=500, msg="JSON validation error", additional=e.asdict())
 	
 	return deserialized
 

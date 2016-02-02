@@ -22,8 +22,8 @@ __all__ = [n.encode('ascii') for n in __all__]
 # ============================================================================ #
 
 class ServiceError(webob.exc.HTTPError):
-	def __init__(self, status=0, msg=''):
-		body = {'status': status, 'message': msg}
+	def __init__(self, status=0, msg='', additional={}):
+		body = {'status': status, 'message': msg, 'additional':additional}
 		webob.Response.__init__(self, json.dumps(body))
 		self.status = status
 		self.content_type = 'application/json'

@@ -49,12 +49,12 @@ class IndividualsInfos(colander.MappingSchema):
 
 			label = colander.SchemaNode(
 				colander.String(),
-				missing=colander.required,
+				missing='',
 				validator=None)
 
 			description = colander.SchemaNode(
 				colander.String(),
-				missing=colander.required,
+				missing='',
 				validator=None)
 
 			last_modified = colander.SchemaNode(

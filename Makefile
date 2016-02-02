@@ -48,7 +48,7 @@ endef
 # Function test_be_api(method, service_name, service_full_uri)
 define test_be_api =
 $(call intestation2,$(1) $(2))
-cd $(BASE_DIR)/backend ; ./birda/scripts/test_service.sh $(VENV) $(BE_CONF) $(1) $(3)
+cd $(BASE_DIR)/backend ; ./birda/scripts/test_service.sh $(VENV) $(BE_CONF) $(1) "$(3)"
 endef
 
 # ================================ #
@@ -125,6 +125,10 @@ test-be:
 	$(call test_be_api,GET,/api/v1/forms,/api/v1/forms)
 	
 	$(call test_be_api,GET,/api/v1/forms/{form_uri},/api/v1/forms/http://pippo.it/birda-data/PersonNormal-Form)
+	
+	$(call test_be_api,GET,/api/v1/individuals/{uri},/api/v1/individuals/http://pippo.it/target-data/pierluigi-mariuolo?asd=1&form_uri=http://pippo.it/birda-data/PersonNormal-Form&lang=it)
+	
+	$(call test_be_api,GET,/api/v1/individuals/{uri},/api/v1/individuals/http://pippo.it/target-data/pierluigi-mariuolo?asd=1&form_uri=http://pippo.it/birda-data/PersonNormal-Form&lang=us)
 	
 	$(call test_ok)
 	

@@ -3,7 +3,7 @@
 VENV=$1
 BE_CONF=$2
 METHOD=$3
-SRV_FULL_URI=$4
+SRV_FULL_URI="$4"
 
 TMP_FILE=/tmp/$(basename $0).$$.tmp
 
@@ -26,7 +26,7 @@ function search_for_error {
 
 # Simulating request
 echo
-${VENV}/bin/prequest -m${METHOD} -d ${BE_CONF} ${SRV_FULL_URI} | tee ${TMP_FILE}
+${VENV}/bin/prequest -m${METHOD} -d ${BE_CONF} "${SRV_FULL_URI}" | tee ${TMP_FILE}
 echo
 
 # Look for errors

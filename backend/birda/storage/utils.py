@@ -320,12 +320,14 @@ def delete_all_triples(conn, subject_uri):
 	
 # ============================================================================ #
 
-def get_by_lang(lit_list, lang):
+def get_by_lang(lit_list, lang, loose=False):
 	"""
 	Finds the occurrence of <lang> in the specified literals list
 	
 	:param lit_list: Literals list
 	:param lang: Language in 2 chars iso format
+	:param loose: tell the function to try to search for something else if
+		it doesn't find the input lang
 	:return: Found Literal, a default Literal or Literal('') if no literals were present
 	"""
 	
@@ -346,15 +348,18 @@ def get_by_lang(lit_list, lang):
 		elif l.language == None:
 			default2 = l
 	
-	if default1:
-		# If lang was not found, return english
-		return default1
-	elif default2:
-		# If lang was not found, return the literal without language informations
-		return default2
+	if loose:
+		if default1:
+			# If lang was not found, return english
+			return default1
+		elif default2:
+			# If lang was not found, return the literal without language informations
+			return default2
+		else:
+			# If even english was not found, return the first available
+			return lit_list[0]
 	else:
-		# If even english was not found, return the first available
-		return lit_list[0]
+		return rdflib.term.Literal('')
 
 # ---------------------------------------------------------------------------- #
 
