@@ -54,6 +54,9 @@ def rdf2py(value):
 
 def rdf2sparql(element, lang=None):
 	
+	if type(element) == type(rdflib.term.URIRef('')):
+		return "<%s>" % element
+		
 	if type(element) != type(rdflib.term.Literal('')):
 		element = rdflib.term.Literal(element, lang=lang)
 		

@@ -8,6 +8,7 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import rdflib
 import collections
 from birda.bModel.widget import Widget
 
@@ -49,6 +50,15 @@ class TextInputWidget(Widget):
 		a['placeholders'] = get_property(self.conn, self.uri, BIRDA.hasPlaceholder, rdfw=self.rdfw, lexical=True)
 		
 		return a
+	
+	# --------------------------------- #
+	
+	def to_rdf(self, value, lang=None):
+		"""
+		See Widget.to_rdf declaration 
+		"""
+		
+		return rdflib.term.Literal(str(value), lang=lang, datatype=None)
 	
 	# --------------------------------- #
 	

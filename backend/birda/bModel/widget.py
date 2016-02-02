@@ -124,7 +124,61 @@ class Widget(object):
 		
 		return '\n'.join(s)
 	
+	# --------------------------------- #
+	
+	def to_rdf(self, value, lang=None):
+		"""
+		Converts input <value> in the correct rdflib object
 		
+		:param value: input value (string or whatever). If None, returns
+			a representative object (e.g. "" for strings)
+		:param lang: optional language specification (used only for strings)
+		:return: The corresponding rdflib object
+		"""
+		
+		raise NotImplementedError('This method should implemented in subclasses')
+	
+	# --------------------------------- #
+	
+	def get_language(self, lang=None):
+		"""
+		Returns <lang> if widget cares about language, None otherwise
+		
+		:param lang: language specification
+		:return: <lang> or None
+		"""
+		
+		rep_el = self.to_rdf(None, lang=lang)
+		
+		if type(rep_el) == type(rdflib.term.Literal('')):
+			return rep_el.language
+		else:
+			return None
+		
+	# --------------------------------- #
+	
+	def get_descendants(self):
+		if self.hierarchical:
+			return self.descendants
+		else:
+			raise ValueError("This method should be invoked only on hierarchical widgets")
+	
+	# --------------------------------- #
+	
+	def get_mapped_type(self):
+		if self.attributes.has_key('maps_type'):
+			return self.attributes['maps_type']
+		else:
+			raise TypeError('This widget doesn\'t maps any type')
+	
+	# --------------------------------- #
+	
+	def get_mapped_property(self):
+		if self.attributes.has_key('maps_property'):
+			return self.attributes['maps_property']
+		else:
+			raise TypeError('This widget doesn\'t maps any property')
+	
 	# --------------------------------- #
 	
 	def get_managed_properties(self):

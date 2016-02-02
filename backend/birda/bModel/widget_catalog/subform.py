@@ -8,6 +8,7 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import rdflib
 import collections
 from birda.bModel.widget import Widget
 
@@ -49,6 +50,17 @@ class SubFormWidget(Widget):
 		a['reference_form'] = get_property(self.conn, self.uri, BIRDA.hasReferenceForm, rdfw=self.rdfw, lexical=True, single=True)
 		
 		return a
+	
+	# --------------------------------- #
+	
+	def to_rdf(self, value, lang=None):
+		"""
+		See Widget.to_rdf declaration 
+		"""
+		if value != None:
+			return rdflib.term.URIRef(value)
+		else:
+			return rdflib.term.URIRef('')
 	
 	# --------------------------------- #
 	

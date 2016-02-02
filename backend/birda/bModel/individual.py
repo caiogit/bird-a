@@ -26,7 +26,10 @@ from birda.storage.utils import (
 	get_co_list, 
 	get_by_lang,
 	get_by_lang_mul,
-	py2rdf
+	py2rdf,
+	insert_triple,
+	delete_triple,
+	update_triple
 )
 
 # Consts ...
@@ -75,7 +78,7 @@ class Individual(object):
 		self.w_form = w_form
 		
 		# Gather Form Widget infos
-		self.type = self.w_form.attributes['maps_type']
+		self.type = self.w_form.get_mapped_type()
 		self.only_properties = w_form.get_managed_properties()
 		if self.w_form.attributes['label_property']:
 			self.label_property = self.w_form.attributes['label_property']
@@ -168,51 +171,6 @@ class Individual(object):
 	
 	# -------------------------------------- #
 	
-	def update_db(self):
-		"""
-		Compare current data vs the original data retrieved from db and
-		delete or delete/insert in order to make the letter be equal to
-		the former
-		
-		:return: None
-		"""
-		
-		modified = False
-		
-		# ----------------------------- #
-		
-		if self.data_current['type'] != self.data_orig['type']:
-			if self.data_orig['type'] == None:
-				insert_triple(self.individual_uri, RDF.type, self.data_current['type'])
-				modified = True
-			else:
-				raise Exception('This condition should not arise (curr: %s != orig: %s)' % 
-									(self.data_current['type'], self.data_orig['type']))
-		
-		# ----------------------------- #
-		
-		# Utility Function
-		def update_single_field(d_orig, d_curr, field, property, lang):
-			old_value = get_by_lang(d_orig[field], lang)
-			new_value = get_by_lang(d_curr[field], lang)
-			if old_value != new_value:
-				print "%(new_value)s != %(old_value)s" % vars()
-				update_triple(self.individual_uri, property, old_value, new_value)
-				return True
-			else:
-				return False
-				
-		# ----------------------------- #
-		
-		modified |= update_single_field(self.data_orig, self.data_current, 'labels', self.label_property, self.lang_current)
-		modified |= update_single_field(self.data_orig, self.data_current, 'descriptions', self.descr_property, self.lang_current)
-		
-		# We start from data_current and not by data_orig becouse ...
-		for self.data_current['properties']
-		
-	
-	# -------------------------------------- #
-	
 	def get_json(self, lang):
 		
 		j = collections.OrderedDict()
@@ -233,7 +191,97 @@ class Individual(object):
 		
 		return j
 	
-# ---------------------------------------------------------------------------- #
+	# -------------------------------------- #
+	
+	def update_db(self, verbose=False):
+		"""
+		Compare current data vs the original data retrieved from db and
+		delete or delete/insert in order to make the letter be equal to
+		the former
+		
+		:return: None
+		"""
+		
+		modified = False
+		
+		if verbose: print "Update..."
+		
+		# ----------------------------- #
+		
+		# Type #
+		
+		if self.data_current['type'] != self.data_orig['type']:
+			if self.data_orig['type'] == None:
+				if verbose: print "Added type: %s" % (prettify(self.data_current['type']))
+				insert_triple(self.individual_uri, RDF.type, self.data_current['type'])
+				modified = True
+			else:
+				raise Exception('RDF Types mismatch! new: %s, orig: %s' % 
+						(prettify(self.data_current['type']), prettify(self.data_orig['type'])))
+		
+		# ----------------------------- #
+		
+		# Label and Description #
+		
+		def update_single_field(d_orig, d_curr, field, property, lang):
+			"""Utility function"""
+			
+			old_value = get_by_lang(d_orig[field], lang)
+			new_value = get_by_lang(d_curr[field], lang)
+			assert old_value.language == new_value.language
+			
+			if old_value != new_value:
+				if verbose: print "%(field)s (%(property)s): %(old_value)r -> %(new_value)r" % vars()
+				update_triple(self.conn, self.individual_uri, property, old_value, new_value)
+				return True
+			else:
+				return False
+		
+		modified |= update_single_field(self.data_orig, self.data_current, 'labels', self.label_property, self.lang_current)
+		modified |= update_single_field(self.data_orig, self.data_current, 'descriptions', self.descr_property, self.lang_current)
+		
+		# ----------------------------- #
+		
+		# Authors #
+		# ...
+		
+		# Modified time #
+		# ...
+		
+		# ----------------------------- #
+		
+		# Other properties #
+		for widget in self.w_form.get_descendants():
+			
+			property = widget.get_mapped_property()
+			values_orig = get_by_lang_mul(
+				self.data_orig['properties'].get(property,[]),
+				lang=widget.get_language(self.lang_current))
+			values_current = get_by_lang_mul(
+				self.data_current['properties'].get(property,[]),
+				lang=widget.get_language(self.lang_current))
+			
+			only_in_orig = set(values_orig) - set(values_current)
+			only_in_curr = set(values_current) - set(values_orig)
+			#in_both = set(values_current) & set(values_orig)
+			
+			for val in only_in_orig:
+				if verbose: print "Delete %s: %s" % (prettify(property), prettify(val))
+				delete_triple(
+					self.conn, self.individual_uri, property,
+					widget.to_rdf(val, lang=self.lang_current))
+				modified = True
+				
+			for val in only_in_curr:
+				if verbose: print "Insert %s: %s" % (prettify(property), prettify(val))
+				insert_triple(
+					self.conn, self.individual_uri, property,
+					widget.to_rdf(val, lang=self.lang_current))
+				modified = True
+		
+		if verbose: print "Modified: %s" % modified
+	
+# ============================================================================ #
 
 def test_individual_1(iConn, form_factory, individual, form_uri):
 	
@@ -257,6 +305,22 @@ def test_individual_2(iConn, form_factory, individual, form_uri):
 	ind.load_json(j)
 	print json.dumps(ind.data_orig, indent=4)
 	print json.dumps(ind.data_current, indent=4)
+	
+	iConn.verbose = True
+	#ind.data_current['type'] = BINST.pippo
+	ind.data_current['labels'] = [ rdflib.term.Literal('Mariottide',lang='it') ]
+	#ind.data_current['descriptions'] = [ rdflib.term.Literal('Maranello',lang='en') ]
+	ind.data_current['descriptions'] = [ rdflib.term.Literal('Maranello',lang='it') ]
+	ind.data_current['properties']['http://xmlns.com/foaf/0.1/givenName'] \
+		+= [ rdflib.term.Literal('Maria',lang='it') ]
+	ind.data_current['properties']['http://xmlns.com/foaf/0.1/familyName'] \
+		= [ rdflib.term.Literal('Mistificio',lang='it') ]
+	ind.data_current['properties']['http://xmlns.com/foaf/0.1/knows'] \
+		.pop(0)
+	print
+	ind.update_db(verbose=True)
+	print
+	iConn.rollback()
 
 # ============================================================================ #
 

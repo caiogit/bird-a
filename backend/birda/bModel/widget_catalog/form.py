@@ -67,6 +67,15 @@ class FormWidget(Widget):
 	
 	# --------------------------------- #
 	
+	def to_rdf(self, value, lang=None):
+		"""
+		See Widget.to_rdf declaration 
+		"""
+		
+		raise NotImplementedError('This method should not be invoked on a Form widget')
+	
+	# --------------------------------- #
+	
 	def getJSON(self, lang):
 		"""
 		Inherited from Widget 
