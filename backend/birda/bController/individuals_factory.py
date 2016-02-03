@@ -56,6 +56,66 @@ class IndividualsFactory(object):
 		return Individual(iConn, individual_uri=individual_uri, w_form=w_form)
 	
 	# --------------------------------- #
+	
+	def search(self, iConn, in_json):
+		"""
+		Warning!
+		
+		The implementation of this feature is in "dummy" state.
+		At the moment, this function only scan the input json properties
+		in search of rdf:type property, search instances with this type
+		ordering them by uri and then returns vanilla Individual jsons.
+		"""
+		
+		"""
+		{
+			"properties": [
+				{
+					"uri": "http://xmlns.com/foaf/0.1/givenName"
+				},
+				{
+					"uri": "http://xmlns.com/foaf/0.1/familyName"
+				}
+			],
+			"filters":[
+				{
+					"property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+					"value": "http://xmlns.com/foaf/0.1/Person",
+					"match": "exact"
+				},
+				{
+					"property": "http://xmlns.com/foaf/0.1/familyName",
+					"value": "Pippo",
+					"match": "starts_with"
+				}
+			],
+			"order_by":[
+				{
+					"property": "http://xmlns.com/foaf/0.1/familyName",
+					"order": "desc"
+				}
+			],
+			"limit": 0,
+			"offset": 0
+		}
+		"""
+		
+		# Search with SPARQL
+		in_json['']
+		
+		iConn.query("""
+		SELECT ?s
+		WHERE {{
+			?s rdf:type <{type_uri}> .
+		}}
+		""".format(**vars()))
+		
+		# Create list of individuals
+		
+		# Create jsons list
+		
+	
+	# --------------------------------- #
 
 # ============================================================================ #
 

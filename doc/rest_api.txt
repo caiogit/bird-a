@@ -330,10 +330,6 @@ Same as GET returned JSON (useful for reload "uri", "authors" and "last_modified
 
 Delete all data for that individual.
 
-==========================================================================================
-/api/v1/individuals
-==========================================================================================
-Example: /api/v1/individuals
 
 ------------------------------------------------------------------------------------------
 										PUT
@@ -343,6 +339,9 @@ Create an individual. Informations possibly changed in the process, like url, au
 last_modified should be returned in response and updated on the screen.
 
 Used by: Creation of a new individual
+
+UPDATE: Url will not be modifiable, so PUT can be invoked with the standard uri 
+/api/v1/individuals/{individual_uri}
 
 Payload:
 {{

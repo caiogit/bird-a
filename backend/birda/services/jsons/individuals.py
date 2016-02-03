@@ -266,7 +266,7 @@ SearchQuery_example = json.loads("""
 		},
 		{
 			"property": "http://xmlns.com/foaf/0.1/familyName",
-			"value": "http://xmlns.com/foaf/0.1/Person",
+			"value": "Pippo",
 			"match": "starts_with"
 		}
 	],

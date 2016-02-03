@@ -70,7 +70,7 @@ def form_get(request):
 	form = form_factory.get_form(form_uri)
 	
 	if not form:
-		raise ServiceError(status=404, msg="Form '%(form_uri)s' not found" % vars())
+		raise ServiceError(status=404, msg="Form '%(form_uri)s' not found" % vars(), connections=[])
 	
 	j = form.getJSON(lang)
 	
