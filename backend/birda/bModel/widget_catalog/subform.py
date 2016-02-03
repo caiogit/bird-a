@@ -64,6 +64,21 @@ class SubFormWidget(Widget):
 	
 	# --------------------------------- #
 	
+	def are_valid_values(self, values):
+		"""
+		See Widget.validate_values declaration 
+		"""
+		
+		issues = super(TextInputWidget, self).validate_values(values)
+		
+		# TODO
+		# Validate type of referenced instances?
+		# ...
+		
+		return issues 
+	
+	# --------------------------------- #
+	
 	def getJSON(self, lang):
 		"""
 		Inherited from Widget 

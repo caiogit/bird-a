@@ -152,7 +152,7 @@ class Individual(object):
 		Load an Individual JSON in data_current
 		
 		:param in_json: Individual JSON
-		:return: None
+		:return: List of issues 
 		"""
 		
 		lang = in_json['lang']
@@ -170,17 +170,42 @@ class Individual(object):
 		# - Validate values with widget.are_valid_values(values)
 		# - Convert values with widget.get_converted_values(values)
 		d['properties'] = collections.OrderedDict()
-		for prop in in_json['properties']:
-			# FIXME
-			# Warning: matching uri-like strings and assign them a URIRef type is not
-			# correct. Some method should be used to discern URIRef from datatype anyUri
-			d['properties'][prop['uri']] = [
-				py2rdf(val, lang=lang) for val in prop['values']
-			]
+# 		for prop in in_json['properties']:
+# 			# FIXME
+# 			# Warning: matching uri-like strings and assign them a URIRef type is not
+# 			# correct. Some method should be used to discern URIRef from datatype anyUri
+# 			d['properties'][prop['uri']] = [
+# 				py2rdf(val, lang=lang) for val in prop['values']
+# 			]
 		
-		self.data_current = d
-		self.lang_current = lang
-	
+		# Normalize json properties
+		json_properties = {}
+		for prop in in_json['properties']:
+			json_properties[prop['uri']] = prop['values']
+		
+		# Cycles to the widgets in order to validate properties
+		issues = {}
+		for widget in self.w_form.get_descendants():
+			property = widget.get_mapped_property()
+			p_issues = widget.validate_values( json_properties[property] )
+			
+			if not p_issues:
+				d['properties'][property] = [
+					widget.to_rdf(val, lang=lang) for val in json_properties[property]
+				]
+			
+			else:
+				issues[property] = p_issues
+		
+		if issues:
+			return issues
+		
+		else:
+			# Set the current dictionary if no issues have been found
+			self.data_current = d
+			self.lang_current = lang
+			return {}
+			
 	# -------------------------------------- #
 	
 	def get_json(self, lang):
@@ -240,7 +265,6 @@ class Individual(object):
 			
 			old_value = get_by_lang(d_orig[field], lang)
 			new_value = get_by_lang(d_curr[field], lang)
-			print repr(old_value)
 			assert (not old_value and old_value.language == None) or (old_value.language == new_value.language), \
 				"old language %r differ from new language %r" % (old_value.language, new_value.language)
 			

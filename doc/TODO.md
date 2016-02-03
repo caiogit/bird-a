@@ -56,8 +56,6 @@
  - Unittests
 
 ### Improvements
- - Backend: Proper handling of datatype "anyURI"
- - Backend: Proper handling of no-need-to-be-translated properties
  - Backend: Proper caching of form widget by the form_factory for large number of forms
 
 ### Performance

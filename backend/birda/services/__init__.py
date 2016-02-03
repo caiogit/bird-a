@@ -4,6 +4,7 @@
 # -------------------------------------- #
 # Enables python3-like strings handling
 from __future__ import unicode_literals
+old_str = str
 str = unicode
 # -------------------------------------- #
 
@@ -22,16 +23,29 @@ __all__ = [n.encode('ascii') for n in __all__]
 # ============================================================================ #
 
 class ServiceError(webob.exc.HTTPError):
+	
 	def __init__(self, status=0, msg='', additional={}):
+		self.status = status
+		self.msg = msg
+		self.additional = additional
+		
 		body = {'status': status, 'message': msg, 'additional':additional}
 		webob.Response.__init__(self, json.dumps(body))
 		self.status = status
-		self.content_type = 'application/json'
+		self.content_type = old_str('application/json')
+	
+	def __str__(self):
+		return 'Status %s: %s (additional infos: %s)' % (self.status, self.msg, self.additional) 
 
 # ---------------------------------------------------------------------------- #
 
 def is_verbose(request):
 	return request.registry.settings['birda.verbose'] == 'true'
+
+# ---------------------------------------------------------------------------- #
+	
+def do_commit(request):
+	return request.registry.settings['birda.do_commit'] == 'true'
 
 # ---------------------------------------------------------------------------- #
 

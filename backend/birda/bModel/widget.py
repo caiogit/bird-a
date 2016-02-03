@@ -157,35 +157,26 @@ class Widget(object):
 		
 	# --------------------------------- #
 	
-	def are_valid_values(self, values):
+	def validate_values(self, values):
 		"""
 		Take a list of values (even raw strings) and validate them accordingly to
 		the widget settings
 		
 		:param values: List of input values
-		:return: True if values are valid, False otherwise
+		:return: List of founded issues (empty list indicates a valid values list)
 		"""
 		
-		return True
+		issues = []
 		
-		# FIXME: To uncomment when all widget will been implemented
-		# raise NotImplementedError("This method should be implemented by subclasses")
-	
-	# --------------------------------- #
-	
-	def get_converted_values(self, values):
-		"""
-		Take a list of values (even raw strings) and convert them to the 
-		appropriate object accordingly to widget settings
+		if self.attributes['at_least']:
+			if len(values) < int(self.attributes['at_least']):
+				issues += ['Values length "%s" is less then the minium allowed of "%s"' % (len(values), self.attributes['at_least'])]
 		
-		:param values: List of input values
-		:return: List of converted values
-		"""
+		if self.attributes['at_most']:
+			if len(values) > int(self.attributes['at_most']):
+				issues += ['Values length "%s" is more then the maxium allowed of "%s"' % (len(values), self.attributes['at_most'])]
 		
-		return values
-		
-		# FIXME: To uncomment when all widget will been implemented
-		# raise NotImplementedError("This method should be implemented by subclasses")
+		return issues 
 	
 	# --------------------------------- #
 	

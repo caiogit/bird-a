@@ -7,13 +7,14 @@ from __future__ import unicode_literals
 str = unicode
 # -------------------------------------- #
 
+import json
 import colander
 import cornice
-import jsons.individuals
 
+import jsons.individuals
 import birda.storage as storage
 
-from __init__ import ServiceError, is_verbose
+from __init__ import ServiceError, is_verbose, do_commit
 from jsons.individuals import IndividualsInfos, SearchQuery
 
 # ============================================================================ #
@@ -32,6 +33,10 @@ individualV1 = cornice.Service(
 
 def individual_initialization(request):
 	u = request.matchdict['individual_uri']
+	print u
+	if request.method in ('GET','POST','DELETE') and not u:
+		raise ServiceError(status=400, msg="Individual URI is mandatory in method %s" % request.method)
+		
 	individual_uri = u[0] + '//' + '/'.join(u[1:])
 	form_uri = request.GET.get('form_uri','')
 	lang = request.GET.get('lang','en').lower()
@@ -88,17 +93,19 @@ def individual_post(request):
 		raise ServiceError(status=404, msg="Individual '%s' not found" % ind.individual_uri)
 	
 	try:
-		print request.json_body
 		j = IndividualsInfos().deserialize(request.json_body)
 	except colander.Invalid as e:
-		print e
 		raise ServiceError(status=400, msg="JSON validation error", additional=e.asdict())
 	
 	if len(j['individuals']) != 1:
 		raise ServiceError(status=400, msg="There should be only one individual in POST JSON")
 	
-	ind.load_json(j['individuals'][0])
-	ind.update_db(verbose=is_verbose(request))
+	issues = ind.load_json(j['individuals'][0])
+	
+	if issues:
+		raise ServiceError(status=500, msg="JSON validation error", additional=issues)
+	
+	modified = ind.update_db(verbose=is_verbose(request))
 	
 	j = ind.get_json(lang)
 	j = {
@@ -110,7 +117,8 @@ def individual_post(request):
 	except colander.Invalid as e:
 		raise ServiceError(status=500, msg="JSON validation error", additional=e.asdict())
 	
-	#iConn.commit()
+	if modified and do_commit(request):
+		iConn.commit()
 	iConn.close()
 	
 	return deserialized
@@ -119,7 +127,7 @@ def individual_post(request):
 
 @individual.delete()
 @individualV1.delete()
-def individual_post(request):
+def individual_delete(request):
 	
 	iConn, lang, ind = individual_initialization(request)
 	
@@ -132,7 +140,8 @@ def individual_post(request):
 		request.response.status = 204
 		if is_verbose(request): print "Deleted!!"
 	
-	iConn.commit()
+	if do_commit(request):
+		iConn.commit()
 	iConn.close()
 	
 	return {}
