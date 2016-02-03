@@ -313,10 +313,14 @@ def update_triple(conn, subject_uri, property_uri, old_value, new_value, lang=No
 def delete_all_triples(conn, subject_uri):
 	
 	conn.update("""
-	DELETE DATA {{
-		<{subject_uri}> ?p ?o .
+	DELETE  {{
+		<{subject_uri}> ?p ?o
+	}}
+	WHERE {{ 
+		<{subject_uri}> ?p ?o. 
 	}}
 	""".format(**vars()))
+
 	
 # ============================================================================ #
 

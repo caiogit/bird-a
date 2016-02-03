@@ -49,6 +49,7 @@
  - Individuals modified time
  - Other output formats besides json (e.g. turtle, nt, etc.)
  - Storage on other databases besides files
+ - Implementing RDFA in frontend
 
  - Validation of produced individuals
  - Facilitated creation of birda widgets

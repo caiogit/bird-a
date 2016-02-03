@@ -322,7 +322,6 @@ def test_individual_1(iConn, form_factory, individual, form_uri):
 def test_individual_2(iConn, form_factory, individual, form_uri):
 	
 	ind = Individual(iConn, individual_uri=individual, w_form=form_factory.get_form(form_uri))
-	ind.load_from_db()
 	j = ind.get_json('it')
 	ind.load_json(j)
 	print json.dumps(ind.data_orig, indent=4)
@@ -353,7 +352,6 @@ def test_individual_2(iConn, form_factory, individual, form_uri):
 def test_individual_3(iConn, form_factory, individual, form_uri):
 	
 	ind = Individual(iConn, individual_uri=individual, w_form=form_factory.get_form(form_uri))
-	ind.load_from_db()
 	j = ind.get_json('it')
 	
 	new_ind = Individual(iConn, individual_uri=individual+'-bis', w_form=form_factory.get_form(form_uri))

@@ -29,7 +29,7 @@ formsV1 = cornice.Service(
 @formsV1.get()
 def forms_get(request):
 	
-	lang = request.GET.get('lang','en')
+	lang = request.GET.get('lang','en').lower()
 	
 	form_factory = request.find_service(name='FormsFactory')
 	j = form_factory.get_forms_JSON(lang)
@@ -63,7 +63,7 @@ def form_get(request):
 	
 	u = request.matchdict['form_uri']
 	form_uri = u[0] + '//' + '/'.join(u[1:])
-	lang = request.GET.get('lang','en')
+	lang = request.GET.get('lang','en').lower()
 	
 	form_factory = request.find_service(name='FormsFactory')
 	
