@@ -13,20 +13,20 @@ import jsons.individuals
 
 import birda.storage as storage
 
-from __init__ import ServiceError
+from __init__ import ServiceError, is_verbose
 from jsons.individuals import IndividualsInfos, SearchQuery
 
 # ============================================================================ #
 
 individual = cornice.Service(
 		name='individual',
-		path='/api/v1/individuals/*individual_uri',
-		description="Individuals get, update and delete")
+		path='/api/v1/individuals*individual_uri',
+		description="Individuals CRUD operations")
 
 individualV1 = cornice.Service(
 		name='individual',
-		path='/api/v1/individuals/*individual_uri',
-		description="Individuals get, update and delete")
+		path='/api/v1/individuals*individual_uri',
+		description="Individuals CRUD operations")
 
 # ---------------------------------------------------------------------------- #
 
@@ -88,12 +88,17 @@ def individual_post(request):
 		raise ServiceError(status=404, msg="Individual '%s' not found" % ind.individual_uri)
 	
 	try:
+		print request.json_body
 		j = IndividualsInfos().deserialize(request.json_body)
 	except colander.Invalid as e:
+		print e
 		raise ServiceError(status=400, msg="JSON validation error", additional=e.asdict())
 	
-	ind.load_json(j)
-	ind.update_db(verbose=True)
+	if len(j['individuals']) != 1:
+		raise ServiceError(status=400, msg="There should be only one individual in POST JSON")
+	
+	ind.load_json(j['individuals'][0])
+	ind.update_db(verbose=is_verbose(request))
 	
 	j = ind.get_json(lang)
 	j = {
@@ -105,7 +110,7 @@ def individual_post(request):
 	except colander.Invalid as e:
 		raise ServiceError(status=500, msg="JSON validation error", additional=e.asdict())
 	
-	iConn.commit()
+	#iConn.commit()
 	iConn.close()
 	
 	return deserialized
@@ -121,11 +126,11 @@ def individual_post(request):
 	if not ind.is_present_at_db():
 		#raise ServiceError(status=404, msg="JSON validation error", additional=e.asdict())
 		request.response.status = 202
-		print "Not found"
+		if is_verbose(request): print "Not found"
 	else:
 		ind.delete()
 		request.response.status = 204
-		print "Deleted!!"
+		if is_verbose(request): print "Deleted!!"
 	
 	iConn.commit()
 	iConn.close()

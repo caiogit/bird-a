@@ -157,6 +157,38 @@ class Widget(object):
 		
 	# --------------------------------- #
 	
+	def are_valid_values(self, values):
+		"""
+		Take a list of values (even raw strings) and validate them accordingly to
+		the widget settings
+		
+		:param values: List of input values
+		:return: True if values are valid, False otherwise
+		"""
+		
+		return True
+		
+		# FIXME: To uncomment when all widget will been implemented
+		# raise NotImplementedError("This method should be implemented by subclasses")
+	
+	# --------------------------------- #
+	
+	def get_converted_values(self, values):
+		"""
+		Take a list of values (even raw strings) and convert them to the 
+		appropriate object accordingly to widget settings
+		
+		:param values: List of input values
+		:return: List of converted values
+		"""
+		
+		return values
+		
+		# FIXME: To uncomment when all widget will been implemented
+		# raise NotImplementedError("This method should be implemented by subclasses")
+	
+	# --------------------------------- #
+	
 	def get_descendants(self):
 		if self.hierarchical:
 			return self.descendants

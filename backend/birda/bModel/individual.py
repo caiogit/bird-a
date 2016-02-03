@@ -155,25 +155,31 @@ class Individual(object):
 		:return: None
 		"""
 		
+		lang = in_json['lang']
+		
 		d = collections.OrderedDict()
-		d['type'] = in_json['type']
-		d['labels'] = [ rdflib.term.Literal(in_json['label'],lang=in_json['lang']) ]
-		d['descriptions'] = [ rdflib.term.Literal(in_json['description'],lang=in_json['lang']) ]
+		d['type'] = rdflib.term.URIRef(in_json['type'])
+		d['labels'] = [ rdflib.term.Literal(in_json['label'], lang=lang) ]
+		d['descriptions'] = [ rdflib.term.Literal(in_json['description'], lang=lang) ]
 		
 		# d['authors'] = ...
 		# d['modified_time'] = ...
 		
+		# TODO
+		# - Drive the properties treatment with widgets list
+		# - Validate values with widget.are_valid_values(values)
+		# - Convert values with widget.get_converted_values(values)
 		d['properties'] = collections.OrderedDict()
 		for prop in in_json['properties']:
 			# FIXME
 			# Warning: matching uri-like strings and assign them a URIRef type is not
 			# correct. Some method should be used to discern URIRef from datatype anyUri
 			d['properties'][prop['uri']] = [
-				py2rdf(val) for val in prop['values']
+				py2rdf(val, lang=lang) for val in prop['values']
 			]
 		
 		self.data_current = d
-		self.lang_current = in_json['lang']
+		self.lang_current = lang
 	
 	# -------------------------------------- #
 	

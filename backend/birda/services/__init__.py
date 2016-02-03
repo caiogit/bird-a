@@ -30,6 +30,11 @@ class ServiceError(webob.exc.HTTPError):
 
 # ---------------------------------------------------------------------------- #
 
+def is_verbose(request):
+	return request.registry.settings['birda.verbose'] == 'true'
+
+# ---------------------------------------------------------------------------- #
+
 def request2dict(request, function, extended=False):
 	ret = {}
 	ret['function'] = function
