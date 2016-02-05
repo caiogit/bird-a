@@ -1,7 +1,8 @@
 # ================================ #
 
 BASE_DIR := $(PWD)
-GRUNT := ./node_modules/.bin/grunt
+GRUNT := $(PWD)/frontend/node_modules/.bin/grunt
+BOWER := $(PWD)/frontend/node_modules/.bin/bower
 
 # Set VENV if not already set
 ifndef VENV
@@ -83,6 +84,10 @@ make-be:
 #	export PYTHON_PATH=$(BASE_DIR)/backend:$(BASE_DIR)/backend/birda:$PYTHON_PATH ; \
 	$(SUDO) $(VENV)/bin/python setup.py $(BE_SETUP_TARGET)
 	
+	# Just to make sure...
+	$(SUDO) $(VENV)/bin/easy_install -UZ cryptacular
+	$(SUDO) $(VENV)/bin/pip install --upgrade rdflib
+	
 	# TODO: Initialization scripts
 	@echo
 	@echo "========================"
@@ -137,7 +142,7 @@ test-be:
 # Make Frontend
 make-fe:
 	cd $(BASE_DIR)/frontend; npm install
-	cd $(BASE_DIR)/frontend; bower install
+	cd $(BASE_DIR)/frontend; $(BOWER) install
 	cd $(BASE_DIR)/frontend; $(GRUNT) --force
 
 # -------------------------------- #

@@ -223,7 +223,7 @@ header {
 
 .main-container {
 	text-align: center;
-	height: 78%;
+	min-height: 82%;
 	display: table;
 	table-layout: fixed;
 
@@ -307,6 +307,14 @@ footer {
 
 	.container {
 		display:inline;
+	}
+
+	p {
+		margin:0px;
+	}
+
+	.row {
+		margin:0px;
 	}
 }
 
