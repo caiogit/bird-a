@@ -18,6 +18,8 @@ fontend/dist
 fontend/.tmp
 fontend/.sass-cache
 fontend/bower_components
+frontend/gems_packages/
+frontend/node/
 
 # Fuseki exclusion
 fuseki/

@@ -1,8 +1,9 @@
 # ================================ #
 
 BASE_DIR := $(PWD)
-GRUNT := $(PWD)/frontend/node_modules/.bin/grunt
-BOWER := $(PWD)/frontend/node_modules/.bin/bower
+#GRUNT := $(PWD)/frontend/node_modules/.bin/grunt
+#BOWER := $(PWD)/frontend/node_modules/.bin/bower
+EXPORT_PATH_FE = export PATH=$(BASE_DIR)/frontend/node_modules/.bin:$(BASE_DIR)/frontend/gems_packages/bin:$(BASE_DIR)/frontend/node/n/versions/node/5.4.1/bin:$(PATH)
 
 # Set VENV if not already set
 ifndef VENV
@@ -141,15 +142,18 @@ test-be:
 
 # Make Frontend
 make-fe:
-	cd $(BASE_DIR)/frontend; npm install
-	cd $(BASE_DIR)/frontend; $(BOWER) install
-	cd $(BASE_DIR)/frontend; $(GRUNT) --force
+	cd $(BASE_DIR)/frontend; npm install npm
+	cd $(BASE_DIR)/frontend; gem install compass --install-dir gems_packages
+	$(EXPORT_PATH_FE); cd $(BASE_DIR)/frontend; export N_PREFIX=node ; n 5.4.1
+	$(EXPORT_PATH_FE); cd $(BASE_DIR)/frontend; npm install
+	$(EXPORT_PATH_FE); cd $(BASE_DIR)/frontend; bower install
+	$(EXPORT_PATH_FE); cd $(BASE_DIR)/frontend; grunt --force
 
 # -------------------------------- #
 
 # Run Frontend
 run-fe:
-	cd $(BASE_DIR)/frontend ; $(GRUNT) serve --force
+	$(EXPORT_PATH_FE); cd $(BASE_DIR)/frontend ; grunt serve --force
 	
 # -------------------------------- #
 
