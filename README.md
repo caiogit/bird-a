@@ -1,6 +1,5 @@
 # Bird-A
 
-
 Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 
 ## Requirements
@@ -9,8 +8,6 @@ Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 - Python SQLite3 bindings (debian packages: build-essential, libsqlite3-dev).
 - virtualenv (optional)
 - npm
-- bower
-- grunt
 - Java Runtime Environment (required by Fuseki)
 
 In a debian system:
@@ -19,8 +16,6 @@ In a debian system:
 - sudo gem update --system
 - sudo gem install compass
 - sudo npm install -g bower grunt
-- sudo pip install --upgrade rdflib
-- sudo easy_install -UZ cryptacular
 
 ## Installing and Running
 
@@ -49,6 +44,8 @@ Run backend, frondend and fuseki:
 
 ## Troubleshooting
 
+### Cryptacular
+
 If `make make-be` ends with this error::
 
 	cryptacular/bcrypt/_bcrypt.c:26:20: fatal error: Python.h: No such file or directory
@@ -58,6 +55,7 @@ then try (source [[https://github.com/eventray/horus/issues/38]]):
 	sudo apt-get install python-dev python3-dev
 	sudo easy_install -UZ cryptacular
 
+### Rdflib
 
 If some scripts raise this error:
 
@@ -66,6 +64,13 @@ If some scripts raise this error:
 		from rdflib.namespace import RDF
 	ImportError: No module named namespace
 
-then try:
+try:
 
 	sudo pip install --upgrade rdflib
+
+### Unibo CS department only
+
+In department machines npm is not in path. To bypass this:
+
+	echo -e '\nexport PATH=$PATH:/usr/local/node/bin\n' >> ~/.bashrc
+

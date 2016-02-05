@@ -197,7 +197,7 @@ Returns:
 
 
 ==========================================================================================
-/api/v1/individuals/search ? [lang=it] & [offset={x}] & [limit={x}]
+/api/v1/individuals/search ? [form={form_uri}] & [lang=it] & [offset={x}] & [limit={x}]
 ==========================================================================================
 Example: /api/v1/individuals?lang=en&offset=10&limit=10
 
@@ -205,9 +205,12 @@ Example: /api/v1/individuals?lang=en&offset=10&limit=10
 										POST
 ------------------------------------------------------------------------------------------
 
-Resarch a list of individuals with a complex filter.
+Research a list of individuals with a complex filter.
 
 Used by: subform searches
+
+UPDATE: form_uri required in order to deduct proper rdf type for the values and
+for instantiate the individuals. 
 
 Params: 
 {
@@ -299,7 +302,7 @@ Used for: fill a form with informations relative to an individual.
 
 Returns:
 {{
-Same as GET /api/v1/individuals/search returned JSON, with only one indvidual
+Same as GET /api/v1/individuals/search returned JSON, with only one individual
 }}
 
 ------------------------------------------------------------------------------------------
@@ -310,7 +313,7 @@ Update an individual. Informations possibly changed in the process, like url, au
 last_modified should be returned in response and updated on the screen.
 
 In POST the query string "form" is mandatory (backend uses it to deduct which informations
-of the specified indivdual should be deleted and rewritten)
+of the specified individual should be deleted and rewritten)
 
 Used in: Update an existing individual
 
