@@ -8,6 +8,9 @@
     - Add Forms and fields
     - Make the script run with pyramid configuration
     - Write the files in /db
+ 
+ - Reliability: add try / except statements to services in order to format exception
+   properly and close connections
 
 ## Frontend
 

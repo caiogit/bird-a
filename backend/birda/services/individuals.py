@@ -19,15 +19,19 @@ from jsons.individuals import IndividualsInfos, SearchQuery
 
 # ============================================================================ #
 
+# FIXME
+# Workaround: used individuals-search instad of individuals/search because url
+# matching takes erroneously the individuals/* rule. To be fixed. 
+
 individuals_search = cornice.Service(
 		name='individuals_search',
-		path='/api/individuals/search',
-		description="Individuals CRUD operations")
+		path='/api/individuals-search',
+		description="Individuals search")
 
 individuals_search_v1 = cornice.Service(
 		name='individuals_search_v1',
-		path='/api/v1/individuals/search',
-		description="Individuals CRUD operations")
+		path='/api/v1/individuals-search',
+		description="Individuals search")
 
 # ---------------------------------------------------------------------------- #
 
@@ -38,17 +42,25 @@ def individuals_search(request):
 	lang = request.GET.get('lang','en').lower()
 	limit = request.GET.get('lang','0')
 	offset = request.GET.get('lang','0')
+	form_uri = request.GET.get('form_uri','')
 	
 	try:
 		in_json = SearchQuery().deserialize(request.json_body)
 	except colander.Invalid as e:
 		raise ServiceError(status=400, msg="JSON validation error", additional=e.asdict(), connections=[])
 	
-	individuals_factory = request.find_service(name='IndividualsFactory')
+	forms_factory = request.find_service(name='FormsFactory')
+	
+	w_form = forms_factory.get_form(form_uri)
+	if not w_form:
+		raise ServiceError(status=404, msg="Form '%(form_uri)s' not found" % vars(), connections=[]) 
 	
 	iConn = storage.Storage.connect(request.registry.settings, dataset='indiv', verbose=False)
 	
-	j = search(iConn, in_json)
+	individuals_factory = request.find_service(name='IndividualsFactory')
+	j = individuals_factory.search(iConn, in_json, w_form, lang, limit, offset)
+	
+	iConn.close()
 	return j
 
 # ============================================================================ #

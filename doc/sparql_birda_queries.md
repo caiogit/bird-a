@@ -3,6 +3,7 @@
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX birda: <http://w3id.org/ontologies/bird-a/>
 PREFIX birda-d: <http://pippo.it/birda-data/>
 ```
@@ -89,4 +90,30 @@ WHERE {
     ?form ?property ?value .
 }
 ORDER BY ?form ?property
+```
+
+# Individuals
+
+```
+SELECT ?ind ?name
+WHERE { 
+	?ind rdf:type foaf:Person ;
+		 foaf:givenName ?name .
+	FILTER (langMatches(lang(?name), "EN")) .
+}
+```
+
+```
+SELECT ?ind ?prop1 ?prop2
+WHERE { 
+	?ind rdf:type foaf:Person .
+	
+	?ind foaf:givenName ?prop1 .
+	FILTER (lcase(str(?prop1)) = "mario") .
+	FILTER (langMatches(lang(?prop1), "it")) .
+
+	?ind foaf:familyName ?prop2 .
+	FILTER (strstarts(lcase(?prop2), "ro")) .
+	FILTER (langMatches(lang(?prop2), "it")) .
+}
 ```

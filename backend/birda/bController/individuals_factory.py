@@ -11,11 +11,11 @@ str = unicode
 import zope.interface
 from birda.bModel.individual import Individual
 
+from rdflib.namespace import RDF
+
 # ============================================================================ #
 
 class IIndividualsFactory(zope.interface.Interface):
-	def reload_forms():
-		pass
 	
 	def reload_forms(self):
 		pass
@@ -57,14 +57,21 @@ class IndividualsFactory(object):
 	
 	# --------------------------------- #
 	
-	def search(self, iConn, in_json):
+	def search(self, iConn, in_json, w_form, lang, limit, offset):
 		"""
 		Warning!
+		The implementation of this feature is incomplete. It relies on a form
+		in order to operate (constraint that should be removed in future releases),
+		and ignores the "properties" selection. The reason behind this choice is
+		to ease the recognition of correct type of values and to have a handy
+		generation of the output json.
+		Correct implementation should independently look for correct widget to
+		manage each "filter" and each "property" and use it to validate input,
+		generate sparql and render the result.
 		
-		The implementation of this feature is in "dummy" state.
-		At the moment, this function only scan the input json properties
-		in search of rdf:type property, search instances with this type
-		ordering them by uri and then returns vanilla Individual jsons.
+		Update: for simplicity, all values in sparql queries have been handled
+		as strings. This could affect performances, so it probably need some
+		enhancements in future versions
 		"""
 		
 		"""
@@ -101,19 +108,87 @@ class IndividualsFactory(object):
 		"""
 		
 		# Search with SPARQL
-		in_json['']
 		
-		iConn.query("""
-		SELECT ?s
+		# Normalize fields
+		
+		sparql_type = ''
+		sparql_filters = []
+		
+		for filter in in_json['filters']:
+			property = filter['property']
+			print filter
+			
+			if str(property) == str(RDF.type):
+				sparql_type = '?ind rdf:type <{value}> .'.format(value=filter['value'])
+			
+			else:
+				sparql_filter = []
+				value = filter['value']
+				value_name = '?value%s' % (len(sparql_filters)+1)
+				
+				sparql_filter += ['?ind <{property}> {value_name} .'.format(**vars()) ]
+				sparql_filter += ['FILTER (langMatches(lang({value_name}), "{lang}")) .'.format(**vars()) ]
+				"""
+				?ind foaf:givenName ?prop1 .
+				FILTER (strstarts(lcase(?prop1), "m")) .
+				FILTER (langMatches(lang(?prop1), "it")) .
+				"""
+				
+				# For normal properties we should look for the widget that maps it 
+				# in order to use the correct sparql syntax
+				#if not w_form.descendants_per_property.has_key(property):
+				#	raise ValueError('Property <%s> not defined in form <%s>' % (property,w_form.uri))
+				#value = w_form.descendants_per_property.has_key[property]\
+				#	.to_rdf(filter['value'].lower(), lang=lang)
+				
+				if filter['match'] == 'exact':
+					sparql_filter += [ 'FILTER (lcase(str({value_name})), "{value}")) .'.format(**vars()) ]
+				elif filter['match'] == 'starts_with':
+					sparql_filter += [ 'FILTER (strstarts(lcase({value_name}), "{value}")) .'.format(**vars()) ]
+				else:
+					raise NotImplementedError('match: %(match)s' % filter)
+				
+				sparql_filters += ['\n'.join(sparql_filter)]
+		
+		# TODO
+		# To be used the json order-by indications
+		order_by = "?ind"
+		
+		# TODO
+		# To be used the limit and offset indications
+		
+		iConn.verbose = True
+		
+		# SPARQL query building
+		results = iConn.query("""
+		SELECT ?ind
 		WHERE {{
-			?s rdf:type <{type_uri}> .
+			{type}
+			
+			{filters}
 		}}
-		""".format(**vars()))
+		ORDER BY {order_by}
+		""".format(
+			type = sparql_type,
+			filters = '\n\n'.join(sparql_filters),
+			order_by = order_by
+		))
 		
 		# Create list of individuals
+		individuals = []
+		for res in results.getDictList():
+			individuals += [
+				Individual(iConn, individual_uri=res['ind'], w_form=w_form)
+			 ]
 		
 		# Create jsons list
+		j = {
+			'individuals':[
+				ind.get_json(lang) for ind in individuals
+			]
+		}
 		
+		return j
 	
 	# --------------------------------- #
 

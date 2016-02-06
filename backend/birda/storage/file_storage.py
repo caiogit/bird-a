@@ -70,6 +70,11 @@ class FileConnection(storage.Connection):
 
 	# ----------------------------------------------------------------------- #
 	
+	def __del__(self):
+		self.close()
+	
+	# ----------------------------------------------------------------------- #
+	
 	def query(self, query):
 		"""
 		Exectutes a read-only sparql query
@@ -81,7 +86,11 @@ class FileConnection(storage.Connection):
 			storage.Results.printQuery(query)
 		
 		start_time = time.time()
-		results = self.rdf.query(query, initNs=self.namespaces)
+		try:
+			results = self.rdf.query(query, initNs=self.namespaces)
+		except Exception as e:
+			storage.Results.printQuery(query, lines_number=True)
+			raise e
 		elapsed_time = time.time() - start_time
 		
 		bResults = storage.Results(query, results, elapsed_time, namespaces=self.namespaces)
@@ -106,7 +115,11 @@ class FileConnection(storage.Connection):
 			storage.Results.printQuery(query)
 		
 		start_time = time.time()
-		results = self.rdf.update(query, initNs=self.namespaces)
+		try:
+			results = self.rdf.update(query, initNs=self.namespaces)
+		except Exception as e:
+			storage.Results.printQuery(query, lines_number=True)
+			raise e
 		elapsed_time = time.time() - start_time
 		
 		bResults = storage.Results(query, results, elapsed_time, namespaces=self.namespaces)
@@ -162,22 +175,34 @@ class FileConnection(storage.Connection):
 # ================================================================================================ #
 
 if __name__ == '__main__':
-	tConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='test', verbose=True)
-	tConn.update("""
-	INSERT DATA {
-		<birda:pippetto> birda:hasLabel "foo"@it .
+	# tConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='test', verbose=True)
+	# tConn.update("""
+	# INSERT DATA {
+	# 	<birda:pippetto> birda:hasLabel "foo"@it .
+	# }
+	# """)
+	# tConn.update("""
+	# INSERT DATA {
+	# 	<birda:pippetto> birda:hasLabel "foo" .
+	# }
+	# """)
+	# tConn.update("""
+	# DELETE DATA {
+	# 	<birda:pippetto> birda:hasLabel "foo"@it .
+	# }
+	# """)
+	# tConn.commit()
+	# results = tConn.query("select ?s ?p ?o where { ?s ?p ?o }")
+	# tConn.close()
+	
+	# -------------------------------------- #
+	
+	iConn = storage.Storage.connect(storage.FAKE_SETTINGS, dataset='indiv', verbose=True)
+	results = iConn.query("""
+	SELECT ?ind
+	WHERE { 
+		?ind rdf:type foaf:Person .
+		?ind foaf:giveName ?prop1 
 	}
 	""")
-	tConn.update("""
-	INSERT DATA {
-		<birda:pippetto> birda:hasLabel "foo" .
-	}
-	""")
-	tConn.update("""
-	DELETE DATA {
-		<birda:pippetto> birda:hasLabel "foo"@it .
-	}
-	""")
-	tConn.commit()
-	results = tConn.query("select ?s ?p ?o where { ?s ?p ?o }")
-	tConn.close()
+	iConn.close()

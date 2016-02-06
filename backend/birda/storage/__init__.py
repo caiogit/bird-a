@@ -124,9 +124,20 @@ class Results(object):
 	# ----------------------------------------------------------------------- #
 	
 	@staticmethod
-	def printQuery(query):
+	def printQuery(query, lines_number=False):
 		query_rows = query.replace('\t','  ').split('\n')
-		query = "\n".join([ r for r in query_rows if r.strip() ])
+		
+		if lines_number:
+			# Little ugly function of convenience
+			def ln(s):
+				ln.n += 1
+				return "%2s   %s" % (ln.n, s)
+			ln.n = 0
+			
+			query = "\n".join([ ln(r) for r in query_rows if r.strip() ])
+		
+		else:
+			query = "\n".join([ r for r in query_rows if r.strip() ])
 		
 		print '===================================='
 		print query

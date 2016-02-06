@@ -41,6 +41,9 @@ class Widget(object):
 	#core_attributes = {}
 	descendants = []
 	
+	# Descendants organized per property
+	descendants_per_property = {}
+	
 	# --------------------------------- #
 	
 	def __init__(self, conn, rdfw=None, uri='', actionable=False, hierarchical=False):
@@ -65,6 +68,8 @@ class Widget(object):
 		
 		if self.hierarchical:
 			self.descendants = self._get_descendants()
+			for desc in self.descendants:
+				self.descendants_per_property[desc.attributes['maps_property']] = desc
 		
 	# --------------------------------- #
 	
