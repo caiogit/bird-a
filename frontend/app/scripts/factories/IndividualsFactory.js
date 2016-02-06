@@ -73,74 +73,8 @@ angular.module('birdaApp')
 
 				function getDummyIndividual(config, individualUri, formUri) {
 					//console.log(individualUri);
-					return self.test_individuals[individualUri].individuals[0];
+					return dummy_jsons.test_individuals[individualUri].individuals[0];
 				}
-
-				/* ========================================= */
-
-				self.test_individuals = {
-					'http://ex.com/john-max-smith-01': {
-						'individuals': [
-							{
-								'uri': 'http://ex.com/john-max-smith',
-								'type': 'http://xmlns.com/foaf/0.1/Person',
-								'lang': 'en',
-								'label': 'John Max Smith',
-								'description': 'Famous actor',
-								'last_modified': '2015-11-25 14:33:01',
-								'authors': [
-									{
-										'uri': 'http://bigio-bagio.it#me',
-										'label': 'Bigio Bagio'
-									}
-								],
-								'properties': [
-									{
-										'uri': 'http://xmlns.com/foaf/0.1/givenName',
-										'values': ['John', 'Max']
-									},
-									{
-										'uri': 'http://xmlns.com/foaf/0.1/familyName',
-										'values': ['Smith']
-									}
-								]
-							}
-						]
-					},
-
-					'http://ex.com/john-max-smith-02': {
-						'individuals': [
-							{
-								'uri': 'http://ex.com/john-max-smith-2',
-								'type': 'http://xmlns.com/foaf/0.1/Person',
-								'lang': 'en',
-								'label': 'John Max Smith Senior',
-								'description': 'Famous singer',
-								'last_modified': '2010-01-25 08:33:01',
-								'authors': [
-									{
-										'uri': 'http://bigio-bagio.it#me',
-										'label': 'Bigio Bagio'
-									}
-								],
-								'properties': [
-									{
-										'uri': 'http://xmlns.com/foaf/0.1/givenName',
-										'values': ['John', 'Max', 'Senior']
-									},
-									{
-										'uri': 'http://xmlns.com/foaf/0.1/familyName',
-										'values': ['Smith']
-									},
-									{
-										'uri': 'http://xmlns.com/foaf/0.1/birthDate',
-										'values': []
-									}
-								]
-							}
-						]
-					}
-				};
 
 				/* ========================================= */
 

@@ -59,7 +59,7 @@ angular.module('birdaApp')
 			};
 
 			function getDummyForms() {
-				return self.forms_Test1;
+				return dummy_jsons.forms_test_1;
 			}
 
 			/* ----------------------------------------- */
@@ -74,31 +74,6 @@ angular.module('birdaApp')
 				});
 
 				return ret;
-			};
-
-			/* ========================================= */
-
-			self.forms_Test1 = {
-				'forms': [
-					{
-						'uri': 'http://www.birda.it/form-person-1',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'FOAF Person Light',
-						'description': 'Form for editing idividuals in the FOAF Ontology.\nLight version.'
-					},
-					{
-						'uri': 'http://www.birda.it/form-person-2',
-						'type': 'http://xmlns.com/foaf/0.1/Person',
-						'label': 'FOAF Person Extended',
-						'description': 'Form for editing idividuals in the FOAF Ontology.\nExtended version'
-					},
-					{
-						'uri': 'http://www.birda.it/fuff',
-						'type': 'http://xmlns.com/foaf/0.1/Fuff',
-						'label': 'FUFF Object',
-						'description': 'Nothing much here'
-					}
-				]
 			};
 
 			/* ========================================= */
