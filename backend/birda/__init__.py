@@ -17,6 +17,7 @@ import pyramid.events
 
 import sqlalchemy
 
+import birda.views
 import birda.models
 import birda.models.acl
 
@@ -100,8 +101,8 @@ def main(global_config, **settings):
 	config.include('cornice')
 	config.scan("birda.services")
 
-	# Add "home" view, with a simple greeting message
-	config.add_route('home', '/')
+	# Add non JSON API routes
+	birda.views.add_routes(config)
 	config.scan()
 
 	# Import all birda.models modules (necessary?)

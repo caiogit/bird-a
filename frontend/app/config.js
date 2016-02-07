@@ -29,7 +29,7 @@ var CONFIG = {
 	'lang': 'en',
 
 	/* Tell frontend to load dummy data instead of data retrieved from backend */
-	'dummyData': true,
+	'dummyData': false,
 	/* How many milliseconds the dummy response should be deleted */
 	'dummyWaitTime': 200,
 

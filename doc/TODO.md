@@ -61,6 +61,9 @@
 
 ### Improvements
  - Backend: Proper caching of form widget by the form_factory for large number of forms
+ - Backend / Frontend: communications between backend and fontend are currently
+   managed by a belt and braces mix of CORS and xdomain. This should be rationalized 
+   and simplified.
 
 ### Performance
  - Backend: lazy loading individual (and forms?) translations form db
