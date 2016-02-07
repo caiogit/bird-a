@@ -2,6 +2,7 @@
 	"name": "birda",
 	"version": "0.0.0",
 	"dependencies": {
+		"xdomain": "jpillora/xdomain#~0.7.5",
 		"angular": "~1.4.0",
 		"bootstrap-sass-official": "^3.2.0",
 		"angular-animate": "~1.4.0",
@@ -12,7 +13,8 @@
 		"angular-touch": "~1.4.0",
 		"angular-ui": "~0.4.0",
 		"angular-bootstrap": "^1.0.0",
-		"lodash": "^3.10.1"
+		"lodash": "^3.10.1",
+		"bootstrap-languages": "bootstrap-language#*"
 	},
 	"devDependencies": {
 		"angular-mocks": "~1.4.0",

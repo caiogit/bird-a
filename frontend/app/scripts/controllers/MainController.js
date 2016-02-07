@@ -11,11 +11,11 @@ angular.module('birdaApp')
 	.controller('MainController', ['$location', 'ConfigService',
 		function ($location, ConfigService) {
 			var self = this;
+			self.config = ConfigService.getConf();
 
 			/* ----------------------------------------- */
 
 			function init() {
-
 			}
 
 			/* ========================================= */

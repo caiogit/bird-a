@@ -28,7 +28,7 @@ angular.module('birdaApp')
 					}
 					cField.setDefaultValue(defaultValue);
 
-					// TODO: Retrieve next configuration from ontology
+					// TODO: Retrieve next configurations from Form data
 
 					/* Set Datepicker options */
 					$scope.dateOptions = {

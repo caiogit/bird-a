@@ -33,17 +33,8 @@ angular.module('birdaApp')
 						self.error = 'Form "'+self.formUri+'" not found!';
 						self.valid = false;
 					} else {
-						individualsSearchService.clean();
-						individualsSearchService.addFilter({
-							'property': RDF_TYPE,
-							'value': self.form.type,
-							'match': 'exact'
-						});
-						individualsSearchService.search(self.formUri)
-							.then(function(response) {
-								self.individuals = response.individuals;
-							});
 						self.valid = true;
+						self.search();
 					}
 				} else {
 					self.valid = false;
@@ -84,6 +75,21 @@ angular.module('birdaApp')
 				}
 
 				self.messages.push(message);
+			};
+
+			/* ========================================= */
+
+			self.search = function() {
+				individualsSearchService.clean();
+				individualsSearchService.addFilter({
+					'property': RDF_TYPE,
+					'value': self.form.type,
+					'match': 'exact'
+				});
+				individualsSearchService.search(self.formUri)
+					.then(function(response) {
+						self.individuals = response.individuals;
+					});
 			};
 
 			/* ========================================= */

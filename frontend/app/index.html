@@ -8,6 +8,7 @@
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		<!-- build:css(.) styles/vendor.css -->
 		<!-- bower:css -->
+		<link rel="stylesheet" href="bower_components/bootstrap-languages/languages.min.css" />
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:css(.tmp) styles/main.css -->
@@ -102,12 +103,14 @@
 		</script>
 		-->
 
+		<!-- TODO: Find a way to not hardwire backend infos here -->
+		<!-- This should go outside bower (because it should not be reshuffled)
+		     and should be loaded before every other library than can use XHR -->
+		<script src="bower_components/xdomain/dist/xdomain.js"
+				slave="http://0.0.0.0:8000/proxy.html" ></script>
+
 		<!-- build:js(.) scripts/vendor.js -->
 		<!-- bower:js -->
-		<script src="bower_components/jpillora/xdomain/dist/xdomain.min.js"
-				slave="http://0.0.0.0:8000/proxy.html"
-		></script>
-
 		<script src="bower_components/jquery/dist/jquery.js"></script>
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>

@@ -23,6 +23,7 @@ module.exports = function(config) {
 		files: [
 			// bower:js
 			'bower_components/jquery/dist/jquery.js',
+			'bower_components/xdomain/dist/xdomain.js',
 			'bower_components/angular/angular.js',
 			'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
 			'bower_components/angular-animate/angular-animate.js',
