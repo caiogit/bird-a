@@ -5,8 +5,8 @@
  */
 
 angular.module('birdaApp')
-	.service('IndividualsSearchService', ['$q', '$timeout', '$resource', 'ConfigService',
-		function($q, $timeout, $resource, ConfigService) {
+	.service('IndividualsSearchService', ['$q', '$timeout', '$resource', 'ConfigService', 'UIService',
+		function($q, $timeout, $resource, ConfigService, UIService) {
 
 			var self = this;
 			var config = ConfigService.getConf();
@@ -14,7 +14,16 @@ angular.module('birdaApp')
 			var params = null;
 			var results = [];
 
-			var IndividualsSearch = $resource(config.buildApiUri('/individuals-search'));
+			var IndividualsSearch = $resource(
+				config.buildApiUri('/individuals-search'),
+				{
+					form_uri:'@form_uri',
+					lang:'@lang'
+				},
+				{
+					search: {method:'POST'}
+				}
+			);
 
 			function init() {
 				self.clean();
@@ -26,7 +35,7 @@ angular.module('birdaApp')
 				params = {
 					'properties': [],
 					'filters': [],
-					'order-by': []
+					'order_by': []
 				};
 				clearObject(results);
 			};
@@ -103,10 +112,10 @@ angular.module('birdaApp')
 
 				} else {
 
-					results = IndividualsSearch.get({
-						form:form_uri,
-						lang:config.lang
-					});
+					results = IndividualsSearch.search({
+						lang: config.lang,
+						form_uri: form_uri
+					}, params);
 
 					console.log("Results: ",results);
 

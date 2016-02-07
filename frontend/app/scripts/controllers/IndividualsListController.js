@@ -39,7 +39,7 @@ angular.module('birdaApp')
 							'value': self.form.type,
 							'match': 'exact'
 						});
-						individualsSearchService.search()
+						individualsSearchService.search(self.formUri)
 							.then(function(response) {
 								self.individuals = response.individuals;
 							});
