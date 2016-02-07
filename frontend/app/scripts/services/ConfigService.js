@@ -9,7 +9,7 @@ angular.module('birdaApp')
 		function ($http, $uibModal) {
 
 			var self = this;
-			var config = CONFIG;
+			var config = {};
 
 			/* ----------------------------------------- */
 
@@ -20,6 +20,9 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.loadConf = function() {
+
+				config = CONFIG;
+
 				/*
 				$http.get('config.json').then(
 

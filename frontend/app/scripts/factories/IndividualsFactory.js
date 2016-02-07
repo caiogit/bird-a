@@ -31,6 +31,28 @@ angular.module('birdaApp')
 
 				/* ----------------------------------------- */
 
+				self.createNew = function(type) {
+					var defer = $q.defer();
+					individual.$promise = defer.promise;
+
+					angular.merge(individual, {
+						'uri': '',
+						'type': '',
+						'lang': config.lang,
+						'label': '',
+						'description': '',
+						'last_modified': null,
+						'authors': [],
+						'properties': []
+					});
+
+					defer.resolve(individual);
+					return individual.$promise;
+				};
+
+				/* ----------------------------------------- */
+
+
 				self.retrieveIndividual = function(individualUri, formUri) {
 
 					if (config.dummyData) {

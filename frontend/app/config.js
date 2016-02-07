@@ -17,12 +17,16 @@ var CONFIG = {
 	'backendPort': '8000',
 	'backendAPIPath':'/api/v1',
 
+	/* Backend uri composition functions */
 	'getBackendUri': function() {
 		return CONFIG.backendProtocol +'://'+ CONFIG.backendHostName +':'+ CONFIG.backendPort;
 	},
 	'buildApiUri': function(path) {
 		return CONFIG.getBackendUri() + CONFIG.backendAPIPath + path;
 	},
+
+	/* Default language */
+	'lang': 'en',
 
 	/* Tell frontend to load dummy data instead of data retrieved from backend */
 	'dummyData': true,

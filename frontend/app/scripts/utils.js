@@ -83,17 +83,24 @@ function getIndividualProperty($q, individual, propertyUri) {
 						propertyObj = value;
 					}
 				});
-			console.log("Property "+propertyUri, propertyObj);
+			//console.log("Property "+propertyUri, propertyObj);
 
+			/* If property was not found, then creates it */
 			if (!(propertyObj)) {
-				throw new Error('Property "' + propertyUri + '" not found!');
+				//throw new Error('Property "' + propertyUri + '" not found!');
+				console.log('Waring: property "' + propertyUri + '" not found. Creating it.');
+				propertyObj = {
+					'uri': propertyUri,
+					'values': []
+				};
+				individual.properties.push(propertyObj);
 			}
 
 			defer.resolve(propertyObj);
 
 		}, null);
 
-	console.log('Property premise',defer.promise);
+	//console.log('Property premise',defer.promise);
 	return defer.promise;
 }
 
