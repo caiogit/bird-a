@@ -28,6 +28,6 @@ def home(request):
 # "proxy.html" view needed by xdomain (https://github.com/jpillora/xdomain)
 @view_config(route_name='proxy', renderer='templates/proxy.jinja2')
 def proxy(request):
-	return {}
+	return {'frontend_uri':request.registry.settings['birda.frontend']}
 
 # ============================================================================ #
