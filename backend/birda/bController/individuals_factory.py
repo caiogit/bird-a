@@ -157,8 +157,6 @@ class IndividualsFactory(object):
 		# TODO
 		# To be used the limit and offset indications
 		
-		iConn.verbose = True
-		
 		# SPARQL query building
 		results = iConn.query("""
 		SELECT ?ind

@@ -210,6 +210,6 @@ lines-of-code:
 #	grep -v 'ascii_utils' | \
 #	xargs wc
 
-	cloc --exclude-dir=node_modules,bower_components --not-match-f=ascii_utils --by-file-by-lang backend/birda frontend/app/
+	cloc --exclude-dir=node_modules,bower_components --not-match-f='(ascii_utils|dummy_jsons)' --by-file-by-lang backend/birda frontend/app/
 
 # ================================ #

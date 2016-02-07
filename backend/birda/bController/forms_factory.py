@@ -146,7 +146,7 @@ class FormsFactory(object):
 			if w_form.type_name == 'Form':
 				d = {}
 				d['uri'] = form
-				d['type'] = 'http://ex.com' # TODO
+				d['type'] = w_form.get_mapped_type()
 				d['label'] = str(w_form.get_label(lang))
 				d['description'] = str(w_form.get_description(lang))
 				

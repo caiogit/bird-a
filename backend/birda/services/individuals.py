@@ -44,6 +44,11 @@ def individuals_search(request):
 	offset = request.GET.get('lang','0')
 	form_uri = request.GET.get('form_uri','')
 	
+	if not form_uri:
+		raise ServiceError(status=400, msg="'form_uri' must be passed in GET parameters", connections=[]) 
+	if not request.json_body:
+		raise ServiceError(status=400, msg="A valid JSON object have to be passed in POST body", connections=[]) 
+	
 	try:
 		in_json = SearchQuery().deserialize(request.json_body)
 	except colander.Invalid as e:
