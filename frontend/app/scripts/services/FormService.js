@@ -51,8 +51,7 @@ angular.module('birdaApp')
 
 					form.$promise.then(
 						function(response) {
-							console.log(response);
-							console.log('Form: ',response);
+							console.log('Form response: ',response);
 						},
 						UIService.notifyError);
 

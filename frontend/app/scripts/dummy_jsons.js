@@ -160,142 +160,144 @@ var dummy_jsons = {
 		}
 	},
 
-	test_individuals_search_person_results: {
-		'individuals': [
-			{
-				'uri': 'http://ex.com/john-max-smith-01',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-02',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-03',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-04',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-05',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-06',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-07',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-08',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-09',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-10',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-11',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-12',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-13',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-14',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-15',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-16',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-17',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-18',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			},
-			{
-				'uri': 'http://ex.com/john-max-smith-19',
-				'type': 'http://xmlns.com/foaf/0.1/Person',
-				'label': 'John Max Smith',
-				'description': 'Famous actor'
-			}
-		]
-	},
+	test_individuals_search_results: {
+		'http://xmlns.com/foaf/0.1/Person': {
+			'individuals': [
+				{
+					'uri': 'http://ex.com/john-max-smith-01',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-02',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-03',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-04',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-05',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-06',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-07',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-08',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-09',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-10',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-11',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-12',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-13',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-14',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-15',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-16',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-17',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-18',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				},
+				{
+					'uri': 'http://ex.com/john-max-smith-19',
+					'type': 'http://xmlns.com/foaf/0.1/Person',
+					'label': 'John Max Smith',
+					'description': 'Famous actor'
+				}
+			]
+		},
 
-	test_individuals_search_fuff_results: {
-		'individuals': [
-			{
-				'uri': 'http://ex.com/1111',
-				'type': 'http://xmlns.com/foaf/0.1/Fuff',
-				'label': 'Pippo',
-				'Description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae nisl rutrum, placerat nisl ac.',
-				'properties': []
-			},
-			{
-				'uri': 'http://ex.com/2222',
-				'type': 'http://xmlns.com/foaf/0.1/Fuff',
-				'label': 'Pippo',
-				'Description': 'Suspendisse non sapien tempus, cursus nisi at, lacinia justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-				'properties': []
-			}
-		]
+		'http://xmlns.com/foaf/0.1/Fuff': {
+			'individuals': [
+				{
+					'uri': 'http://ex.com/1111',
+					'type': 'http://xmlns.com/foaf/0.1/Fuff',
+					'label': 'Pippo',
+					'Description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae nisl rutrum, placerat nisl ac.',
+					'properties': []
+				},
+				{
+					'uri': 'http://ex.com/2222',
+					'type': 'http://xmlns.com/foaf/0.1/Fuff',
+					'label': 'Pippo',
+					'Description': 'Suspendisse non sapien tempus, cursus nisi at, lacinia justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+					'properties': []
+				}
+			]
+		}
 	},
 
 	test_individuals: {

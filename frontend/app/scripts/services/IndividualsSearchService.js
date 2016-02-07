@@ -5,15 +5,16 @@
  */
 
 angular.module('birdaApp')
-	.service('IndividualsSearchService', ['ConfigService',
-		function(ConfigService) {
+	.service('IndividualsSearchService', ['$q', '$timeout', '$resource', 'ConfigService',
+		function($q, $timeout, $resource, ConfigService) {
 
 			var self = this;
 			var config = ConfigService.getConf();
 
 			var params = null;
-			var results = null;
+			var results = [];
 
+			var IndividualsSearch = $resource(config.buildApiUri('/individuals-search'));
 
 			function init() {
 				self.clean();
@@ -27,7 +28,7 @@ angular.module('birdaApp')
 					'filters': [],
 					'order-by': []
 				};
-				results = null;
+				clearObject(results);
 			};
 
 			/* ----------------------------------------- */
@@ -37,10 +38,10 @@ angular.module('birdaApp')
 					console.log('IndividualsSearchService: Warning: altering params in a not cleaned status');
 				}
 				if ( (typeof property !== 'object') || (property === null)  ) {
-					throw 'IndividualsSearchService: "property" should be a not null object';
+					throw Error('IndividualsSearchService: "property" should be a not null object');
 				}
 				if ( ! ('uri' in property) ) {
-					throw 'IndividualsSearchService: "property" should have a "uri" property';
+					throw Error('IndividualsSearchService: "property" should have a "uri" property');
 				}
 
 				params.properties.push(property);
@@ -51,16 +52,16 @@ angular.module('birdaApp')
 					console.log('IndividualsSearchService: Warning: altering params in a not cleaned status');
 				}
 				if ( (typeof filter !== 'object') || (filter === null)  ) {
-					throw 'IndividualsSearchService: "filter" should be a not null object';
+					throw Error('IndividualsSearchService: "filter" should be a not null object');
 				}
 				if ( ! ('property' in filter) ) {
-					throw 'IndividualsSearchService: "filter" should have a "property" property';
+					throw Error('IndividualsSearchService: "filter" should have a "property" property');
 				}
 				if ( ! ('value' in filter) ) {
-					throw 'IndividualsSearchService: "filter" should have a "value" property';
+					throw Error('IndividualsSearchService: "filter" should have a "value" property');
 				}
 				if ( ! ('match' in filter) ) {
-					throw 'IndividualsSearchService: "filter" should have a "match" property';
+					throw Error('IndividualsSearchService: "filter" should have a "match" property');
 				}
 
 				params.filters.push(filter);
@@ -71,13 +72,13 @@ angular.module('birdaApp')
 					console.log('IndividualsSearchService: Warning: altering params in a not cleaned status');
 				}
 				if ( (typeof orderBy !== 'object') || (orderBy === null)  ) {
-					throw 'IndividualsSearchService: "orderBy" should be a not null object';
+					throw Error('IndividualsSearchService: "orderBy" should be a not null object');
 				}
 				if ( ! ('property' in orderBy) ) {
-					throw 'IndividualsSearchService: "orderBy" should have a "property" property';
+					throw Error('IndividualsSearchService: "orderBy" should have a "property" property');
 				}
 				if ( ! ('order' in orderBy) ) {
-					throw 'IndividualsSearchService: "orderBy" should have a "order" property';
+					throw Error('IndividualsSearchService: "orderBy" should have a "order" property');
 				}
 
 				params.order_by.push(orderBy);
@@ -85,32 +86,59 @@ angular.module('birdaApp')
 
 			/* ----------------------------------------- */
 
-			self.search = function() {
+			self.search = function(form_uri) {
 
-				/** TODO: Remove debug code here **/
+				if (config.dummyData) {
+					clearObject(results);
+					var defer = $q.defer();
 
-				if ( (params.properties.length === 0) &&
-					 (params.filters[0].property === RDF_TYPE) &&
-					 (params.filters[0].value === 'http://xmlns.com/foaf/0.1/Person') ) {
+					// simulated async function
+					$timeout(function() {
+						angular.extend(results, getDummyResults());
+						defer.resolve(results);
+						console.log('Results: ', results);
+					}, config.dummyWaitTime);
 
-					results = dummy_jsons.test_individuals_search_person_results;
-					return;
+					return defer.promise;
+
+				} else {
+
+					results = IndividualsSearch.get({
+						form:form_uri,
+						lang:config.lang
+					});
+
+					console.log("Results: ",results);
+
+					results.$promise.then(
+						function(response) {
+							console.log('Results: ', response);
+						},
+						UIService.notifyError);
+
+					return results.$promise;
 				}
 
-				if ( (params.properties.length === 0) &&
-					 (params.filters[0].property === RDF_TYPE) &&
-					 (params.filters[0].value === 'http://www.birda.it/fuff') ) {
-
-					results = dummy_jsons.test_individuals_search_fuff_results;
-					return;
-				}
-
-				throw "Azz";
 			};
+
+			/* ----------------------------------------- */
 
 			self.getResults = function() {
+				console.log(results);
 				return results;
 			};
+
+			/* ----------------------------------------- */
+
+			function getDummyResults() {
+				assert(
+					((params.properties.length === 0) &&
+					 (params.filters[0].property === RDF_TYPE)));
+
+				//console.log(dummy_jsons.test_individuals_search_results, 'value', params.filters[0].value);
+				return dummy_jsons.test_individuals_search_results[params.filters[0].value];
+
+			}
 
 			/* ========================================= */
 

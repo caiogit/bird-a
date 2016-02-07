@@ -12,7 +12,7 @@ angular.module('birdaApp')
 		function ($location, formsService, individualsSearchService) {
 			var self = this;
 
-			self.individuals = null;
+			self.individuals = {};
 			self.formUri = null;
 			self.form = null;
 
@@ -39,8 +39,10 @@ angular.module('birdaApp')
 							'value': self.form.type,
 							'match': 'exact'
 						});
-						individualsSearchService.search();
-						self.individuals = individualsSearchService.getResults().individuals;
+						individualsSearchService.search()
+							.then(function(response) {
+								self.individuals = response.individuals;
+							});
 						self.valid = true;
 					}
 				} else {
@@ -52,7 +54,7 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.isValid = function() {
-				return self.individuals !== null;
+				return self.individuals !== {};
 			};
 
 			self.hasValues = function() {
@@ -62,7 +64,7 @@ angular.module('birdaApp')
 			self.renderInstList = function() {
 				var query = $location.search();
 				if (! ('form' in query) ) {
-					self.individuals = null;
+					self.individuals = {};
 				} else {
 					self.setTestData(query.form);
 				}

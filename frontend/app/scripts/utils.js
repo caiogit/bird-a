@@ -28,12 +28,22 @@ function modalXhrError($uibModal, response) {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Clear the given object (doesn't handle arrays, at the moment)
+ * Clear the given object
  * @param obj
  */
 function clearObject(obj) {
-	for (var member in obj) {
-		delete obj[member];
+	if (angular.isArray(obj)) {
+		/* Arrays */
+		while (obj.pop(0)) {}
+
+	} else if (angular.isObject(obj)) {
+		/* Objects */
+		for (var member in obj) {
+			delete obj[member];
+		}
+	} else {
+
+		throw Error('Object "'+obj+'" not implemented');
 	}
 }
 
@@ -102,6 +112,24 @@ function getIndividualProperty($q, individual, propertyUri) {
 
 	//console.log('Property premise',defer.promise);
 	return defer.promise;
+}
+
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Simple assert implementation
+ *
+ * @param condition
+ * @param message
+ */
+function assert(condition, message) {
+	if (!condition) {
+		message = message || "Assertion failed";
+		if (typeof Error !== "undefined") {
+			throw new Error(message);
+		}
+		throw message; // Fallback
+	}
 }
 
 /* -------------------------------------------------------------------------- */
