@@ -18,12 +18,9 @@ from birda.bModel import NAMESPACES, CO, BIRDA, BINST, TINST
 DIR_PATH = os.path.dirname( os.path.realpath(__file__) )
 SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
-# ---------------------------------------------------------------------------- #
+# ============================================================================ #
 
-def create_birda_instace():
-	rdf = ontology.new_rdf_Graph()
-
-	# --------------------------------------------------------------- #
+def create_birda_foaf_forms(rdf):
 
 	# FOAF Name
 	input_givenName = ontology.create_widget(
@@ -109,6 +106,17 @@ def create_birda_instace():
 	ontology.make_co_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName, input_Gender, subform_Knows])
 	ontology.add_local_name_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName])
 
+# ---------------------------------------------------------------------------- #
+
+
+
+# ---------------------------------------------------------------------------- #
+
+def create_birda_instace():
+	rdf = ontology.new_rdf_Graph()
+	
+	create_birda_foaf_forms(rdf)
+	
 	return rdf
 
 # ============================================================================ #

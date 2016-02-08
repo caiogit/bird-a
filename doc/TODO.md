@@ -15,7 +15,9 @@
 ## Frontend
 
  - Portare tutti i dummy JSON in un unico file
-    - Rimuovere questo file dal conteggio delle linee di codice 
+    - Rimuovere questo file dal conteggio delle linee di codice
+ - Make "new individual" working
+ - Make "delete" in "individuals list" working
 
 ## Generic
 
