@@ -4,7 +4,8 @@
 		<br />
 		<small>{{cEdit.form.description}}</small>
 	</h3>
-	<form class="form-content container">
+	<form name="editForm"
+		  class="form-content container">
 
 		<!-- Header -->
 		<div class="form-content-header row">
@@ -39,9 +40,10 @@
 						<!--Instance Description-->
 					<!--</label>-->
 					<textarea id="instance-description"
+							  ng-model="cEdit.individual.description"
 							  class="form-control text-center" rows="2"
 							  placeholder="Instance description"
-					>{{cEdit.individual.description}}</textarea>
+					></textarea>
 
 				</div>
 
@@ -56,19 +58,20 @@
 
 		<!-- Actions -->
 		<div class="form-content-actions row">
-			<button class="btn btn-success b-width-150 b-font-110" role="button"
-					ng-click="cEdit.saveIndividual()">
-				<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+			<button class="btn btn-success b-width-125 b-font-130" role="button"
+					ng-click="cEdit.saveIndividual()"
+					ng-disabled="editForm.$pristine">
+				<span class="glyphicon glyphicon-ok-circle small" aria-hidden="true"></span>
 				Save
 			</button>
-			<button class="btn btn-primary b-width-150 b-font-110" role="button"
+			<button class="btn btn-primary b-width-125 b-font-130" role="button"
 					ng-click="cEdit.discardChanges()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-remove small" aria-hidden="true"></span>
 				Reset
 			</button>
-			<button class="btn btn-danger b-width-150 b-font-110" role="button"
+			<button class="btn btn-danger b-width-125 b-font-130" role="button"
 					ng-click="cEdit.deleteIndividual()">
-				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-trash small" aria-hidden="true"></span>
 				Delete
 			</button>
 		</div>

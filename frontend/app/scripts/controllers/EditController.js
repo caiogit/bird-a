@@ -5,8 +5,8 @@
  */
 
 angular.module('birdaApp')
-	.controller('EditController', ['$route', '$routeParams', 'FormService', 'IndividualsFactory',
-		function ($route, $routeParams, FormService, IndividualsFactory) {
+	.controller('EditController', ['$route', '$routeParams', '$location', 'FormService', 'IndividualsFactory',
+		function ($route, $routeParams, $location, FormService, IndividualsFactory) {
 			var self = this;
 
 			self.form_uri = '';
@@ -62,6 +62,7 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.saveIndividual = function() {
+				// TODO: Form validation
 				IndividualService.save();
 			};
 
@@ -76,7 +77,10 @@ angular.module('birdaApp')
 			/* ----------------------------------------- */
 
 			self.deleteIndividual = function() {
-				alert('Deleted');
+				// TODO: confirmation
+				IndividualService.delete();
+				$location.path('/individuals-list')
+					.search('form', self.form_uri);
 			};
 
 

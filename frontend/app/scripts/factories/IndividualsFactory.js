@@ -124,7 +124,8 @@ angular.module('birdaApp')
 							]
 						},
 						function(response) {
-
+							//console.log(response);
+							clearAndSetObject(individual, response.individuals[0]);
 						},
 						UIService.notifyError);
 				};
@@ -132,7 +133,16 @@ angular.module('birdaApp')
 				/* ----------------------------------------- */
 
 				self.delete = function() {
-
+					Individual.delete({
+							individual_uri: individual.uri,
+							form_uri: formUri,
+							lang: config.lang
+						},
+						function(response) {
+							//console.log(response);
+							clearObject(individual);
+						},
+						UIService.notifyError);
 				};
 
 				/* ========================================= */
