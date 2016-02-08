@@ -45,10 +45,12 @@ angular.module('birdaApp')
 					return defer.promise;
 
 				} else {
-					forms = Forms.get();
+					//forms = Forms.get();
+					clearAndSetObject(forms, Forms.get());
 
 					forms.$promise.then(
 						function(response) {
+							clearAndSetObject(forms, response);
 							console.log(response);
 						},
 						UIService.notifyError);

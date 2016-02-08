@@ -45,21 +45,31 @@
 			<div class="individual col-sm-6 col-md-3"
 				 ng-repeat="individualX in cIndList.individuals.slice($index, $index+4)">
 
-				<!-- Instance infos -->
-				<h3>{{individualX.label}}</h3>
-				<div class="row uri">{{individualX.uri}}</div>
-				<div class="row description">{{individualX.description}}</div>
+				<div class="individual-container">
+					<!-- Instance infos -->
+					<h3>
+						<span ng-show="individualX.label">{{individualX.label}}</span>
+						<span ng-show="! individualX.label" class="no-label">No label</span>
+					</h3>
 
-				<!-- Instance actions -->
-				<div class="row buttons">
-					<button class="button-edit btn btn-primary"
-					   ng-click="cIndList.editIndividual(individualX.uri)">
-						Edit
-					</button>
-					<button class="button-delete btn btn-danger"
-					   ng-click="cIndList.deleteIndividual(individualX.uri)">
-						Delete
-					</button>
+					<div class="row description">
+						<span ng-show="individualX.description">{{individualX.description}}</span>
+						<span ng-show="! individualX.description"  class="no-description">No description</span>
+					</div>
+
+					<div class="row uri">{{individualX.uri}}</div>
+
+					<!-- Instance actions -->
+					<div class="row buttons">
+						<button class="button-edit btn btn-primary"
+						   ng-click="cIndList.editIndividual(individualX.uri)">
+							Edit
+						</button>
+						<button class="button-delete btn btn-danger"
+						   ng-click="cIndList.deleteIndividual(individualX.uri)">
+							Delete
+						</button>
+					</div>
 				</div>
 			</div>
 

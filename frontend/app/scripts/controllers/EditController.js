@@ -31,7 +31,6 @@ angular.module('birdaApp')
 				}
 
 				self.form_uri = $routeParams.form;
-				self.form = FormService.getForm();
 				FormService.retrieveForm(self.form_uri).then(
 					function (response) {
 						/* Set type if individual is a new one */
@@ -40,19 +39,20 @@ angular.module('birdaApp')
 						}
 					}
 				);
+				self.form = FormService.getForm();
 
 				if (typeof $routeParams.individual !== 'undefined') {
 					/* Retrieves individual */
 					self.isNew = false;
 					self.individual_uri = $routeParams.individual;
-					self.individual = IndividualService.getIndividual();
 					IndividualService.retrieveIndividual(self.individual_uri, self.form_uri);
+					self.individual = IndividualService.getIndividual();
 				} else {
 					/* Creates a brand new individual */
 					self.isNew = true;
 					self.individual_uri = '';
+					IndividualService.createNew(self.form_uri);
 					self.individual = IndividualService.getIndividual();
-					IndividualService.createNew();
 					if (self.form) {
 						self.individual.type = self.form.maps_type;
 					}
@@ -62,7 +62,7 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.saveIndividual = function() {
-				alert('Saved');
+				IndividualService.save();
 			};
 
 			/* ----------------------------------------- */

@@ -6,7 +6,8 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap";
 @import "../../bower_components/compass-mixins/lib/_compass.scss";
 
-
+/* ----------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------- */
 
 .birda-center {
@@ -17,6 +18,8 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 	display: flex;
 	align-items: center;
 }
+
+/* ----------------------------------------------------------------------------- */
 
 @mixin birda-box-shadow($hoff: 0px, $voff: 0px, $blur: 0px, $spread: 0px, $color: inherit, $inset: null) {
 	@if ($inset == null) {
@@ -31,6 +34,18 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 	}
 }
 
+/* ----------------------------------------------------------------------------- */
+
+@mixin birda-border-radius($radius: 0px) {
+	-webkit-border-radius: $radius;
+	   -moz-border-radius: $radius;
+	    -ms-border-radius: $radius;
+	     -o-border-radius: $radius;
+	        border-radius: $radius;
+}
+
+/* ----------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------- */
 
 html {
@@ -288,6 +303,47 @@ header {
 		.desc {
 			font-size:20px;
 			font-color:#666;
+		}
+	}
+}
+
+/* ----------------------------------------------------------------------------- */
+
+#individuals-list {
+	.individual {
+		padding:10px;
+	}
+	.individual-container {
+		//background-color: #EEE;
+		border:solid 1px #DDD;
+		@include birda-border-radius(8px);
+		padding:0px 10px;
+
+		h3 {
+			margin-top:15px;
+			margin-bottom:5px;
+		}
+
+		.description {
+			font-size:15px;
+			margin-bottom:7px;
+		}
+
+		.uri {
+			color:#2A39BA;
+			font-size:15px;
+			margin-bottom:12px;
+		}
+
+		.buttons {
+			margin:10px;
+
+			button {
+				width:100px;
+				padding-top:4px;
+				padding-bottom:4px;
+				margin:0px 2px;
+			}
 		}
 	}
 }

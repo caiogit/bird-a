@@ -12,10 +12,15 @@ angular.module('birdaApp')
 				var config = ConfigService.getConf();
 
 				var individual = {};
+				var formUri = '';
 
-				var Individuals = $resource(config.buildApiUri(
-					'/api/v1/individuals/:individualUri'),
-					{individualUri: '@uri', formUri:'form_uri'});
+				var Individual = $resource(config.buildApiUri(
+					'/individuals/:individual_uri'),
+					{
+						individual_uri: '@individual_uri',
+						form_uri: '@form_uri',
+						lang: '@lang'
+					});
 
 				/* ----------------------------------------- */
 
@@ -31,7 +36,10 @@ angular.module('birdaApp')
 
 				/* ----------------------------------------- */
 
-				self.createNew = function(type) {
+				self.createNew = function(formUri) {
+
+					self.formUri = formUri;
+
 					var defer = $q.defer();
 					individual.$promise = defer.promise;
 
@@ -52,8 +60,8 @@ angular.module('birdaApp')
 
 				/* ----------------------------------------- */
 
-
-				self.retrieveIndividual = function(individualUri, formUri) {
+				self.retrieveIndividual = function(individualUri, form_uri) {
+					formUri = form_uri;
 
 					if (config.dummyData) {
 						clearObject(individual);
@@ -62,7 +70,7 @@ angular.module('birdaApp')
 
 						// simulated async function
 						$timeout(function() {
-							angular.merge(individual, getDummyIndividual(config, individualUri, formUri));
+							angular.merge(individual, getDummyIndividual(config, individualUri, form_uri));
 							defer.resolve(individual);
 							console.log("Individual: ",individual);
 						}, config.dummyWaitTime);
@@ -71,7 +79,18 @@ angular.module('birdaApp')
 
 					} else {
 
-						individual = Individuals.get({formUri:formUri});
+						individual = Individual.get({
+							individual_uri: individualUri,
+							form_uri: form_uri,
+							lang: config.lang
+						});
+
+						//var new_individual = Individual.get({
+						//	individual_uri: individualUri,
+						//	form_uri: form_uri,
+						//	lang: config.lang
+						//});
+						//clearAndSetObject(individual, new_individual, true);
 
 						individual.$promise.then(
 							function(response) {
@@ -91,7 +110,32 @@ angular.module('birdaApp')
 
 				};
 
+				/* ========================================= */
+
+				self.save = function() {
+					Individual.save({
+							individual_uri: individual.uri,
+							form_uri: formUri,
+							lang: config.lang
+						},
+						{
+							'individuals': [
+								individual
+							]
+						},
+						function(response) {
+
+						},
+						UIService.notifyError);
+				};
+
 				/* ----------------------------------------- */
+
+				self.delete = function() {
+
+				};
+
+				/* ========================================= */
 
 				function getDummyIndividual(config, individualUri, formUri) {
 					//console.log(individualUri);

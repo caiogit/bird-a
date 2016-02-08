@@ -26,7 +26,7 @@ var CONFIG = {
 	},
 
 	/* Default language */
-	'lang': 'en',
+	'lang': 'it',
 
 	/* Tell frontend to load dummy data instead of data retrieved from backend */
 	'dummyData': false,
