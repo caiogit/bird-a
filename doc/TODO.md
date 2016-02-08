@@ -17,7 +17,6 @@
  - Portare tutti i dummy JSON in un unico file
     - Rimuovere questo file dal conteggio delle linee di codice 
 
-
 ## Generic
 
  - Ontology:
@@ -32,7 +31,21 @@
 	- Add "hasReferenceForm"
 	    - Only for SubForms
 	    - States what is the preferred form for inserting elements
-    
+
+## Widgets
+
+ - (x) /TextInput
+ - ( ) /TextAreaInput
+ - ( ) /CheckboxInput
+ - ( ) /DateInput
+ - ( ) /NumberInput
+ - ( ) /RadioInput
+ - ( ) /SelectInput
+ - ( ) /StaticText
+ - ( ) /SubForm
+ - ( ) /TabbedFieldSet
+ - ( ) /NextFieldSet
+
 
 ## Low Priority
 
