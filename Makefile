@@ -19,7 +19,7 @@ reply := $(shell read -p 'Production or Development? (p/D) ' reply; echo $$reply
 PROD := $(shell echo "$(reply)" | grep "^[pP]$$" | tr '[:lower:]' '[:upper:]')
 
 # Variables setting
-ifeq ($(PROD), "P")
+ifeq ($(PROD), P)
 	BE_SETUP_TARGET := install
 	BE_CONF := production.ini
 	BE_RELOAD := 
