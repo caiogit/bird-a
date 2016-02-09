@@ -5,49 +5,65 @@
 		<small>{{cEdit.form.description}}</small>
 	</h3>
 	<form name="editForm"
-		  class="form-content container">
+		  class="form-content container"
+		  novalidate >
 
 		<!-- Header -->
 		<div class="form-content-header row">
 
-			<!-- Instance Label -->
-			<div class="form-group instance-label">
-				<!--<label for="instance-uri">-->
-					<!--Instance URI-->
+			<!-- Individual Label -->
+			<div class="form-group individual-label"
+			     ng-class="{'has-warning': editForm.individual_label.$touched && ! cEdit.individual.label}">
+				<!--<label for="individual-uri">-->
+					<!--Individual URI-->
 				<!--</label>-->
-				<input type="text" id="instance-label"
+				<input type="text"
+					   id="individual_label" name="individual_label"
 					   ng-model="cEdit.individual.label"
 					   class="form-control text-center input-lg"
-					   placeholder="Instance Label" />
+					   placeholder="Individual Label" />
+
+				<p ng-show="editForm.individual_label.$touched && ! cEdit.individual.label"
+				   class="help-block">
+					It's a good idea to set the individual label.
+				</p>
 			</div>
 
 			<div class="b-col-8-cen form-content-header-sub">
-				<!-- Instance URI -->
-				<div class="form-group instance-uri">
-					<!--<label for="instance-uri">-->
-						<!--Instance URI-->
+				<!-- Individual URI -->
+				<div class="form-group individual-uri"
+					 ng-class="{'has-error': editForm.individual_uri.$invalid}" >
+					<!--<label for="individual-uri">-->
+						<!--Individual URI-->
 					<!--</label>-->
-					<input type="url" id="instance-uri"
+					<input type="url"
+						   id="individual_uri" name="individual_uri"
 						   ng-model="cEdit.individual.uri"
 						   ng-readonly="! cEdit.isNew"
 						   class="form-control text-center"
-						   placeholder="{{cEdit.form.base_uri}}..." />
+						   placeholder="{{cEdit.form.base_uri}}..."
+						   required />
+
+					<p ng-show="editForm.individual_uri.$invalid && !editForm.individual_uri.$pristine"
+					   class="help-block">
+						Individual URI is required and it has to be a valid URI.
+					</p>
 				</div>
 
-				<!-- Instance Description -->
-				<div class="form-group instance-uri">
-					<!--<label for="instance-description">-->
-						<!--Instance Description-->
+				<!-- Individual Description -->
+				<div class="form-group individual-uri">
+					<!--<label for="individual-description">-->
+						<!--Individual Description-->
 					<!--</label>-->
-					<textarea id="instance-description"
+					<textarea id="individual-description"
 							  ng-model="cEdit.individual.description"
 							  class="form-control text-center" rows="2"
-							  placeholder="Instance description"
+							  placeholder="Individual description"
 					></textarea>
 
 				</div>
 
-				<!-- Instance Authors -->
+				<!-- Individual Authors -->
 				<!--   ...   -->
 				<!--   ...   -->
 				<!--   ...   -->
@@ -59,8 +75,8 @@
 		<!-- Actions -->
 		<div class="form-content-actions row">
 			<button class="btn btn-success b-width-125 b-font-130" role="button"
-					ng-click="cEdit.saveIndividual()"
-					ng-disabled="editForm.$pristine">
+					ng-click="cEdit.saveIndividual(editForm)"
+					ng-disabled="editForm.$pristine || ! editForm.$valid">
 				<span class="glyphicon glyphicon-ok-circle small" aria-hidden="true"></span>
 				Save
 			</button>

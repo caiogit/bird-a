@@ -61,9 +61,14 @@ angular.module('birdaApp')
 
 			/* ========================================= */
 
-			self.saveIndividual = function() {
+			self.saveIndividual = function(angularForm) {
 				// TODO: Form validation
-				IndividualService.save();
+
+				if (! angularForm.$valid) {
+					alert('Warning: form validation failed');
+				} else {
+					IndividualService.save();
+				}
 			};
 
 			/* ----------------------------------------- */

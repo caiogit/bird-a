@@ -187,11 +187,11 @@ class Individual(object):
 		issues = {}
 		for widget in self.w_form.get_descendants():
 			property = widget.get_mapped_property()
-			p_issues = widget.validate_values( json_properties[property] )
+			p_issues = widget.validate_values( json_properties.get(property, []) )
 			
 			if not p_issues:
 				d['properties'][property] = [
-					widget.to_rdf(val, lang=lang) for val in json_properties[property]
+					widget.to_rdf(val, lang=lang) for val in json_properties.get(property, [])
 				]
 			
 			else:

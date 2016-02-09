@@ -98,13 +98,13 @@ class IndividualsInfos(colander.MappingSchema):
 						validator=jsons.check_uri(required=True))
 
 					@colander.instantiate(
-						missing=colander.required,
+						missing=[],
 						validator=colander.Length(min=0))
 					class values(colander.SequenceSchema):
 
 						value = colander.SchemaNode(
 							colander.String(),
-							missing=colander.required,
+							missing='',
 							validator=None)
 
 

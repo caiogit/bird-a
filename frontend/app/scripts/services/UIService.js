@@ -34,7 +34,7 @@ angular.module('birdaApp')
 							modalInstance.dismiss();
 						};
 					},
-					size: 'sm'
+					size: 'md'
 				});
 			};
 

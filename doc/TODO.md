@@ -13,15 +13,16 @@
    properly and close connections
 
 ## Frontend
-
- - Portare tutti i dummy JSON in un unico file
-    - Rimuovere questo file dal conteggio delle linee di codice
+ 
+ - **Form Validation**
+ - **SubForm**
  - Make "new individual" working
  - Make "delete" in "individuals list" working
 
 ## Generic
 
  - Ontology:
+    - Submit birda to w3id
     - Check '/' instead of '#'
     - Add "hasBaseURI"
     - Add "hasLocalName"
@@ -51,8 +52,6 @@
 
 ## Low Priority
 
- - Align development.ini and production.ini
- - Link config files in config/
  - Create test ontologies
  - make run-fe Production
  

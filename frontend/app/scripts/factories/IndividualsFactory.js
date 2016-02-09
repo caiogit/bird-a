@@ -12,6 +12,8 @@ angular.module('birdaApp')
 				var config = ConfigService.getConf();
 
 				var individual = {};
+				var is_new = false;
+
 				var formUri = '';
 
 				var Individual = $resource(config.buildApiUri(
@@ -20,7 +22,11 @@ angular.module('birdaApp')
 						individual_uri: '@individual_uri',
 						form_uri: '@form_uri',
 						lang: '@lang'
-					});
+					},
+					{
+						'create': {method:'PUT'}
+					}
+				);
 
 				/* ----------------------------------------- */
 
@@ -36,9 +42,10 @@ angular.module('birdaApp')
 
 				/* ----------------------------------------- */
 
-				self.createNew = function(formUri) {
+				self.createNew = function(form_uri) {
 
-					self.formUri = formUri;
+					is_new = true;
+					formUri = form_uri;
 
 					var defer = $q.defer();
 					individual.$promise = defer.promise;
@@ -113,7 +120,19 @@ angular.module('birdaApp')
 				/* ========================================= */
 
 				self.save = function() {
-					Individual.save({
+					var method;
+					var args;
+
+					/* Decides which method to use */
+					if (is_new) {
+						method = Individual.create;
+					} else {
+						method = Individual.save;
+					}
+
+					/* Creates the arguments list */
+					args = [
+						{
 							individual_uri: individual.uri,
 							form_uri: formUri,
 							lang: config.lang
@@ -123,11 +142,18 @@ angular.module('birdaApp')
 								individual
 							]
 						},
-						function(response) {
+						function (response) {
 							//console.log(response);
 							clearAndSetObject(individual, response.individuals[0]);
+							if (is_new) {
+								is_new = false;
+							}
 						},
-						UIService.notifyError);
+						UIService.notifyError
+					];
+
+					/* Finally, invokes method */
+					method.apply(null, args);
 				};
 
 				/* ----------------------------------------- */

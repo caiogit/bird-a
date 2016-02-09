@@ -21,7 +21,7 @@ function modalXhrError($uibModal, response) {
 				modalInstance.dismiss();
 			};
 		},
-		size: 'sm'
+		size: 'md'
 	});
 }
 
