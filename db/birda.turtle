@@ -15,7 +15,8 @@ binst:PersonNormal-Form a co:List,
     co:item binst:PersonNormal-Form-el1,
         binst:PersonNormal-Form-el2,
         binst:PersonNormal-Form-el3,
-        binst:PersonNormal-Form-el4 ;
+        binst:PersonNormal-Form-el4,
+        binst:PersonNormal-Form-el5 ;
     birda:hasBaseIRI "http://pippo.it/target-data/"^^xsd:anyURI ;
     birda:hasBaseNameList binst:PersonNormal-Form-local-name-list ;
     birda:hasDescription "Used to insert FOAF:Person attributes"@en,
@@ -26,6 +27,13 @@ binst:PersonNormal-Form a co:List,
     birda:mapsType foaf:Person ;
     birda:usesPropertyForDescription rdfs:comment ;
     birda:usesPropertyForLabel skos:prefLabel .
+
+binst:Height-TextInput a birda:TextInput ;
+    birda:atLeast 1 ;
+    birda:atMost 1 ;
+    birda:hasLabel "Height"@en,
+        "Altezza"@it ;
+    birda:mapsProperty foaf:height .
 
 binst:PersonKnowsSubForm-SubForm a co:List,
         birda:SubForm ;
@@ -87,7 +95,10 @@ binst:PersonNormal-Form-el2 co:itemContent binst:FamilyName-TextInput ;
 binst:PersonNormal-Form-el3 co:itemContent binst:Gender-TextInput ;
     co:nextItem binst:PersonNormal-Form-el4 .
 
-binst:PersonNormal-Form-el4 co:itemContent binst:PersonKnowsSubForm-SubForm .
+binst:PersonNormal-Form-el4 co:itemContent binst:Height-TextInput ;
+    co:nextItem binst:PersonNormal-Form-el5 .
+
+binst:PersonNormal-Form-el5 co:itemContent binst:PersonKnowsSubForm-SubForm .
 
 binst:PersonNormal-Form-local-name-list-el1 co:itemContent binst:GivenName-TextInput ;
     co:nextItem binst:PersonNormal-Form-local-name-list-el2 .

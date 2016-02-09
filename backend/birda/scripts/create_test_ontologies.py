@@ -42,6 +42,16 @@ def create_birda_foaf_forms(rdf):
 	
 	# ----------------------- #
 	
+	# FOAF Height
+	input_Height = ontology.create_widget(
+		rdf, type=BIRDA.TextInput, namespace=BINST, name='Height',
+		maps_property=FOAF.height, at_least=1, at_most=1, labels={
+			'en': "Height",
+			'it': "Altezza"
+		})
+	
+	# ----------------------- #
+	
 	# FOAF Gender
 	input_Gender = ontology.create_widget(
 		rdf, type=BIRDA.TextInput, namespace=BINST, name='Gender',
@@ -103,7 +113,7 @@ def create_birda_foaf_forms(rdf):
 			'it': "Utilizzato per inserire attributi di FOAF:Person",
 		})
 
-	ontology.make_co_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName, input_Gender, subform_Knows])
+	ontology.make_co_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName, input_Gender, input_Height, subform_Knows])
 	ontology.add_local_name_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName])
 
 # ---------------------------------------------------------------------------- #

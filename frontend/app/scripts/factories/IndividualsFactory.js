@@ -130,6 +130,8 @@ angular.module('birdaApp')
 						method = Individual.save;
 					}
 
+					console.log("Individual last time",individual);
+
 					/* Creates the arguments list */
 					args = [
 						{
@@ -147,6 +149,9 @@ angular.module('birdaApp')
 							clearAndSetObject(individual, response.individuals[0]);
 							if (is_new) {
 								is_new = false;
+								alert('Created');
+							} else {
+								alert('Saved');
 							}
 						},
 						UIService.notifyError

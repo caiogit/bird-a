@@ -64,6 +64,7 @@ angular.module('birdaApp')
 			self.saveIndividual = function(angularForm) {
 				// TODO: Form validation
 
+				console.log("Individual Controller:",self.individual);
 				if (! angularForm.$valid) {
 					alert('Warning: form validation failed');
 				} else {
