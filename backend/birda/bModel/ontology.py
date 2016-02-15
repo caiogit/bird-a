@@ -260,7 +260,8 @@ def add_local_name_list(rdf, form, widget_list):
 
 def set_reference_form(rdf, subform, form):
 	"""
-	Set the reference form for the specified subform
+	Set the reference form for the specified subform (the form that should
+	be used to create new instances)
 	
 	:param rdf: graph to which attach the list
 	:param subform: 

@@ -132,6 +132,8 @@ test-be:
 	
 	$(call test_be_api,GET,/api/v1/forms/{form_uri},/api/v1/forms/http://pippo.it/birda-data/PersonNormal-Form)
 	
+	$(call test_be_api,GET,/api/v1/forms/{form_uri},/api/v1/forms/http://pippo.it/birda-data/dummy-guy-Form)
+	
 	$(call test_be_api,GET,/api/v1/individuals/{uri},/api/v1/individuals/http://pippo.it/target-data/pierluigi-mariuolo?form_uri=http://pippo.it/birda-data/PersonNormal-Form&lang=it)
 	
 	$(call test_be_api,GET,/api/v1/individuals/{uri},/api/v1/individuals/http://pippo.it/target-data/pierluigi-mariuolo?form_uri=http://pippo.it/birda-data/PersonNormal-Form&lang=us)

@@ -40,11 +40,70 @@ binst:PersonKnowsSubForm-SubForm a co:List,
     co:firstItem binst:PersonKnowsSubForm-SubForm-el1 ;
     co:item binst:PersonKnowsSubForm-SubForm-el1,
         binst:PersonKnowsSubForm-SubForm-el2 ;
-    birda:hasLabel "Gender"@en,
-        "Sesso"@it ;
+    birda:hasLabel "Connections"@en,
+        "Conoscenze"@it ;
     birda:hasReferenceForm binst:PersonLight-Form ;
     birda:mapsProperty foaf:knows ;
     birda:mapsType foaf:Person .
+
+binst:PersonNormal-Form-local-name-list a co:List ;
+    co:firstItem binst:PersonNormal-Form-local-name-list-el1 ;
+    co:item binst:PersonNormal-Form-local-name-list-el1,
+        binst:PersonNormal-Form-local-name-list-el2 .
+
+binst:dummy-dummy-knows-SubForm a co:List,
+        birda:SubForm ;
+    co:firstItem binst:dummy-dummy-knows-SubForm-el1 ;
+    co:item binst:dummy-dummy-knows-SubForm-el1,
+        binst:dummy-dummy-knows-SubForm-el2,
+        binst:dummy-dummy-knows-SubForm-el3,
+        binst:dummy-dummy-knows-SubForm-el4,
+        binst:dummy-dummy-knows-SubForm-el5,
+        binst:dummy-dummy-knows-SubForm-el6 ;
+    birda:atLeast 1 ;
+    birda:hasDescription "Min zero intenrnal connections"@en,
+        "Minimo zero conoscenze interne"@it ;
+    birda:hasLabel "Intenal Dummy Connections"@en,
+        "Conoscenze Dummy interne"@it ;
+    birda:hasReferenceForm binst:dummy-guy-Form ;
+    birda:mapsProperty <http://dummy.com/onto-dummyknows> ;
+    birda:mapsType foaf:DummyGuy .
+
+binst:dummy-guy-Form a co:List,
+        birda:Form ;
+    co:firstItem binst:dummy-guy-Form-el1 ;
+    co:item binst:dummy-guy-Form-el1,
+        binst:dummy-guy-Form-el2,
+        binst:dummy-guy-Form-el3,
+        binst:dummy-guy-Form-el4,
+        binst:dummy-guy-Form-el5,
+        binst:dummy-guy-Form-el6,
+        binst:dummy-guy-Form-el7 ;
+    birda:hasBaseIRI "http://dummy.com/onto-dummy/data#"^^xsd:anyURI ;
+    birda:hasBaseNameList binst:dummy-guy-Form-local-name-list ;
+    birda:hasDescription "Dummy form with all available widgets"@en,
+        "Dummy form con tutti i widget disponibili"@it ;
+    birda:hasLabel "Dummy Form"@en,
+        "Form Dummy"@it ;
+    birda:hasTokenSeparator "-" ;
+    birda:mapsType foaf:DummyGuy ;
+    birda:usesPropertyForDescription rdfs:comment ;
+    birda:usesPropertyForLabel skos:prefLabel .
+
+binst:dummy-guy-Form-local-name-list a co:List ;
+    co:firstItem binst:dummy-guy-Form-local-name-list-el1 ;
+    co:item binst:dummy-guy-Form-local-name-list-el1 .
+
+binst:Gender-TextInput a birda:TextInput ;
+    birda:atMost 1 ;
+    birda:hasLabel "Gender"@en,
+        "Sesso"@it ;
+    birda:mapsProperty foaf:gender .
+
+binst:PersonKnowsSubForm-SubForm-el1 co:itemContent binst:GivenName-TextInput ;
+    co:nextItem binst:PersonKnowsSubForm-SubForm-el2 .
+
+binst:PersonKnowsSubForm-SubForm-el2 co:itemContent binst:FamilyName-TextInput .
 
 binst:PersonLight-Form a co:List,
         birda:Form ;
@@ -61,22 +120,6 @@ binst:PersonLight-Form a co:List,
     birda:mapsType foaf:Person ;
     birda:usesPropertyForDescription rdfs:comment ;
     birda:usesPropertyForLabel skos:prefLabel .
-
-binst:PersonNormal-Form-local-name-list a co:List ;
-    co:firstItem binst:PersonNormal-Form-local-name-list-el1 ;
-    co:item binst:PersonNormal-Form-local-name-list-el1,
-        binst:PersonNormal-Form-local-name-list-el2 .
-
-binst:Gender-TextInput a birda:TextInput ;
-    birda:atMost 1 ;
-    birda:hasLabel "Gender"@en,
-        "Sesso"@it ;
-    birda:mapsProperty foaf:gender .
-
-binst:PersonKnowsSubForm-SubForm-el1 co:itemContent binst:GivenName-TextInput ;
-    co:nextItem binst:PersonKnowsSubForm-SubForm-el2 .
-
-binst:PersonKnowsSubForm-SubForm-el2 co:itemContent binst:FamilyName-TextInput .
 
 binst:PersonLight-Form-el1 co:itemContent binst:GivenName-TextInput ;
     co:nextItem binst:PersonLight-Form-el2 .
@@ -104,6 +147,103 @@ binst:PersonNormal-Form-local-name-list-el1 co:itemContent binst:GivenName-TextI
     co:nextItem binst:PersonNormal-Form-local-name-list-el2 .
 
 binst:PersonNormal-Form-local-name-list-el2 co:itemContent binst:FamilyName-TextInput .
+
+binst:dummy-checkbox-CheckboxInput a birda:CheckboxInput ;
+    birda:atLeast 1 ;
+    birda:atMost 1 ;
+    birda:hasLabel "Checkbox"@en,
+        "Checkbox"@it ;
+    birda:mapsProperty <http://dummy.com/onto-dummyCheckbox> .
+
+binst:dummy-dummy-knows-SubForm-el1 co:itemContent binst:dummy-single-text-TextInput ;
+    co:nextItem binst:dummy-dummy-knows-SubForm-el2 .
+
+binst:dummy-dummy-knows-SubForm-el2 co:itemContent binst:dummy-multi-text-TextInput ;
+    co:nextItem binst:dummy-dummy-knows-SubForm-el3 .
+
+binst:dummy-dummy-knows-SubForm-el3 co:itemContent binst:dummy-multi-DateInput ;
+    co:nextItem binst:dummy-dummy-knows-SubForm-el4 .
+
+binst:dummy-dummy-knows-SubForm-el4 co:itemContent binst:dummy-checkbox-CheckboxInput ;
+    co:nextItem binst:dummy-dummy-knows-SubForm-el5 .
+
+binst:dummy-dummy-knows-SubForm-el5 co:itemContent binst:dummy-radio-RadioInput ;
+    co:nextItem binst:dummy-dummy-knows-SubForm-el6 .
+
+binst:dummy-dummy-knows-SubForm-el6 co:itemContent binst:dummy-foaf-knows-SubForm .
+
+binst:dummy-foaf-knows-SubForm a co:List,
+        birda:SubForm ;
+    co:firstItem binst:dummy-foaf-knows-SubForm-el1 ;
+    co:item binst:dummy-foaf-knows-SubForm-el1,
+        binst:dummy-foaf-knows-SubForm-el2 ;
+    birda:atMost 3 ;
+    birda:hasDescription "Min zero, max three connections"@en,
+        "Minimo zero, massimo tre conoscenze"@it ;
+    birda:hasLabel "Dummy Connections"@en,
+        "Conoscenze Dummy"@it ;
+    birda:hasReferenceForm binst:PersonLight-Form ;
+    birda:mapsProperty foaf:knows ;
+    birda:mapsType foaf:Person .
+
+binst:dummy-foaf-knows-SubForm-el1 co:itemContent binst:GivenName-TextInput ;
+    co:nextItem binst:dummy-foaf-knows-SubForm-el2 .
+
+binst:dummy-foaf-knows-SubForm-el2 co:itemContent binst:FamilyName-TextInput .
+
+binst:dummy-guy-Form-el1 co:itemContent binst:dummy-single-text-TextInput ;
+    co:nextItem binst:dummy-guy-Form-el2 .
+
+binst:dummy-guy-Form-el2 co:itemContent binst:dummy-multi-text-TextInput ;
+    co:nextItem binst:dummy-guy-Form-el3 .
+
+binst:dummy-guy-Form-el3 co:itemContent binst:dummy-multi-DateInput ;
+    co:nextItem binst:dummy-guy-Form-el4 .
+
+binst:dummy-guy-Form-el4 co:itemContent binst:dummy-checkbox-CheckboxInput ;
+    co:nextItem binst:dummy-guy-Form-el5 .
+
+binst:dummy-guy-Form-el5 co:itemContent binst:dummy-radio-RadioInput ;
+    co:nextItem binst:dummy-guy-Form-el6 .
+
+binst:dummy-guy-Form-el6 co:itemContent binst:dummy-foaf-knows-SubForm ;
+    co:nextItem binst:dummy-guy-Form-el7 .
+
+binst:dummy-guy-Form-el7 co:itemContent binst:dummy-dummy-knows-SubForm .
+
+binst:dummy-guy-Form-local-name-list-el1 co:itemContent binst:dummy-multi-text-TextInput .
+
+binst:dummy-multi-DateInput a birda:DateInput ;
+    birda:atMost 3 ;
+    birda:hasDescription "Min zero, max three dates"@en,
+        "Minimo zero, massimo tre date"@it ;
+    birda:hasLabel "Dummy multi dates"@en,
+        "Date multiple"@it ;
+    birda:mapsProperty <http://dummy.com/onto-dummyMultiDates> .
+
+binst:dummy-radio-RadioInput a birda:RadioInput ;
+    birda:atLeast 1 ;
+    birda:atMost 1 ;
+    birda:hasLabel "Radio input"@en,
+        "Radio input"@it ;
+    birda:mapsProperty <http://dummy.com/onto-dummyRadio> .
+
+binst:dummy-single-text-TextInput a birda:TextInput ;
+    birda:atLeast 1 ;
+    birda:atMost 1 ;
+    birda:hasDescription "One and only one value"@en,
+        "Uno ed un solo valore"@it ;
+    birda:hasLabel "Dummy single text"@en,
+        "Singolo campo testuale"@it ;
+    birda:mapsProperty <http://dummy.com/onto-dummySingleText> .
+
+binst:dummy-multi-text-TextInput a birda:TextInput ;
+    birda:atLeast 1 ;
+    birda:hasDescription "At least one value"@en,
+        "Almeno un valore"@it ;
+    birda:hasLabel "Dummy multi text"@en,
+        "Campo multiplo testuale"@it ;
+    birda:mapsProperty <http://dummy.com/onto-dummyMultiText> .
 
 binst:FamilyName-TextInput a birda:TextInput ;
     birda:atLeast 1 ;

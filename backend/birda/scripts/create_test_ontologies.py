@@ -8,6 +8,7 @@ str = unicode
 # -------------------------------------- #
 
 import os
+import datetime
 import rdflib
 import birda.bModel.ontology as ontology
 
@@ -18,9 +19,12 @@ from birda.bModel import NAMESPACES, CO, BIRDA, BINST, TINST
 DIR_PATH = os.path.dirname( os.path.realpath(__file__) )
 SUPPORTED_OUTPUT_TYPES = ['triples', 'xml', 'n3', 'turtle', 'nt', 'pretty-xml']
 
+DUMMY = Namespace('http://dummy.com/onto-dummy')
+DUMMY_INST = Namespace('http://dummy.com/onto-dummy/data#')
+
 # ============================================================================ #
 
-def create_birda_foaf_forms(rdf):
+def create_birda_foaf_forms(rdf, widgets):
 
 	# FOAF Name
 	input_givenName = ontology.create_widget(
@@ -89,8 +93,8 @@ def create_birda_foaf_forms(rdf):
 	subform_Knows = ontology.create_widget(
 		rdf, type=BIRDA.SubForm, namespace=BINST, name='PersonKnowsSubForm',
 		maps_type=FOAF.Person, maps_property=FOAF.knows, labels={
-			'en': "Gender",
-			'it': "Sesso"
+			'en': "Connections",
+			'it': "Conoscenze"
 		})
 	
 	ontology.make_co_list(rdf, subform_Knows, [input_givenName, input_FamilyName])
@@ -115,17 +119,165 @@ def create_birda_foaf_forms(rdf):
 
 	ontology.make_co_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName, input_Gender, input_Height, subform_Knows])
 	ontology.add_local_name_list(rdf, form_PersonNormal, [input_givenName, input_FamilyName])
+	
+	# --------------------------------------------------------------- #
+	
+	# Adding created widgets to widgets dict
+	for k in set(vars().keys()) - set(['rdf','widgets']):
+		assert not widgets.has_key(k), 'Error, name "%s" already assigned' % k
+	widgets.update(vars())
 
 # ---------------------------------------------------------------------------- #
 
+def create_ontodummy(rdf, widgets):
+	
+	# Dummy Single Text
+	dummy_text_inp_single = ontology.create_widget(
+		rdf, type=BIRDA.TextInput, namespace=BINST, name='dummy-single-text',
+		maps_property=DUMMY.SingleText, at_least=1, at_most=1, labels={
+			'en': "Dummy single text",
+			'it': "Singolo campo testuale"
+		},
+		descriptions={
+			'en': "One and only one value",
+			'it': "Uno ed un solo valore",
+		})
+	
+	# ----------------------- #
+	
+	# Dummy Multiple Text
+	dummy_text_inp_multi = ontology.create_widget(
+		rdf, type=BIRDA.TextInput, namespace=BINST, name='dummy-multi-text',
+		maps_property=DUMMY.MultiText, at_least=1, labels={
+			'en': "Dummy multi text",
+			'it': "Campo multiplo testuale"
+		},
+		descriptions={
+			'en': "At least one value",
+			'it': "Almeno un valore",
+		})
+	
+	# ----------------------- #
+	
+	# Dummy Multiple Dates
+	dummy_date_inp_multi = ontology.create_widget(
+		rdf, type=BIRDA.DateInput, namespace=BINST, name='dummy-multi',
+		maps_property=DUMMY.MultiDates, at_least=0, at_most=3, labels={
+			'en': "Dummy multi dates",
+			'it': "Date multiple"
+		},
+		descriptions={
+			'en': "Min zero, max three dates",
+			'it': "Minimo zero, massimo tre date",
+		})
+	
+	# ----------------------- #
+	
+	# Dummy Checkbox
+	dummy_check_inp = ontology.create_widget(
+		rdf, type=BIRDA.CheckboxInput, namespace=BINST, name='dummy-checkbox',
+		maps_property=DUMMY.Checkbox, at_least=1, at_most=1, labels={
+			'en': "Checkbox",
+			'it': "Checkbox"
+		})
+	ontology.set_widget_options(dummy_check_inp, {
+		'en': ["One", 2, datetime.datetime.now()],
+		'it': ["Uno", 2, datetime.datetime.now()]
+	})
+	
+	# ----------------------- #
+	
+	# Dummy Radio
+	dummy_radio_inp = ontology.create_widget(
+		rdf, type=BIRDA.RadioInput, namespace=BINST, name='dummy-radio',
+		maps_property=DUMMY.Radio, at_least=1, at_most=1, labels={
+			'en': "Radio input",
+			'it': "Radio input"
+		})
+	ontology.set_widget_options(dummy_radio_inp, {
+		'en': ["One", 2, datetime.datetime.now()],
+		'it': ["Uno", 2, datetime.datetime.now()]
+	})
+	
+	# --------------------------------------------------------------- #
+	
+	# Dummy FOAF SubForm knows
+	dummy_foaf_knows_subform = ontology.create_widget(
+		rdf, type=BIRDA.SubForm, namespace=BINST, name='dummy-foaf-knows',
+		maps_type=FOAF.Person, maps_property=FOAF.knows, at_least=0, at_most=3, labels={
+			'en': "Dummy Connections",
+			'it': "Conoscenze Dummy"
+		},
+		descriptions={
+			'en': "Min zero, max three connections",
+			'it': "Minimo zero, massimo tre conoscenze",
+		})
+	
+	ontology.make_co_list(rdf, dummy_foaf_knows_subform, [widgets['input_givenName'], widgets['input_FamilyName']])
+	ontology.set_reference_form(rdf, dummy_foaf_knows_subform, widgets['form_PersonLight'])
+	
+	# ----------------------- #
+	
+	# Dummy Dummy SubForm knows
+	dummy_dummy_knows_subform = ontology.create_widget(
+		rdf, type=BIRDA.SubForm, namespace=BINST, name='dummy-dummy-knows',
+		maps_type=FOAF.DummyGuy, maps_property=DUMMY.knows, at_least=1, labels={
+			'en': "Intenal Dummy Connections",
+			'it': "Conoscenze Dummy interne"
+		},
+		descriptions={
+			'en': "Min zero intenrnal connections",
+			'it': "Minimo zero conoscenze interne",
+		})
+	
+	ontology.make_co_list(rdf, dummy_dummy_knows_subform, [
+		dummy_text_inp_single, dummy_text_inp_multi, dummy_date_inp_multi, 
+		dummy_check_inp, dummy_radio_inp, dummy_foaf_knows_subform
+	])
+	
+	# ----------------------- #
+	
+	# FOAF Form Extended
+	form_dummy = ontology.create_form_widget(
+		rdf, namespace=BINST, name='dummy-guy',
+		maps_type=FOAF.DummyGuy, maps_property=None,
+		base_iri=URIRef(DUMMY_INST), token_separator='-',
+		target_label_property=SKOS.prefLabel,  target_descr_property=RDFS.comment,
+		labels={
+			'en': "Dummy Form",
+			'it': "Form Dummy",
+		},
+		descriptions={
+			'en': "Dummy form with all available widgets",
+			'it': "Dummy form con tutti i widget disponibili",
+		})
 
+	ontology.make_co_list(rdf, form_dummy, [
+		dummy_text_inp_single, dummy_text_inp_multi, dummy_date_inp_multi, dummy_check_inp, 
+		dummy_radio_inp, dummy_foaf_knows_subform, dummy_dummy_knows_subform
+	])
+	ontology.add_local_name_list(rdf, form_dummy, [dummy_text_inp_multi])
+	
+	# --------------------------------------------------------------- #
+	
+	ontology.set_reference_form(rdf, dummy_dummy_knows_subform, form_dummy)
+	
+	# --------------------------------------------------------------- #
+	
+	# Adding created widgets to widgets dict
+	for k in set(vars().keys()) - set(['rdf','widgets']):
+		assert not widgets.has_key(k), 'Error, name "%s" already assigned' % k
+	widgets.update(vars())
 
 # ---------------------------------------------------------------------------- #
 
 def create_birda_instace():
 	rdf = ontology.new_rdf_Graph()
 	
-	create_birda_foaf_forms(rdf)
+	widgets = {}
+	
+	create_birda_foaf_forms(rdf, widgets)
+	create_ontodummy(rdf, widgets)
 	
 	return rdf
 
