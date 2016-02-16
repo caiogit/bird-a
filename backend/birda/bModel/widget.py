@@ -242,6 +242,17 @@ class Widget(object):
 	
 	# --------------------------------- #
 	
+	def get_allowed_values(self, lang):
+		assert self.attributes.has_key('options')
+		
+		options = get_by_lang(self.attributes['options'], lang)
+		if options:
+			return [ ast.literal_eval(o.strip()) for o in options.split(',') ]
+		else:
+			return []
+	
+	# ================================= #
+	
 	def getJSON(self, lang):
 		"""
 		Build a JSON representation of the object
@@ -329,6 +340,10 @@ class Widget(object):
 			)
 		if type_name == 'TextInput':
 			return widget_catalog.TextInputWidget(
+				conn, rdfw=rdfw, uri=uri,
+			)
+		if type_name == 'CheckboxInput':
+			return widget_catalog.CheckboxInputWidget(
 				conn, rdfw=rdfw, uri=uri,
 			)
 		

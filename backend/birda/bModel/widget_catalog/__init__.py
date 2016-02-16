@@ -11,10 +11,12 @@ str = unicode
 import form
 import subform
 import text_input
+import checkbox_input
 
 FormWidget = form.FormWidget
 SubFormWidget = subform.SubFormWidget
 TextInputWidget = text_input.TextInputWidget
+CheckboxInputWidget = checkbox_input.CheckboxInputWidget
 
 # ============================================================================ #
 

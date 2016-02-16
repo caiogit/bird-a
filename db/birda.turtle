@@ -153,6 +153,8 @@ binst:dummy-checkbox-CheckboxInput a birda:CheckboxInput ;
     birda:atMost 1 ;
     birda:hasLabel "Checkbox"@en,
         "Checkbox"@it ;
+    birda:hasOptions "\"One\", 2, \"3\""@en,
+        "\"Uno\", 2, \"3\""@it ;
     birda:mapsProperty <http://dummy.com/onto-dummyCheckbox> .
 
 binst:dummy-dummy-knows-SubForm-el1 co:itemContent binst:dummy-single-text-TextInput ;
@@ -226,6 +228,8 @@ binst:dummy-radio-RadioInput a birda:RadioInput ;
     birda:atMost 1 ;
     birda:hasLabel "Radio input"@en,
         "Radio input"@it ;
+    birda:hasOptions "\"One\", 2, \"3\""@en,
+        "\"Uno\", 2, \"3\""@it ;
     birda:mapsProperty <http://dummy.com/onto-dummyRadio> .
 
 binst:dummy-single-text-TextInput a birda:TextInput ;

@@ -186,8 +186,10 @@ def set_widget_options(rdf, widget, options={}):
 	:return: None
 	"""
 
-	for lang,opts in options:
-		opts_literal = ', '.join( [repr(o) for o in opts] )
+	for lang,opts in options.items():
+		opts_literal = ', '.join( [
+			type(o) == type('') and '"'+o+'"' or str(o)
+			for o in opts] )
 		rdf.add((widget, bModel.BIRDA.hasOptions, Literal(opts_literal, lang=lang)))
 
 # ---------------------------------------------------------------------------- #

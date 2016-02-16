@@ -180,9 +180,9 @@ def create_ontodummy(rdf, widgets):
 			'en': "Checkbox",
 			'it': "Checkbox"
 		})
-	ontology.set_widget_options(dummy_check_inp, {
-		'en': ["One", 2, datetime.datetime.now()],
-		'it': ["Uno", 2, datetime.datetime.now()]
+	ontology.set_widget_options(rdf, dummy_check_inp, {
+		'en': ["One", 2, "3"],
+		'it': ["Uno", 2, "3"]
 	})
 	
 	# ----------------------- #
@@ -194,9 +194,9 @@ def create_ontodummy(rdf, widgets):
 			'en': "Radio input",
 			'it': "Radio input"
 		})
-	ontology.set_widget_options(dummy_radio_inp, {
-		'en': ["One", 2, datetime.datetime.now()],
-		'it': ["Uno", 2, datetime.datetime.now()]
+	ontology.set_widget_options(rdf, dummy_radio_inp, {
+		'en': ["One", 2, "3"],
+		'it': ["Uno", 2, "3"]
 	})
 	
 	# --------------------------------------------------------------- #
