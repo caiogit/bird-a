@@ -87,12 +87,17 @@ function getIndividualProperty($q, individual, propertyUri) {
 		function (response) {
 			var propertyObj = null;
 
-			angular.forEach(individual.properties,
-				function (value, key) {
-					if (value.uri === propertyUri) {
-						propertyObj = value;
-					}
-				});
+			//angular.forEach(individual.properties,
+			//	function (value, key) {
+			//		if (value.uri === propertyUri) {
+			//			propertyObj = value;
+			//		}
+			//	});
+			for (var i = 0; i < individual.properties.length; i++) {
+				if (individual.properties[i].uri === propertyUri) {
+					propertyObj = individual.properties[i];
+				}
+			}
 			//console.log("Property "+propertyUri, propertyObj);
 
 			/* If property was not found, then creates it */

@@ -50,9 +50,6 @@
         <Class IRI="/DateInput"/>
     </Declaration>
     <Declaration>
-        <Class IRI="/DiscardButton"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="/FieldSet"/>
     </Declaration>
     <Declaration>
@@ -89,9 +86,6 @@
         <Class IRI="/SubForm"/>
     </Declaration>
     <Declaration>
-        <Class IRI="/SubmitButton"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="/TabbedFieldSet"/>
     </Declaration>
     <Declaration>
@@ -105,9 +99,6 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="/hasNextLocalNameCompoent"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="/hasPlaceholder"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="/atLeast"/>
@@ -138,6 +129,9 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="/hasOptions"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasPlaceholder"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="/hasTokenSeparator"/>
@@ -187,14 +181,6 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="/DateInput"/>
-        <Class IRI="/LeafWidget"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="/DiscardButton"/>
-        <Class IRI="/InputWidget"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="/DiscardButton"/>
         <Class IRI="/LeafWidget"/>
     </SubClassOf>
     <SubClassOf>
@@ -273,14 +259,6 @@
         <Class IRI="/HierarchicalWidget"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="/SubmitButton"/>
-        <Class IRI="/InputWidget"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="/SubmitButton"/>
-        <Class IRI="/LeafWidget"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="/TabbedFieldSet"/>
         <Class IRI="/FieldSet"/>
     </SubClassOf>
@@ -415,6 +393,22 @@
         <Class IRI="/TextInput"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="/hasPlaceholder"/>
+        <Class IRI="/NumberInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasPlaceholder"/>
+        <Class IRI="/SelectInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasPlaceholder"/>
+        <Class IRI="/TextAreaInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasPlaceholder"/>
+        <Class IRI="/TextInput"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="/hasTokenSeparator"/>
         <Class abbreviatedIRI="owl:Thing"/>
     </DataPropertyDomain>
@@ -488,6 +482,10 @@
         </DatatypeRestriction>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="/hasPlaceholder"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="/hasTokenSeparator"/>
         <DatatypeRestriction>
             <Datatype abbreviatedIRI="xsd:string"/>
@@ -516,21 +514,6 @@
         <DataProperty IRI="/usesPropertyForLabel"/>
         <Datatype abbreviatedIRI="xsd:anyURI"/>
     </DataPropertyRange>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
-        <IRI>/hasPlaceholder</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Specify a placeholder for inputs that admit it</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>/hasPlaceholder</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">placeholder</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/DiscardButton</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Permits user to specify the DiscardButton properties (like label, colour, etc). If this Widget is not present, Bird-a will take care to add a default one.</Literal>
-    </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>/FieldSet</IRI>
@@ -600,11 +583,6 @@
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>/SubForm</IRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">Sub Form</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>/SubmitButton</IRI>
-        <Literal datatypeIRI="&rdf;PlainLiteral">Permits user to specify the SubmitButton properties (like label, colour, etc). If this Widget is not present, Bird-a will take care to add a default one.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -757,6 +735,16 @@ re_valid = r&quot;&quot;&quot;
 $                                   # Anchor to end of string.
 &quot;&quot;&quot;
 re.match(re_valid, &apos;[...]&apos;, re.VERBOSE)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <IRI>/hasPlaceholder</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Specify a placeholder for inputs that admit it</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/hasPlaceholder</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">placeholder</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
