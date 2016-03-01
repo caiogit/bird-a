@@ -6,10 +6,10 @@
 	<div class="modal-body">
 		<h3 class="large">
 			<b>{{response.status}} {{response.statusText}}</b>
-			<br />
-			<small>{{response.data | json}}</small>
 		</h3>
-
+		<pre>
+			{{response.data | json}}
+		</pre>
 	</div>
 	<div class="modal-footer">
 		<p>Try to reload the page</p>

@@ -19,6 +19,7 @@ angular.module('birdaApp')
 			/* ========================================= */
 
 			self.notifyError = function(response) {
+				console.log('Error: ', response);
 				if (response.status === -1) {
 					console.log('Status -1. What happened?', response);
 					response.status = '<?>';
