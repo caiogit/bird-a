@@ -193,6 +193,14 @@ function FieldController($scope, $element, $attrs, $transclude, $q) {
 	 * @param value
 	 */
 	self.addValue = function(index, value) {
+		if ( (typeof self.field.at_most !== 'undefined') &&
+			 (self.field.at_most > 0) &&
+			 (self.property.values.length >= self.field.at_most) ) {
+
+			alert('Max values number reached!');
+			return;
+		}
+
 		if (typeof value === 'undefined') {
 			value = self.defaultValue;
 		}
