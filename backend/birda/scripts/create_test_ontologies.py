@@ -58,12 +58,12 @@ def create_birda_foaf_forms(rdf, widgets):
 	
 	# FOAF Gender
 	input_Gender = ontology.create_widget(
-		rdf, type=BIRDA.TextInput, namespace=BINST, name='Gender',
+		rdf, type=BIRDA.CheckboxInput, namespace=BINST, name='Gender',
 		maps_property=FOAF.gender, at_least=0, at_most=1, labels={
 			'en': "Gender",
 			'it': "Sesso"
 		})
-	ontology.set_widget_options(input_Gender, {
+	ontology.set_widget_options(rdf, input_Gender, {
 		'en': ["Male", "Female", "Unknown"],
 		'it': ["Maschio", "Femmina", "Sconosciuto"]
 	})
@@ -221,12 +221,12 @@ def create_ontodummy(rdf, widgets):
 	# Dummy Dummy SubForm knows
 	dummy_dummy_knows_subform = ontology.create_widget(
 		rdf, type=BIRDA.SubForm, namespace=BINST, name='dummy-dummy-knows',
-		maps_type=FOAF.DummyGuy, maps_property=DUMMY.knows, at_least=1, labels={
+		maps_type=FOAF.DummyGuy, maps_property=DUMMY.knows, at_least=0, labels={
 			'en': "Intenal Dummy Connections",
 			'it': "Conoscenze Dummy interne"
 		},
 		descriptions={
-			'en': "Min zero intenrnal connections",
+			'en': "Min zero internal connections",
 			'it': "Minimo zero conoscenze interne",
 		})
 	

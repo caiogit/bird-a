@@ -185,7 +185,9 @@ def set_widget_options(rdf, widget, options={}):
 
 	:return: None
 	"""
-
+	
+	assert type(rdf) == type(rdflib.Graph()) 
+	
 	for lang,opts in options.items():
 		opts_literal = ', '.join( [
 			type(o) == type('') and '"'+o+'"' or str(o)
