@@ -68,7 +68,7 @@ class CheckboxInputWidget(Widget):
 		See Widget.validate_values declaration 
 		"""
 		
-		issues = super(TextInputWidget, self).validate_values(values)
+		issues = super(CheckboxInputWidget, self).validate_values(values)
 		
 		# TODO
 		# ...

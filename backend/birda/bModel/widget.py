@@ -346,6 +346,10 @@ class Widget(object):
 			return widget_catalog.CheckboxInputWidget(
 				conn, rdfw=rdfw, uri=uri,
 			)
+		if type_name == 'RadioInput':
+			return widget_catalog.RadioInputWidget(
+				conn, rdfw=rdfw, uri=uri,
+			)
 		
 		# raise ValueError('Type "%s" unknown' % type_name)
 		return Widget(
