@@ -11,6 +11,8 @@
  
  - Reliability: add try / except statements to services in order to format exception
    properly and close connections
+  
+ - DateInput: convert to date instead of string
 
 ## Frontend
  
@@ -39,8 +41,8 @@
 
  - (x) /TextInput
  - ( ) /TextAreaInput
- - ( ) /CheckboxInput
- - ( ) /DateInput
+ - (x) /CheckboxInput
+ - (x) /DateInput
  - ( ) /NumberInput
  - ( ) /RadioInput
  - ( ) /SelectInput

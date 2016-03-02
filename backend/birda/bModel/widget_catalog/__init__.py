@@ -11,12 +11,14 @@ str = unicode
 import form
 import subform
 import text_input
+import date_input
 import checkbox_input
 import radio_input
 
 FormWidget = form.FormWidget
 SubFormWidget = subform.SubFormWidget
 TextInputWidget = text_input.TextInputWidget
+DateInputWidget = date_input.DateInputWidget
 CheckboxInputWidget = checkbox_input.CheckboxInputWidget
 RadioInputWidget = radio_input.RadioInputWidget
 

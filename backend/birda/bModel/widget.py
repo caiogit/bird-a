@@ -141,6 +141,7 @@ class Widget(object):
 		:return: The corresponding rdflib object
 		"""
 		
+		print self
 		raise NotImplementedError('This method should implemented in subclasses')
 	
 	# --------------------------------- #
@@ -340,6 +341,10 @@ class Widget(object):
 			)
 		if type_name == 'TextInput':
 			return widget_catalog.TextInputWidget(
+				conn, rdfw=rdfw, uri=uri,
+			)
+		if type_name == 'DateInput':
+			return widget_catalog.DateInputWidget(
 				conn, rdfw=rdfw, uri=uri,
 			)
 		if type_name == 'CheckboxInput':
