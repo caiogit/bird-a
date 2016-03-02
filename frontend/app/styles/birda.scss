@@ -372,6 +372,12 @@ header {
 	.form-field {
 		padding-top: 10px;
 	}
+
+	.b-checkbox-input .form-inline {
+		display: table;
+		margin: 0px auto;
+		text-align: left;
+	}
 }
 
 /* ----------------------------------------------------------------------------- */

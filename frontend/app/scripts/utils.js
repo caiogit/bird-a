@@ -180,8 +180,9 @@ function FieldController($scope, $element, $attrs, $transclude, $q) {
 		for (var i = self.property.values.length;
 			 i < Math.max(1, self.field.at_least);
 			 i++) {
-
-			self.property.values.push(self.defaultValue);
+			if (self.defaultValue !== null) {
+				self.property.values.push(self.defaultValue);
+			}
 		}
 	};
 
