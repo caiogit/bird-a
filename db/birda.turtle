@@ -60,7 +60,6 @@ binst:dummy-dummy-knows-SubForm a co:List,
         binst:dummy-dummy-knows-SubForm-el4,
         binst:dummy-dummy-knows-SubForm-el5,
         binst:dummy-dummy-knows-SubForm-el6 ;
-    birda:atLeast 1 ;
     birda:hasDescription "Min zero intenrnal connections"@en,
         "Minimo zero conoscenze interne"@it ;
     birda:hasLabel "Intenal Dummy Connections"@en,
@@ -224,8 +223,7 @@ binst:dummy-multi-DateInput a birda:DateInput ;
     birda:mapsProperty <http://dummy.com/onto-dummyMultiDates> .
 
 binst:dummy-radio-RadioInput a birda:RadioInput ;
-    birda:atLeast 1 ;
-    birda:atMost 1 ;
+    birda:atLeast 0 ;
     birda:hasLabel "Radio input"@en,
         "Radio input"@it ;
     birda:hasOptions "\"One\", 2, \"3\""@en,
