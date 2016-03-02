@@ -15,8 +15,12 @@ endif
 
 
 # Ask the user if prod or devel
-reply := $(shell read -p 'Production or Development? (p/D) ' reply; echo $$reply)
-PROD := $(shell echo "$(reply)" | grep "^[pP]$$" | tr '[:lower:]' '[:upper:]')
+ifndef BIRDA_ENV
+	reply := $(shell read -p 'Production or Development? (p/D) ' reply; echo $$reply)
+	PROD := $(shell echo "$(reply)" | grep "^[pP]$$" | tr '[:lower:]' '[:upper:]')
+else
+	PROD := $(BIRDA_ENV)
+endif
 
 # Variables setting
 ifeq ($(PROD), P)
@@ -76,6 +80,12 @@ all:
 	@echo "make lines-of-code"
 	@echo "     Display actual Source Lines of Codes (SLOC)"
 	@echo
+
+# ================================ #
+
+run:
+	export BIRDA_ENV=$(PROD) ; make run-be >> $(BASE_DIR)/log/backend_run.log 2>&1 &
+	export BIRDA_ENV=$(PROD) ; make run-fe >> $(BASE_DIR)/log/frontend_run.log 2>&1 &
 
 # ================================ #
 
