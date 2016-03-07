@@ -14,7 +14,9 @@ angular.module('birdaApp')
 			//var query = null;
 			var forms = {};
 
-			var Forms = $resource(config.buildApiUri('/forms'));
+			var Forms = $resource(config.buildApiUri('/forms'),{
+				lang: '@lang'
+			});
 
 			/* ----------------------------------------- */
 
@@ -46,7 +48,9 @@ angular.module('birdaApp')
 
 				} else {
 					//forms = Forms.get();
-					clearAndSetObject(forms, Forms.get());
+					clearAndSetObject(forms, Forms.get({
+						lang:config.lang
+					}));
 
 					forms.$promise.then(
 						function(response) {

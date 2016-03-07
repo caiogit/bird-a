@@ -14,7 +14,10 @@ angular.module('birdaApp')
 			//var query = null;
 			var form = {};
 
-			var Form = $resource(config.buildApiUri('/forms/:formUri'), {formUri:'@form_uri'});
+			var Form = $resource(config.buildApiUri('/forms/:formUri'), {
+				formUri:'@form_uri',
+				lang: '@lang'
+			});
 
 			/* ----------------------------------------- */
 
@@ -47,7 +50,10 @@ angular.module('birdaApp')
 
 				} else {
 
-					form = Form.get({formUri:formUri});
+					form = Form.get({
+						formUri:formUri,
+						lang:config.lang
+					});
 
 					form.$promise.then(
 						function(response) {
