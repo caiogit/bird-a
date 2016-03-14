@@ -311,11 +311,14 @@ header {
 
 		.uri {
 			color: $link-color;
+			margin-bottom:0px;
+			font-size:18px;
 		}
 
 		.desc {
-			font-size:20px;
+			font-size:21px;
 			font-color:#666;
+			margin-bottom:10px;
 		}
 	}
 }
@@ -326,6 +329,7 @@ header {
 	.individual {
 		padding:10px;
 	}
+
 	.individual-container {
 		//background-color: #EEE;
 		border:solid 1px #DDD;
@@ -335,6 +339,11 @@ header {
 		h3 {
 			margin-top:15px;
 			margin-bottom:5px;
+		}
+
+		.row {
+			margin-left:0px;
+			margin-right:0px;
 		}
 
 		.description {

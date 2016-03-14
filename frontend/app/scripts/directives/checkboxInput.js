@@ -21,7 +21,8 @@ angular.module('birdaApp')
 
 					/* Set the default value */
 					var defaultValue;
-					if (typeof cField.field.default === 'undefined') {
+					if (typeof cField.field.default === 'undefined' ||
+					    cField.field.default === '') {
 						defaultValue = null;
 					} else {
 						defaultValue = cField.field.default;
@@ -34,7 +35,8 @@ angular.module('birdaApp')
 					/* ----------------------------------------- */
 
 					cField.is_in_values = function(value) {
-						if (cField.property.values.indexOf(value) > -1) {
+						if (typeof cField.property.values !== 'undefined' &&
+							cField.property.values.indexOf(value) > -1) {
 							return true;
 						} else {
 							return false;
