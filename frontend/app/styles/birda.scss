@@ -382,10 +382,14 @@ header {
 		padding-top: 10px;
 	}
 
-	.b-checkbox-input .form-inline {
+	.b-checkbox-input .form-inline, .b-radio-input .form-inline {
 		display: table;
 		margin: 0px auto;
 		text-align: left;
+	}
+
+	input[type=text] {
+
 	}
 }
 

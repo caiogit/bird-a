@@ -1,0 +1,44 @@
+<div class="b-radio-input" style="border:solid 1px #DDD"
+	 xmlns="http://www.w3.org/1999/html">
+
+	<div class="form-group">
+		<!-- Label -->
+		<label for="{{property.uri}}">
+			{{field.label}}
+			<br />
+			<small>{{field.description}}</small>
+		</label>
+
+		<!-- Input row -->
+		<div class="form-inline">
+
+			<div ng-repeat="choice in field.choices">
+				<label>
+
+					<input type="radio"
+						   name="{{field.widget_uri}}"
+						   value="{{choice.value}}"
+						   ng-checked="is_in_values(choice.value)"
+					       ng-click="toggle_in_values(choice.value)" />
+
+					{{choice.label}}
+
+				</label>
+			</div>
+
+		</div>
+
+		<div ng-show="hasMultipleValues()">
+			<button
+				class="btn btn-sm btn-primary b-width-60"
+				ng-click="addValue(property.default)">
+					<span class="glyphicon glyphicon-plus"></span> Row
+			</button>
+			<button
+				class="btn btn-sm btn-primary b-width-60"
+				ng-click="delAllValues()">
+					<span class="glyphicon glyphicon-remove"></span> All
+			</button>
+		</div>
+	</div>
+</div>
