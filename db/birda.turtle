@@ -93,10 +93,12 @@ binst:dummy-guy-Form-local-name-list a co:List ;
     co:firstItem binst:dummy-guy-Form-local-name-list-el1 ;
     co:item binst:dummy-guy-Form-local-name-list-el1 .
 
-binst:Gender-TextInput a birda:TextInput ;
+binst:Gender-TextInput a birda:RadioInput ;
     birda:atMost 1 ;
     birda:hasLabel "Gender"@en,
-        "Sesso"@it ;
+        "Genere"@it ;
+    birda:hasOptions "\"Male\", \"Female\""@en,
+        "\"Maschio\", \"Femmina\""@it ;
     birda:mapsProperty foaf:gender .
 
 binst:PersonKnowsSubForm-SubForm-el1 co:itemContent binst:GivenName-TextInput ;
@@ -152,8 +154,8 @@ binst:dummy-checkbox-CheckboxInput a birda:CheckboxInput ;
     birda:atMost 1 ;
     birda:hasLabel "Checkbox"@en,
         "Checkbox"@it ;
-    birda:hasOptions "\"One\", 2, \"3\""@en,
-        "\"Uno\", 2, \"3\""@it ;
+    birda:hasOptions "\"One\", \"Two\", \"Three\""@en,
+        "\"Uno\", \"Due\", \"Tre\""@it ;
     birda:mapsProperty <http://dummy.com/onto-dummyCheckbox> .
 
 binst:dummy-dummy-knows-SubForm-el1 co:itemContent binst:dummy-single-text-TextInput ;
@@ -226,8 +228,8 @@ binst:dummy-radio-RadioInput a birda:RadioInput ;
     birda:atLeast 0 ;
     birda:hasLabel "Radio input"@en,
         "Radio input"@it ;
-    birda:hasOptions "\"One\", 2, \"3\""@en,
-        "\"Uno\", 2, \"3\""@it ;
+    birda:hasOptions "\"One\", \"Two\", \"Three\""@en,
+        "\"Uno\", \"Due\", \"Tre\""@it ;
     birda:mapsProperty <http://dummy.com/onto-dummyRadio> .
 
 binst:dummy-single-text-TextInput a birda:TextInput ;
@@ -249,6 +251,7 @@ binst:dummy-multi-text-TextInput a birda:TextInput ;
 
 binst:FamilyName-TextInput a birda:TextInput ;
     birda:atLeast 1 ;
+    birda:atMost 1;
     birda:hasLabel "Family Name"@en,
         "Cognome"@it ;
     birda:mapsProperty foaf:familyName .
