@@ -2,6 +2,17 @@
 
 Builder of Interfaces for RDF Data Authoring (BIRD-A) Ontology.
 
+<blockquote>
+  <p><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Warning_icon.svg" alt="warning" width="20" heigth="20" /> &nbsp;<b>Warning</b></p>
+  
+  <p>This project is part of Francesco Caliumi bachelor degree thesis
+     and it's intended to be completed by one or more additional theses in 
+     Web Technologies field of Bologna Computer Science Degree.</p>
+     
+  <p>Even though the software is fully working, there are some unimplemented
+     features that should be implemented in future versions.</p>
+</blockquote>
+
 ## Requirements
 
 - Python 2.7
